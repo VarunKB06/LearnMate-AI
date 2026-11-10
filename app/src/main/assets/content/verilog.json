@@ -1,0 +1,1220 @@
+{
+ "id": "verilog",
+ "title": "Verilog HDL",
+ "description": "Learn to describe digital hardware in Verilog: modules, data types, operators, assign, always blocks, testbenches and finite state machines, with runnable examples you can simulate in HDL Studio.",
+ "level": "Intermediate",
+ "path": "Digital Design and VLSI",
+ "pathOrder": 2,
+ "prerequisites": [
+  "digital"
+ ],
+ "icon": "💻",
+ "questions": [
+  {
+   "id": "vl01",
+   "topic": "Modules and Ports",
+   "difficulty": 1,
+   "prompt": "Which keyword closes a Verilog module?",
+   "choices": [
+    "end",
+    "endmodule",
+    "finish",
+    "endcase"
+   ],
+   "answer": 1,
+   "explanation": "Every module ends with endmodule."
+  },
+  {
+   "id": "vl02",
+   "topic": "Modules and Ports",
+   "difficulty": 1,
+   "prompt": "In module m(input a, output y); what is y?",
+   "choices": [
+    "An input port",
+    "A parameter",
+    "A memory",
+    "An output port"
+   ],
+   "answer": 3,
+   "explanation": "y is declared with the output direction."
+  },
+  {
+   "id": "vl03",
+   "topic": "Modules and Ports",
+   "difficulty": 2,
+   "prompt": "What is a top module?",
+   "choices": [
+    "The module with most ports",
+    "A module that no other module instantiates",
+    "A module with no outputs",
+    "The first module in the file"
+   ],
+   "answer": 1,
+   "explanation": "Top modules are not instantiated by anything; in simulation this is normally the testbench."
+  },
+  {
+   "id": "vl04",
+   "topic": "Modules and Ports",
+   "difficulty": 2,
+   "prompt": "Why are named port connections like .a(x) preferred?",
+   "choices": [
+    "They run faster",
+    "They are required by the language",
+    "They do not depend on port order",
+    "They avoid using wires"
+   ],
+   "answer": 2,
+   "explanation": "Named connections cannot be mixed up if the port order changes."
+  },
+  {
+   "id": "vl05",
+   "topic": "Data Types and Vectors",
+   "difficulty": 1,
+   "prompt": "Which declaration creates an 8-bit signal?",
+   "choices": [
+    "reg [7:0] d;",
+    "reg [8:0] d;",
+    "reg d[8];",
+    "wire d(8);"
+   ],
+   "answer": 0,
+   "explanation": "[7:0] means bits 7 down to 0, so 8 bits."
+  },
+  {
+   "id": "vl06",
+   "topic": "Data Types and Vectors",
+   "difficulty": 1,
+   "prompt": "Where can a reg be assigned?",
+   "choices": [
+    "Only with assign",
+    "Only in port lists",
+    "Inside always and initial blocks",
+    "Nowhere"
+   ],
+   "answer": 2,
+   "explanation": "Procedural assignment targets regs."
+  },
+  {
+   "id": "vl07",
+   "topic": "Data Types and Vectors",
+   "difficulty": 2,
+   "prompt": "What value does an unassigned reg have at time 0?",
+   "choices": [
+    "x",
+    "0",
+    "1",
+    "z"
+   ],
+   "answer": 0,
+   "explanation": "Uninitialised signals start as unknown (x)."
+  },
+  {
+   "id": "vl08",
+   "topic": "Data Types and Vectors",
+   "difficulty": 2,
+   "prompt": "What is {a[1:0], b[1:0]} for a=2'b10, b=2'b01?",
+   "choices": [
+    "4'b0110",
+    "4'b1001",
+    "4'b1010",
+    "4'b0101"
+   ],
+   "answer": 1,
+   "explanation": "Concatenation puts a first (most significant) then b."
+  },
+  {
+   "id": "vl09",
+   "topic": "Data Types and Vectors",
+   "difficulty": 3,
+   "prompt": "What does the keyword integer declare?",
+   "choices": [
+    "A 1-bit wire",
+    "An unsigned 64-bit reg",
+    "A real number",
+    "A 32-bit signed variable"
+   ],
+   "answer": 3,
+   "explanation": "integer is a 32-bit signed variable, often a loop counter."
+  },
+  {
+   "id": "vl10",
+   "topic": "Operators and Expressions",
+   "difficulty": 1,
+   "prompt": "What is 4'b1100 & 4'b1010?",
+   "choices": [
+    "4'b1110",
+    "4'b0110",
+    "4'b1000",
+    "4'b0000"
+   ],
+   "answer": 2,
+   "explanation": "Bitwise AND is 1 only where both bits are 1."
+  },
+  {
+   "id": "vl11",
+   "topic": "Operators and Expressions",
+   "difficulty": 2,
+   "prompt": "What does a && b give when a=4'b1010 and b=4'b0101?",
+   "choices": [
+    "1",
+    "0",
+    "4'b0000",
+    "x"
+   ],
+   "answer": 0,
+   "explanation": "Both are non-zero, so the logical AND is true (1)."
+  },
+  {
+   "id": "vl12",
+   "topic": "Operators and Expressions",
+   "difficulty": 2,
+   "prompt": "What does |4'b0000 give?",
+   "choices": [
+    "1",
+    "x",
+    "0",
+    "4'b1111"
+   ],
+   "answer": 2,
+   "explanation": "OR-reduction is 1 only if some bit is 1."
+  },
+  {
+   "id": "vl13",
+   "topic": "Operators and Expressions",
+   "difficulty": 2,
+   "prompt": "What does sel ? a : b select when sel is 0?",
+   "choices": [
+    "b",
+    "a",
+    "Both",
+    "Neither"
+   ],
+   "answer": 0,
+   "explanation": "The conditional operator returns the second option when the condition is false."
+  },
+  {
+   "id": "vl14",
+   "topic": "Operators and Expressions",
+   "difficulty": 3,
+   "prompt": "Which comparison treats x as different from 0 and 1 exactly?",
+   "choices": [
+    "==",
+    "<=",
+    "&&",
+    "==="
+   ],
+   "answer": 3,
+   "explanation": "=== compares all four states exactly; == can return x."
+  },
+  {
+   "id": "vl15",
+   "topic": "Continuous Assignment and Gates",
+   "difficulty": 1,
+   "prompt": "What can the left side of assign be?",
+   "choices": [
+    "A reg",
+    "A wire",
+    "An integer",
+    "A parameter"
+   ],
+   "answer": 1,
+   "explanation": "assign drives nets (wires)."
+  },
+  {
+   "id": "vl16",
+   "topic": "Continuous Assignment and Gates",
+   "difficulty": 1,
+   "prompt": "In and g1(y, a, b); which terminal is the output?",
+   "choices": [
+    "a",
+    "b",
+    "g1",
+    "y"
+   ],
+   "answer": 3,
+   "explanation": "The first terminal of a gate primitive is the output."
+  },
+  {
+   "id": "vl17",
+   "topic": "Continuous Assignment and Gates",
+   "difficulty": 2,
+   "prompt": "When is the expression in an assign evaluated?",
+   "choices": [
+    "Only once at time 0",
+    "Whenever a signal on its right side changes",
+    "Only on clock edges",
+    "Only when $display runs"
+   ],
+   "answer": 1,
+   "explanation": "Continuous assignments re-evaluate on any input change."
+  },
+  {
+   "id": "vl18",
+   "topic": "Continuous Assignment and Gates",
+   "difficulty": 2,
+   "prompt": "Which is dataflow style?",
+   "choices": [
+    "assign y = a & b;",
+    "and g1(y, a, b);",
+    "always @(posedge clk) y <= a;",
+    "initial y = 1;"
+   ],
+   "answer": 0,
+   "explanation": "assign with expressions is dataflow; gate primitives are structural."
+  },
+  {
+   "id": "vl19",
+   "topic": "Continuous Assignment and Gates",
+   "difficulty": 3,
+   "prompt": "Why is driving the same wire from two assigns a problem?",
+   "choices": [
+    "It is faster",
+    "Wires cannot have outputs",
+    "Two drivers can conflict",
+    "The compiler optimises it away"
+   ],
+   "answer": 2,
+   "explanation": "Multiple drivers on one bit can fight and produce unknown values."
+  },
+  {
+   "id": "vl20",
+   "topic": "Always Blocks",
+   "difficulty": 1,
+   "prompt": "Which sensitivity list makes combinational logic?",
+   "choices": [
+    "always @(posedge clk)",
+    "always @(*)",
+    "initial",
+    "always @(negedge rst)"
+   ],
+   "answer": 1,
+   "explanation": "@(*) re-runs the block when any input changes."
+  },
+  {
+   "id": "vl21",
+   "topic": "Always Blocks",
+   "difficulty": 1,
+   "prompt": "What triggers always @(posedge clk)?",
+   "choices": [
+    "Any change of clk",
+    "A falling clock edge",
+    "Time zero only",
+    "A rising clock edge"
+   ],
+   "answer": 3,
+   "explanation": "posedge means the 0-to-1 transition."
+  },
+  {
+   "id": "vl22",
+   "topic": "Always Blocks",
+   "difficulty": 2,
+   "prompt": "What causes an accidental latch?",
+   "choices": [
+    "Using posedge",
+    "An output not assigned on every path",
+    "Using parameters",
+    "Using begin/end"
+   ],
+   "answer": 1,
+   "explanation": "If a path leaves an output unassigned, the old value must be remembered."
+  },
+  {
+   "id": "vl23",
+   "topic": "Always Blocks",
+   "difficulty": 2,
+   "prompt": "Which assignment style belongs in clocked blocks?",
+   "choices": [
+    "=",
+    "assign",
+    "force",
+    "<="
+   ],
+   "answer": 3,
+   "explanation": "Non-blocking assignments model flip-flops that update together."
+  },
+  {
+   "id": "vl24",
+   "topic": "Always Blocks",
+   "difficulty": 2,
+   "prompt": "After a <= b; b <= a; with a=0 and b=1, what are a and b?",
+   "choices": [
+    "a=1, b=0",
+    "a=1, b=1",
+    "a=0, b=0",
+    "a=0, b=1"
+   ],
+   "answer": 0,
+   "explanation": "Both right sides use old values, so the two swap."
+  },
+  {
+   "id": "vl25",
+   "topic": "Always Blocks",
+   "difficulty": 3,
+   "prompt": "Which is true of blocking assignment (=)?",
+   "choices": [
+    "The update waits for the end of the time step",
+    "It can only drive wires",
+    "The left side updates immediately",
+    "It cannot be used in always blocks"
+   ],
+   "answer": 2,
+   "explanation": "Blocking assignments take effect immediately, so later statements see the new value."
+  },
+  {
+   "id": "vl26",
+   "topic": "Always Blocks",
+   "difficulty": 3,
+   "prompt": "In a 4-bit shift register q <= {q[2:0], din}, how far does each bit move per clock?",
+   "choices": [
+    "One position",
+    "Four positions",
+    "Zero positions",
+    "Two positions"
+   ],
+   "answer": 0,
+   "explanation": "All right sides use the old q, so every bit shifts by exactly one place."
+  },
+  {
+   "id": "vl27",
+   "topic": "Testbenches",
+   "difficulty": 1,
+   "prompt": "What does $finish do?",
+   "choices": [
+    "Prints a message",
+    "Resets the design",
+    "Ends the simulation",
+    "Starts the clock"
+   ],
+   "answer": 2,
+   "explanation": "$finish stops the simulation."
+  },
+  {
+   "id": "vl28",
+   "topic": "Testbenches",
+   "difficulty": 1,
+   "prompt": "Which block normally generates stimulus once?",
+   "choices": [
+    "assign",
+    "module",
+    "endcase",
+    "initial"
+   ],
+   "answer": 3,
+   "explanation": "initial runs once from time 0."
+  },
+  {
+   "id": "vl29",
+   "topic": "Testbenches",
+   "difficulty": 2,
+   "prompt": "What does always #5 clk = ~clk; do?",
+   "choices": [
+    "Sets clk to 5",
+    "Toggles clk every 5 time units",
+    "Waits 5 units once",
+    "Stops after 5 cycles"
+   ],
+   "answer": 1,
+   "explanation": "The always block repeats forever, giving a clock with period 10."
+  },
+  {
+   "id": "vl30",
+   "topic": "Testbenches",
+   "difficulty": 2,
+   "prompt": "Why wait #1 before checking an output after changing inputs?",
+   "choices": [
+    "Let the combinational logic settle",
+    "The simulator is slow",
+    "To avoid x values at reset",
+    "$display needs time"
+   ],
+   "answer": 0,
+   "explanation": "Delays let the design react before the test samples."
+  },
+  {
+   "id": "vl31",
+   "topic": "Testbenches",
+   "difficulty": 3,
+   "prompt": "Why check with !== rather than != ?",
+   "choices": [
+    "It is shorter",
+    "It ignores widths",
+    "x outputs then fail the check",
+    "It is required for vectors"
+   ],
+   "answer": 2,
+   "explanation": "!== treats x as different, so unknown outputs are caught."
+  },
+  {
+   "id": "vl32",
+   "topic": "FSM Coding",
+   "difficulty": 1,
+   "prompt": "What does the state register hold?",
+   "choices": [
+    "The current state",
+    "The next state only",
+    "The inputs",
+    "The testbench"
+   ],
+   "answer": 0,
+   "explanation": "A clocked block stores the current state."
+  },
+  {
+   "id": "vl33",
+   "topic": "FSM Coding",
+   "difficulty": 2,
+   "prompt": "In a Moore machine outputs depend on...",
+   "choices": [
+    "State and inputs",
+    "Only inputs",
+    "Only the current state",
+    "The clock period"
+   ],
+   "answer": 2,
+   "explanation": "Moore outputs come from the state alone."
+  },
+  {
+   "id": "vl34",
+   "topic": "FSM Coding",
+   "difficulty": 2,
+   "prompt": "Why include a default branch in the next-state case?",
+   "choices": [
+    "Make it faster",
+    "Handle unused states safely",
+    "Create a latch",
+    "Avoid parameters"
+   ],
+   "answer": 1,
+   "explanation": "A default returns the machine to a known state."
+  },
+  {
+   "id": "vl35",
+   "topic": "FSM Coding",
+   "difficulty": 2,
+   "prompt": "In the 101 detector, which state means the last two bits were 1,0?",
+   "choices": [
+    "S0",
+    "S1",
+    "None",
+    "S2"
+   ],
+   "answer": 3,
+   "explanation": "S0 saw nothing useful, S1 saw 1, S2 saw 1 then 0."
+  },
+  {
+   "id": "vl36",
+   "topic": "FSM Coding",
+   "difficulty": 3,
+   "prompt": "Why does S2 go to S1 on x=1 in the overlapping detector?",
+   "choices": [
+    "It is an error state",
+    "The new 1 may start another pattern",
+    "It resets",
+    "It swaps outputs"
+   ],
+   "answer": 1,
+   "explanation": "The final 1 of 101 can also be the first 1 of the next 101."
+  }
+ ],
+ "lessons": [
+  {
+   "id": "verilog-module-structure",
+   "topic": "Modules and Ports",
+   "title": "Modules, Ports and Structure",
+   "level": "Beginner",
+   "minutes": 7,
+   "keywords": [
+    "module",
+    "port",
+    "input",
+    "output",
+    "endmodule",
+    "instantiation",
+    "hierarchy",
+    "verilog",
+    "hdl",
+    "structure",
+    "testbench",
+    "dut",
+    "named connection",
+    "ansi"
+   ],
+   "objectives": [
+    "Write a module with ANSI-style ports",
+    "Instantiate one module inside another using named port connections",
+    "Explain what a top module is"
+   ],
+   "body": "A Verilog design is built from modules. A module has a name, a port list that says which signals enter and leave, and a body that describes what the hardware does. Everything between the keywords module and endmodule belongs to it.\n\nPorts have a direction: input, output or inout. In the modern ANSI style the direction and type are written directly in the port list, for example module and_gate(input a, input b, output y). Inside the body you describe behaviour, for example with an assign statement.\n\nModules are reused by instantiating them inside other modules. An instance needs the module name, an instance name and the port connections. Named connections such as .a(x) are safer than positional ones because the order cannot be mixed up. A module that nobody instantiates is a top module; in simulation that is normally the testbench.",
+   "definitions": [
+    {
+     "term": "Module",
+     "meaning": "The basic building block of a Verilog design, from module to endmodule."
+    },
+    {
+     "term": "Port",
+     "meaning": "A named connection point of a module with a direction: input, output or inout."
+    },
+    {
+     "term": "Instance",
+     "meaning": "One use of a module inside another module, with its own name and connections."
+    },
+    {
+     "term": "Top module",
+     "meaning": "A module that is not instantiated by any other module."
+    }
+   ],
+   "example": "module and_gate(input a, input b, output y);\n  assign y = a & b;\nendmodule\n\nmodule top;\n  reg p, q; wire r;\n  and_gate u1(.a(p), .b(q), .y(r));\nendmodule",
+   "exampleNote": "u1 is an instance of and_gate. Each .port(signal) pair connects a port of the module to a signal in the parent.",
+   "diagram": "  +------------------+\n  |  module and_gate |\n a|                  |\n--+-->[ & ]----------+--> y\n b|                  |\n--+------------------+\n  +------------------+",
+   "mistakes": [
+    "Forgetting the semicolon after the port list: write module name(...); with the semicolon.",
+    "Connecting ports by position and swapping two signals: prefer named connections like .a(x).",
+    "Declaring an output as wire and then assigning it in an always block: use output reg for that."
+   ],
+   "practice": [
+    {
+     "q": "What keyword ends a module?",
+     "a": "endmodule closes the module started by module."
+    },
+    {
+     "q": "Why prefer .a(x) named connections?",
+     "a": "They do not depend on port order, so reordering ports cannot silently break the design."
+    }
+   ],
+   "exercises": [
+    "In HDL Studio open the demo, press Run and read the truth table.",
+    "Change the gate to OR by editing one operator and run again."
+   ],
+   "summary": [
+    "A module has ports and a body.",
+    "Instances reuse modules; named connections are safer.",
+    "A module nobody instantiates is a top module."
+   ],
+   "hdl": {
+    "title": "AND gate with a self-checking testbench",
+    "files": [
+     {
+      "name": "and_gate.v",
+      "tb": false,
+      "text": "module and_gate(input a, input b, output y);\n  assign y = a & b;\nendmodule\n"
+     },
+     {
+      "name": "and_gate_tb.v",
+      "tb": true,
+      "text": "module and_gate_tb;\n  reg a, b; wire y; integer i, errors;\n  and_gate dut(.a(a), .b(b), .y(y));\n  initial begin\n    errors = 0;\n    for (i = 0; i < 4; i = i + 1) begin\n      {a, b} = i; #1;\n      $display(\"a=%b b=%b y=%b\", a, b, y);\n      if (y !== (a & b)) errors = errors + 1;\n    end\n    if (errors == 0) $display(\"PASS\"); else $display(\"FAIL\");\n    $finish;\n  end\nendmodule\n"
+     }
+    ]
+   }
+  },
+  {
+   "id": "verilog-data-types",
+   "topic": "Data Types and Vectors",
+   "title": "wire, reg and Vectors",
+   "level": "Beginner",
+   "minutes": 7,
+   "keywords": [
+    "wire",
+    "reg",
+    "vector",
+    "bus",
+    "width",
+    "bit select",
+    "part select",
+    "concatenation",
+    "integer",
+    "x",
+    "unknown",
+    "4-state"
+   ],
+   "objectives": [
+    "Choose between wire and reg",
+    "Declare and index vectors",
+    "Predict what x means in a simulation"
+   ],
+   "body": "Verilog has two main kinds of signal. A wire is a connection: it is driven by an assign statement or by a module output and cannot be assigned inside an always block. A reg holds a value between assignments and is what you assign in always and initial blocks. Despite the name, a reg does not always become a hardware register; a combinational always block also assigns regs.\n\nSignals can be vectors. reg [7:0] data declares an 8-bit signal whose bits are data[7] down to data[0]. You can select one bit, data[3], or a slice, data[7:4], and join signals with braces: {a, b}.\n\nSimulation uses four values per bit: 0, 1, x for unknown and z for high impedance. Anything that has not been assigned yet starts as x. This simulator treats z as x. An integer is a 32-bit signed variable, handy for loop counters.",
+   "definitions": [
+    {
+     "term": "wire",
+     "meaning": "A net that is continuously driven; assigned with assign or by an instance output."
+    },
+    {
+     "term": "reg",
+     "meaning": "A variable assigned inside always or initial blocks; keeps its value."
+    },
+    {
+     "term": "Vector",
+     "meaning": "A multi-bit signal such as [7:0]."
+    },
+    {
+     "term": "x",
+     "meaning": "The unknown logic value, for example before a signal has been assigned."
+    }
+   ],
+   "example": "reg [7:0] data;\ninitial begin\n  data = 8'b1010_0101;\n  $display(\"%b %b\", data[7:4], data[3:0]);\n  $display(\"%h\", {data[3:0], data[7:4]});\nend",
+   "exampleNote": "The first line prints the upper and lower nibbles; the second swaps them with a concatenation and prints 5a.",
+   "diagram": "  data[7:0]\n  7 6 5 4 3 2 1 0\n  1 0 1 0 0 1 0 1\n  \\_____/ \\_____/\n  data[7:4] data[3:0]",
+   "mistakes": [
+    "Assigning a wire inside an always block: declare it reg, or use assign.",
+    "Writing reg [0:7] and reading bits backwards: put the MSB first, [7:0].",
+    "Expecting an uninitialised reg to be 0: it starts as x."
+   ],
+   "practice": [
+    {
+     "q": "What is the width of reg [3:0] a?",
+     "a": "4 bits, indices 3 down to 0."
+    },
+    {
+     "q": "What does a reg hold before it is first assigned?",
+     "a": "x, the unknown value."
+    }
+   ],
+   "exercises": [
+    "Run the demo and confirm the swapped nibbles.",
+    "Print a[0] and a[3] of a 4-bit value you choose."
+   ],
+   "summary": [
+    "wire = driven connection, reg = assigned variable.",
+    "[msb:lsb] declares a vector; braces concatenate.",
+    "Unassigned signals are x."
+   ],
+   "hdl": {
+    "title": "Vector slices and concatenation",
+    "files": [
+     {
+      "name": "slices.v",
+      "tb": false,
+      "text": "module slices(input [7:0] d, output [3:0] hi, output [3:0] lo, output [7:0] swapped);\n  assign hi = d[7:4];\n  assign lo = d[3:0];\n  assign swapped = {d[3:0], d[7:4]};\nendmodule\n"
+     },
+     {
+      "name": "slices_tb.v",
+      "tb": true,
+      "text": "module slices_tb;\n  reg [7:0] d; wire [3:0] hi, lo; wire [7:0] swapped; integer errors;\n  slices dut(.d(d), .hi(hi), .lo(lo), .swapped(swapped));\n  initial begin\n    errors = 0; d = 8'hA5; #1;\n    $display(\"hi=%h lo=%h swapped=%h\", hi, lo, swapped);\n    if (hi !== 4'hA || lo !== 4'h5 || swapped !== 8'h5A) errors = errors + 1;\n    if (errors == 0) $display(\"PASS\"); else $display(\"FAIL\");\n    $finish;\n  end\nendmodule\n"
+     }
+    ]
+   }
+  },
+  {
+   "id": "verilog-operators",
+   "topic": "Operators and Expressions",
+   "title": "Operators and Expressions",
+   "level": "Beginner",
+   "minutes": 8,
+   "keywords": [
+    "operator",
+    "bitwise",
+    "logical",
+    "reduction",
+    "shift",
+    "ternary",
+    "conditional",
+    "concatenation",
+    "replication",
+    "arithmetic",
+    "comparison",
+    "equality"
+   ],
+   "objectives": [
+    "Tell bitwise from logical operators",
+    "Use reduction operators",
+    "Write a conditional expression"
+   ],
+   "body": "Bitwise operators work on every bit position: & | ^ ~. Logical operators && || ! treat a whole value as true or false and give a single bit. For a = 4'b1010 and b = 4'b0101, a & b is 0000 but a && b is 1, because both values are non-zero.\n\nReduction operators collapse a vector into one bit. &a is 1 only if all bits are 1, |a is 1 if any bit is 1 and ^a gives the parity.\n\nOther operators: + - * / % for arithmetic, << and >> for shifts, == != for equality and the conditional operator sel ? x : y, which is how a 2-to-1 multiplexer is written in one line. In this simulator all arithmetic is unsigned. If an operand contains x, an arithmetic or comparison result is x; === compares x exactly.",
+   "definitions": [
+    {
+     "term": "Bitwise operator",
+     "meaning": "Acts on each bit pair of its operands."
+    },
+    {
+     "term": "Reduction operator",
+     "meaning": "Applies an operator across all bits of one vector to give one bit."
+    },
+    {
+     "term": "Conditional operator",
+     "meaning": "cond ? a : b selects a when cond is true, otherwise b."
+    },
+    {
+     "term": "Replication",
+     "meaning": "{n{x}} repeats x n times."
+    }
+   ],
+   "example": "reg [3:0] a, b;\ninitial begin\n  a = 4'b1010; b = 4'b0101;\n  $display(\"%b %b\", a & b, a && b);\n  $display(\"%b %b %b\", &a, |a, ^a);\n  $display(\"%b\", a > b ? a : b);\nend",
+   "exampleNote": "Prints 0000 1, then 0 1 0, then 1010. The last line is a maximum selector.",
+   "diagram": "  a   = 1010\n  b   = 0101\n  a&b = 0000   (bitwise)\n  a&&b= 1      (logical)\n  &a  = 0   |a = 1   ^a = 0",
+   "mistakes": [
+    "Using & where && is meant (or the reverse): & is per bit, && is true/false.",
+    "Forgetting that a + b in a 4-bit target loses the carry: widen the target or use a concatenation.",
+    "Comparing with == when x is possible: use === in testbenches."
+   ],
+   "practice": [
+    {
+     "q": "What is 4'b1100 | 4'b0011?",
+     "a": "1111, each bit is the OR of the pair."
+    },
+    {
+     "q": "What does ^4'b1011 give?",
+     "a": "1, there are three ones (odd parity)."
+    }
+   ],
+   "exercises": [
+    "Run the demo and explain each printed line.",
+    "Write a one-line assign that outputs the larger of two 4-bit inputs."
+   ],
+   "summary": [
+    "Bitwise is per bit; logical gives one bit.",
+    "Reduction operators fold a vector into one bit.",
+    "Conditional operator is a compact multiplexer."
+   ],
+   "hdl": {
+    "title": "Operator checks",
+    "files": [
+     {
+      "name": "ops.v",
+      "tb": false,
+      "text": "module ops(input [3:0] a, input [3:0] b, output [3:0] band, output lor, output rand_all, output [3:0] big);\n  assign band = a & b;\n  assign lor = a || b;\n  assign rand_all = &a;\n  assign big = (a > b) ? a : b;\nendmodule\n"
+     },
+     {
+      "name": "ops_tb.v",
+      "tb": true,
+      "text": "module ops_tb;\n  reg [3:0] a, b; wire [3:0] band, big; wire lor, rand_all; integer errors;\n  ops dut(.a(a), .b(b), .band(band), .lor(lor), .rand_all(rand_all), .big(big));\n  initial begin\n    errors = 0; a = 4'b1010; b = 4'b0101; #1;\n    $display(\"and=%b or=%b all=%b big=%d\", band, lor, rand_all, big);\n    if (band !== 4'b0000 || lor !== 1'b1 || rand_all !== 1'b0 || big !== 4'd10) errors = errors + 1;\n    a = 4'b1111; b = 4'b0111; #1;\n    if (rand_all !== 1'b1 || big !== 4'd15) errors = errors + 1;\n    if (errors == 0) $display(\"PASS\"); else $display(\"FAIL\");\n    $finish;\n  end\nendmodule\n"
+     }
+    ]
+   }
+  },
+  {
+   "id": "verilog-assign-gates",
+   "topic": "Continuous Assignment and Gates",
+   "title": "assign Statements and Gate Primitives",
+   "level": "Beginner",
+   "minutes": 7,
+   "keywords": [
+    "assign",
+    "continuous assignment",
+    "gate",
+    "primitive",
+    "and",
+    "or",
+    "not",
+    "xor",
+    "nand",
+    "dataflow",
+    "structural",
+    "combinational"
+   ],
+   "objectives": [
+    "Describe combinational logic with assign",
+    "Use gate primitives",
+    "Explain why assign re-evaluates automatically"
+   ],
+   "body": "A continuous assignment, written assign y = expression;, makes a wire follow an expression for as long as the simulation runs. Whenever any signal on the right-hand side changes, the expression is evaluated again and y is updated. That is exactly how a combinational circuit behaves, so assign is the simplest way to describe one.\n\nVerilog also provides gate primitives such as and, or, not and xor. The first terminal is the output and the rest are inputs, for example and g1(y, a, b);. Writing gates by hand is called structural modelling; writing expressions with assign is dataflow modelling. Both describe the same hardware.\n\nThe left side of an assign must be a wire. Assigning a reg with assign is an error in this simulator and in real tools.",
+   "definitions": [
+    {
+     "term": "Continuous assignment",
+     "meaning": "An assign statement that keeps a wire equal to an expression."
+    },
+    {
+     "term": "Gate primitive",
+     "meaning": "A built-in logic gate such as and, or, not, xor."
+    },
+    {
+     "term": "Dataflow modelling",
+     "meaning": "Describing logic with expressions and assign."
+    },
+    {
+     "term": "Structural modelling",
+     "meaning": "Describing a circuit as connected gates or modules."
+    }
+   ],
+   "example": "wire s, c;\nassign s = a ^ b;     // half adder sum\nassign c = a & b;     // carry\n// the same with gates\nxor g1(s, a, b);\nand g2(c, a, b);",
+   "exampleNote": "The two forms are equivalent. A change on a or b immediately updates s and c.",
+   "diagram": "   a ----+--[XOR]--> s\n   b ----|--[AND]--> c\n         |\n  (either description gives this)",
+   "mistakes": [
+    "Using assign to drive a reg: declare the target as wire.",
+    "Driving the same wire from two assign statements: only one driver per bit.",
+    "Believing assign executes once: it re-evaluates on every input change."
+   ],
+   "practice": [
+    {
+     "q": "Which terminal of a gate primitive is the output?",
+     "a": "The first one."
+    },
+    {
+     "q": "Can assign drive a reg?",
+     "a": "No, assign drives wires."
+    }
+   ],
+   "exercises": [
+    "Run the demo to see sum and carry for all inputs.",
+    "Build NAND from an and gate followed by a not gate."
+   ],
+   "summary": [
+    "assign keeps a wire equal to an expression.",
+    "Gate primitives list the output first.",
+    "Dataflow and structural styles give the same hardware."
+   ],
+   "hdl": {
+    "title": "Half adder with assign",
+    "files": [
+     {
+      "name": "half_adder.v",
+      "tb": false,
+      "text": "module half_adder(input a, input b, output sum, output carry);\n  assign sum = a ^ b;\n  assign carry = a & b;\nendmodule\n"
+     },
+     {
+      "name": "half_adder_tb.v",
+      "tb": true,
+      "text": "module half_adder_tb;\n  reg a, b; wire sum, carry; integer i, errors;\n  half_adder dut(.a(a), .b(b), .sum(sum), .carry(carry));\n  initial begin\n    errors = 0;\n    for (i = 0; i < 4; i = i + 1) begin\n      {a, b} = i; #1;\n      $display(\"%b+%b -> carry=%b sum=%b\", a, b, carry, sum);\n      if ({carry, sum} !== a + b) errors = errors + 1;\n    end\n    if (errors == 0) $display(\"PASS\"); else $display(\"FAIL\");\n    $finish;\n  end\nendmodule\n"
+     }
+    ]
+   }
+  },
+  {
+   "id": "verilog-always-blocks",
+   "topic": "Always Blocks",
+   "title": "always Blocks: Combinational and Sequential",
+   "level": "Intermediate",
+   "minutes": 9,
+   "keywords": [
+    "always",
+    "sensitivity list",
+    "posedge",
+    "negedge",
+    "combinational",
+    "sequential",
+    "clock",
+    "flip-flop",
+    "always @(*)",
+    "always_comb",
+    "latch",
+    "reset",
+    "synchronous",
+    "asynchronous"
+   ],
+   "objectives": [
+    "Write combinational logic with always @(*)",
+    "Write a clocked register with posedge clk",
+    "Avoid accidental latches"
+   ],
+   "body": "An always block runs repeatedly: every time something in its sensitivity list changes, the statements inside execute. For combinational logic use always @(*), which lists every signal the block reads automatically. Every output must get a value on every path through the block, otherwise the hardware must remember the old value and a latch appears.\n\nFor sequential logic write always @(posedge clk). The block only runs on the rising clock edge, so what you assign becomes flip-flop state. A synchronous reset is checked inside that block; an asynchronous reset is added to the list: always @(posedge clk or negedge rst_n).\n\nSignals assigned inside an always block must be declared reg. In this simulator an always @(*) block also runs once at time 0 so combinational outputs start with real values.",
+   "definitions": [
+    {
+     "term": "Sensitivity list",
+     "meaning": "The events that make an always block run, for example posedge clk."
+    },
+    {
+     "term": "Combinational block",
+     "meaning": "An always block whose outputs depend only on current inputs."
+    },
+    {
+     "term": "Sequential block",
+     "meaning": "An always block triggered by a clock edge that creates flip-flops."
+    },
+    {
+     "term": "Latch",
+     "meaning": "Unintended memory created when an output is not assigned on every path."
+    }
+   ],
+   "example": "always @(*) begin\n  if (sel) y = a;\n  else     y = b;\nend\n\nalways @(posedge clk) begin\n  if (rst) q <= 0;\n  else     q <= d;\nend",
+   "exampleNote": "The first block is a 2-to-1 mux; the second is a D flip-flop with a synchronous reset.",
+   "diagram": "  clk  _|-|_|-|_|-|_\n  d    ---X----X--------\n  q    ----X----X-------\n  (q copies d at each rising edge)",
+   "mistakes": [
+    "Leaving out an else branch in combinational logic: you create a latch, assign a default first.",
+    "Using always @(a) when the block also reads b: use @(*).",
+    "Mixing clocked and combinational styles in one block."
+   ],
+   "practice": [
+    {
+     "q": "What triggers always @(posedge clk)?",
+     "a": "The rising edge of clk."
+    },
+    {
+     "q": "Why must an output be assigned on every path in combinational logic?",
+     "a": "Otherwise the circuit has to remember the old value, which is a latch."
+    }
+   ],
+   "exercises": [
+    "Run the demo and watch q follow d after each clock.",
+    "Remove the else branch from the mux and think about what hardware that implies."
+   ],
+   "summary": [
+    "always @(*) is combinational, always @(posedge clk) is sequential.",
+    "Assign every output on every path to avoid latches.",
+    "Variables assigned in always blocks are reg."
+   ],
+   "hdl": {
+    "title": "D flip-flop with synchronous reset",
+    "files": [
+     {
+      "name": "dff_sync.v",
+      "tb": false,
+      "text": "module dff_sync(input clk, input rst, input d, output reg q);\n  always @(posedge clk) begin\n    if (rst) q <= 1'b0;\n    else q <= d;\n  end\nendmodule\n"
+     },
+     {
+      "name": "dff_sync_tb.v",
+      "tb": true,
+      "text": "module dff_sync_tb;\n  reg clk, rst, d; wire q; integer errors;\n  dff_sync dut(.clk(clk), .rst(rst), .d(d), .q(q));\n  initial clk = 0;\n  always #5 clk = ~clk;\n  initial begin\n    errors = 0; rst = 1; d = 1;\n    @(posedge clk); #1;\n    if (q !== 1'b0) errors = errors + 1;\n    rst = 0; d = 1;\n    @(posedge clk); #1;\n    $display(\"q=%b\", q);\n    if (q !== 1'b1) errors = errors + 1;\n    d = 0;\n    @(posedge clk); #1;\n    if (q !== 1'b0) errors = errors + 1;\n    if (errors == 0) $display(\"PASS\"); else $display(\"FAIL\");\n    $finish;\n  end\nendmodule\n"
+     }
+    ]
+   }
+  },
+  {
+   "id": "verilog-blocking-nonblocking",
+   "topic": "Always Blocks",
+   "title": "Blocking (=) vs Non-Blocking (<=)",
+   "level": "Intermediate",
+   "minutes": 8,
+   "keywords": [
+    "blocking",
+    "non-blocking",
+    "=",
+    "<=",
+    "race",
+    "swap",
+    "pipeline",
+    "scheduler",
+    "nba",
+    "assignment",
+    "clocked",
+    "shift register"
+   ],
+   "objectives": [
+    "Explain the difference between = and <=",
+    "Choose the right one for sequential and combinational logic",
+    "Predict a swap and a shift register"
+   ],
+   "body": "A blocking assignment (=) updates the left side immediately, so the next statement already sees the new value. A non-blocking assignment (<=) first evaluates the right side, then updates the left side at the end of the time step, after every always block has had a chance to read the old values.\n\nThat is exactly how flip-flops behave: all of them sample their inputs on the same clock edge. So the rule is simple. Use <= in clocked always blocks and = in combinational always blocks. Do not mix both styles for the same signal.\n\nTwo classic examples show the difference. With a <= b; b <= a; the two values swap. With a = b; b = a; both end up holding the old b. In a shift register q <= {q[2:0], din}, every bit moves one place per clock because all right sides use the old q.",
+   "definitions": [
+    {
+     "term": "Blocking assignment",
+     "meaning": "= : executes in order and updates immediately."
+    },
+    {
+     "term": "Non-blocking assignment",
+     "meaning": "<= : right side is sampled now, the update happens at the end of the time step."
+    },
+    {
+     "term": "Race condition",
+     "meaning": "Result depends on the order in which simultaneous events happen to run."
+    },
+    {
+     "term": "Shift register",
+     "meaning": "Registers chained so each takes the previous one's value on every clock."
+    }
+   ],
+   "example": "always @(posedge clk) begin\n  a <= b;\n  b <= a;      // swap\nend",
+   "exampleNote": "Because both right sides are read before either update, a and b exchange values on each clock edge.",
+   "diagram": "  clk edge:\n   a_old=0 b_old=1\n   a <= b  ->  a_new = 1\n   b <= a  ->  b_new = 0\n   (old values are used)",
+   "mistakes": [
+    "Using = in clocked blocks: use <= so flip-flops update together.",
+    "Using <= for combinational outputs and reading them in the same block: use =.",
+    "Assigning the same reg from two different always blocks."
+   ],
+   "practice": [
+    {
+     "q": "Which assignment do you use inside always @(posedge clk)?",
+     "a": "Non-blocking <=."
+    },
+    {
+     "q": "After a <= b; b <= a; with a=0, b=1, what are a and b?",
+     "a": "a=1, b=0: they swapped."
+    }
+   ],
+   "exercises": [
+    "Run the swap demo, then change <= to = and explain the new result.",
+    "Draw a 4-bit shift register and mark which value each flip-flop samples."
+   ],
+   "summary": [
+    "= is immediate; <= updates at the end of the time step.",
+    "Use <= for clocked logic, = for combinational.",
+    "Non-blocking models simultaneous flip-flops."
+   ],
+   "hdl": {
+    "title": "Swap with non-blocking assignment",
+    "files": [
+     {
+      "name": "swap.v",
+      "tb": false,
+      "text": "module swap(input clk, input load, input [3:0] ia, input [3:0] ib, output reg [3:0] a, output reg [3:0] b);\n  always @(posedge clk) begin\n    if (load) begin\n      a <= ia;\n      b <= ib;\n    end else begin\n      a <= b;\n      b <= a;\n    end\n  end\nendmodule\n"
+     },
+     {
+      "name": "swap_tb.v",
+      "tb": true,
+      "text": "module swap_tb;\n  reg clk, load; reg [3:0] ia, ib; wire [3:0] a, b; integer errors;\n  swap dut(.clk(clk), .load(load), .ia(ia), .ib(ib), .a(a), .b(b));\n  initial clk = 0;\n  always #5 clk = ~clk;\n  initial begin\n    errors = 0; load = 1; ia = 4'd3; ib = 4'd9;\n    @(posedge clk); #1; load = 0;\n    @(posedge clk); #1;\n    $display(\"a=%0d b=%0d\", a, b);\n    if (a !== 4'd9 || b !== 4'd3) errors = errors + 1;\n    @(posedge clk); #1;\n    if (a !== 4'd3 || b !== 4'd9) errors = errors + 1;\n    if (errors == 0) $display(\"PASS\"); else $display(\"FAIL\");\n    $finish;\n  end\nendmodule\n"
+     }
+    ]
+   }
+  },
+  {
+   "id": "verilog-testbenches",
+   "topic": "Testbenches",
+   "title": "Writing Testbenches",
+   "level": "Intermediate",
+   "minutes": 9,
+   "keywords": [
+    "testbench",
+    "initial",
+    "delay",
+    "$display",
+    "$monitor",
+    "$finish",
+    "stimulus",
+    "clock generation",
+    "self-checking",
+    "dut",
+    "verification",
+    "errors"
+   ],
+   "objectives": [
+    "Generate a clock and stimulus",
+    "Print results with $display and $monitor",
+    "Write a self-checking testbench"
+   ],
+   "body": "A testbench is a module without ports that instantiates the design under test (DUT), drives its inputs and checks its outputs. It is never synthesised; it only runs in simulation, so it may use delays and system tasks.\n\nStimulus is written in initial blocks, which run once from time 0. #5 waits 5 time units. A clock is usually made with always #5 clk = ~clk; after setting clk = 0 in an initial block. The task $display prints a line, $monitor prints whenever one of its arguments changes and $finish ends the simulation.\n\nA good testbench checks results itself: compare the output with the expected value using !== (which also catches x), count errors and print PASS or FAIL at the end. Then you never need to read waveforms to know that a change broke something.",
+   "definitions": [
+    {
+     "term": "DUT",
+     "meaning": "Design under test, the module the testbench exercises."
+    },
+    {
+     "term": "Stimulus",
+     "meaning": "The input values a testbench applies over time."
+    },
+    {
+     "term": "Self-checking testbench",
+     "meaning": "One that compares outputs with expected values and reports PASS or FAIL."
+    },
+    {
+     "term": "$finish",
+     "meaning": "System task that ends the simulation."
+    }
+   ],
+   "example": "initial clk = 0;\nalways #5 clk = ~clk;\ninitial begin\n  rst = 1; #12 rst = 0;\n  #100;\n  if (count !== 4'd10) $display(\"FAIL\");\n  else $display(\"PASS\");\n  $finish;\nend",
+   "exampleNote": "The clock toggles every 5 units; reset is released at 12; after waiting the testbench checks the counter.",
+   "diagram": "  time  0   5   10  15  20\n  clk   0   1   0   1   0\n  rst   1   1   1   0   0\n        (reset released at t=12)",
+   "mistakes": [
+    "Forgetting $finish when a clock runs forever: the simulation stops only at the safety limit.",
+    "Using != instead of !== so an x output looks like a pass: use !==.",
+    "Checking outputs at the same instant inputs change: wait #1 first."
+   ],
+   "practice": [
+    {
+     "q": "What does always #5 clk = ~clk do?",
+     "a": "Toggles clk every 5 time units, forever."
+    },
+    {
+     "q": "Why use !== for checks?",
+     "a": "It treats x as different from 0 or 1, so unknown outputs fail."
+    }
+   ],
+   "exercises": [
+    "Run the demo and read the log.",
+    "Add one more test vector that should fail and see FAIL printed."
+   ],
+   "summary": [
+    "A testbench instantiates the DUT and drives inputs.",
+    "initial for stimulus, always for clocks.",
+    "Self-checking tests print PASS or FAIL."
+   ],
+   "hdl": {
+    "title": "Self-checking counter testbench",
+    "files": [
+     {
+      "name": "up_counter.v",
+      "tb": false,
+      "text": "module up_counter(input clk, input rst, output reg [3:0] count);\n  always @(posedge clk) begin\n    if (rst) count <= 4'd0;\n    else count <= count + 4'd1;\n  end\nendmodule\n"
+     },
+     {
+      "name": "up_counter_tb.v",
+      "tb": true,
+      "text": "module up_counter_tb;\n  reg clk, rst; wire [3:0] count; integer errors, i;\n  up_counter dut(.clk(clk), .rst(rst), .count(count));\n  initial clk = 0;\n  always #5 clk = ~clk;\n  initial begin\n    errors = 0; rst = 1; #12; rst = 0;\n    for (i = 1; i <= 10; i = i + 1) begin\n      @(posedge clk); #1;\n      if (count !== i) errors = errors + 1;\n    end\n    $display(\"count=%0d\", count);\n    if (errors == 0) $display(\"PASS\"); else $display(\"FAIL\");\n    $finish;\n  end\nendmodule\n"
+     }
+    ]
+   }
+  },
+  {
+   "id": "verilog-fsm-coding",
+   "topic": "FSM Coding",
+   "title": "Coding Finite State Machines",
+   "level": "Intermediate",
+   "minutes": 10,
+   "keywords": [
+    "fsm",
+    "state machine",
+    "state",
+    "next state",
+    "moore",
+    "mealy",
+    "parameter",
+    "case",
+    "sequence detector",
+    "encoding",
+    "state register",
+    "output logic"
+   ],
+   "objectives": [
+    "Structure an FSM as state register, next-state logic and output logic",
+    "Use parameters for state names",
+    "Build a sequence detector"
+   ],
+   "body": "A finite state machine is usually written as three parts. A state register, a clocked always block, stores the current state. Next-state logic, a combinational always block with a case statement, decides the next state from the current state and the inputs. Output logic produces the outputs, either from the state alone (Moore) or from the state and the inputs (Mealy).\n\nGive states readable names with parameter, for example S0, S1, S2, and always include a default branch that returns to a safe state. Keep reset in the state register so the machine starts in a known state.\n\nThe demo is a Mealy detector for the bit pattern 1-0-1 with overlap: it moves S0 to S1 on a 1, S1 to S2 on a 0 and raises its output when it is in S2 and sees another 1.",
+   "definitions": [
+    {
+     "term": "State register",
+     "meaning": "Flip-flops that hold the current state."
+    },
+    {
+     "term": "Moore machine",
+     "meaning": "Outputs depend only on the current state."
+    },
+    {
+     "term": "Mealy machine",
+     "meaning": "Outputs depend on the current state and the inputs."
+    },
+    {
+     "term": "Overlap",
+     "meaning": "The end of one match can be the start of the next."
+    }
+   ],
+   "example": "always @(posedge clk)\n  if (rst) state <= S0; else state <= next;\nalways @(*) begin\n  case (state)\n    S0: next = x ? S1 : S0;\n    S1: next = x ? S1 : S2;\n    S2: next = x ? S1 : S0;\n    default: next = S0;\n  endcase\nend\nassign y = (state == S2) & x;",
+   "exampleNote": "S2 means the last two bits were 1,0. A 1 in S2 completes 101 and also counts as the first 1 of the next pattern, so the next state is S1.",
+   "diagram": "   x=1       x=0       x=1/y=1\n S0 ---> S1 ------> S2 ------> S1\n  ^ x=0   | x=1 (stay)  |\n  +-------+      x=0     |\n  +--------<-------------+ S0",
+   "mistakes": [
+    "Missing default branch: add one that returns to the reset state.",
+    "Putting outputs in the clocked block by accident, adding an extra cycle of delay.",
+    "Using many unrelated assigns instead of one case statement."
+   ],
+   "practice": [
+    {
+     "q": "Which part decides the next state?",
+     "a": "The combinational next-state logic."
+    },
+    {
+     "q": "Is y here a Moore or Mealy output?",
+     "a": "Mealy, because it depends on the input x as well as the state."
+    }
+   ],
+   "exercises": [
+    "Run the demo and find the positions where 101 is detected.",
+    "Change the pattern to 110 and update the states."
+   ],
+   "summary": [
+    "FSM = state register + next-state logic + output logic.",
+    "Name states with parameters; always have a default.",
+    "Moore outputs use state only; Mealy also uses inputs."
+   ],
+   "hdl": {
+    "title": "Sequence detector 101",
+    "files": [
+     {
+      "name": "det101.v",
+      "tb": false,
+      "text": "module det101(input clk, input rst, input x, output y);\n  parameter S0 = 2'd0, S1 = 2'd1, S2 = 2'd2;\n  reg [1:0] state, next;\n  always @(posedge clk) begin\n    if (rst) state <= S0;\n    else state <= next;\n  end\n  always @(*) begin\n    case (state)\n      S0: next = x ? S1 : S0;\n      S1: next = x ? S1 : S2;\n      S2: next = x ? S1 : S0;\n      default: next = S0;\n    endcase\n  end\n  assign y = (state == S2) & x;\nendmodule\n"
+     },
+     {
+      "name": "det101_tb.v",
+      "tb": true,
+      "text": "module det101_tb;\n  reg clk, rst, x; wire y; integer i, hits; reg [7:0] pattern;\n  det101 dut(.clk(clk), .rst(rst), .x(x), .y(y));\n  initial begin\n    clk = 0; rst = 1; x = 0; hits = 0; pattern = 8'b10110101;\n    #2 clk = 1; #2 clk = 0; rst = 0;\n    for (i = 7; i >= 0; i = i - 1) begin\n      x = pattern[i]; #1;\n      if (y) begin hits = hits + 1; $display(\"101 found at bit %0d\", i); end\n      #1 clk = 1; #2 clk = 0;\n    end\n    if (hits == 3) $display(\"PASS\"); else $display(\"FAIL hits=%0d\", hits);\n    $finish;\n  end\nendmodule\n"
+     }
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,552 @@
+{
+ "id": "fpga",
+ "title": "FPGA Design",
+ "description": "What an FPGA contains, how the design flow turns RTL into a bitstream, how clocks and constraints work, and when an FPGA or an ASIC is the better choice.",
+ "level": "Intermediate",
+ "path": "Digital Design and VLSI",
+ "pathOrder": 5,
+ "prerequisites": [
+  "verilog"
+ ],
+ "icon": "🧱",
+ "questions": [
+  {
+   "id": "fp01",
+   "topic": "FPGA Architecture",
+   "difficulty": 1,
+   "prompt": "What is the basic logic element of an FPGA?",
+   "choices": [
+    "Resistor",
+    "Antenna",
+    "Look-up table (LUT)",
+    "Diode"
+   ],
+   "answer": 2,
+   "explanation": "LUTs implement logic functions as small memories."
+  },
+  {
+   "id": "fp02",
+   "topic": "FPGA Architecture",
+   "difficulty": 2,
+   "prompt": "How many bits does a 4-input LUT store?",
+   "choices": [
+    "16",
+    "4",
+    "8",
+    "32"
+   ],
+   "answer": 0,
+   "explanation": "There are 2^4 = 16 input combinations, one stored bit each."
+  },
+  {
+   "id": "fp03",
+   "topic": "FPGA Architecture",
+   "difficulty": 2,
+   "prompt": "What is typically paired with a LUT to make a registered output?",
+   "choices": [
+    "A fuse",
+    "A transformer",
+    "A flip-flop",
+    "A capacitor"
+   ],
+   "answer": 2,
+   "explanation": "A flip-flop stores the LUT output on a clock edge."
+  },
+  {
+   "id": "fp04",
+   "topic": "FPGA Architecture",
+   "difficulty": 3,
+   "prompt": "In the LUT demo, which cfg value gives a 4-input AND?",
+   "choices": [
+    "16'h0001",
+    "16'h8000",
+    "16'hFFFF",
+    "16'h6996"
+   ],
+   "answer": 1,
+   "explanation": "Only input 1111 (address 15) outputs 1, so only bit 15 is set."
+  },
+  {
+   "id": "fp05",
+   "topic": "FPGA Design Flow",
+   "difficulty": 1,
+   "prompt": "What file is loaded into the FPGA to configure it?",
+   "choices": [
+    "Netlist",
+    "Testbench",
+    "Source RTL",
+    "Bitstream"
+   ],
+   "answer": 3,
+   "explanation": "The bitstream sets LUT contents and routing switches."
+  },
+  {
+   "id": "fp06",
+   "topic": "FPGA Design Flow",
+   "difficulty": 2,
+   "prompt": "What does synthesis produce?",
+   "choices": [
+    "A bitstream directly",
+    "A netlist mapped to device resources",
+    "A testbench",
+    "A waveform"
+   ],
+   "answer": 1,
+   "explanation": "Synthesis converts RTL to logic mapped onto LUTs and flip-flops."
+  },
+  {
+   "id": "fp07",
+   "topic": "FPGA Design Flow",
+   "difficulty": 2,
+   "prompt": "Which step chooses physical locations for logic?",
+   "choices": [
+    "Simulation",
+    "Elaboration of the testbench",
+    "Linting",
+    "Placement"
+   ],
+   "answer": 3,
+   "explanation": "Placement assigns netlist cells to physical sites."
+  },
+  {
+   "id": "fp08",
+   "topic": "FPGA Design Flow",
+   "difficulty": 2,
+   "prompt": "Why simulate before programming the board?",
+   "choices": [
+    "The board cannot run",
+    "Simulation produces the bitstream",
+    "Faster debugging",
+    "It is required by law"
+   ],
+   "answer": 2,
+   "explanation": "Simulation gives quick iteration and full visibility of signals."
+  },
+  {
+   "id": "fp09",
+   "topic": "Constraints and Clocks",
+   "difficulty": 1,
+   "prompt": "What is the period of a 100 MHz clock?",
+   "choices": [
+    "10 ns",
+    "1 ns",
+    "100 ns",
+    "0.1 ns"
+   ],
+   "answer": 0,
+   "explanation": "Period is 1/100 MHz = 10 ns."
+  },
+  {
+   "id": "fp10",
+   "topic": "Constraints and Clocks",
+   "difficulty": 2,
+   "prompt": "What do pin constraints specify?",
+   "choices": [
+    "The clock period",
+    "Which physical pin each port uses",
+    "The LUT size",
+    "The bitstream size"
+   ],
+   "answer": 1,
+   "explanation": "Pin constraints map top-level ports to package pins."
+  },
+  {
+   "id": "fp11",
+   "topic": "Constraints and Clocks",
+   "difficulty": 2,
+   "prompt": "Which approach is usually safer for a slower rate?",
+   "choices": [
+    "A new clock made from logic",
+    "Removing the reset",
+    "Using latches",
+    "A clock enable on the fast clock"
+   ],
+   "answer": 3,
+   "explanation": "Enables keep a single clock domain."
+  },
+  {
+   "id": "fp12",
+   "topic": "Constraints and Clocks",
+   "difficulty": 3,
+   "prompt": "A flip-flop that samples during a change may become...",
+   "choices": [
+    "Faster",
+    "Metastable",
+    "Smaller",
+    "Synthesized"
+   ],
+   "answer": 1,
+   "explanation": "Sampling at the wrong moment can leave the output undefined for a while."
+  },
+  {
+   "id": "fp13",
+   "topic": "FPGA vs ASIC",
+   "difficulty": 1,
+   "prompt": "What does NRE stand for?",
+   "choices": [
+    "Net routing error",
+    "Next register enable",
+    "Nominal rated energy",
+    "Non-recurring engineering"
+   ],
+   "answer": 3,
+   "explanation": "NRE is the one-time cost of designing and making the chip."
+  },
+  {
+   "id": "fp14",
+   "topic": "FPGA vs ASIC",
+   "difficulty": 2,
+   "prompt": "Which is usually better for a small production run?",
+   "choices": [
+    "FPGA",
+    "ASIC",
+    "Both cost the same",
+    "Neither can be used"
+   ],
+   "answer": 0,
+   "explanation": "With no mask cost, FPGAs suit low volume."
+  },
+  {
+   "id": "fp15",
+   "topic": "FPGA vs ASIC",
+   "difficulty": 2,
+   "prompt": "Which has the lower cost per chip at very high volume?",
+   "choices": [
+    "FPGA",
+    "Neither",
+    "ASIC",
+    "They are always equal"
+   ],
+   "answer": 2,
+   "explanation": "ASIC unit cost drops once NRE is spread over many chips."
+  },
+  {
+   "id": "fp16",
+   "topic": "FPGA vs ASIC",
+   "difficulty": 3,
+   "prompt": "Why do teams prototype an ASIC on an FPGA?",
+   "choices": [
+    "To test behaviour before paying for masks",
+    "Because FPGAs are always faster",
+    "To avoid writing RTL",
+    "Because ASICs cannot be simulated"
+   ],
+   "answer": 0,
+   "explanation": "An FPGA prototype finds bugs early at low cost."
+  }
+ ],
+ "lessons": [
+  {
+   "id": "fpga-architecture",
+   "topic": "FPGA Architecture",
+   "title": "Inside an FPGA: LUTs, Flip-Flops and Routing",
+   "level": "Intermediate",
+   "minutes": 8,
+   "keywords": [
+    "fpga",
+    "lut",
+    "look-up table",
+    "flip-flop",
+    "routing",
+    "clb",
+    "block ram",
+    "bram",
+    "dsp",
+    "io",
+    "logic cell",
+    "configurable"
+   ],
+   "objectives": [
+    "Explain how a LUT implements any logic function",
+    "List the main resources in an FPGA",
+    "Describe why routing matters"
+   ],
+   "body": "An FPGA is a chip whose logic and wiring are configured after manufacturing. Its basic logic element is the look-up table (LUT). A 4-input LUT is a tiny memory with 16 one-bit cells: the four inputs form an address and the stored bit at that address is the output. Loading different bits makes the LUT behave as any 4-input function, such as AND, XOR or a custom truth table.\n\nEach LUT is usually paired with a flip-flop so it can produce a registered output. Groups of these cells form configurable logic blocks. Around them the chip has programmable routing wires and switches, input/output blocks, and dedicated resources such as block RAM and DSP blocks for multiplication.\n\nThe exact LUT size, block layout and resource counts differ by vendor and device family, so always check the datasheet of your board. In many designs the delay of the routing wires is a large part of the total path delay.",
+   "definitions": [
+    {
+     "term": "LUT",
+     "meaning": "Look-up table: a small memory whose contents define a logic function."
+    },
+    {
+     "term": "CLB",
+     "meaning": "Configurable logic block: a group of LUTs and flip-flops."
+    },
+    {
+     "term": "Block RAM",
+     "meaning": "Dedicated on-chip memory blocks."
+    },
+    {
+     "term": "Routing",
+     "meaning": "Programmable wires and switches that connect logic blocks."
+    }
+   ],
+   "example": "// 4-input LUT: cfg holds the 16 truth-table bits\nassign out = cfg[in];\n// cfg = 16'h8000 -> AND of 4 inputs\n// cfg = 16'h6996 -> XOR of 4 inputs",
+   "exampleNote": "Only in = 1111 selects bit 15. Setting just that bit gives a 4-input AND; the pattern 6996 hex gives odd parity (4-input XOR).",
+   "diagram": "  in[3:0] --> [ 16 x 1-bit ] --> out\n             [  memory    ]\n  address = in, data = stored bit\n         |\n         v\n  [ D flip-flop ] --> registered out",
+   "mistakes": [
+    "Thinking an FPGA runs software: it is configured hardware, not a processor running code.",
+    "Ignoring routing delay when estimating speed: wires add significant delay.",
+    "Assuming every FPGA has the same resources: check the specific device."
+   ],
+   "practice": [
+    {
+     "q": "How many truth-table bits does a 4-input LUT store?",
+     "a": "16, one per input combination."
+    },
+    {
+     "q": "What pairs with a LUT to give registered outputs?",
+     "a": "A flip-flop in the same logic cell."
+    }
+   ],
+   "exercises": [
+    "Run the LUT demo and read the AND and XOR tables.",
+    "Compute the 16-bit configuration for a 4-input OR."
+   ],
+   "summary": [
+    "A LUT is a small configurable memory.",
+    "LUT + flip-flop is the basic logic cell.",
+    "Routing, block RAM and DSP blocks complete the device."
+   ],
+   "hdl": {
+    "title": "4-input LUT configured as AND and XOR",
+    "files": [
+     {
+      "name": "lut4.v",
+      "tb": false,
+      "text": "module lut4(input [3:0] in, input [15:0] cfg, output out);\n  assign out = cfg[in];\nendmodule\n"
+     },
+     {
+      "name": "lut4_tb.v",
+      "tb": true,
+      "text": "module lut4_tb;\n  reg [3:0] in; reg [15:0] cfg; wire out; integer i, errors;\n  lut4 dut(.in(in), .cfg(cfg), .out(out));\n  initial begin\n    errors = 0;\n    cfg = 16'h8000;\n    for (i = 0; i < 16; i = i + 1) begin\n      in = i; #1;\n      if (out !== (&in)) errors = errors + 1;\n    end\n    cfg = 16'h6996;\n    for (i = 0; i < 16; i = i + 1) begin\n      in = i; #1;\n      if (out !== (^in)) errors = errors + 1;\n    end\n    $display(\"AND and XOR LUT checks done, errors=%0d\", errors);\n    if (errors == 0) $display(\"PASS\"); else $display(\"FAIL\");\n    $finish;\n  end\nendmodule\n"
+     }
+    ]
+   }
+  },
+  {
+   "id": "fpga-design-flow",
+   "topic": "FPGA Design Flow",
+   "title": "From RTL to Bitstream",
+   "level": "Intermediate",
+   "minutes": 8,
+   "keywords": [
+    "synthesis",
+    "place and route",
+    "bitstream",
+    "implementation",
+    "netlist",
+    "timing report",
+    "utilization",
+    "constraints",
+    "fpga flow",
+    "programming"
+   ],
+   "objectives": [
+    "List the steps of the FPGA flow",
+    "Say what synthesis and place-and-route produce",
+    "Know what a bitstream is"
+   ],
+   "body": "The FPGA flow turns your HDL into a configuration file for the chip. First you write RTL and simulate it to check behaviour. Synthesis converts the RTL into a netlist of generic gates and registers, then maps it onto the device's LUTs and flip-flops.\n\nImplementation follows. Placement chooses which physical logic cell holds each part of the netlist, and routing selects the wires and switches that connect them. The tool then reports timing and resource usage, so you can see whether the design meets its clock and how much of the device it uses.\n\nFinally the tool generates a bitstream, the file that sets every LUT bit and routing switch, and you program it into the FPGA through a cable or from flash. If timing fails, you change the RTL or the constraints and run the flow again.",
+   "definitions": [
+    {
+     "term": "Synthesis",
+     "meaning": "Converting RTL into a netlist of logic mapped to device resources."
+    },
+    {
+     "term": "Place and route",
+     "meaning": "Choosing physical locations for logic and the wires between them."
+    },
+    {
+     "term": "Bitstream",
+     "meaning": "The configuration file loaded into the FPGA."
+    },
+    {
+     "term": "Utilization",
+     "meaning": "How much of the device's LUTs, flip-flops and memory the design uses."
+    }
+   ],
+   "example": null,
+   "exampleNote": null,
+   "diagram": "  RTL + testbench\n       |  simulate\n       v\n   Synthesis -> netlist\n       v\n  Place and route\n       v\n  Timing / utilization reports\n       v\n  Bitstream -> program the FPGA",
+   "mistakes": [
+    "Skipping simulation and debugging on the board: simulation is much faster to iterate.",
+    "Ignoring timing reports: a design that fails timing may work only sometimes.",
+    "Treating warnings as noise: unconnected or inferred-latch warnings point to real bugs."
+   ],
+   "practice": [
+    {
+     "q": "What does synthesis produce?",
+     "a": "A netlist mapped to the device's resources."
+    },
+    {
+     "q": "What is loaded into the FPGA?",
+     "a": "The bitstream."
+    }
+   ],
+   "exercises": [
+    "Write the flow steps in order from memory.",
+    "In HDL Studio compile and run a design: which flow step does that correspond to?"
+   ],
+   "summary": [
+    "Simulate first, then synthesize, place, route and generate a bitstream.",
+    "Read timing and utilization reports.",
+    "A bitstream configures the chip."
+   ]
+  },
+  {
+   "id": "fpga-constraints-clocks",
+   "topic": "Constraints and Clocks",
+   "title": "Clocks and Constraints",
+   "level": "Intermediate",
+   "minutes": 8,
+   "keywords": [
+    "clock",
+    "constraint",
+    "xdc",
+    "sdc",
+    "pin assignment",
+    "period",
+    "clock divider",
+    "enable",
+    "clock domain",
+    "timing constraint",
+    "pll"
+   ],
+   "objectives": [
+    "Explain why constraints are needed",
+    "Prefer clock enables to derived clocks",
+    "Build a divide-by-4 style counter"
+   ],
+   "body": "Constraints tell the tools what your design needs. Pin constraints map each top-level port to a physical pin. Timing constraints state the clock period, for example a 100 MHz clock has a 10 ns period, so the tools know which paths must be fast enough.\n\nWhen you need a slower rate, avoid creating new clocks from logic outputs where you can. A common safer style is to keep one clock and use a counter to create an enable pulse, so the registers only act every Nth cycle. Dedicated clock-management blocks such as PLLs are used when a genuinely different frequency is needed.\n\nA signal that crosses between two unrelated clocks needs special synchronisation. Without it, a flip-flop can sample during a change and go metastable. The demo is a simple divide-by-4 output built with a counter.",
+   "definitions": [
+    {
+     "term": "Constraint",
+     "meaning": "A requirement given to the tools, such as pin location or clock period."
+    },
+    {
+     "term": "Clock enable",
+     "meaning": "A signal that lets registers act only on selected clock cycles."
+    },
+    {
+     "term": "Clock domain",
+     "meaning": "A group of registers driven by the same clock."
+    },
+    {
+     "term": "Metastability",
+     "meaning": "An undefined flip-flop state caused by sampling during a change."
+    }
+   ],
+   "example": "always @(posedge clk) begin\n  if (rst) begin c <= 0; slow <= 0; end\n  else begin\n    c <= c + 1;\n    if (c == 1) begin slow <= ~slow; c <= 0; end\n  end\nend",
+   "exampleNote": "slow toggles every second clock cycle, so one full period of slow lasts four cycles of clk.",
+   "diagram": "  clk   _|-|_|-|_|-|_|-|_|-|_|-|_|-|_\n  slow  ___|---------|---------|-----\n  (period of slow = 4 x clk period)",
+   "mistakes": [
+    "Using a logic output as a clock without need: prefer an enable on the fast clock.",
+    "Forgetting to constrain the clock: timing results are meaningless without it.",
+    "Crossing clock domains with a single wire: add a synchroniser."
+   ],
+   "practice": [
+    {
+     "q": "What is the period of a 100 MHz clock?",
+     "a": "10 ns, since period = 1 / frequency."
+    },
+    {
+     "q": "Why prefer a clock enable to a derived clock?",
+     "a": "It keeps one clock domain and simplifies timing."
+    }
+   ],
+   "exercises": [
+    "Run the demo and read the slow clock pattern.",
+    "Change the counter to divide by 8."
+   ],
+   "summary": [
+    "Constraints give pin locations and clock periods.",
+    "Prefer enables to derived clocks.",
+    "Crossing clock domains needs synchronisers."
+   ],
+   "hdl": {
+    "title": "Divide-by-4 clock divider",
+    "files": [
+     {
+      "name": "clkdiv.v",
+      "tb": false,
+      "text": "module clkdiv(input clk, input rst, output reg slow);\n  reg [1:0] c;\n  always @(posedge clk) begin\n    if (rst) begin\n      c <= 2'd0;\n      slow <= 1'b0;\n    end else begin\n      c <= c + 2'd1;\n      if (c == 2'd1) begin\n        slow <= ~slow;\n        c <= 2'd0;\n      end\n    end\n  end\nendmodule\n"
+     },
+     {
+      "name": "clkdiv_tb.v",
+      "tb": true,
+      "text": "module clkdiv_tb;\n  reg clk, rst; wire slow; integer i, errors; reg [7:0] seen; reg [7:0] expect_bits;\n  clkdiv dut(.clk(clk), .rst(rst), .slow(slow));\n  initial clk = 0;\n  always #5 clk = ~clk;\n  initial begin\n    errors = 0; rst = 1; seen = 8'd0; expect_bits = 8'b01100110;\n    @(posedge clk); #1; rst = 0;\n    for (i = 7; i >= 0; i = i - 1) begin\n      @(posedge clk); #1;\n      seen[i] = slow;\n    end\n    $display(\"slow over 8 cycles = %b\", seen);\n    if (seen !== expect_bits) errors = errors + 1;\n    if (errors == 0) $display(\"PASS\"); else $display(\"FAIL\");\n    $finish;\n  end\nendmodule\n"
+     }
+    ]
+   }
+  },
+  {
+   "id": "fpga-fpga-vs-asic",
+   "topic": "FPGA vs ASIC",
+   "title": "FPGA or ASIC?",
+   "level": "Intermediate",
+   "minutes": 6,
+   "keywords": [
+    "asic",
+    "fpga",
+    "nre",
+    "cost",
+    "volume",
+    "performance",
+    "power",
+    "prototype",
+    "time to market",
+    "reconfigurable"
+   ],
+   "objectives": [
+    "Compare FPGAs and ASICs on cost, speed, power and flexibility",
+    "Pick a sensible target for a given project"
+   ],
+   "body": "An ASIC is a chip designed for one purpose and manufactured with custom masks. An FPGA is a standard chip that you configure.\n\nIn general, an ASIC has a high one-time engineering cost (NRE) but a low cost per chip at high volume, and it can reach higher speed and lower power for a given function. An FPGA has no mask cost, can be reprogrammed in the field, and gets a design running quickly, but each unit costs more and the same function usually runs slower and uses more power.\n\nThat is why FPGAs are popular for prototypes, low-volume products and designs that must change, while very high-volume products often use ASICs. Many ASIC projects first prototype on an FPGA. These are general tendencies, and the real answer depends on volume, schedule and requirements.",
+   "definitions": [
+    {
+     "term": "ASIC",
+     "meaning": "Application-specific integrated circuit built for one purpose."
+    },
+    {
+     "term": "NRE",
+     "meaning": "Non-recurring engineering cost paid once to design and make the chip."
+    },
+    {
+     "term": "Prototype",
+     "meaning": "An early working version used to test ideas."
+    },
+    {
+     "term": "Reconfigurable",
+     "meaning": "Able to change its function by loading a new configuration."
+    }
+   ],
+   "example": null,
+   "exampleNote": null,
+   "diagram": "  Cost per chip\n  ^\n  | FPGA ----------------\n  |\n  |  ASIC ..... (after NRE)\n  +--------------------> volume\n  (simplified, not to scale)",
+   "mistakes": [
+    "Saying FPGAs are always slower: they are slower for the same function in general, not in every case.",
+    "Ignoring NRE: low per-chip cost needs high volume to pay off.",
+    "Choosing ASIC for a design that will change often."
+   ],
+   "practice": [
+    {
+     "q": "Which one has mask cost, FPGA or ASIC?",
+     "a": "ASIC."
+    },
+    {
+     "q": "Why prototype an ASIC on an FPGA?",
+     "a": "To test behaviour early without paying for masks."
+    }
+   ],
+   "exercises": [
+    "List three products that suit an FPGA and three that suit an ASIC.",
+    "Explain NRE in one sentence."
+   ],
+   "summary": [
+    "ASIC: high NRE, low unit cost at volume, best speed/power.",
+    "FPGA: no NRE, flexible, quicker to start.",
+    "Choose by volume, schedule and flexibility."
+   ]
+  }
+ ]
+}

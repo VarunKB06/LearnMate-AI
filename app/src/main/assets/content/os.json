@@ -1,0 +1,965 @@
+{
+ "id": "os",
+ "title": "Operating Systems",
+ "description": "Core operating system ideas: processes and threads, CPU scheduling, synchronization, deadlock, memory management with paging, and file systems.",
+ "level": "Intermediate",
+ "path": "Computer Systems",
+ "pathOrder": 2,
+ "prerequisites": [
+  "c"
+ ],
+ "icon": "⚙️",
+ "questions": [
+  {
+   "id": "os01",
+   "topic": "Processes and Threads",
+   "difficulty": 1,
+   "prompt": "What is a process?",
+   "choices": [
+    "A file stored on disk",
+    "A CPU register",
+    "A type of memory page",
+    "A program in execution"
+   ],
+   "answer": 3,
+   "explanation": "A program becomes a process once it is loaded and running."
+  },
+  {
+   "id": "os02",
+   "topic": "Processes and Threads",
+   "difficulty": 2,
+   "prompt": "What does fork() return in the child process?",
+   "choices": [
+    "The parent's PID",
+    "The child's PID",
+    "0",
+    "-1"
+   ],
+   "answer": 2,
+   "explanation": "In the child fork returns 0; in the parent it returns the child's PID."
+  },
+  {
+   "id": "os03",
+   "topic": "Processes and Threads",
+   "difficulty": 1,
+   "prompt": "Which structure holds a process's saved registers and state?",
+   "choices": [
+    "TLB",
+    "PCB",
+    "Page table only",
+    "Inode"
+   ],
+   "answer": 1,
+   "explanation": "The process control block stores the context needed to resume the process."
+  },
+  {
+   "id": "os04",
+   "topic": "Processes and Threads",
+   "difficulty": 2,
+   "prompt": "Which resource is private to each thread within a process?",
+   "choices": [
+    "Stack",
+    "Heap",
+    "Global variables",
+    "Open files"
+   ],
+   "answer": 0,
+   "explanation": "Each thread needs its own stack and registers; the rest is shared."
+  },
+  {
+   "id": "os05",
+   "topic": "Processes and Threads",
+   "difficulty": 2,
+   "prompt": "A running process starts a disk read. Its new state is:",
+   "choices": [
+    "Ready",
+    "Terminated",
+    "New",
+    "Waiting (blocked)"
+   ],
+   "answer": 3,
+   "explanation": "It cannot continue until the I/O finishes, so it is blocked."
+  },
+  {
+   "id": "os06",
+   "topic": "CPU Scheduling",
+   "difficulty": 1,
+   "prompt": "Which algorithm runs processes strictly in arrival order?",
+   "choices": [
+    "SJF",
+    "Round Robin",
+    "FCFS",
+    "SRTF"
+   ],
+   "answer": 2,
+   "explanation": "First-Come First-Served uses a simple queue by arrival."
+  },
+  {
+   "id": "os07",
+   "topic": "CPU Scheduling",
+   "difficulty": 2,
+   "prompt": "Bursts 5, 3, 8, 2 all arrive at 0. What is the average waiting time under FCFS?",
+   "choices": [
+    "4.25",
+    "7.25",
+    "7.5",
+    "18"
+   ],
+   "answer": 1,
+   "explanation": "Waits are 0, 5, 8, 16, which sum to 29; 29/4 = 7.25."
+  },
+  {
+   "id": "os08",
+   "topic": "CPU Scheduling",
+   "difficulty": 2,
+   "prompt": "For the same processes, what is the average waiting time under SJF?",
+   "choices": [
+    "4.25",
+    "7.25",
+    "5.5",
+    "10"
+   ],
+   "answer": 0,
+   "explanation": "Order 2, 3, 5, 8 gives waits 0, 2, 5, 10; the sum 17 divided by 4 is 4.25."
+  },
+  {
+   "id": "os09",
+   "topic": "CPU Scheduling",
+   "difficulty": 2,
+   "prompt": "Waiting time equals:",
+   "choices": [
+    "Burst time minus arrival time",
+    "Finish time minus quantum",
+    "Arrival time plus burst time",
+    "Turnaround time minus burst time"
+   ],
+   "answer": 3,
+   "explanation": "Turnaround covers waiting plus running, so waiting = turnaround - burst."
+  },
+  {
+   "id": "os10",
+   "topic": "CPU Scheduling",
+   "difficulty": 2,
+   "prompt": "If the Round Robin quantum is made very large, RR behaves like:",
+   "choices": [
+    "SJF",
+    "Priority scheduling",
+    "FCFS",
+    "Multilevel feedback queue"
+   ],
+   "answer": 2,
+   "explanation": "No process is preempted before it finishes, so order is arrival order."
+  },
+  {
+   "id": "os11",
+   "topic": "CPU Scheduling",
+   "difficulty": 3,
+   "prompt": "In Round Robin with q = 3, a process with burst 8 gets how many CPU turns if it runs alone?",
+   "choices": [
+    "2",
+    "3",
+    "4",
+    "8"
+   ],
+   "answer": 1,
+   "explanation": "It needs 3 + 3 + 2, which is three turns."
+  },
+  {
+   "id": "os12",
+   "topic": "Synchronization",
+   "difficulty": 1,
+   "prompt": "A race condition happens when:",
+   "choices": [
+    "The result depends on the timing of concurrent threads",
+    "A thread uses too much CPU",
+    "A process runs out of memory",
+    "Two files have the same name"
+   ],
+   "answer": 0,
+   "explanation": "Unsynchronized shared access makes outcomes timing dependent."
+  },
+  {
+   "id": "os13",
+   "topic": "Synchronization",
+   "difficulty": 2,
+   "prompt": "counter is 5 and two threads each run counter++ without a lock. A possible final value is:",
+   "choices": [
+    "8",
+    "4",
+    "10",
+    "6"
+   ],
+   "answer": 3,
+   "explanation": "Both may load 5 and store 6; the final value can be 6 or 7 but never 8."
+  },
+  {
+   "id": "os14",
+   "topic": "Synchronization",
+   "difficulty": 2,
+   "prompt": "Which is NOT a requirement for a critical-section solution?",
+   "choices": [
+    "Mutual exclusion",
+    "Progress",
+    "Faster execution than any other solution",
+    "Bounded waiting"
+   ],
+   "answer": 2,
+   "explanation": "The three requirements are mutual exclusion, progress and bounded waiting."
+  },
+  {
+   "id": "os15",
+   "topic": "Synchronization",
+   "difficulty": 2,
+   "prompt": "A binary semaphore used as a lock should start at:",
+   "choices": [
+    "0",
+    "1",
+    "2",
+    "-1"
+   ],
+   "answer": 1,
+   "explanation": "A value of 1 means one thread may enter immediately."
+  },
+  {
+   "id": "os16",
+   "topic": "Synchronization",
+   "difficulty": 2,
+   "prompt": "A semaphore wait (P) operation:",
+   "choices": [
+    "Decrements and blocks if no resource is available",
+    "Increments the value and wakes a thread",
+    "Destroys the semaphore",
+    "Always blocks the caller"
+   ],
+   "answer": 0,
+   "explanation": "Wait takes a unit of the resource or blocks until one is available."
+  },
+  {
+   "id": "os17",
+   "topic": "Synchronization",
+   "difficulty": 3,
+   "prompt": "In the bounded-buffer problem, what does the counting semaphore empty track?",
+   "choices": [
+    "The number of items produced in total",
+    "The lock state",
+    "The number of consumers",
+    "The number of free buffer slots"
+   ],
+   "answer": 3,
+   "explanation": "The producer waits on empty before adding an item to the buffer."
+  },
+  {
+   "id": "os18",
+   "topic": "Deadlock",
+   "difficulty": 1,
+   "prompt": "How many necessary conditions must hold for deadlock?",
+   "choices": [
+    "2",
+    "3",
+    "4",
+    "5"
+   ],
+   "answer": 2,
+   "explanation": "Mutual exclusion, hold and wait, no preemption and circular wait."
+  },
+  {
+   "id": "os19",
+   "topic": "Deadlock",
+   "difficulty": 2,
+   "prompt": "Acquiring locks in a fixed global order prevents which condition?",
+   "choices": [
+    "Mutual exclusion",
+    "Circular wait",
+    "No preemption",
+    "Hold and wait"
+   ],
+   "answer": 1,
+   "explanation": "With a total order, a cycle of waiting cannot form."
+  },
+  {
+   "id": "os20",
+   "topic": "Deadlock",
+   "difficulty": 2,
+   "prompt": "A safe state means:",
+   "choices": [
+    "Some order lets every process finish",
+    "No process holds any resource",
+    "Deadlock has occurred",
+    "All resources are free"
+   ],
+   "answer": 0,
+   "explanation": "Safety is about the existence of a completion sequence."
+  },
+  {
+   "id": "os21",
+   "topic": "Deadlock",
+   "difficulty": 2,
+   "prompt": "In the banker's algorithm, Need equals:",
+   "choices": [
+    "Allocation minus Max",
+    "Available minus Max",
+    "Max plus Allocation",
+    "Max minus Allocation"
+   ],
+   "answer": 3,
+   "explanation": "Need is what a process may still request."
+  },
+  {
+   "id": "os22",
+   "topic": "Deadlock",
+   "difficulty": 3,
+   "prompt": "12 resources, holds 5, 2, 2, so available is 3. P1 needs 2. Which statement is true?",
+   "choices": [
+    "No process can run",
+    "P0 must run first",
+    "P1 can run and complete first",
+    "The state is a deadlock"
+   ],
+   "answer": 2,
+   "explanation": "P1's need of 2 is at most the 3 available, so it can finish."
+  },
+  {
+   "id": "os23",
+   "topic": "Deadlock",
+   "difficulty": 2,
+   "prompt": "Which strategy lets deadlock occur and then recovers?",
+   "choices": [
+    "Prevention",
+    "Detection and recovery",
+    "Avoidance",
+    "Ordering locks"
+   ],
+   "answer": 1,
+   "explanation": "It finds a cycle after the fact and aborts or preempts to break it."
+  },
+  {
+   "id": "os24",
+   "topic": "Memory Management and Paging",
+   "difficulty": 1,
+   "prompt": "In paging, physical memory is divided into fixed-size blocks called:",
+   "choices": [
+    "Frames",
+    "Pages",
+    "Segments",
+    "Sectors"
+   ],
+   "answer": 0,
+   "explanation": "Frames are the physical counterpart of logical pages."
+  },
+  {
+   "id": "os25",
+   "topic": "Memory Management and Paging",
+   "difficulty": 2,
+   "prompt": "Page size 1 KB, logical address 3500. What are the page number and offset?",
+   "choices": [
+    "Page 3, offset 3500",
+    "Page 4, offset 428",
+    "Page 3, offset 524",
+    "Page 3, offset 428"
+   ],
+   "answer": 3,
+   "explanation": "3500 divided by 1024 gives 3 remainder 428."
+  },
+  {
+   "id": "os26",
+   "topic": "Memory Management and Paging",
+   "difficulty": 2,
+   "prompt": "Page 3 maps to frame 7 and the offset is 428 (page 1 KB). The physical address is:",
+   "choices": [
+    "3500",
+    "7168",
+    "7596",
+    "4524"
+   ],
+   "answer": 2,
+   "explanation": "7 x 1024 + 428 = 7596."
+  },
+  {
+   "id": "os27",
+   "topic": "Memory Management and Paging",
+   "difficulty": 2,
+   "prompt": "What is the purpose of the TLB?",
+   "choices": [
+    "Store disk blocks",
+    "Cache recent page-table translations",
+    "Hold the process's stack",
+    "Schedule processes"
+   ],
+   "answer": 1,
+   "explanation": "It avoids a page-table memory access on a hit."
+  },
+  {
+   "id": "os28",
+   "topic": "Memory Management and Paging",
+   "difficulty": 2,
+   "prompt": "Which type of fragmentation can paging still show?",
+   "choices": [
+    "Internal fragmentation",
+    "External fragmentation of frames",
+    "Neither kind",
+    "Disk fragmentation only"
+   ],
+   "answer": 0,
+   "explanation": "The last page of a process is typically not completely filled."
+  },
+  {
+   "id": "os29",
+   "topic": "Memory Management and Paging",
+   "difficulty": 3,
+   "prompt": "TLB 10 ns, memory 100 ns, TLB hit ratio 80%. What is the effective access time?",
+   "choices": [
+    "110 ns",
+    "120 ns",
+    "210 ns",
+    "130 ns"
+   ],
+   "answer": 3,
+   "explanation": "0.8 x 110 + 0.2 x 210 = 88 + 42 = 130 ns."
+  },
+  {
+   "id": "os30",
+   "topic": "File Systems",
+   "difficulty": 1,
+   "prompt": "Which structure stores a Unix file's metadata and block pointers?",
+   "choices": [
+    "Directory",
+    "Superblock only",
+    "Inode",
+    "PCB"
+   ],
+   "answer": 2,
+   "explanation": "The inode holds attributes and pointers to data blocks."
+  },
+  {
+   "id": "os31",
+   "topic": "File Systems",
+   "difficulty": 2,
+   "prompt": "Which allocation method gives fast random access but suffers external fragmentation?",
+   "choices": [
+    "Linked",
+    "Contiguous",
+    "Indexed",
+    "Chained hash"
+   ],
+   "answer": 1,
+   "explanation": "Consecutive blocks give easy addressing but free space fragments."
+  },
+  {
+   "id": "os32",
+   "topic": "File Systems",
+   "difficulty": 2,
+   "prompt": "With 4 KB blocks and 4-byte pointers, one indirect block holds how many pointers?",
+   "choices": [
+    "1024",
+    "512",
+    "4096",
+    "256"
+   ],
+   "answer": 0,
+   "explanation": "4096 bytes divided by 4 bytes is 1024."
+  },
+  {
+   "id": "os33",
+   "topic": "File Systems",
+   "difficulty": 3,
+   "prompt": "10 direct pointers and one single-indirect (4 KB blocks, 4-byte pointers). Max file size?",
+   "choices": [
+    "4096 KB",
+    "40 KB",
+    "1034 KB",
+    "4136 KB"
+   ],
+   "answer": 3,
+   "explanation": "10 x 4 KB + 1024 x 4 KB = 40 + 4096 = 4136 KB."
+  },
+  {
+   "id": "os34",
+   "topic": "File Systems",
+   "difficulty": 2,
+   "prompt": "Linked allocation is slow for what operation?",
+   "choices": [
+    "Sequential reading",
+    "Creating an empty file",
+    "Random access to the middle of a file",
+    "Reading the first block"
+   ],
+   "answer": 2,
+   "explanation": "Reaching block k means following k links."
+  },
+  {
+   "id": "os35",
+   "topic": "File Systems",
+   "difficulty": 1,
+   "prompt": "A bitmap in a file system is used to:",
+   "choices": [
+    "Store file names",
+    "Track which blocks are free",
+    "Encrypt data",
+    "Schedule disk requests"
+   ],
+   "answer": 1,
+   "explanation": "Each bit says whether a block is free or in use."
+  }
+ ],
+ "lessons": [
+  {
+   "id": "os-processes-threads",
+   "topic": "Processes and Threads",
+   "title": "Processes and Threads",
+   "level": "Beginner",
+   "minutes": 9,
+   "keywords": [
+    "process",
+    "thread",
+    "pcb",
+    "context switch",
+    "fork",
+    "wait",
+    "process state",
+    "ready",
+    "running",
+    "blocked",
+    "multithreading",
+    "ipc"
+   ],
+   "objectives": [
+    "Distinguish a program from a process",
+    "Describe process states and the context switch",
+    "Compare processes and threads"
+   ],
+   "body": "A program is a file of instructions on disk; a process is a program in execution, with its own address space (code, data, heap and stack), registers and open files. The operating system tracks each process in a process control block (PCB) holding its state, program counter, saved registers, memory information and open files.\n\nA process moves between states. New becomes ready when admitted. Ready becomes running when the scheduler picks it. Running goes back to ready if its time slice ends, to waiting (blocked) if it requests I/O, or to terminated when it exits. A waiting process becomes ready when the I/O completes. Switching the CPU from one process to another is a context switch: the OS saves the old PCB and loads the new one. This is pure overhead because no useful work is done during it.\n\nA thread is a unit of execution inside a process. Threads of one process share code, data, heap and open files, but each has its own stack, registers and program counter. Creating threads and switching between them is cheaper than for processes, and sharing data is easy, but a bug in one thread can corrupt the whole process.",
+   "definitions": [
+    {
+     "term": "Process",
+     "meaning": "A program in execution with its own address space and resources."
+    },
+    {
+     "term": "PCB",
+     "meaning": "Process control block: the OS data structure storing a process's state and context."
+    },
+    {
+     "term": "Context switch",
+     "meaning": "Saving one process's CPU state and restoring another's so the CPU can run it."
+    },
+    {
+     "term": "Thread",
+     "meaning": "A lightweight unit of execution that shares its process's memory with sibling threads."
+    }
+   ],
+   "example": "#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\nint main(void) {\n  pid_t pid = fork();\n  if (pid == 0) {\n    printf(\"child\\n\");\n  } else {\n    wait(NULL);\n    printf(\"parent\\n\");\n  }\n  return 0;\n}",
+   "exampleNote": "fork() creates a copy of the process: it returns 0 in the child and the child's PID in the parent. Because the parent calls wait(), it prints only after the child ends, so the output is child then parent.",
+   "diagram": "     admit      dispatch\nNew ----> Ready ------> Running\n           ^  <-----    |  |\n           | time slice |  | exit\n           | ends       |  v\n           |            | Terminated\n           | I/O done   |\n           +-- Waiting <+\n                I/O request",
+   "mistakes": [
+    "Saying threads have separate heaps. Threads of the same process share the heap and globals; only stacks and registers are separate.",
+    "Believing fork() returns the same value in both processes. The child gets 0 and the parent gets the child's PID."
+   ],
+   "practice": [
+    {
+     "q": "Which parts does a thread NOT share with its sibling threads?",
+     "a": "Its stack, registers and program counter."
+    },
+    {
+     "q": "What causes Running -> Waiting?",
+     "a": "The process requests I/O or waits for an event."
+    },
+    {
+     "q": "Why is a context switch overhead?",
+     "a": "The CPU does bookkeeping (saving and loading state) rather than useful work."
+    }
+   ],
+   "exercises": [
+    "Draw the process state diagram from memory and label each arrow with its cause.",
+    "Predict the output if the wait(NULL) call in the example is removed and explain why it can vary."
+   ],
+   "summary": [
+    "A process is a running program with its own address space.",
+    "The PCB stores what the OS needs to pause and resume a process.",
+    "Threads share memory within a process but have their own stacks.",
+    "Context switches are necessary but cost time."
+   ]
+  },
+  {
+   "id": "os-cpu-scheduling",
+   "topic": "CPU Scheduling",
+   "title": "CPU Scheduling: FCFS, SJF and Round Robin",
+   "level": "Intermediate",
+   "minutes": 12,
+   "keywords": [
+    "scheduling",
+    "fcfs",
+    "sjf",
+    "round robin",
+    "quantum",
+    "waiting time",
+    "turnaround time",
+    "gantt",
+    "preemptive",
+    "srtf",
+    "convoy effect",
+    "burst time"
+   ],
+   "objectives": [
+    "Explain scheduling criteria and preemption",
+    "Draw Gantt charts for FCFS, SJF and RR",
+    "Compute waiting and turnaround times"
+   ],
+   "body": "The scheduler picks which ready process gets the CPU. Common goals are high CPU utilization and throughput, and low turnaround time (finish minus arrival), waiting time (turnaround minus burst) and response time. Non-preemptive algorithms let a process run until it blocks or finishes; preemptive ones can take the CPU away.\n\nFirst-Come First-Served (FCFS) runs processes in arrival order. It is simple, but a long job at the front delays short ones (the convoy effect). Shortest Job First (SJF) runs the process with the smallest next CPU burst and gives the minimum average waiting time among non-preemptive algorithms for a given set. Its preemptive form is shortest remaining time first (SRTF). Real systems must estimate burst lengths, and long jobs can starve. Round Robin (RR) gives each process a fixed time quantum in a circular queue. It is fair and gives good response time; if the quantum is huge RR behaves like FCFS, and if it is tiny context-switch overhead dominates.",
+   "definitions": [
+    {
+     "term": "Turnaround time",
+     "meaning": "Completion time minus arrival time."
+    },
+    {
+     "term": "Waiting time",
+     "meaning": "Time a process spends in the ready queue: turnaround minus burst."
+    },
+    {
+     "term": "Time quantum",
+     "meaning": "The fixed time slice a process may run in Round Robin before being preempted."
+    },
+    {
+     "term": "Starvation",
+     "meaning": "A process waiting indefinitely because others are always chosen first."
+    }
+   ],
+   "example": "All arrive at 0. Bursts: P1=5 P2=3 P3=8 P4=2\n\nFCFS: |P1 0-5|P2 5-8|P3 8-16|P4 16-18|\n wait P1 0, P2 5, P3 8, P4 16 -> avg 29/4=7.25\n\nSJF : |P4 0-2|P2 2-5|P1 5-10|P3 10-18|\n wait P4 0, P2 2, P1 5, P3 10 -> avg 17/4=4.25\n\nRR q=3: P1 0-3, P2 3-6, P3 6-9, P4 9-11,\n P1 11-13, P3 13-16, P3 16-18\n finish P2 6, P4 11, P1 13, P3 18\n wait P1 8, P2 3, P3 10, P4 9 -> avg 30/4=7.5",
+   "exampleNote": "Waiting time = finish - burst when all arrive at 0. SJF has the lowest average (4.25) because short jobs go first. RR is in between here (7.5) but gives every process an early turn, which helps response time.",
+   "diagram": "Gantt chart, RR with quantum 3\n|P1 |P2 |P3 |P4|P1|P3 |P3 |\n0   3   6   9  11 13  16  18\n\nP2 (burst 3) finishes in its 1st turn\nP4 (burst 2) finishes in its 1st turn\nP1 needs 5: turns of 3 and 2\nP3 needs 8: turns of 3, 3 and 2",
+   "mistakes": [
+    "Computing waiting time as the finish time. Waiting = finish - arrival - burst.",
+    "Assuming SJF is always practical. The next burst length is not known in advance and must be estimated."
+   ],
+   "practice": [
+    {
+     "q": "FCFS bursts 4, 3, 1 all arriving at 0: average waiting time?",
+     "a": "Waits 0, 4, 7 so (0+4+7)/3 = 3.67."
+    },
+    {
+     "q": "Which algorithm can cause starvation of long jobs?",
+     "a": "SJF/SRTF, when short jobs keep arriving."
+    },
+    {
+     "q": "What happens to RR if the quantum is very large?",
+     "a": "It behaves like FCFS."
+    }
+   ],
+   "exercises": [
+    "Recompute the example with RR quantum 2 and compare average waiting time.",
+    "Add arrival times 0, 1, 2, 3 to the example and redo SRTF."
+   ],
+   "summary": [
+    "FCFS is simple but suffers from the convoy effect.",
+    "SJF minimizes average waiting but needs burst estimates.",
+    "RR is fair, with quantum size trading response and overhead.",
+    "Waiting = turnaround - burst."
+   ]
+  },
+  {
+   "id": "os-synchronization",
+   "topic": "Synchronization",
+   "title": "Synchronization: Race Conditions, Mutexes and Semaphores",
+   "level": "Intermediate",
+   "minutes": 12,
+   "keywords": [
+    "race condition",
+    "critical section",
+    "mutex",
+    "semaphore",
+    "lock",
+    "wait",
+    "signal",
+    "mutual exclusion",
+    "atomic",
+    "producer consumer",
+    "busy waiting",
+    "synchronization"
+   ],
+   "objectives": [
+    "Explain how a race condition arises",
+    "State the critical-section requirements",
+    "Use mutexes and semaphores correctly"
+   ],
+   "body": "A race condition occurs when the result depends on the timing of threads that share data. The statement counter++ is really three steps: load, add, store. If two threads interleave those steps, one update is lost.\n\nThe part of code that touches shared data is the critical section. A solution must provide mutual exclusion (only one thread inside at a time), progress (a decision to enter cannot be postponed forever by threads outside) and bounded waiting (no thread waits forever).\n\nA mutex is a lock with two operations: lock before the critical section and unlock after it, and only the owner unlocks it. A semaphore is an integer with two atomic operations: wait (P) decrements and blocks if the value would go below zero, and signal (V) increments and wakes a waiter. A binary semaphore (0 or 1) can work like a lock, while a counting semaphore tracks a number of identical resources such as free buffer slots. Busy waiting wastes CPU, so blocking implementations are preferred.",
+   "definitions": [
+    {
+     "term": "Race condition",
+     "meaning": "A bug where the outcome depends on the unpredictable order of operations by concurrent threads."
+    },
+    {
+     "term": "Critical section",
+     "meaning": "Code that accesses shared data and must not be run by more than one thread at once."
+    },
+    {
+     "term": "Mutex",
+     "meaning": "A lock that gives a single thread exclusive access to a critical section."
+    },
+    {
+     "term": "Semaphore",
+     "meaning": "A synchronization integer with atomic wait and signal operations."
+    }
+   ],
+   "example": "counter = 5 (shared), both threads run counter++\n\nT1: load  r=5\nT2: load  r=5\nT1: store 6\nT2: store 6      -> counter = 6, not 7\n\nFix with a mutex (pseudo C):\nlock(&m);\ncounter++;       // critical section\nunlock(&m);\n\nBounded buffer slots (semaphores):\nempty = N, full = 0, mutex = 1\nproducer: wait(empty); wait(mutex); put; signal(mutex); signal(full)",
+   "exampleNote": "Both threads read 5 before either writes, so one increment is lost. With the lock, the load-add-store sequence of one thread finishes before the other begins, giving 7. In the buffer, empty counts free slots and full counts filled ones.",
+   "diagram": "Thread A      Thread B\n  |             |\nlock(m) ok    lock(m) -> waits\n  |             .\n[critical]    .\n  |             .\nunlock(m) --> gets lock\n                |\n              [critical]\n                |\n              unlock(m)",
+   "mistakes": [
+    "Protecting only the write and not the read. Every access to the shared variable must use the same lock.",
+    "Using wait and signal in the wrong order, for example wait(mutex) before wait(empty) in a producer, which can cause deadlock."
+   ],
+   "practice": [
+    {
+     "q": "Why can counter++ lose an update?",
+     "a": "It is load, add, store, and two threads can interleave those steps."
+    },
+    {
+     "q": "What is the initial value of a binary semaphore used as a lock?",
+     "a": "1, meaning the resource is free."
+    },
+    {
+     "q": "What does signal (V) do?",
+     "a": "It increments the semaphore and wakes a waiting thread if any."
+    }
+   ],
+   "exercises": [
+    "Write the interleaving that makes two threads each doing 3 increments end with a value less than 6.",
+    "Design semaphores for a pool of 3 identical printers."
+   ],
+   "summary": [
+    "Race conditions come from unsynchronized access to shared data.",
+    "Mutual exclusion, progress and bounded waiting define a good solution.",
+    "Mutexes lock; semaphores count.",
+    "Order of semaphore operations matters."
+   ]
+  },
+  {
+   "id": "os-deadlock",
+   "topic": "Deadlock",
+   "title": "Deadlock: Conditions, Avoidance and Banker's Algorithm",
+   "level": "Intermediate",
+   "minutes": 11,
+   "keywords": [
+    "deadlock",
+    "coffman",
+    "mutual exclusion",
+    "hold and wait",
+    "no preemption",
+    "circular wait",
+    "banker",
+    "safe state",
+    "resource allocation graph",
+    "prevention",
+    "avoidance",
+    "detection"
+   ],
+   "objectives": [
+    "State the four necessary conditions for deadlock",
+    "Distinguish prevention, avoidance and detection",
+    "Decide whether a state is safe"
+   ],
+   "body": "A deadlock is a set of processes each waiting for a resource held by another in the set, so none can proceed. Four conditions must all hold: mutual exclusion (a resource is held by one process at a time), hold and wait (a process holds some resources while waiting for others), no preemption (resources cannot be forcibly taken away) and circular wait (a cycle of processes each waiting for the next).\n\nPrevention breaks at least one condition, for example by ordering resources and always acquiring them in that order, which removes circular wait. Avoidance lets the OS grant a request only if the system stays in a safe state: a state is safe if there is some order in which every process can obtain its maximum need and finish. The banker's algorithm checks this using the maximum claims, current allocation and available resources. An unsafe state does not mean deadlock has happened, only that it is possible. Detection and recovery allow deadlock, find cycles in a wait-for graph, and then abort processes or preempt resources.",
+   "definitions": [
+    {
+     "term": "Deadlock",
+     "meaning": "A situation in which processes wait forever for resources held by each other."
+    },
+    {
+     "term": "Safe state",
+     "meaning": "A state where some ordering lets all processes finish with their maximum needs."
+    },
+    {
+     "term": "Circular wait",
+     "meaning": "A cycle of processes where each waits for a resource held by the next."
+    },
+    {
+     "term": "Banker's algorithm",
+     "meaning": "A deadlock-avoidance method that grants requests only if a safe sequence still exists."
+    }
+   ],
+   "example": "12 identical resources. Available = 3\nProc  Max  Hold  Need\nP0    10    5     5\nP1     4    2     2\nP2     9    2     7\n\nTry order P1, P0, P2:\nP1 needs 2 <= 3 -> runs, releases 4 -> avail 5\nP0 needs 5 <= 5 -> runs, releases 10 -> avail 10\nP2 needs 7 <= 10 -> runs, finishes\nSafe sequence: P1, P0, P2",
+   "exampleNote": "Available is 12 - (5 + 2 + 2) = 3. Starting with P1 (need 2) lets the chain complete, so the state is safe. If the OS granted P2 one more resource, available would drop to 2 and then P1 could run, release 4 (avail 4), but P0 (need 5) and P2 (need 6) could not finish, so that request would be denied under avoidance.",
+   "diagram": "Circular wait (2 locks)\n\n Thread A        Thread B\n holds L1        holds L2\n wants L2        wants L1\n\n   A --wants--> L2\n   ^             |\n  holds        held by\n   |             v\n  L1 <--wants-- B",
+   "mistakes": [
+    "Thinking an unsafe state is already a deadlock. Unsafe only means deadlock is possible.",
+    "Believing removing one of the four conditions is enough only sometimes. If any ONE condition is prevented, deadlock cannot occur."
+   ],
+   "practice": [
+    {
+     "q": "Which condition does lock ordering remove?",
+     "a": "Circular wait."
+    },
+    {
+     "q": "Is a state with no safe sequence always deadlocked?",
+     "a": "No, it is unsafe: deadlock is possible but not certain."
+    },
+    {
+     "q": "In the example, how is Need computed?",
+     "a": "Need = Max - Hold, such as P0: 10 - 5 = 5."
+    }
+   ],
+   "exercises": [
+    "Add a request in which P2 asks for 1 more resource and test whether granting it keeps the state safe.",
+    "Write two threads that deadlock on two mutexes, then fix them by lock ordering."
+   ],
+   "summary": [
+    "Deadlock needs all four conditions at once.",
+    "Prevention removes a condition; avoidance keeps the system safe.",
+    "Safe state means a completion order exists.",
+    "Detection and recovery handle deadlocks after they occur."
+   ]
+  },
+  {
+   "id": "os-memory-paging",
+   "topic": "Memory Management and Paging",
+   "title": "Memory Management and Paging",
+   "level": "Intermediate",
+   "minutes": 13,
+   "keywords": [
+    "paging",
+    "page table",
+    "frame",
+    "page",
+    "tlb",
+    "virtual memory",
+    "address translation",
+    "page fault",
+    "offset",
+    "fragmentation",
+    "mmu",
+    "demand paging",
+    "lru",
+    "fifo"
+   ],
+   "objectives": [
+    "Translate a logical address using a page table",
+    "Explain internal fragmentation and the TLB",
+    "Describe page faults and page replacement"
+   ],
+   "body": "The CPU issues logical (virtual) addresses; the memory management unit (MMU) turns them into physical addresses. Paging splits logical memory into fixed-size pages and physical memory into frames of the same size. A page table maps each page number to a frame number. Because the page size is a power of two, a logical address is split into a page number (high bits) and an offset (low bits), and the offset is copied unchanged.\n\nPaging avoids external fragmentation, but the last page of a process is usually only partly used, which is internal fragmentation. Looking up the page table in memory costs an extra access, so the translation lookaside buffer (TLB), a small fast cache of recent translations, is used.\n\nWith demand paging, pages are loaded only when used. If the page table says a page is not in memory, a page fault occurs: the OS finds a free frame (replacing a victim using a policy such as FIFO or LRU if needed), reads the page from disk and restarts the instruction. Too many faults cause thrashing.",
+   "definitions": [
+    {
+     "term": "Page table",
+     "meaning": "A per-process table mapping page numbers to frame numbers."
+    },
+    {
+     "term": "TLB",
+     "meaning": "A small hardware cache of recent page-table entries."
+    },
+    {
+     "term": "Page fault",
+     "meaning": "A trap when the referenced page is not currently in physical memory."
+    },
+    {
+     "term": "Internal fragmentation",
+     "meaning": "Wasted space inside an allocated page that the process does not use."
+    }
+   ],
+   "example": "Page size = 1 KB = 1024 bytes\nLogical address = 3500, page 3 maps to frame 7\n\npage   = 3500 / 1024 = 3 (integer)\noffset = 3500 mod 1024 = 428\nphysical = 7 x 1024 + 428 = 7596\n\nEffective access time (TLB 10 ns, memory 100 ns, TLB hit 80%):\n hit : 10 + 100 = 110 ns\n miss: 10 + 100 + 100 = 210 ns\n EAT = 0.8 x 110 + 0.2 x 210 = 130 ns",
+   "exampleNote": "3 x 1024 = 3072 and 3500 - 3072 = 428. The frame base is 7 x 1024 = 7168, so the physical address is 7168 + 428 = 7596. On a TLB miss one extra memory access reads the page table, giving 130 ns on average in this simplified model.",
+   "diagram": "Logical address (16-bit, 1 KB pages)\n+--------------+----------------+\n| page (6 bit) | offset (10 bit)|\n+------+-------+--------+-------+\n       |                |\n   page table           |\n  +-----+-------+       |\n  | 3   |   7   |       |\n  +-----+-------+       |\n       | frame 7         |\n+------v-------+--------v-------+\n| frame (7)    | offset (428)   |\n+--------------+----------------+",
+   "mistakes": [
+    "Changing the offset during translation. Only the page number is replaced by the frame number.",
+    "Calling paging free of fragmentation. It removes external fragmentation but still has internal fragmentation in the last page."
+   ],
+   "practice": [
+    {
+     "q": "A 16-bit logical address and 1 KB pages: how many pages?",
+     "a": "2^16 / 2^10 = 2^6 = 64 pages."
+    },
+    {
+     "q": "What happens on a page fault?",
+     "a": "The OS loads the page from disk into a frame, updates the table and restarts the instruction."
+    },
+    {
+     "q": "Why use a TLB?",
+     "a": "To avoid an extra memory access for the page table on most translations."
+    }
+   ],
+   "exercises": [
+    "Translate logical address 2100 with 1 KB pages if page 2 is in frame 5.",
+    "Recompute EAT for a 90% TLB hit ratio with the same timings."
+   ],
+   "summary": [
+    "Paging maps fixed-size pages to frames via a page table.",
+    "Address = page number + offset; only the page number is translated.",
+    "TLBs cache translations to speed up access.",
+    "Page faults load pages on demand; heavy faulting is thrashing."
+   ]
+  },
+  {
+   "id": "os-file-systems",
+   "topic": "File Systems",
+   "title": "File Systems",
+   "level": "Intermediate",
+   "minutes": 10,
+   "keywords": [
+    "file system",
+    "inode",
+    "directory",
+    "allocation",
+    "contiguous",
+    "linked",
+    "indexed",
+    "block",
+    "fat",
+    "free space",
+    "bitmap",
+    "file",
+    "path"
+   ],
+   "objectives": [
+    "Explain files, directories and file metadata",
+    "Compare contiguous, linked and indexed allocation",
+    "Calculate the maximum file size for an index scheme"
+   ],
+   "body": "A file system organizes persistent storage into files (named collections of data) and directories (which map names to files). The OS keeps file metadata such as size, owner, permissions and timestamps, and tracks which disk blocks each file uses. In Unix-style systems this metadata lives in an inode, and a directory entry links a name to an inode number.\n\nThere are three classic allocation methods. Contiguous allocation stores a file in consecutive blocks: access is fast and simple, but it suffers external fragmentation and files are hard to grow. Linked allocation chains blocks with pointers: there is no external fragmentation, but random access is slow because you follow the chain (the FAT variant keeps the links in a table). Indexed allocation uses an index of block pointers, supporting direct access without external fragmentation, at the cost of the index space.\n\nFree space is tracked with a bitmap (one bit per block) or a free list. File systems also cache blocks in memory and use journaling to recover consistently after a crash.",
+   "definitions": [
+    {
+     "term": "Inode",
+     "meaning": "A structure holding a file's metadata and its block pointers."
+    },
+    {
+     "term": "Directory",
+     "meaning": "A special file that maps names to files or inodes."
+    },
+    {
+     "term": "Indexed allocation",
+     "meaning": "A method where an index block or inode lists the blocks of a file."
+    },
+    {
+     "term": "Bitmap",
+     "meaning": "A free-space structure with one bit per block telling whether it is free."
+    }
+   ],
+   "example": "Simplified Unix-style inode:\n 10 direct pointers, 1 single-indirect\n block size 4 KB, pointer size 4 bytes\n\nPointers per block = 4096 / 4 = 1024\nDirect data   = 10 x 4 KB   = 40 KB\nIndirect data = 1024 x 4 KB = 4096 KB\nMax file size = 40 + 4096 = 4136 KB",
+   "exampleNote": "The indirect block holds 1024 pointers, each addressing one 4 KB data block, so it adds 4096 KB (4 MB). Adding the 40 KB from direct pointers gives 4136 KB. Real file systems add double and triple indirect levels.",
+   "diagram": "Inode\n+-------------+\n| size, owner |\n| permissions |\n+-------------+\n| direct 1  --+--> data block\n| direct 2  --+--> data block\n| ...         |\n| single ind -+--> [ptr|ptr|...]\n+-------------+      |    |\n                    data  data",
+   "mistakes": [
+    "Thinking the file name is stored in the inode. The name is stored in the directory entry; the inode holds metadata.",
+    "Assuming deleting a file always erases its data. Normally the blocks are just marked free."
+   ],
+   "practice": [
+    {
+     "q": "Why is linked allocation poor for random access?",
+     "a": "To reach block k you must follow k pointers through the chain."
+    },
+    {
+     "q": "What problem does contiguous allocation have?",
+     "a": "External fragmentation and difficulty growing files."
+    },
+    {
+     "q": "With 4 KB blocks and 4-byte pointers, how many pointers fit in one block?",
+     "a": "1024."
+    }
+   ],
+   "exercises": [
+    "Add a double-indirect pointer to the example and compute the new maximum file size.",
+    "List the files in a directory with ls -i and note two names that share an inode (hard links)."
+   ],
+   "summary": [
+    "Directories map names to files; inodes hold metadata and block pointers.",
+    "Contiguous, linked and indexed are the main allocation methods.",
+    "Indexed allocation supports direct access without external fragmentation.",
+    "Bitmaps and free lists track free blocks."
+   ]
+  }
+ ]
+}

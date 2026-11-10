@@ -1,0 +1,914 @@
+{
+ "id": "semi",
+ "title": "Semiconductor Fundamentals",
+ "description": "The physics and devices underneath digital chips: semiconductors and doping, the PN junction and diode, bipolar transistors, MOSFET operation, and how chips are fabricated.",
+ "level": "Beginner",
+ "path": "Digital Design and VLSI",
+ "pathOrder": 0,
+ "prerequisites": [],
+ "icon": "🔬",
+ "questions": [
+  {
+   "id": "sm01",
+   "topic": "Materials and Doping",
+   "difficulty": 1,
+   "prompt": "Which material is a semiconductor?",
+   "choices": [
+    "Copper",
+    "Aluminium",
+    "Silicon",
+    "Silicon dioxide"
+   ],
+   "answer": 2,
+   "explanation": "Silicon has a band gap of about 1.1 eV, which places it between conductors and insulators."
+  },
+  {
+   "id": "sm02",
+   "topic": "Materials and Doping",
+   "difficulty": 1,
+   "prompt": "Which dopant produces n-type silicon?",
+   "choices": [
+    "Phosphorus",
+    "Boron",
+    "Aluminium",
+    "Gallium"
+   ],
+   "answer": 0,
+   "explanation": "Phosphorus has five valence electrons and donates an extra electron; boron, aluminium and gallium are acceptors."
+  },
+  {
+   "id": "sm03",
+   "topic": "Materials and Doping",
+   "difficulty": 1,
+   "prompt": "What are the majority carriers in p-type silicon?",
+   "choices": [
+    "Electrons",
+    "Protons",
+    "Neutrons",
+    "Holes"
+   ],
+   "answer": 3,
+   "explanation": "Acceptor doping creates holes, which become the majority carriers."
+  },
+  {
+   "id": "sm04",
+   "topic": "Materials and Doping",
+   "difficulty": 2,
+   "prompt": "With ni = 1e10 per cm^3 and n = 1e16 per cm^3, what is p?",
+   "choices": [
+    "1e6 per cm^3",
+    "1e4 per cm^3",
+    "1e16 per cm^3",
+    "1e26 per cm^3"
+   ],
+   "answer": 1,
+   "explanation": "p = ni^2 / n = 1e20 / 1e16 = 1e4 per cm^3."
+  },
+  {
+   "id": "sm05",
+   "topic": "Materials and Doping",
+   "difficulty": 2,
+   "prompt": "What happens to the resistivity of an intrinsic semiconductor as temperature rises?",
+   "choices": [
+    "It increases, as in a metal",
+    "It decreases, because more carriers are generated",
+    "It stays constant",
+    "It becomes infinite"
+   ],
+   "answer": 1,
+   "explanation": "Thermal energy moves more electrons across the gap, increasing carrier density and lowering resistivity."
+  },
+  {
+   "id": "sm06",
+   "topic": "Materials and Doping",
+   "difficulty": 1,
+   "prompt": "What is a hole?",
+   "choices": [
+    "A physical gap in the crystal",
+    "A free proton",
+    "A negative ion",
+    "A missing electron in the valence band that acts like a positive carrier"
+   ],
+   "answer": 3,
+   "explanation": "Holes are vacancies in the valence band that move as if they were positive charges."
+  },
+  {
+   "id": "sm07",
+   "topic": "Materials and Doping",
+   "difficulty": 2,
+   "prompt": "In the band model, what mainly distinguishes an insulator from a semiconductor?",
+   "choices": [
+    "The insulator has a much larger band gap",
+    "The insulator has more free electrons",
+    "The insulator has no valence band",
+    "The insulator contains donor atoms"
+   ],
+   "answer": 0,
+   "explanation": "A large band gap means very few electrons reach the conduction band at room temperature."
+  },
+  {
+   "id": "sm08",
+   "topic": "PN Junction and Diode",
+   "difficulty": 1,
+   "prompt": "What does a forward-biased silicon diode typically drop in the simple model?",
+   "choices": [
+    "About 0.07 V",
+    "About 5 V",
+    "About 0.7 V",
+    "Exactly 0 V"
+   ],
+   "answer": 2,
+   "explanation": "The simple model uses roughly 0.7 V for a conducting silicon diode."
+  },
+  {
+   "id": "sm09",
+   "topic": "PN Junction and Diode",
+   "difficulty": 1,
+   "prompt": "What does reverse bias do to the depletion region?",
+   "choices": [
+    "It narrows it",
+    "It removes it completely",
+    "It makes it conductive",
+    "It widens it"
+   ],
+   "answer": 3,
+   "explanation": "Reverse voltage adds to the built-in barrier, so the depletion region grows."
+  },
+  {
+   "id": "sm10",
+   "topic": "PN Junction and Diode",
+   "difficulty": 1,
+   "prompt": "Which terminal must be more positive for a diode to conduct?",
+   "choices": [
+    "The anode",
+    "The cathode",
+    "Neither, it conducts either way",
+    "The substrate"
+   ],
+   "answer": 0,
+   "explanation": "Current flows from anode to cathode when the anode is more positive by about 0.7 V."
+  },
+  {
+   "id": "sm11",
+   "topic": "PN Junction and Diode",
+   "difficulty": 2,
+   "prompt": "A 9 V source, a 470 ohm resistor and a silicon diode (0.7 V) are in series. What is the current?",
+   "choices": [
+    "About 19.1 mA",
+    "About 1.77 mA",
+    "About 17.7 mA",
+    "About 8.3 mA"
+   ],
+   "answer": 2,
+   "explanation": "I = (9 - 0.7) / 470 = 8.3 / 470, about 17.7 mA."
+  },
+  {
+   "id": "sm12",
+   "topic": "PN Junction and Diode",
+   "difficulty": 2,
+   "prompt": "What is the thermal voltage Vt = kT/q near room temperature?",
+   "choices": [
+    "About 0.7 V",
+    "About 26 mV",
+    "About 2.6 V",
+    "About 1 mV"
+   ],
+   "answer": 1,
+   "explanation": "At about 300 K, kT/q is roughly 26 mV."
+  },
+  {
+   "id": "sm13",
+   "topic": "PN Junction and Diode",
+   "difficulty": 2,
+   "prompt": "What does the depletion region contain?",
+   "choices": [
+    "Only free electrons",
+    "Only holes",
+    "Fixed ionised dopant atoms and very few mobile carriers",
+    "A metal layer"
+   ],
+   "answer": 2,
+   "explanation": "Mobile carriers have diffused away, leaving fixed charged ions that build the electric field."
+  },
+  {
+   "id": "sm14",
+   "topic": "PN Junction and Diode",
+   "difficulty": 3,
+   "prompt": "Why must the source and drain junctions of an NMOS stay reverse biased or at zero bias with respect to the body?",
+   "choices": [
+    "A forward-biased junction would conduct and leak current into the body",
+    "The oxide would melt",
+    "The threshold would become exactly zero",
+    "The gate would stop working as an insulator"
+   ],
+   "answer": 0,
+   "explanation": "Those junctions are PN diodes; forward bias would let current flow into the substrate instead of through the channel."
+  },
+  {
+   "id": "sm15",
+   "topic": "Bipolar Junction Transistor",
+   "difficulty": 1,
+   "prompt": "Which BJT region is normally used for amplification?",
+   "choices": [
+    "Cutoff",
+    "Saturation",
+    "Breakdown only",
+    "Forward-active"
+   ],
+   "answer": 3,
+   "explanation": "Amplification needs B-E forward and B-C reverse, which is the forward-active region."
+  },
+  {
+   "id": "sm16",
+   "topic": "Bipolar Junction Transistor",
+   "difficulty": 1,
+   "prompt": "A BJT has beta = 150 and IB = 10 uA in the active region. What is IC?",
+   "choices": [
+    "15 mA",
+    "1.5 mA",
+    "0.15 mA",
+    "150 uA"
+   ],
+   "answer": 1,
+   "explanation": "IC = beta x IB = 150 x 10 uA = 1.5 mA."
+  },
+  {
+   "id": "sm17",
+   "topic": "Bipolar Junction Transistor",
+   "difficulty": 2,
+   "prompt": "IC = 3 mA and IB = 30 uA. What is IE?",
+   "choices": [
+    "2.97 mA",
+    "3.03 mA",
+    "3.3 mA",
+    "0.03 mA"
+   ],
+   "answer": 1,
+   "explanation": "IE = IB + IC = 0.03 mA + 3 mA = 3.03 mA."
+  },
+  {
+   "id": "sm18",
+   "topic": "Bipolar Junction Transistor",
+   "difficulty": 1,
+   "prompt": "In saturation, how are the two junctions biased?",
+   "choices": [
+    "Both reverse biased",
+    "B-E reverse, B-C forward",
+    "B-E forward, B-C reverse",
+    "Both forward biased"
+   ],
+   "answer": 3,
+   "explanation": "Saturation means both the base-emitter and base-collector junctions conduct."
+  },
+  {
+   "id": "sm19",
+   "topic": "Bipolar Junction Transistor",
+   "difficulty": 1,
+   "prompt": "What controls the collector current of a BJT?",
+   "choices": [
+    "The base current",
+    "The gate voltage only",
+    "The substrate bias only",
+    "The oxide thickness"
+   ],
+   "answer": 0,
+   "explanation": "A BJT is current controlled: IB sets IC through the gain beta."
+  },
+  {
+   "id": "sm20",
+   "topic": "Bipolar Junction Transistor",
+   "difficulty": 2,
+   "prompt": "Why do modern digital chips use MOSFETs rather than BJTs for logic?",
+   "choices": [
+    "BJTs cannot be switched",
+    "MOSFETs have higher current gain",
+    "MOSFETs draw almost no gate current and are denser",
+    "BJTs need no power"
+   ],
+   "answer": 2,
+   "explanation": "The insulated MOSFET gate draws negligible DC current and the devices are compact."
+  },
+  {
+   "id": "sm21",
+   "topic": "Bipolar Junction Transistor",
+   "difficulty": 3,
+   "prompt": "An NPN with beta = 100 has VCC = 5 V, RC = 1 kohm and IB = 20 uA in the active region. What is VCE?",
+   "choices": [
+    "5 V",
+    "2 V",
+    "4.98 V",
+    "3 V"
+   ],
+   "answer": 3,
+   "explanation": "IC = 100 x 20 uA = 2 mA, so VRC = 2 V and VCE = 5 - 2 = 3 V."
+  },
+  {
+   "id": "sm22",
+   "topic": "MOSFET Operation",
+   "difficulty": 1,
+   "prompt": "When does an NMOS transistor begin to conduct?",
+   "choices": [
+    "When VGS exceeds Vth",
+    "When VGS is negative",
+    "When VDS is zero",
+    "When the drain is grounded"
+   ],
+   "answer": 0,
+   "explanation": "A channel forms once the gate-source voltage is above the threshold voltage."
+  },
+  {
+   "id": "sm23",
+   "topic": "MOSFET Operation",
+   "difficulty": 1,
+   "prompt": "Which transistor passes a strong logic 0?",
+   "choices": [
+    "PMOS",
+    "Both pass a weak 0",
+    "NMOS",
+    "Neither"
+   ],
+   "answer": 2,
+   "explanation": "NMOS can pull a node all the way to ground; PMOS cannot fully pass a 0."
+  },
+  {
+   "id": "sm24",
+   "topic": "MOSFET Operation",
+   "difficulty": 1,
+   "prompt": "In digital CMOS with its source at VDD, a PMOS turns on when its gate is:",
+   "choices": [
+    "High",
+    "Low",
+    "Floating",
+    "At VDD"
+   ],
+   "answer": 1,
+   "explanation": "PMOS conducts when the gate is sufficiently below the source (VSG > |Vtp|)."
+  },
+  {
+   "id": "sm25",
+   "topic": "MOSFET Operation",
+   "difficulty": 2,
+   "prompt": "Vth = 0.4 V, VGS = 1.0 V, VDS = 0.3 V. Which region is the NMOS in?",
+   "choices": [
+    "Cutoff",
+    "Saturation",
+    "Linear",
+    "Breakdown"
+   ],
+   "answer": 2,
+   "explanation": "VOV = 0.6 V and VDS = 0.3 V is less than VOV, so the transistor is in the linear region."
+  },
+  {
+   "id": "sm26",
+   "topic": "MOSFET Operation",
+   "difficulty": 2,
+   "prompt": "Vth = 0.5 V, k = 1 mA/V^2, VGS = 1.5 V, VDS = 2 V. What is ID in the simple saturation model?",
+   "choices": [
+    "0.5 mA",
+    "1.0 mA",
+    "0.25 mA",
+    "1.5 mA"
+   ],
+   "answer": 0,
+   "explanation": "ID = (k/2)(VGS - Vth)^2 = 0.5 x 1^2 = 0.5 mA."
+  },
+  {
+   "id": "sm27",
+   "topic": "MOSFET Operation",
+   "difficulty": 2,
+   "prompt": "What happens to saturation current if W/L is doubled, other things equal?",
+   "choices": [
+    "It halves",
+    "It quadruples",
+    "It does not change",
+    "It doubles"
+   ],
+   "answer": 3,
+   "explanation": "k = mu Cox (W/L) and ID is proportional to k."
+  },
+  {
+   "id": "sm28",
+   "topic": "MOSFET Operation",
+   "difficulty": 1,
+   "prompt": "Why does almost no DC current flow into a MOSFET gate?",
+   "choices": [
+    "The gate is made of copper",
+    "The gate is separated from the channel by an insulating oxide",
+    "The gate is reverse biased",
+    "The gate is connected to ground"
+   ],
+   "answer": 1,
+   "explanation": "The thin oxide is an insulator, so the gate acts like a capacitor."
+  },
+  {
+   "id": "sm29",
+   "topic": "Fabrication and Process Nodes",
+   "difficulty": 1,
+   "prompt": "What is the purpose of photoresist in lithography?",
+   "choices": [
+    "To dope the silicon",
+    "To define the pattern that protects the layer during etching",
+    "To carry the electrical signal",
+    "To polish the wafer"
+   ],
+   "answer": 1,
+   "explanation": "Resist is exposed and developed to leave a pattern that shields parts of the wafer from the etch."
+  },
+  {
+   "id": "sm30",
+   "topic": "Fabrication and Process Nodes",
+   "difficulty": 1,
+   "prompt": "What diameter is common for modern wafers?",
+   "choices": [
+    "30 mm",
+    "3 mm",
+    "3 m",
+    "300 mm"
+   ],
+   "answer": 3,
+   "explanation": "Modern fabs mostly use 300 mm wafers."
+  },
+  {
+   "id": "sm31",
+   "topic": "Fabrication and Process Nodes",
+   "difficulty": 1,
+   "prompt": "What is ion implantation used for?",
+   "choices": [
+    "Placing dopant atoms into silicon",
+    "Flattening the surface",
+    "Growing metal wires",
+    "Cutting the wafer"
+   ],
+   "answer": 0,
+   "explanation": "Implantation introduces donor or acceptor ions to form n-type and p-type regions."
+  },
+  {
+   "id": "sm32",
+   "topic": "Fabrication and Process Nodes",
+   "difficulty": 2,
+   "prompt": "What does a process node name such as 5 nm mean today?",
+   "choices": [
+    "The exact gate length",
+    "The exact wire width",
+    "A generation label that is not a literal measured dimension",
+    "The wafer thickness"
+   ],
+   "answer": 2,
+   "explanation": "Node names have become marketing and generation labels, no longer tied to one physical size."
+  },
+  {
+   "id": "sm33",
+   "topic": "Fabrication and Process Nodes",
+   "difficulty": 2,
+   "prompt": "Upper bound on dies for a 300 mm wafer (area about 70,686 mm^2) and a 50 mm^2 die?",
+   "choices": [
+    "About 706",
+    "About 2,827",
+    "About 14,137",
+    "About 1,413"
+   ],
+   "answer": 3,
+   "explanation": "70,686 / 50 is about 1,413, ignoring edge loss."
+  },
+  {
+   "id": "sm34",
+   "topic": "Fabrication and Process Nodes",
+   "difficulty": 1,
+   "prompt": "500 dies fit on a wafer and yield is 90%. How many are good?",
+   "choices": [
+    "450",
+    "500",
+    "90",
+    "410"
+   ],
+   "answer": 0,
+   "explanation": "500 x 0.9 = 450."
+  },
+  {
+   "id": "sm35",
+   "topic": "Fabrication and Process Nodes",
+   "difficulty": 2,
+   "prompt": "Why does yield tend to fall as die area increases?",
+   "choices": [
+    "The mask gets thicker",
+    "Silicon becomes a conductor",
+    "A larger die is more likely to contain a defect",
+    "Dopants evaporate"
+   ],
+   "answer": 2,
+   "explanation": "Defects are roughly randomly spread, so more area means a higher chance of a hit."
+  },
+  {
+   "id": "sm36",
+   "topic": "Fabrication and Process Nodes",
+   "difficulty": 2,
+   "prompt": "What is the goal of chemical mechanical polishing (CMP)?",
+   "choices": [
+    "To implant dopants",
+    "To planarise the surface between layers",
+    "To expose the photoresist",
+    "To test the die"
+   ],
+   "answer": 1,
+   "explanation": "CMP flattens the wafer so the next layer can be patterned accurately."
+  }
+ ],
+ "lessons": [
+  {
+   "id": "semi-materials-doping",
+   "topic": "Materials and Doping",
+   "title": "Conductors, Semiconductors and Doping",
+   "level": "Beginner",
+   "minutes": 7,
+   "keywords": [
+    "conductor",
+    "semiconductor",
+    "insulator",
+    "silicon",
+    "band",
+    "gap",
+    "doping",
+    "ntype",
+    "ptype",
+    "donor",
+    "acceptor",
+    "hole",
+    "electron",
+    "intrinsic"
+   ],
+   "objectives": [
+    "Distinguish conductors, semiconductors and insulators using the band gap",
+    "Explain how n-type and p-type silicon are made by doping",
+    "Use n x p = ni^2 to estimate minority carrier concentration"
+   ],
+   "body": "Materials differ in how easily they carry current. Conductors such as copper and aluminium have many free electrons and very low resistivity. Insulators such as silicon dioxide have almost no free carriers. Semiconductors such as silicon sit in between, and their conductivity can be engineered.\n\nIn the band model, electrons in the valence band need extra energy to jump into the conduction band. The energy gap between the bands is the band gap. Silicon's band gap is about 1.1 eV, an insulator's gap is much larger, and in a conductor the bands overlap or are partly filled. When an electron jumps up it leaves a hole behind, and both electrons and holes can carry current.\n\nPure silicon is called intrinsic and has few carriers at room temperature. Doping adds a tiny amount of impurity atoms. Phosphorus or arsenic (five valence electrons) donate extra electrons and make n-type silicon, where electrons are the majority carriers. Boron (three valence electrons) creates holes and makes p-type silicon, where holes are the majority carriers. At a given temperature the product n x p stays roughly constant, so adding donors reduces the number of holes.",
+   "definitions": [
+    {
+     "term": "Band gap",
+     "meaning": "The energy needed to lift an electron from the valence band to the conduction band."
+    },
+    {
+     "term": "Hole",
+     "meaning": "A missing electron in the valence band that behaves like a positive charge carrier."
+    },
+    {
+     "term": "Doping",
+     "meaning": "Deliberately adding impurity atoms to a semiconductor to control its carrier type and density."
+    },
+    {
+     "term": "Majority carrier",
+     "meaning": "The carrier type that is more plentiful: electrons in n-type, holes in p-type."
+    }
+   ],
+   "example": "Mass action law: n x p = ni^2\nUse the round, approximate value ni = 1e10 per cm^3 for silicon at room temperature, so ni^2 = 1e20.\nDonors give n = 1e16 per cm^3.\np = ni^2 / n = 1e20 / 1e16 = 1e4 per cm^3\nElectrons now outnumber holes by a factor of 1e12.",
+   "exampleNote": "Doping with donors raises the electron count enormously and pushes the hole count far below its intrinsic value. The numbers are approximate and only illustrate the law.",
+   "diagram": "Material      Gap         Carriers\nConductor     overlap     very many\nSemiconductor ~1.1 eV Si  few, tunable\nInsulator     large       almost none\n\nn-type: Group V donor (P, As)\np-type: Group III acceptor (B)",
+   "mistakes": [
+    "Thinking an n-type crystal is negatively charged. It is electrically neutral; donor ions and extra electrons balance.",
+    "Believing a hole is a particle that exists on its own. It is the absence of an electron in the valence band that acts like a positive carrier."
+   ],
+   "practice": [
+    {
+     "q": "Which dopant makes p-type silicon?",
+     "a": "Boron (group III), because it has one fewer valence electron than silicon and creates holes."
+    },
+    {
+     "q": "What are the majority carriers in n-type silicon?",
+     "a": "Electrons, supplied by the donor atoms."
+    },
+    {
+     "q": "Why does resistivity of a pure semiconductor fall as it heats up?",
+     "a": "Heat lifts more electrons across the band gap, so more carriers are available."
+    }
+   ],
+   "exercises": [
+    "Draw a simple band picture for a conductor, a semiconductor and an insulator and label the band gap.",
+    "With ni = 1e10 per cm^3 and acceptors giving p = 1e15 per cm^3, compute n."
+   ],
+   "summary": [
+    "The band gap separates conductors, semiconductors and insulators.",
+    "Doping with group V atoms gives n-type, with group III atoms gives p-type.",
+    "n x p = ni^2 links electron and hole densities.",
+    "Semiconductor conductivity can be tuned by doping and changes with temperature."
+   ]
+  },
+  {
+   "id": "semi-pn-diode",
+   "topic": "PN Junction and Diode",
+   "title": "The PN Junction and Diode",
+   "level": "Beginner",
+   "minutes": 8,
+   "keywords": [
+    "pn",
+    "junction",
+    "diode",
+    "depletion",
+    "region",
+    "forward",
+    "bias",
+    "reverse",
+    "bias",
+    "breakdown",
+    "built-in",
+    "potential",
+    "rectifier",
+    "anode",
+    "cathode",
+    "shockley"
+   ],
+   "objectives": [
+    "Describe the depletion region and built-in potential",
+    "Predict diode behaviour under forward and reverse bias",
+    "Solve a simple diode-resistor circuit with the 0.7 V model"
+   ],
+   "body": "A PN junction forms where p-type and n-type silicon meet. Electrons diffuse from the n side into the p side and holes diffuse the other way. They leave behind fixed ionised dopant atoms, creating a depletion region with an electric field and a built-in potential (roughly 0.6 to 0.8 V for silicon, depending on doping) that stops further diffusion.\n\nUnder forward bias (p side, the anode, positive) the applied voltage reduces the barrier, the depletion region narrows, and current grows exponentially once the voltage reaches about 0.6 to 0.7 V for a silicon diode. Under reverse bias the barrier grows, the depletion region widens, and only a tiny leakage current flows until breakdown occurs at a large reverse voltage.\n\nThe ideal diode equation is I = Is (e^(V/(n Vt)) - 1), where Vt = kT/q is about 26 mV at room temperature. For hand analysis a simple model is common: a conducting silicon diode drops about 0.7 V, and a reverse-biased one conducts nothing. Diodes are used in rectifiers and protection circuits, and the source and drain junctions of a MOSFET are PN junctions that must stay reverse biased.",
+   "definitions": [
+    {
+     "term": "Depletion region",
+     "meaning": "The zone around the junction emptied of mobile carriers and left with fixed ionised atoms."
+    },
+    {
+     "term": "Forward bias",
+     "meaning": "Anode more positive than cathode; the barrier shrinks and current flows."
+    },
+    {
+     "term": "Reverse bias",
+     "meaning": "Anode more negative than cathode; the barrier grows and almost no current flows."
+    },
+    {
+     "term": "Thermal voltage Vt",
+     "meaning": "kT/q, about 26 mV at room temperature."
+    }
+   ],
+   "example": "Series circuit: 5 V source, 1 kohm resistor, silicon diode forward biased (0.7 V model).\nVR = 5 - 0.7 = 4.3 V\nI = 4.3 V / 1 kohm = 4.3 mA\nReverse the diode: I is about 0 and the whole 5 V appears across the diode.",
+   "exampleNote": "The diode takes the 0.7 V it needs to conduct and the resistor sets the current with Ohm's law. This is a simplified model; real diode voltage varies slightly with current.",
+   "diagram": "  p side    depletion    n side\n h h h h [ - - | + + ] e e e e\n anode                    cathode\n\n Symbol: anode --|>|-- cathode\n Forward: anode more positive = ON\n Reverse: anode more negative = OFF\n\n h = holes, e = electrons",
+   "mistakes": [
+    "Assuming a diode drops 0.7 V even when reverse biased. In reverse it blocks and the full voltage appears across it.",
+    "Forgetting the series resistor. Without it the exponential law drives a damaging current."
+   ],
+   "practice": [
+    {
+     "q": "What happens to the depletion region in reverse bias?",
+     "a": "It widens, because the applied voltage adds to the built-in barrier."
+    },
+    {
+     "q": "A 3.3 V source feeds a 330 ohm resistor and a silicon diode (0.7 V). Find I.",
+     "a": "I = (3.3 - 0.7) / 330 = 2.6 / 330, about 7.9 mA."
+    },
+    {
+     "q": "What is Vt at room temperature?",
+     "a": "About 26 mV."
+    }
+   ],
+   "exercises": [
+    "Compute the current for a 9 V source, a 470 ohm resistor and a forward diode using the 0.7 V model.",
+    "Sketch the I-V curve of a diode showing the knee near 0.7 V and the tiny reverse current."
+   ],
+   "summary": [
+    "The depletion region and built-in potential form at the junction.",
+    "Forward bias lowers the barrier and conducts; reverse bias widens it and blocks.",
+    "A conducting silicon diode drops about 0.7 V in the simple model.",
+    "Vt = kT/q is about 26 mV at room temperature."
+   ]
+  },
+  {
+   "id": "semi-bjt",
+   "topic": "Bipolar Junction Transistor",
+   "title": "BJT Basics",
+   "level": "Beginner",
+   "minutes": 8,
+   "keywords": [
+    "bjt",
+    "bipolar",
+    "transistor",
+    "npn",
+    "pnp",
+    "emitter",
+    "base",
+    "collector",
+    "beta",
+    "gain",
+    "cutoff",
+    "active",
+    "saturation",
+    "current",
+    "ttl"
+   ],
+   "objectives": [
+    "Name the three BJT terminals and the NPN structure",
+    "Identify cutoff, active and saturation by junction bias",
+    "Apply IC = beta x IB and IE = IB + IC"
+   ],
+   "body": "A bipolar junction transistor (BJT) has three regions and two PN junctions. An NPN device has an n-type emitter, a thin p-type base and an n-type collector. A small base current controls a much larger collector current, so the BJT is a current-controlled device.\n\nThe operating region depends on the two junctions. In cutoff the base-emitter junction is not forward biased enough to conduct and almost no current flows. In the forward-active region the base-emitter junction is forward biased (about 0.6 to 0.7 V for silicon) and the base-collector junction is reverse biased; here IC = beta x IB, where beta, the current gain, is typically tens to a few hundred. In saturation both junctions are forward biased and the transistor behaves like a closed switch with a small collector-emitter voltage.\n\nThe currents always satisfy IE = IB + IC. A PNP transistor works the same way with all polarities reversed. BJTs are used in high-speed analog circuits and older logic families such as TTL, while modern digital VLSI is built mainly from MOSFETs because they draw almost no gate current and pack more densely.",
+   "definitions": [
+    {
+     "term": "Emitter, base, collector",
+     "meaning": "The three BJT terminals; the emitter emits carriers, the thin base controls them, the collector gathers them."
+    },
+    {
+     "term": "Beta",
+     "meaning": "Current gain: IC divided by IB in the forward-active region."
+    },
+    {
+     "term": "Forward-active region",
+     "meaning": "Base-emitter forward biased and base-collector reverse biased; used for amplification."
+    },
+    {
+     "term": "Saturation",
+     "meaning": "Both junctions forward biased; the transistor acts as a closed switch."
+    }
+   ],
+   "example": "NPN in forward-active region, beta = 100, IB = 20 uA\nIC = beta x IB = 100 x 20 uA = 2 mA\nIE = IB + IC = 0.02 mA + 2 mA = 2.02 mA\nWith VCC = 5 V and a 1 kohm collector resistor:\nVCE = 5 - 2 mA x 1 kohm = 3 V",
+   "exampleNote": "Because VCE = 3 V is well above the small saturation voltage, the assumption of the active region holds. If the computed VCE were negative, the transistor would be saturated instead.",
+   "diagram": "Region      B-E junction  B-C junction\nCutoff      off           reverse\nActive      forward       reverse\nSaturation  forward       forward\n\nNPN:  C\n      |\n  B --|    IE = IB + IC\n      |\n      E",
+   "mistakes": [
+    "Using IC = beta x IB in saturation. There the relation no longer holds because the collector current is limited by the external circuit.",
+    "Mixing up which junction is reversed in the active region. It is the base-collector junction."
+   ],
+   "practice": [
+    {
+     "q": "Which region is used for amplification?",
+     "a": "Forward-active, with base-emitter forward and base-collector reverse biased."
+    },
+    {
+     "q": "beta = 150 and IB = 10 uA. Find IC.",
+     "a": "IC = 150 x 10 uA = 1.5 mA."
+    },
+    {
+     "q": "Why does digital VLSI prefer MOSFETs?",
+     "a": "They draw almost no gate current and can be packed more densely."
+    }
+   ],
+   "exercises": [
+    "For beta = 200 and IC = 4 mA, compute IB and IE.",
+    "Draw an NPN with a collector resistor and mark which junction is forward and which is reverse in the active region."
+   ],
+   "summary": [
+    "A BJT is controlled by base current.",
+    "Active region: B-E forward, B-C reverse, IC = beta x IB.",
+    "IE = IB + IC in every region.",
+    "MOSFETs dominate digital VLSI; BJTs remain important in analog circuits."
+   ]
+  },
+  {
+   "id": "semi-mosfet",
+   "topic": "MOSFET Operation",
+   "title": "MOSFET Operation: NMOS, PMOS and Regions",
+   "level": "Beginner",
+   "minutes": 9,
+   "keywords": [
+    "mosfet",
+    "nmos",
+    "pmos",
+    "threshold",
+    "voltage",
+    "vth",
+    "cutoff",
+    "linear",
+    "triode",
+    "saturation",
+    "gate",
+    "source",
+    "drain",
+    "channel",
+    "inversion",
+    "w/l"
+   ],
+   "objectives": [
+    "Explain how the gate voltage creates a channel",
+    "State when NMOS and PMOS turn on",
+    "Classify cutoff, linear and saturation and compute drain current"
+   ],
+   "body": "A MOSFET is a voltage-controlled switch. An NMOS transistor has n-type source and drain regions in a p-type body, with a gate separated from the channel by a thin insulating oxide. Because the gate is insulated, almost no DC current flows into it.\n\nWhen the gate-to-source voltage VGS is below the threshold voltage Vth, no channel exists and the device is in cutoff. When VGS exceeds Vth, a layer of electrons forms under the gate and connects source and drain. NMOS turns on with a high gate and passes a good logic 0. PMOS is the complement: p-type source and drain in an n-type body, it turns on when the gate is low enough (VSG greater than |Vtp|) and passes a good logic 1.\n\nWith the channel on there are two regions. In the linear (triode) region VDS < VGS - Vth and the device acts like a voltage-controlled resistor. In saturation VDS >= VGS - Vth and the current levels off. In the simple long-channel model, ID = (k/2)(VGS - Vth)^2 in saturation, where k = mu Cox (W/L). A wider W or shorter L gives more current. Modern short-channel devices deviate from this square law.",
+   "definitions": [
+    {
+     "term": "Threshold voltage Vth",
+     "meaning": "The gate-source voltage at which a conducting channel starts to form."
+    },
+    {
+     "term": "Overdrive voltage",
+     "meaning": "VGS - Vth, how far the gate is above threshold."
+    },
+    {
+     "term": "Linear (triode) region",
+     "meaning": "VDS < VGS - Vth; the transistor behaves like a resistor."
+    },
+    {
+     "term": "Saturation",
+     "meaning": "VDS >= VGS - Vth; drain current is nearly independent of VDS in the simple model."
+    }
+   ],
+   "example": "Simplified long-channel model: Vth = 0.5 V, k = 2 mA/V^2\nCase 1: VGS = 1.0 V, VDS = 1.0 V\n  VOV = 0.5 V; VDS >= VOV so saturation\n  ID = (2/2) x 0.5^2 = 0.25 mA\nCase 2: VGS = 1.0 V, VDS = 0.2 V\n  VDS < VOV so linear\n  ID = k[VOV x VDS - VDS^2/2] = 2 x [0.1 - 0.02] = 0.16 mA",
+   "exampleNote": "Compare VDS with the overdrive voltage to pick the region, then use the matching formula. These formulas are the textbook model, not a model of a modern short-channel device.",
+   "diagram": "NMOS regions (VOV = VGS - Vth)\n\nVGS < Vth        cutoff\nVGS > Vth and\n  VDS < VOV      linear\n  VDS >= VOV     saturation\n\nNMOS ON: gate high, strong 0\nPMOS ON: gate low,  strong 1",
+   "mistakes": [
+    "Comparing VDS with Vth to find the region. Compare VDS with the overdrive VGS - Vth.",
+    "Using NMOS to pass a strong 1. NMOS drops a threshold; PMOS is the transistor that passes a good 1."
+   ],
+   "practice": [
+    {
+     "q": "When is an NMOS in cutoff?",
+     "a": "When VGS is below Vth, so no channel forms."
+    },
+    {
+     "q": "Vth = 0.4 V, VGS = 1.0 V, VDS = 0.3 V. Which region?",
+     "a": "VOV = 0.6 V and VDS = 0.3 V < 0.6 V, so linear."
+    },
+    {
+     "q": "How can you double the drive current of a transistor?",
+     "a": "Double W/L, for example by doubling the width."
+    }
+   ],
+   "exercises": [
+    "With Vth = 0.5 V and k = 1 mA/V^2, compute saturation current at VGS = 1.5 V.",
+    "Make a table of NMOS and PMOS: gate value that turns it on and which logic level it passes well."
+   ],
+   "summary": [
+    "VGS above Vth creates a channel in an NMOS.",
+    "NMOS passes a strong 0 and PMOS a strong 1.",
+    "Linear: VDS < VGS - Vth. Saturation: VDS >= VGS - Vth.",
+    "Current scales with W/L and with the square of the overdrive in the simple model."
+   ]
+  },
+  {
+   "id": "semi-fabrication",
+   "topic": "Fabrication and Process Nodes",
+   "title": "Fabrication: Wafers, Lithography and Process Nodes",
+   "level": "Beginner",
+   "minutes": 8,
+   "keywords": [
+    "fabrication",
+    "wafer",
+    "lithography",
+    "photoresist",
+    "mask",
+    "etching",
+    "ion",
+    "implantation",
+    "cmp",
+    "process",
+    "node",
+    "nm",
+    "yield",
+    "die",
+    "cleanroom"
+   ],
+   "objectives": [
+    "Outline the main steps of chip fabrication",
+    "Explain what photolithography does",
+    "Estimate dies per wafer and good dies using yield"
+   ],
+   "body": "Chips are built on silicon wafers sliced from a single-crystal ingot. Modern fabs mostly use 300 mm diameter wafers and work in cleanrooms because a single dust particle can ruin a die. Hundreds of identical dies are patterned on one wafer, then cut apart, tested and packaged.\n\nPatterns are made layer by layer. Photolithography coats the wafer with photoresist, shines light through a mask (reticle) to expose the pattern, and develops the resist. Etching removes material where the resist does not protect it. Other repeated steps include oxidation to grow silicon dioxide, ion implantation to place dopants, deposition of thin films, and chemical mechanical polishing (CMP) to flatten the surface. Finally several layers of metal wiring connect the transistors.\n\nA process node name such as 7 nm or 5 nm was once tied to a physical feature such as gate length. Today it is mainly a generation label chosen by each manufacturer and does not directly equal a measured dimension. Smaller nodes generally allow more transistors per area, but cost and design complexity also rise. Yield is the fraction of dies that work, and it tends to fall as die area grows.",
+   "definitions": [
+    {
+     "term": "Wafer",
+     "meaning": "A thin disc of single-crystal silicon on which many dies are made."
+    },
+    {
+     "term": "Photolithography",
+     "meaning": "Transferring a mask pattern into photoresist using light."
+    },
+    {
+     "term": "Ion implantation",
+     "meaning": "Shooting dopant ions into silicon to create n-type or p-type regions."
+    },
+    {
+     "term": "Yield",
+     "meaning": "The fraction of manufactured dies that pass testing."
+    }
+   ],
+   "example": "Simplified die count for a 300 mm wafer, die area 100 mm^2\nWafer area = pi x 150^2 = about 70,686 mm^2\nUpper bound = 70,686 / 100 = about 706 dies\nIf 600 dies actually fit after edge loss, and yield is 80%:\ngood dies = 600 x 0.8 = 480",
+   "exampleNote": "The upper bound ignores the round edge and spacing between dies, so the real count is lower. Yield then removes the dies with defects.",
+   "diagram": "Wafer + oxide layer\n | 1. coat photoresist\n | 2. expose through mask\n | 3. develop the resist\n | 4. etch the oxide\n | 5. strip the resist\n v\nrepeat for every layer, then\nadd dopants and metal wiring",
+   "mistakes": [
+    "Treating a node name like 5 nm as the literal transistor size. It is a generation label, not a measured feature.",
+    "Assuming every die on the wafer works. Yield below 100% is normal and falls for large dies."
+   ],
+   "practice": [
+    {
+     "q": "What is the role of photoresist?",
+     "a": "It holds the exposed pattern and protects the layer below during etching."
+    },
+    {
+     "q": "Why are larger dies harder to yield?",
+     "a": "A bigger area is more likely to contain a random defect."
+    },
+    {
+     "q": "What does CMP do?",
+     "a": "It polishes the wafer flat before the next layer is added."
+    }
+   ],
+   "exercises": [
+    "Compute the upper bound on dies for a 300 mm wafer and a 50 mm^2 die.",
+    "Write the sequence of steps for patterning one layer and explain what each step does."
+   ],
+   "summary": [
+    "Chips are made layer by layer on silicon wafers.",
+    "Lithography, etching, implantation, deposition and CMP repeat for each layer.",
+    "Process node names are generation labels, not exact sizes.",
+    "Yield falls as die area grows."
+   ]
+  }
+ ]
+}

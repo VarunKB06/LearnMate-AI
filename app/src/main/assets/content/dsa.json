@@ -1,0 +1,662 @@
+{
+ "id": "dsa",
+ "title": "Data Structures and Algorithms",
+ "description": "Complexity, arrays, linked lists, stacks, queues, trees, graphs, sorting, searching and hashing.",
+ "level": "Intermediate",
+ "path": "Programming Foundations",
+ "pathOrder": 3,
+ "prerequisites": [
+  "c"
+ ],
+ "icon": "🌳",
+ "questions": [
+  {
+   "id": "d01",
+   "topic": "Complexity",
+   "difficulty": 1,
+   "prompt": "What is the time complexity of binary search on a sorted array of n elements?",
+   "choices": [
+    "O(n)",
+    "O(log n)",
+    "O(n log n)",
+    "O(1)"
+   ],
+   "answer": 1,
+   "explanation": "Each step halves the search range, giving O(log n)."
+  },
+  {
+   "id": "d02",
+   "topic": "Complexity",
+   "difficulty": 2,
+   "prompt": "What is the time complexity of reading an array element by index?",
+   "choices": [
+    "O(n)",
+    "O(log n)",
+    "O(1)",
+    "O(n^2)"
+   ],
+   "answer": 2,
+   "explanation": "Arrays give direct access by index in constant time."
+  },
+  {
+   "id": "d03",
+   "topic": "Complexity",
+   "difficulty": 2,
+   "prompt": "Which Big-O describes two nested loops that each run n times?",
+   "choices": [
+    "O(n)",
+    "O(n^2)",
+    "O(log n)",
+    "O(2^n)"
+   ],
+   "answer": 1,
+   "explanation": "n iterations of an inner loop that runs n times gives n x n = O(n^2)."
+  },
+  {
+   "id": "d04",
+   "topic": "Arrays",
+   "difficulty": 1,
+   "prompt": "Which array operation is typically O(n)?",
+   "choices": [
+    "Read by index",
+    "Insert at the beginning",
+    "Get the length",
+    "Write by index"
+   ],
+   "answer": 1,
+   "explanation": "Inserting at the front shifts every existing element one place."
+  },
+  {
+   "id": "d05",
+   "topic": "Arrays",
+   "difficulty": 2,
+   "prompt": "What is the amortised cost of appending to a dynamic array?",
+   "choices": [
+    "O(n)",
+    "O(log n)",
+    "O(1)",
+    "O(n^2)"
+   ],
+   "answer": 2,
+   "explanation": "Occasional resizing is spread over many appends, so each append is O(1) amortised."
+  },
+  {
+   "id": "d06",
+   "topic": "Arrays",
+   "difficulty": 1,
+   "prompt": "How are array elements laid out in memory?",
+   "choices": [
+    "Contiguously",
+    "Scattered and linked by pointers",
+    "In hash buckets",
+    "As tree nodes"
+   ],
+   "answer": 0,
+   "explanation": "Arrays store elements in one contiguous block, enabling constant-time indexing."
+  },
+  {
+   "id": "d07",
+   "topic": "Linked Lists",
+   "difficulty": 1,
+   "prompt": "What does each node of a singly linked list contain?",
+   "choices": [
+    "Only data",
+    "Data and a pointer to the next node",
+    "Data and two pointers",
+    "An index and data"
+   ],
+   "answer": 1,
+   "explanation": "A singly linked node holds a value and a reference to the next node."
+  },
+  {
+   "id": "d08",
+   "topic": "Linked Lists",
+   "difficulty": 2,
+   "prompt": "What is the time to insert at the head of a singly linked list?",
+   "choices": [
+    "O(1)",
+    "O(n)",
+    "O(log n)",
+    "O(n^2)"
+   ],
+   "answer": 0,
+   "explanation": "Create a node, point it at the old head and update the head: constant time."
+  },
+  {
+   "id": "d09",
+   "topic": "Linked Lists",
+   "difficulty": 2,
+   "prompt": "Which is a disadvantage of a linked list compared with an array?",
+   "choices": [
+    "No O(1) access by index",
+    "It cannot grow",
+    "It has a fixed size",
+    "It cannot store integers"
+   ],
+   "answer": 0,
+   "explanation": "Reaching the k-th node requires walking k links, so indexing is O(n)."
+  },
+  {
+   "id": "d10",
+   "topic": "Linked Lists",
+   "difficulty": 3,
+   "prompt": "Which technique detects a cycle in a linked list using O(1) extra space?",
+   "choices": [
+    "Floyd's slow and fast pointers",
+    "Binary search",
+    "Sorting the nodes",
+    "Recursion with a hash set"
+   ],
+   "answer": 0,
+   "explanation": "Floyd's tortoise and hare moves two pointers at different speeds; they meet if there is a cycle."
+  },
+  {
+   "id": "d11",
+   "topic": "Stacks and Queues",
+   "difficulty": 1,
+   "prompt": "Which ordering principle does a stack follow?",
+   "choices": [
+    "FIFO",
+    "LIFO",
+    "Random",
+    "Priority"
+   ],
+   "answer": 1,
+   "explanation": "A stack is last-in, first-out."
+  },
+  {
+   "id": "d12",
+   "topic": "Stacks and Queues",
+   "difficulty": 1,
+   "prompt": "Which ordering principle does a queue follow?",
+   "choices": [
+    "LIFO",
+    "FIFO",
+    "Most recently used",
+    "Sorted order"
+   ],
+   "answer": 1,
+   "explanation": "A queue is first-in, first-out."
+  },
+  {
+   "id": "d13",
+   "topic": "Stacks and Queues",
+   "difficulty": 2,
+   "prompt": "Which data structure is the natural choice for checking balanced parentheses?",
+   "choices": [
+    "Queue",
+    "Stack",
+    "Heap",
+    "Graph"
+   ],
+   "answer": 1,
+   "explanation": "Push openers and pop on closers; the most recent opener must match."
+  },
+  {
+   "id": "d14",
+   "topic": "Stacks and Queues",
+   "difficulty": 2,
+   "prompt": "Which data structure does breadth-first search use?",
+   "choices": [
+    "Stack",
+    "Queue",
+    "Heap",
+    "Hash table"
+   ],
+   "answer": 1,
+   "explanation": "BFS explores level by level using a FIFO queue."
+  },
+  {
+   "id": "d15",
+   "topic": "Trees",
+   "difficulty": 1,
+   "prompt": "How many children can a node of a binary tree have at most?",
+   "choices": [
+    "1",
+    "2",
+    "3",
+    "Any number"
+   ],
+   "answer": 1,
+   "explanation": "By definition each node has at most a left and a right child."
+  },
+  {
+   "id": "d16",
+   "topic": "Trees",
+   "difficulty": 2,
+   "prompt": "Which traversal of a binary search tree visits keys in ascending order?",
+   "choices": [
+    "Preorder",
+    "Inorder",
+    "Postorder",
+    "Level-order only"
+   ],
+   "answer": 1,
+   "explanation": "Inorder visits left subtree, node, then right subtree, which yields sorted order for a BST."
+  },
+  {
+   "id": "d17",
+   "topic": "Trees",
+   "difficulty": 2,
+   "prompt": "What is the average search time in a balanced binary search tree?",
+   "choices": [
+    "O(1)",
+    "O(log n)",
+    "O(n)",
+    "O(n log n)"
+   ],
+   "answer": 1,
+   "explanation": "A balanced tree has height about log n, so search follows O(log n) links."
+  },
+  {
+   "id": "d18",
+   "topic": "Trees",
+   "difficulty": 3,
+   "prompt": "What is the maximum number of nodes in a binary tree of height h, where a single root has height 0?",
+   "choices": [
+    "2^h",
+    "2^(h+1) - 1",
+    "h^2",
+    "2h + 1"
+   ],
+   "answer": 1,
+   "explanation": "A full tree has 1 + 2 + 4 + ... + 2^h = 2^(h+1) - 1 nodes."
+  },
+  {
+   "id": "d19",
+   "topic": "Graphs",
+   "difficulty": 1,
+   "prompt": "Which graph representation uses a V x V table?",
+   "choices": [
+    "Adjacency list",
+    "Adjacency matrix",
+    "Edge heap",
+    "Parent array"
+   ],
+   "answer": 1,
+   "explanation": "An adjacency matrix stores one cell for every pair of vertices."
+  },
+  {
+   "id": "d20",
+   "topic": "Graphs",
+   "difficulty": 2,
+   "prompt": "Which algorithm finds shortest paths from one source in a graph with non-negative edge weights?",
+   "choices": [
+    "Kruskal",
+    "Dijkstra",
+    "Depth-first search",
+    "Prim"
+   ],
+   "answer": 1,
+   "explanation": "Dijkstra's algorithm repeatedly settles the closest unvisited vertex."
+  },
+  {
+   "id": "d21",
+   "topic": "Graphs",
+   "difficulty": 2,
+   "prompt": "Which traversal naturally uses a stack or recursion?",
+   "choices": [
+    "Breadth-first search",
+    "Depth-first search",
+    "Dijkstra",
+    "Level-order"
+   ],
+   "answer": 1,
+   "explanation": "DFS goes as deep as possible first, which a stack or the call stack provides."
+  },
+  {
+   "id": "d22",
+   "topic": "Sorting",
+   "difficulty": 1,
+   "prompt": "Which algorithm splits the data in halves, sorts each and merges them?",
+   "choices": [
+    "Bubble sort",
+    "Merge sort",
+    "Insertion sort",
+    "Selection sort"
+   ],
+   "answer": 1,
+   "explanation": "Merge sort is divide and conquer with O(n log n) time."
+  },
+  {
+   "id": "d23",
+   "topic": "Sorting",
+   "difficulty": 2,
+   "prompt": "What is the worst-case time complexity of bubble sort?",
+   "choices": [
+    "O(n)",
+    "O(n log n)",
+    "O(n^2)",
+    "O(log n)"
+   ],
+   "answer": 2,
+   "explanation": "Bubble sort compares adjacent pairs in repeated passes, giving O(n^2)."
+  },
+  {
+   "id": "d24",
+   "topic": "Sorting",
+   "difficulty": 2,
+   "prompt": "Which of these sorts is stable in its usual implementation?",
+   "choices": [
+    "Merge sort",
+    "Typical quicksort",
+    "Heap sort",
+    "Selection sort"
+   ],
+   "answer": 0,
+   "explanation": "Merge sort keeps equal elements in their original order."
+  },
+  {
+   "id": "d25",
+   "topic": "Sorting",
+   "difficulty": 3,
+   "prompt": "What is the worst-case time of quicksort when pivots are chosen badly?",
+   "choices": [
+    "O(n log n)",
+    "O(n^2)",
+    "O(n)",
+    "O(log n)"
+   ],
+   "answer": 1,
+   "explanation": "Extremely unbalanced partitions lead to n levels of work, so O(n^2)."
+  },
+  {
+   "id": "d26",
+   "topic": "Searching",
+   "difficulty": 1,
+   "prompt": "What is the worst-case time of linear search?",
+   "choices": [
+    "O(1)",
+    "O(log n)",
+    "O(n)",
+    "O(n^2)"
+   ],
+   "answer": 2,
+   "explanation": "The target may be last or absent, so every element is checked."
+  },
+  {
+   "id": "d27",
+   "topic": "Searching",
+   "difficulty": 2,
+   "prompt": "What must be true of the data for binary search to work?",
+   "choices": [
+    "It is sorted",
+    "All values are unique",
+    "It is stored in a linked list",
+    "It is random"
+   ],
+   "answer": 0,
+   "explanation": "Binary search relies on order to discard half the range each step."
+  },
+  {
+   "id": "d28",
+   "topic": "Searching",
+   "difficulty": 3,
+   "prompt": "Which midpoint formula avoids integer overflow in binary search?",
+   "choices": [
+    "(lo + hi) / 2",
+    "lo + (hi - lo) / 2",
+    "hi - lo",
+    "lo * hi"
+   ],
+   "answer": 1,
+   "explanation": "lo + (hi - lo) / 2 never exceeds hi, while lo + hi can overflow."
+  },
+  {
+   "id": "d29",
+   "topic": "Hashing",
+   "difficulty": 2,
+   "prompt": "What is a hash collision?",
+   "choices": [
+    "Two keys map to the same bucket",
+    "The table is empty",
+    "A key is not found",
+    "The hash function returns null"
+   ],
+   "answer": 0,
+   "explanation": "Different keys can hash to the same index and must be handled, for example by chaining."
+  },
+  {
+   "id": "d30",
+   "topic": "Hashing",
+   "difficulty": 2,
+   "prompt": "What is the average-case lookup time in a good hash table?",
+   "choices": [
+    "O(1)",
+    "O(log n)",
+    "O(n)",
+    "O(n log n)"
+   ],
+   "answer": 0,
+   "explanation": "With a good hash function and low load factor, lookups take constant expected time."
+  }
+ ],
+ "lessons": [
+  {
+   "id": "d-bigo",
+   "topic": "Complexity",
+   "title": "Time complexity and Big-O",
+   "keywords": [
+    "big o",
+    "complexity",
+    "time complexity",
+    "space complexity",
+    "o(n)",
+    "o(1)",
+    "o(log n)",
+    "efficiency",
+    "asymptotic",
+    "bigo",
+    "performance"
+   ],
+   "body": "Big-O describes how running time grows with input size n, ignoring constants. Common classes from fastest to slowest: O(1), O(log n), O(n), O(n log n), O(n^2), O(2^n). A single loop is usually O(n), two nested loops O(n^2), and halving the problem each step gives O(log n).",
+   "example": "for i in range(n):        # O(n)\n    for j in range(n):    # inside: O(n^2) total\n        work()"
+  },
+  {
+   "id": "d-arrays",
+   "topic": "Arrays",
+   "title": "Arrays and dynamic arrays",
+   "keywords": [
+    "array",
+    "dynamic array",
+    "contiguous",
+    "index",
+    "append",
+    "insert",
+    "resize",
+    "vector",
+    "arraylist"
+   ],
+   "body": "Arrays store elements contiguously, so access by index is O(1). Inserting or deleting in the middle or at the front is O(n) because elements shift. Dynamic arrays grow by reallocating, making append O(1) amortised.",
+   "example": null
+  },
+  {
+   "id": "d-linkedlist",
+   "topic": "Linked Lists",
+   "title": "Linked lists",
+   "keywords": [
+    "linked list",
+    "node",
+    "next",
+    "head",
+    "pointer",
+    "singly",
+    "doubly",
+    "insert",
+    "traversal",
+    "cycle",
+    "floyd"
+   ],
+   "body": "A linked list is a chain of nodes, each with data and a reference to the next node. Insertion or deletion at a known position, such as the head, is O(1), but reaching the k-th element takes O(k). Doubly linked lists add a previous pointer. Floyd's slow and fast pointers detect cycles in O(1) extra space.",
+   "example": "class Node:\n    def __init__(self, val):\n        self.val = val\n        self.next = None"
+  },
+  {
+   "id": "d-stack",
+   "topic": "Stacks and Queues",
+   "title": "Stacks",
+   "keywords": [
+    "stack",
+    "lifo",
+    "push",
+    "pop",
+    "peek",
+    "parentheses",
+    "undo",
+    "call stack"
+   ],
+   "body": "A stack is last-in, first-out with push, pop and peek in O(1). Uses include undo, expression evaluation, backtracking, the function call stack and balanced-parentheses checking.",
+   "example": "stack = []\nstack.append(1)  # push\nstack.pop()      # pop"
+  },
+  {
+   "id": "d-queue",
+   "topic": "Stacks and Queues",
+   "title": "Queues",
+   "keywords": [
+    "queue",
+    "fifo",
+    "enqueue",
+    "dequeue",
+    "deque",
+    "circular",
+    "priority queue",
+    "scheduling"
+   ],
+   "body": "A queue is first-in, first-out with enqueue at the back and dequeue at the front in O(1) when implemented properly (a linked list or circular buffer). Breadth-first search and task scheduling use queues. A priority queue serves the highest-priority item first, usually using a heap.",
+   "example": null
+  },
+  {
+   "id": "d-tree",
+   "topic": "Trees",
+   "title": "Binary trees and binary search trees",
+   "keywords": [
+    "tree",
+    "binary tree",
+    "bst",
+    "binary search tree",
+    "node",
+    "root",
+    "leaf",
+    "child",
+    "height",
+    "inorder",
+    "preorder",
+    "postorder",
+    "traversal",
+    "balanced"
+   ],
+   "body": "A binary tree node has at most two children. In a binary search tree, left keys are smaller and right keys are larger, so search, insert and delete take O(log n) on a balanced tree but O(n) on a skewed one. Inorder traversal of a BST visits keys in sorted order. A binary tree of height h has at most 2^(h+1)-1 nodes.",
+   "example": "def inorder(n):\n    if n:\n        inorder(n.left)\n        print(n.val)\n        inorder(n.right)"
+  },
+  {
+   "id": "d-graph",
+   "topic": "Graphs",
+   "title": "Graphs and representations",
+   "keywords": [
+    "graph",
+    "vertex",
+    "edge",
+    "adjacency matrix",
+    "adjacency list",
+    "directed",
+    "undirected",
+    "weighted",
+    "connected",
+    "representation"
+   ],
+   "body": "A graph has vertices connected by edges, which may be directed or weighted. An adjacency matrix uses V x V space and checks an edge in O(1); an adjacency list uses O(V+E) space and is better for sparse graphs.",
+   "example": null
+  },
+  {
+   "id": "d-traversal",
+   "topic": "Graphs",
+   "title": "Graph traversal: BFS and DFS",
+   "keywords": [
+    "bfs",
+    "dfs",
+    "breadth first",
+    "depth first",
+    "traversal",
+    "visited",
+    "queue",
+    "stack",
+    "shortest path",
+    "dijkstra"
+   ],
+   "body": "Breadth-first search uses a queue and explores level by level, finding shortest paths in unweighted graphs. Depth-first search uses a stack or recursion and goes deep before backtracking. Both run in O(V+E). Dijkstra's algorithm finds shortest paths with non-negative weights using a priority queue.",
+   "example": "def bfs(start, adj):\n    seen, q = {start}, [start]\n    while q:\n        v = q.pop(0)\n        for w in adj[v]:\n            if w not in seen:\n                seen.add(w); q.append(w)"
+  },
+  {
+   "id": "d-sorting",
+   "topic": "Sorting",
+   "title": "Sorting algorithms",
+   "keywords": [
+    "sort",
+    "sorting",
+    "bubble sort",
+    "merge sort",
+    "quick sort",
+    "quicksort",
+    "insertion sort",
+    "selection sort",
+    "heap sort",
+    "stable",
+    "n log n"
+   ],
+   "body": "Bubble, selection and insertion sort are O(n^2) in the worst case. Merge sort is O(n log n) always and stable. Quicksort is O(n log n) on average but O(n^2) with bad pivots. Heap sort is O(n log n) and in place. Stable sorts keep equal elements in their original order.",
+   "example": null
+  },
+  {
+   "id": "d-search",
+   "topic": "Searching",
+   "title": "Linear and binary search",
+   "keywords": [
+    "search",
+    "searching",
+    "binary search",
+    "linear search",
+    "sorted",
+    "midpoint",
+    "lookup",
+    "find"
+   ],
+   "body": "Linear search checks each element, O(n). Binary search needs sorted data and halves the range each step, O(log n). Compute the midpoint as lo + (hi - lo) / 2 to avoid overflow.",
+   "example": "def bsearch(a, x):\n    lo, hi = 0, len(a) - 1\n    while lo <= hi:\n        mid = lo + (hi - lo) // 2\n        if a[mid] == x: return mid\n        if a[mid] < x: lo = mid + 1\n        else: hi = mid - 1\n    return -1"
+  },
+  {
+   "id": "d-hash",
+   "topic": "Hashing",
+   "title": "Hash tables",
+   "keywords": [
+    "hash",
+    "hash table",
+    "hashing",
+    "collision",
+    "bucket",
+    "chaining",
+    "open addressing",
+    "load factor",
+    "dictionary",
+    "map",
+    "hashmap"
+   ],
+   "body": "A hash table maps keys to buckets using a hash function, giving O(1) average lookup, insert and delete. Collisions happen when different keys map to the same bucket and are handled by chaining or open addressing. Performance degrades toward O(n) with many collisions, so tables resize when the load factor grows.",
+   "example": null
+  },
+  {
+   "id": "d-recursion",
+   "topic": "Complexity",
+   "title": "Recursion and divide and conquer",
+   "keywords": [
+    "recursion",
+    "recursive",
+    "divide and conquer",
+    "base case",
+    "recurrence",
+    "memoization",
+    "dynamic programming"
+   ],
+   "body": "Recursion solves a problem by solving smaller instances of itself, with a base case to stop. Divide and conquer splits the problem, solves the parts and combines them, as in merge sort. Memoisation stores results to avoid recomputation and underlies dynamic programming.",
+   "example": null
+  }
+ ]
+}

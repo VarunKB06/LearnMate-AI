@@ -1,0 +1,921 @@
+{
+ "id": "coa",
+ "title": "Computer Organization and Architecture",
+ "description": "How a computer works inside: the stored-program model and instruction cycle, instruction sets and addressing modes, the CPU datapath and control unit, pipelining and hazards, cache and the memory hierarchy, and I/O with interrupts.",
+ "level": "Intermediate",
+ "path": "Computer Systems",
+ "pathOrder": 1,
+ "prerequisites": [],
+ "icon": "🖥️",
+ "questions": [
+  {
+   "id": "coa01",
+   "topic": "Von Neumann Architecture",
+   "difficulty": 1,
+   "prompt": "In a von Neumann computer, where are instructions stored?",
+   "choices": [
+    "In a separate read-only instruction memory",
+    "Only inside the ALU",
+    "In the control unit's registers permanently",
+    "In the same main memory as data"
+   ],
+   "answer": 3,
+   "explanation": "The stored-program idea keeps instructions and data together in one memory."
+  },
+  {
+   "id": "coa02",
+   "topic": "Von Neumann Architecture",
+   "difficulty": 1,
+   "prompt": "What does the program counter hold?",
+   "choices": [
+    "The instruction being executed",
+    "The result of the last ALU operation",
+    "The address of the next instruction to fetch",
+    "The number of instructions executed so far"
+   ],
+   "answer": 2,
+   "explanation": "The PC is an address register that points at the next instruction."
+  },
+  {
+   "id": "coa03",
+   "topic": "Von Neumann Architecture",
+   "difficulty": 1,
+   "prompt": "What is the correct order of the instruction cycle?",
+   "choices": [
+    "Decode, fetch, execute",
+    "Fetch, decode, execute",
+    "Execute, fetch, decode",
+    "Fetch, execute, decode"
+   ],
+   "answer": 1,
+   "explanation": "The instruction must be fetched before it can be decoded, and decoded before it can be executed."
+  },
+  {
+   "id": "coa04",
+   "topic": "Von Neumann Architecture",
+   "difficulty": 2,
+   "prompt": "What is the von Neumann bottleneck?",
+   "choices": [
+    "Instructions and data share one path to memory",
+    "The ALU is too slow",
+    "Programs cannot be changed after loading",
+    "Registers are too few"
+   ],
+   "answer": 0,
+   "explanation": "A single memory path limits how fast instructions and data can both be moved."
+  },
+  {
+   "id": "coa05",
+   "topic": "Von Neumann Architecture",
+   "difficulty": 2,
+   "prompt": "Which register receives the instruction read from memory during fetch (simplified model)?",
+   "choices": [
+    "PC",
+    "MAR",
+    "ACC",
+    "IR"
+   ],
+   "answer": 3,
+   "explanation": "The fetched instruction is placed in the instruction register for decoding."
+  },
+  {
+   "id": "coa06",
+   "topic": "Instruction Set and Addressing",
+   "difficulty": 1,
+   "prompt": "In immediate addressing the operand is:",
+   "choices": [
+    "Stored at a memory address in the instruction",
+    "Found in the address held by a register",
+    "Contained in the instruction itself",
+    "Computed from the PC"
+   ],
+   "answer": 2,
+   "explanation": "Immediate mode embeds the constant value in the instruction."
+  },
+  {
+   "id": "coa07",
+   "topic": "Instruction Set and Addressing",
+   "difficulty": 2,
+   "prompt": "With R1 = 100 and Mem[100] = 40, what operand does (R1) give?",
+   "choices": [
+    "100",
+    "40",
+    "140",
+    "0"
+   ],
+   "answer": 1,
+   "explanation": "Register indirect uses R1 as the address, so the operand is Mem[100] = 40."
+  },
+  {
+   "id": "coa08",
+   "topic": "Instruction Set and Addressing",
+   "difficulty": 2,
+   "prompt": "Which addressing mode is most natural for accessing array elements?",
+   "choices": [
+    "Indexed (base plus displacement)",
+    "Immediate",
+    "Register direct",
+    "Implied"
+   ],
+   "answer": 0,
+   "explanation": "A base register plus an offset reaches successive elements."
+  },
+  {
+   "id": "coa09",
+   "topic": "Instruction Set and Addressing",
+   "difficulty": 1,
+   "prompt": "What does the opcode field specify?",
+   "choices": [
+    "Where the next instruction is",
+    "The data size of memory",
+    "The clock speed",
+    "Which operation to perform"
+   ],
+   "answer": 3,
+   "explanation": "The opcode selects the operation such as add, load or branch."
+  },
+  {
+   "id": "coa10",
+   "topic": "Instruction Set and Addressing",
+   "difficulty": 2,
+   "prompt": "Which is a typical RISC characteristic?",
+   "choices": [
+    "Many variable-length instructions with memory operands everywhere",
+    "No registers",
+    "Fixed-length instructions with load/store memory access",
+    "Instructions that cannot be pipelined"
+   ],
+   "answer": 2,
+   "explanation": "RISC designs favour simple, regular instructions that pipeline well."
+  },
+  {
+   "id": "coa11",
+   "topic": "Datapath and Control Unit",
+   "difficulty": 1,
+   "prompt": "What is the role of the control unit?",
+   "choices": [
+    "To perform arithmetic operations",
+    "To generate control signals from the instruction",
+    "To store data permanently",
+    "To hold the program counter only"
+   ],
+   "answer": 1,
+   "explanation": "The control unit decodes the opcode and drives the datapath with signals."
+  },
+  {
+   "id": "coa12",
+   "topic": "Datapath and Control Unit",
+   "difficulty": 2,
+   "prompt": "For a lw instruction in the simplified datapath, which setting is correct?",
+   "choices": [
+    "MemRead = 1 and MemtoReg = 1",
+    "MemWrite = 1 and RegWrite = 0",
+    "Branch = 1 and ALUSrc = 0",
+    "MemRead = 0 and MemtoReg = 0"
+   ],
+   "answer": 0,
+   "explanation": "A load reads memory and sends that data to the register file."
+  },
+  {
+   "id": "coa13",
+   "topic": "Datapath and Control Unit",
+   "difficulty": 2,
+   "prompt": "Why must a single-cycle clock period fit the slowest instruction?",
+   "choices": [
+    "The ALU can only run at one speed",
+    "Memory is always slow",
+    "The PC increments twice",
+    "Every instruction takes exactly one clock cycle"
+   ],
+   "answer": 3,
+   "explanation": "With one cycle per instruction, the longest path sets the period for all."
+  },
+  {
+   "id": "coa14",
+   "topic": "Datapath and Control Unit",
+   "difficulty": 2,
+   "prompt": "Hardwired control compared with microprogrammed control is generally:",
+   "choices": [
+    "Slower and easier to change",
+    "Slower and harder to change",
+    "Faster but harder to change",
+    "Identical in speed and flexibility"
+   ],
+   "answer": 2,
+   "explanation": "Gate-based control is fast; a microprogram is easier to modify."
+  },
+  {
+   "id": "coa15",
+   "topic": "Datapath and Control Unit",
+   "difficulty": 1,
+   "prompt": "What does the ALU do?",
+   "choices": [
+    "Decodes opcodes into signals",
+    "Performs arithmetic and logic operations",
+    "Stores the program",
+    "Controls the bus clock"
+   ],
+   "answer": 1,
+   "explanation": "The arithmetic logic unit computes results such as add, and, or and compare."
+  },
+  {
+   "id": "coa16",
+   "topic": "Pipelining and Hazards",
+   "difficulty": 1,
+   "prompt": "What does pipelining mainly improve?",
+   "choices": [
+    "Instruction throughput",
+    "The latency of a single instruction",
+    "Memory capacity",
+    "The number of registers"
+   ],
+   "answer": 0,
+   "explanation": "Overlapping instructions lets one finish per cycle, but each still takes all stages."
+  },
+  {
+   "id": "coa17",
+   "topic": "Pipelining and Hazards",
+   "difficulty": 2,
+   "prompt": "A read-after-write dependency between consecutive instructions is a:",
+   "choices": [
+    "Structural hazard",
+    "Control hazard",
+    "Cache miss",
+    "Data hazard"
+   ],
+   "answer": 3,
+   "explanation": "The second instruction needs a value the first has not yet written."
+  },
+  {
+   "id": "coa18",
+   "topic": "Pipelining and Hazards",
+   "difficulty": 2,
+   "prompt": "A branch whose outcome is not known when the next instruction is fetched causes a:",
+   "choices": [
+    "Structural hazard",
+    "Data hazard",
+    "Control hazard",
+    "Write-through"
+   ],
+   "answer": 2,
+   "explanation": "The fetch unit does not know which instruction comes next."
+  },
+  {
+   "id": "coa19",
+   "topic": "Pipelining and Hazards",
+   "difficulty": 2,
+   "prompt": "With ideal CPI 1 and 0.22 stall cycles per instruction, what is the CPI?",
+   "choices": [
+    "0.22",
+    "1.22",
+    "1.0",
+    "1.44"
+   ],
+   "answer": 1,
+   "explanation": "CPI equals the ideal CPI plus the average stalls per instruction."
+  },
+  {
+   "id": "coa20",
+   "topic": "Pipelining and Hazards",
+   "difficulty": 3,
+   "prompt": "How many cycles do 100 instructions need in an ideal 5-stage pipeline?",
+   "choices": [
+    "104",
+    "500",
+    "100",
+    "105"
+   ],
+   "answer": 0,
+   "explanation": "The first finishes after 5 cycles, then one more per cycle: 5 + 99 = 104."
+  },
+  {
+   "id": "coa21",
+   "topic": "Pipelining and Hazards",
+   "difficulty": 2,
+   "prompt": "Which technique helps resolve most data hazards without stalling?",
+   "choices": [
+    "Increasing memory size",
+    "Adding more opcodes",
+    "Using a larger clock period",
+    "Forwarding"
+   ],
+   "answer": 3,
+   "explanation": "Forwarding delivers the result straight from a pipeline register to the unit that needs it."
+  },
+  {
+   "id": "coa22",
+   "topic": "Cache and Memory Hierarchy",
+   "difficulty": 1,
+   "prompt": "Which type of locality means recently used data is likely to be used again?",
+   "choices": [
+    "Spatial locality",
+    "Sequential locality only",
+    "Temporal locality",
+    "Branch locality"
+   ],
+   "answer": 2,
+   "explanation": "Temporal locality is reuse of the same item soon after."
+  },
+  {
+   "id": "coa23",
+   "topic": "Cache and Memory Hierarchy",
+   "difficulty": 2,
+   "prompt": "Hit time 1 ns, hit ratio 95%, miss penalty 100 ns. What is the AMAT?",
+   "choices": [
+    "5 ns",
+    "6 ns",
+    "101 ns",
+    "1.05 ns"
+   ],
+   "answer": 1,
+   "explanation": "AMAT = 1 + 0.05 x 100 = 6 ns."
+  },
+  {
+   "id": "coa24",
+   "topic": "Cache and Memory Hierarchy",
+   "difficulty": 2,
+   "prompt": "In a direct-mapped cache with 8 lines, which line holds block 12?",
+   "choices": [
+    "Line 4",
+    "Line 1",
+    "Line 2",
+    "Line 12"
+   ],
+   "answer": 0,
+   "explanation": "12 mod 8 = 4."
+  },
+  {
+   "id": "coa25",
+   "topic": "Cache and Memory Hierarchy",
+   "difficulty": 2,
+   "prompt": "A write-back cache writes a modified block to memory:",
+   "choices": [
+    "On every write",
+    "Never",
+    "Only at reboot",
+    "When the block is evicted"
+   ],
+   "answer": 3,
+   "explanation": "Dirty blocks are written back when replaced, saving memory traffic."
+  },
+  {
+   "id": "coa26",
+   "topic": "Cache and Memory Hierarchy",
+   "difficulty": 3,
+   "prompt": "With L1 hit 1 ns and 90% hit ratio, L2 hit 10 ns with 80% local hit ratio, memory 100 ns, AMAT is:",
+   "choices": [
+    "11 ns",
+    "3 ns",
+    "4 ns",
+    "2 ns"
+   ],
+   "answer": 2,
+   "explanation": "L1 miss penalty = 10 + 0.2 x 100 = 30; AMAT = 1 + 0.1 x 30 = 4 ns."
+  },
+  {
+   "id": "coa27",
+   "topic": "Cache and Memory Hierarchy",
+   "difficulty": 1,
+   "prompt": "Which level of the hierarchy is the fastest?",
+   "choices": [
+    "Main memory",
+    "Registers",
+    "Disk",
+    "L3 cache"
+   ],
+   "answer": 1,
+   "explanation": "Registers sit inside the CPU and are faster than any cache level."
+  },
+  {
+   "id": "coa28",
+   "topic": "I/O and Interrupts",
+   "difficulty": 1,
+   "prompt": "In programmed I/O the CPU waits for a device by:",
+   "choices": [
+    "Polling its status register",
+    "Receiving an interrupt",
+    "Using DMA",
+    "Switching off the device"
+   ],
+   "answer": 0,
+   "explanation": "Programmed I/O loops while checking the device status."
+  },
+  {
+   "id": "coa29",
+   "topic": "I/O and Interrupts",
+   "difficulty": 2,
+   "prompt": "What is saved so the interrupted program can resume?",
+   "choices": [
+    "The entire main memory",
+    "Only the stack size",
+    "The disk contents",
+    "The PC and processor status"
+   ],
+   "answer": 3,
+   "explanation": "Resuming needs the return address and the processor state."
+  },
+  {
+   "id": "coa30",
+   "topic": "I/O and Interrupts",
+   "difficulty": 2,
+   "prompt": "What is the main benefit of DMA?",
+   "choices": [
+    "It makes the ALU faster",
+    "It removes the need for memory",
+    "Block transfers without per-word CPU involvement",
+    "It disables interrupts"
+   ],
+   "answer": 2,
+   "explanation": "A DMA controller moves data on its own and signals when done."
+  },
+  {
+   "id": "coa31",
+   "topic": "I/O and Interrupts",
+   "difficulty": 2,
+   "prompt": "Where does the CPU often find the address of the ISR?",
+   "choices": [
+    "In the ALU",
+    "In an interrupt vector table",
+    "In the cache tag",
+    "In the disk boot sector"
+   ],
+   "answer": 1,
+   "explanation": "The vector table maps interrupt numbers to handler addresses."
+  },
+  {
+   "id": "coa32",
+   "topic": "I/O and Interrupts",
+   "difficulty": 3,
+   "prompt": "A non-maskable interrupt is one that:",
+   "choices": [
+    "Cannot be disabled by the CPU",
+    "Has the lowest priority",
+    "Is only raised by software",
+    "Is handled without an ISR"
+   ],
+   "answer": 0,
+   "explanation": "Non-maskable interrupts are for critical events and cannot be masked."
+  }
+ ],
+ "lessons": [
+  {
+   "id": "coa-von-neumann-cycle",
+   "topic": "Von Neumann Architecture",
+   "title": "Von Neumann Architecture and the Instruction Cycle",
+   "level": "Beginner",
+   "minutes": 8,
+   "keywords": [
+    "von neumann",
+    "stored program",
+    "fetch",
+    "decode",
+    "execute",
+    "pc",
+    "ir",
+    "mar",
+    "mdr",
+    "instruction cycle",
+    "harvard",
+    "bottleneck"
+   ],
+   "objectives": [
+    "Describe the main parts of a von Neumann computer",
+    "Trace fetch, decode and execute for one instruction",
+    "Explain the von Neumann bottleneck"
+   ],
+   "body": "In the von Neumann (stored-program) model, instructions and data live in the same main memory and are both just bit patterns. The machine has a CPU (control unit, ALU and registers), memory, input/output devices and a bus connecting them. Because a program is stored in memory, you change what the computer does by changing memory contents, not by rewiring it.\n\nThe CPU repeats the instruction cycle forever. Fetch: the address in the program counter (PC) goes to memory and the instruction is read into the instruction register (IR); the PC then advances to the next instruction. Decode: the control unit works out the operation and its operands. Execute: the ALU computes, or memory is read or written, or the PC is changed by a jump.\n\nSince one memory and one bus carry both instructions and data, the CPU cannot fetch an instruction and move data at the same moment. This limit is the von Neumann bottleneck. A Harvard design keeps separate instruction and data memories, and modern CPUs imitate it with separate L1 instruction and data caches.",
+   "definitions": [
+    {
+     "term": "Program counter (PC)",
+     "meaning": "Register holding the address of the next instruction to fetch."
+    },
+    {
+     "term": "Instruction register (IR)",
+     "meaning": "Register holding the instruction currently being decoded and executed."
+    },
+    {
+     "term": "Stored-program concept",
+     "meaning": "Instructions and data share one memory, so programs are data that can be loaded and changed."
+    },
+    {
+     "term": "Von Neumann bottleneck",
+     "meaning": "The limit on speed caused by sharing one path between the CPU and memory for both instructions and data."
+    }
+   ],
+   "example": "Tiny accumulator machine (simplified):\nAddr 0: LOAD 10   ; ACC <- Mem[10]\nAddr 1: ADD 11    ; ACC <- ACC + Mem[11]\nAddr 2: STORE 12  ; Mem[12] <- ACC\nMem[10]=7, Mem[11]=5, PC starts at 0\n\nFetch for each instruction:\n  MAR <- PC ; MDR <- Mem[MAR]\n  IR <- MDR ; PC <- PC + 1\nAfter all three: ACC = 12, Mem[12] = 12, PC = 3",
+   "exampleNote": "Each instruction is fetched, decoded and executed in turn: LOAD puts 7 in ACC, ADD makes it 7 + 5 = 12, and STORE writes 12 to address 12. The PC steps 0, 1, 2 and ends at 3.",
+   "diagram": "  +--------+     +--------+\n  |  CPU   |<--->| Memory |\n  | CU ALU |     | instr  |\n  | regs   |     | + data |\n  +---+----+     +----+---+\n      |   system bus    |\n  ----+-----------------+----\n      |\n  +---+-----+\n  | I/O     |\n  +---------+",
+   "mistakes": [
+    "Thinking the CPU stores programs permanently. Memory holds the running program; disks hold it long-term.",
+    "Believing the PC holds the current instruction. It holds the address of the NEXT instruction; the IR holds the current one."
+   ],
+   "practice": [
+    {
+     "q": "Which register is incremented during fetch?",
+     "a": "The PC, so it points to the next instruction."
+    },
+    {
+     "q": "Why is there a bottleneck with one shared bus?",
+     "a": "Instructions and data compete for the same path, so they cannot both be transferred at once."
+    },
+    {
+     "q": "What does a Harvard architecture change?",
+     "a": "It uses separate memories (and paths) for instructions and data."
+    }
+   ],
+   "exercises": [
+    "Trace the instruction cycle by hand for a three-instruction program of your own and write the PC after each step.",
+    "Draw the register transfers (MAR, MDR, IR, PC) for fetching the instruction at address 5."
+   ],
+   "summary": [
+    "Instructions and data share memory in the von Neumann model.",
+    "The cycle is fetch, decode, execute, repeated.",
+    "The PC points to the next instruction; the IR holds the current one.",
+    "The shared bus is the von Neumann bottleneck."
+   ]
+  },
+  {
+   "id": "coa-isa-addressing",
+   "topic": "Instruction Set and Addressing",
+   "title": "Instruction Sets and Addressing Modes",
+   "level": "Intermediate",
+   "minutes": 9,
+   "keywords": [
+    "isa",
+    "instruction set",
+    "addressing mode",
+    "immediate",
+    "direct",
+    "indirect",
+    "indexed",
+    "register",
+    "risc",
+    "cisc",
+    "opcode",
+    "operand",
+    "displacement"
+   ],
+   "objectives": [
+    "Name the parts of an instruction format",
+    "Compare RISC and CISC in general terms",
+    "Evaluate common addressing modes to find an operand"
+   ],
+   "body": "The instruction set architecture (ISA) is the contract between hardware and software: the instructions, registers, data types and addressing modes a programmer can use. An instruction usually has an opcode (what to do) and operand fields (registers, constants or memory addresses).\n\nBroadly, RISC designs use a small set of simple, fixed-length instructions and mostly access memory only through load and store, which suits pipelining. CISC designs offer more complex, variable-length instructions that can do several steps, sometimes with memory operands. Real processors blend both ideas, so treat this as a general contrast.\n\nAn addressing mode tells the CPU how to find an operand. Immediate: the value is in the instruction. Direct: the instruction holds the memory address. Register: the operand is in a register. Register indirect: a register holds the address. Indexed or base plus displacement: the address is a register plus a constant, handy for arrays and struct fields. PC-relative: the address is the PC plus an offset, used for branches.",
+   "definitions": [
+    {
+     "term": "ISA",
+     "meaning": "The programmer-visible interface of a processor: instructions, registers and addressing modes."
+    },
+    {
+     "term": "Opcode",
+     "meaning": "The field of an instruction that selects the operation."
+    },
+    {
+     "term": "Addressing mode",
+     "meaning": "The rule used to compute where an operand is found."
+    },
+    {
+     "term": "Effective address",
+     "meaning": "The final memory address computed by an addressing mode."
+    }
+   ],
+   "example": "R1 = 100, Mem[20] = 100, Mem[100] = 40, Mem[104] = 55\n\nMode              Operand fetched\nImmediate  #20    20\nDirect     20     Mem[20]    = 100\nRegister   R1     R1         = 100\nReg-indirect (R1) Mem[100]   = 40\nIndexed    4(R1)  Mem[104]   = 55",
+   "exampleNote": "Immediate uses 20 itself, direct reads the word at address 20, register indirect uses R1 (100) as the address, and indexed adds 4 to R1 to reach address 104.",
+   "diagram": "Instruction format (generic)\n+--------+------+------+---------+\n| opcode | dest | src  | operand |\n+--------+------+------+---------+\n\nIndexed: EA = R1 + 4\n  R1 --> [100] --+\n  disp 4 --------+--> EA = 104\n                      |\n                  Mem[104] = 55",
+   "mistakes": [
+    "Mixing up immediate and direct: #20 is the number 20, while 20 alone means the contents of address 20.",
+    "Treating register indirect like register mode. Register mode uses the register value; indirect uses it as an address."
+   ],
+   "practice": [
+    {
+     "q": "In register-indirect (R2) with R2 = 200, which memory address is read?",
+     "a": "Address 200."
+    },
+    {
+     "q": "Why is indexed addressing useful for arrays?",
+     "a": "The base register holds the array start and the offset selects the element."
+    },
+    {
+     "q": "Name one typical RISC trait.",
+     "a": "Fixed-length instructions with memory accessed only by load/store."
+    }
+   ],
+   "exercises": [
+    "With R1 = 50 and Mem[50] = 9, Mem[54] = 21, write the operand for (R1), 4(R1) and #4.",
+    "Rewrite C code a[i] = a[i] + 1 using base plus index addressing in words."
+   ],
+   "summary": [
+    "The ISA is the hardware/software interface.",
+    "Opcode picks the operation; operands say what to use.",
+    "Addressing modes decide how an operand is located.",
+    "RISC favours simple fixed-length instructions; CISC favours richer ones."
+   ]
+  },
+  {
+   "id": "coa-datapath-control",
+   "topic": "Datapath and Control Unit",
+   "title": "CPU Datapath and Control Unit",
+   "level": "Intermediate",
+   "minutes": 10,
+   "keywords": [
+    "datapath",
+    "control unit",
+    "alu",
+    "register file",
+    "control signals",
+    "regwrite",
+    "alusrc",
+    "hardwired",
+    "microprogrammed",
+    "single cycle",
+    "mux",
+    "clock period"
+   ],
+   "objectives": [
+    "Identify the main datapath components",
+    "Explain what control signals do",
+    "Contrast hardwired and microprogrammed control"
+   ],
+   "body": "The datapath is the hardware that moves and transforms data: the PC, instruction memory, register file, ALU, data memory and the multiplexers (muxes) that choose between sources. The control unit reads the opcode of the current instruction and produces control signals that steer the datapath, such as which mux input to use and whether to write a register or memory.\n\nThe example below uses a simplified single-cycle MIPS-style machine. For add, the ALU takes two registers and the result is written back (RegWrite = 1, ALUSrc = 0). For lw, the ALU adds a base register and an offset, so ALUSrc = 1, then memory is read (MemRead = 1) and the loaded value goes to a register (MemtoReg = 1). For sw, MemWrite = 1 and RegWrite = 0. For beq, the ALU compares registers and Branch = 1 lets the PC take the branch target if they are equal.\n\nIn a single-cycle design every instruction takes one clock period, and that period must fit the slowest instruction, usually lw. That is why real CPUs pipeline. Control can be hardwired (logic gates, fast) or microprogrammed (a stored sequence of micro-operations, easier to change).",
+   "definitions": [
+    {
+     "term": "Datapath",
+     "meaning": "The registers, ALU, memories and buses that perform operations on data."
+    },
+    {
+     "term": "Control unit",
+     "meaning": "Logic that turns the decoded instruction into control signals for the datapath."
+    },
+    {
+     "term": "Hardwired control",
+     "meaning": "Control implemented directly with gates; fast but hard to modify."
+    },
+    {
+     "term": "Microprogrammed control",
+     "meaning": "Control implemented as a stored microprogram in a small control memory."
+    }
+   ],
+   "example": "Control signals (simplified single-cycle):\nInstr RegWrite ALUSrc MemRead MemWrite MemtoReg Branch\nadd     1       0      0       0        0        0\nlw      1       1      1       0        1        0\nsw      0       1      0       1        x        0\nbeq     0       0      0       0        x        1\n(x = don't care)",
+   "exampleNote": "lw needs ALUSrc = 1 because its second ALU input is the immediate offset, and MemtoReg = 1 because the register gets memory data rather than the ALU result. sw writes memory but not a register.",
+   "diagram": "+----+   +-----------+\n| PC |-->| Instr Mem |--+ opcode\n+----+   +-----------+  |\n  ^                       v\n  |                +------------+\n  |                |  Control   |\n  |                +-----+------+\n  |                      | signals\n+-+--+  +---------+  +---v---+\n| +4 |  | RegFile |->|  ALU  |-> DMem\n+----+  +---------+  +-------+",
+   "mistakes": [
+    "Saying the control unit does the arithmetic. The ALU computes; control only sends signals.",
+    "Assuming single-cycle is fast. The clock must suit the slowest instruction, so most instructions waste time."
+   ],
+   "practice": [
+    {
+     "q": "Which signal is 1 for sw but 0 for add?",
+     "a": "MemWrite."
+    },
+    {
+     "q": "Why does lw set ALUSrc to 1?",
+     "a": "The ALU adds a register and the sign-extended offset instead of two registers."
+    },
+    {
+     "q": "Why is the single-cycle clock period long?",
+     "a": "It must cover the longest instruction path, such as lw."
+    }
+   ],
+   "exercises": [
+    "Fill in the signals for an addi instruction on the table in the example.",
+    "Sketch the path of data through the datapath when lw $t0, 8($s1) executes."
+   ],
+   "summary": [
+    "The datapath processes data; the control unit steers it with signals.",
+    "Different instructions need different signal settings.",
+    "Single-cycle clock = slowest instruction, which motivates pipelining.",
+    "Control may be hardwired or microprogrammed."
+   ]
+  },
+  {
+   "id": "coa-pipelining-hazards",
+   "topic": "Pipelining and Hazards",
+   "title": "Pipelining and Hazards",
+   "level": "Intermediate",
+   "minutes": 11,
+   "keywords": [
+    "pipeline",
+    "pipelining",
+    "hazard",
+    "data hazard",
+    "control hazard",
+    "structural hazard",
+    "forwarding",
+    "stall",
+    "cpi",
+    "branch prediction",
+    "throughput",
+    "raw"
+   ],
+   "objectives": [
+    "Explain how pipelining improves throughput",
+    "Classify structural, data and control hazards",
+    "Compute CPI with stalls and the resulting speedup"
+   ],
+   "body": "Pipelining overlaps the execution of instructions, like an assembly line. A classic five-stage pipeline has IF (fetch), ID (decode and register read), EX (execute), MEM (memory access) and WB (write back). Once full, one instruction finishes every cycle, so the ideal CPI is 1. Pipelining raises throughput; it does not make a single instruction faster. With k stages and n instructions, the time is k + n - 1 cycles.\n\nHazards stop the next instruction from proceeding in its cycle. A structural hazard is a hardware resource conflict, for example one memory used for both fetch and data access. A data hazard happens when an instruction needs a result an earlier one has not written yet (read after write, RAW). Forwarding passes the ALU result straight to the next instruction, but a load followed by a dependent use still needs one stall. A control hazard comes from branches, since the next instruction is unknown until the branch resolves. Prediction and flushing handle it.\n\nWith stalls, CPI = ideal CPI + average stall cycles per instruction.",
+   "definitions": [
+    {
+     "term": "Pipeline",
+     "meaning": "A technique that overlaps the stages of consecutive instructions."
+    },
+    {
+     "term": "Hazard",
+     "meaning": "A situation that prevents the next instruction from executing in its designated cycle."
+    },
+    {
+     "term": "Forwarding",
+     "meaning": "Sending a result directly from a pipeline register to where it is needed, avoiding a wait for write back."
+    },
+    {
+     "term": "CPI",
+     "meaning": "Clock cycles per instruction, averaged over a program."
+    }
+   ],
+   "example": "Assume ideal CPI = 1 (5-stage pipeline)\n25% loads; 40% of loads are followed by a\ndependent instruction -> 1 stall cycle\n20% branches; 30% of branches cost a\n2-cycle penalty (mispredicted)\n\nLoad stalls  = 0.25 x 0.40 x 1 = 0.10\nBranch stalls= 0.20 x 0.30 x 2 = 0.12\nCPI = 1 + 0.10 + 0.12 = 1.22\nSpeedup vs unpipelined (CPI 5, same clock)\n  = 5 / 1.22 = about 4.10",
+   "exampleNote": "Each stall source adds its frequency times its penalty to the ideal CPI of 1, giving 1.22. Under the simplified assumption that an unpipelined machine needs 5 cycles per instruction at the same clock, the speedup is about 4.1, below the ideal 5 because of stalls.",
+   "diagram": "Cycle  1  2  3  4  5  6  7\nI1     IF ID EX ME WB\nI2        IF ID EX ME WB\nI3           IF ID EX ME WB\n\nlw r1,0(r2)  IF ID EX ME WB\nadd r3,r1,r4    IF ID -- EX ME WB\n                      ^ 1 stall",
+   "mistakes": [
+    "Saying pipelining reduces the latency of one instruction. It improves throughput; one instruction still passes through all stages.",
+    "Forgetting that forwarding cannot remove the load-use stall completely: the loaded data is not ready until after MEM."
+   ],
+   "practice": [
+    {
+     "q": "For 100 instructions in a 5-stage pipeline with no stalls, how many cycles?",
+     "a": "k + n - 1 = 5 + 100 - 1 = 104 cycles."
+    },
+    {
+     "q": "Name the hazard when two instructions need one memory port in the same cycle.",
+     "a": "A structural hazard."
+    },
+    {
+     "q": "What is CPI if stalls add 0.3 cycles per instruction to an ideal 1?",
+     "a": "1.3."
+    }
+   ],
+   "exercises": [
+    "Draw the pipeline diagram for add r1,r2,r3 followed by sub r4,r1,r5 with and without forwarding.",
+    "Recompute the worked CPI if branches are 15% and mispredictions cost 3 cycles for 20% of them."
+   ],
+   "summary": [
+    "Pipelining overlaps stages and raises throughput, not single-instruction speed.",
+    "Hazards are structural, data or control.",
+    "Forwarding fixes most data hazards; load-use still stalls once.",
+    "CPI = 1 + stall cycles per instruction."
+   ]
+  },
+  {
+   "id": "coa-cache-memory",
+   "topic": "Cache and Memory Hierarchy",
+   "title": "Cache Memory and the Memory Hierarchy",
+   "level": "Intermediate",
+   "minutes": 12,
+   "keywords": [
+    "cache",
+    "hit ratio",
+    "miss",
+    "amat",
+    "locality",
+    "hierarchy",
+    "direct mapped",
+    "associative",
+    "write back",
+    "write through",
+    "block",
+    "lru",
+    "l1",
+    "l2"
+   ],
+   "objectives": [
+    "Explain why a memory hierarchy works",
+    "Map a block address to a direct-mapped cache line",
+    "Compute AMAT for one and two cache levels"
+   ],
+   "body": "Fast memory is small and expensive; large memory is slow. The memory hierarchy stacks registers, caches (L1, L2, L3), main memory (DRAM) and storage, so most accesses hit a small fast level. It works because of locality: temporal locality (recently used data is used again) and spatial locality (nearby addresses are used soon), so caches fetch whole blocks.\n\nA hit finds the data in the cache; otherwise a miss fetches the block from the next level. Hit ratio is hits divided by accesses. In a direct-mapped cache each memory block maps to exactly one line: line = block address mod number of lines. Set-associative caches allow a block in any line of one set, and fully associative caches in any line, which reduces conflict misses. When full, a replacement policy such as LRU picks a victim. Write-through updates memory on every write; write-back updates memory only when a modified block is evicted.\n\nAverage memory access time: AMAT = hit time + miss rate x miss penalty.",
+   "definitions": [
+    {
+     "term": "Locality",
+     "meaning": "The tendency of programs to reuse recent data (temporal) and nearby data (spatial)."
+    },
+    {
+     "term": "Hit ratio",
+     "meaning": "The fraction of memory accesses found in the cache."
+    },
+    {
+     "term": "AMAT",
+     "meaning": "Average memory access time: hit time plus miss rate times miss penalty."
+    },
+    {
+     "term": "Write-back",
+     "meaning": "A write policy that updates memory only when a dirty block is replaced."
+    }
+   ],
+   "example": "One level: hit time 1 ns, hit ratio 95%,\nmiss penalty 100 ns\nAMAT = 1 + 0.05 x 100 = 6 ns\n\nTwo levels: L1 hit 1 ns, L1 hit ratio 90%\nL2 hit 10 ns, L2 local hit ratio 80%\nmemory 100 ns\nL1 miss penalty = 10 + 0.20 x 100 = 30 ns\nAMAT = 1 + 0.10 x 30 = 4 ns\n\nDirect map: 8 lines, block 12 -> 12 mod 8 = line 4",
+   "exampleNote": "A 5% miss rate adds 5 ns to a 1 ns hit, so AMAT is 6 ns. With an L2 that catches 80% of L1 misses, the L1 miss penalty falls to 30 ns and AMAT to 4 ns.",
+   "diagram": "Faster, smaller, costlier per byte\n   +-----------+\n   | Registers |\n   +-----------+\n   |  L1 cache |\n   +-----------+\n   | L2 / L3   |\n   +-----------+\n   | Main mem  |\n   +-----------+\n   |  Storage  |\n   +-----------+\nSlower, larger, cheaper per byte",
+   "mistakes": [
+    "Using miss penalty as the whole miss cost without hit time. AMAT always includes the hit time.",
+    "Confusing global and local hit ratio at L2. The local ratio applies only to accesses that missed in L1."
+   ],
+   "practice": [
+    {
+     "q": "Hit ratio 98%, hit time 2 ns, miss penalty 50 ns. AMAT?",
+     "a": "2 + 0.02 x 50 = 3 ns."
+    },
+    {
+     "q": "Which line holds block 21 in a 16-line direct-mapped cache?",
+     "a": "21 mod 16 = line 5."
+    },
+    {
+     "q": "Which locality is exploited by fetching a whole block?",
+     "a": "Spatial locality."
+    }
+   ],
+   "exercises": [
+    "Compute AMAT for hit time 1 ns, miss rate 3%, miss penalty 80 ns.",
+    "Trace block addresses 0, 8, 0, 8 in an 8-line direct-mapped cache and count hits."
+   ],
+   "summary": [
+    "Hierarchies work because of temporal and spatial locality.",
+    "Direct-mapped line = block address mod number of lines.",
+    "AMAT = hit time + miss rate x miss penalty.",
+    "Write-back delays memory writes until eviction."
+   ]
+  },
+  {
+   "id": "coa-io-interrupts",
+   "topic": "I/O and Interrupts",
+   "title": "I/O and Interrupts",
+   "level": "Intermediate",
+   "minutes": 9,
+   "keywords": [
+    "io",
+    "interrupt",
+    "isr",
+    "polling",
+    "dma",
+    "interrupt driven",
+    "vector",
+    "priority",
+    "maskable",
+    "controller",
+    "programmed io",
+    "device"
+   ],
+   "objectives": [
+    "Compare programmed I/O, interrupt-driven I/O and DMA",
+    "Describe the steps when an interrupt occurs",
+    "Explain interrupt priority and masking"
+   ],
+   "body": "I/O devices connect through device controllers with status, command and data registers. In programmed I/O the CPU polls the status register in a loop until the device is ready, which wastes CPU time. In interrupt-driven I/O the CPU starts the operation and does other work; the device raises an interrupt when it is ready. With direct memory access (DMA), a DMA controller moves a whole block between device and memory without the CPU copying each word, and interrupts the CPU once at the end.\n\nWhen an interrupt arrives, the CPU normally finishes the current instruction, saves the PC and status (and the ISR saves other registers it uses), then looks up the interrupt service routine (ISR) address, often in an interrupt vector table, and jumps to it. After the ISR, a return-from-interrupt instruction restores the state and the program continues.\n\nInterrupts have priorities, so a more urgent device can pre-empt a less urgent one. Maskable interrupts can be disabled by the CPU; non-maskable interrupts cannot and are for critical events.",
+   "definitions": [
+    {
+     "term": "Interrupt",
+     "meaning": "A signal that makes the CPU suspend its current program and run a handler."
+    },
+    {
+     "term": "ISR",
+     "meaning": "Interrupt service routine: the handler code run for an interrupt."
+    },
+    {
+     "term": "DMA",
+     "meaning": "Direct memory access: block transfers between device and memory with little CPU involvement."
+    },
+    {
+     "term": "Polling",
+     "meaning": "The CPU repeatedly checking a device's status register."
+    }
+   ],
+   "example": "Interrupt-driven keyboard read (simplified)\n1. Program runs: ... instr 100, instr 101\n2. Key pressed -> device raises IRQ\n3. CPU finishes instr 101, saves PC = 102\n4. CPU reads vector table -> ISR address\n5. ISR reads key code, stores it, returns\n6. CPU restores PC = 102, continues",
+   "exampleNote": "The program is not rewritten or aware of the interrupt: the saved PC lets it resume exactly at instruction 102 after the ISR returns.",
+   "diagram": "  Device      CPU          Memory\n    |          |             |\n    |--IRQ---->|             |\n    |      finish instr      |\n    |      save PC           |\n    |      jump to ISR       |\n    |<--read data--|         |\n    |      return from int   |\n    |      resume program    |\n  DMA: device <==block==> memory",
+   "mistakes": [
+    "Believing interrupts are always better than polling. For very fast, frequent events, polling can have lower overhead.",
+    "Thinking DMA removes the CPU entirely. The CPU still sets up the transfer and handles the completion interrupt."
+   ],
+   "practice": [
+    {
+     "q": "Why does the CPU save the PC on an interrupt?",
+     "a": "So it can resume the interrupted program at the right instruction."
+    },
+    {
+     "q": "What advantage does DMA have for a big disk transfer?",
+     "a": "The CPU is not involved word by word, so it can do other work."
+    },
+    {
+     "q": "What is a maskable interrupt?",
+     "a": "One the CPU can temporarily ignore by setting a mask."
+    }
+   ],
+   "exercises": [
+    "List what could go wrong if an ISR forgets to save a register that the main program uses.",
+    "Compare polling and interrupts for a device that produces data once per second."
+   ],
+   "summary": [
+    "Polling wastes CPU time; interrupts let the CPU work until notified.",
+    "An interrupt saves the PC, runs an ISR via a vector, then resumes.",
+    "DMA moves blocks with one interrupt at the end.",
+    "Priorities and masks control which interrupts are served."
+   ]
+  }
+ ]
+}

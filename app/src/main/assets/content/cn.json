@@ -1,0 +1,945 @@
+{
+ "id": "cn",
+ "title": "Computer Networks",
+ "description": "How networks work: layered models, IP addressing and subnetting, routing, TCP and UDP, DNS and HTTP, security basics, and the link layer including Ethernet and Wi-Fi.",
+ "level": "Intermediate",
+ "path": "Computer Systems",
+ "pathOrder": 3,
+ "prerequisites": [],
+ "icon": "🌐",
+ "questions": [
+  {
+   "id": "cn01",
+   "topic": "Network Models",
+   "difficulty": 1,
+   "prompt": "How many layers does the OSI model have?",
+   "choices": [
+    "4",
+    "5",
+    "7",
+    "6"
+   ],
+   "answer": 2,
+   "explanation": "OSI defines seven layers from Physical up to Application."
+  },
+  {
+   "id": "cn02",
+   "topic": "Network Models",
+   "difficulty": 1,
+   "prompt": "Which TCP/IP layer corresponds to the OSI Network layer?",
+   "choices": [
+    "Internet",
+    "Transport",
+    "Link",
+    "Application"
+   ],
+   "answer": 0,
+   "explanation": "IP works at the Internet layer, matching OSI layer 3."
+  },
+  {
+   "id": "cn03",
+   "topic": "Network Models",
+   "difficulty": 1,
+   "prompt": "Which layer delivers data between processes using port numbers?",
+   "choices": [
+    "Network",
+    "Data Link",
+    "Physical",
+    "Transport"
+   ],
+   "answer": 3,
+   "explanation": "Ports are used by TCP and UDP at the Transport layer."
+  },
+  {
+   "id": "cn04",
+   "topic": "Network Models",
+   "difficulty": 2,
+   "prompt": "What are the data units at Transport, Network and Link layers, in that order?",
+   "choices": [
+    "Packet, segment, frame",
+    "Segment, packet, frame",
+    "Frame, packet, segment",
+    "Segment, frame, packet"
+   ],
+   "answer": 1,
+   "explanation": "Going down: segment (TCP), packet (IP), frame (Ethernet or Wi-Fi)."
+  },
+  {
+   "id": "cn05",
+   "topic": "Network Models",
+   "difficulty": 2,
+   "prompt": "Which type of switching reserves a dedicated path for a whole conversation?",
+   "choices": [
+    "Packet switching",
+    "Datagram forwarding",
+    "Circuit switching",
+    "Store-and-forward switching"
+   ],
+   "answer": 2,
+   "explanation": "Circuit switching sets up and holds a path, as classic phone calls did."
+  },
+  {
+   "id": "cn06",
+   "topic": "IP Addressing and Routing",
+   "difficulty": 1,
+   "prompt": "How many bits are in an IPv4 address?",
+   "choices": [
+    "16",
+    "32",
+    "48",
+    "128"
+   ],
+   "answer": 1,
+   "explanation": "IPv4 uses 32 bits, shown as four decimal bytes."
+  },
+  {
+   "id": "cn07",
+   "topic": "IP Addressing and Routing",
+   "difficulty": 1,
+   "prompt": "What is the dotted mask for /26?",
+   "choices": [
+    "255.255.255.128",
+    "255.255.255.224",
+    "255.255.255.240",
+    "255.255.255.192"
+   ],
+   "answer": 3,
+   "explanation": "26 ones = 255.255.255 plus 2 ones in the last octet = 11000000 = 192."
+  },
+  {
+   "id": "cn08",
+   "topic": "IP Addressing and Routing",
+   "difficulty": 2,
+   "prompt": "How many usable host addresses does a /26 subnet have?",
+   "choices": [
+    "62",
+    "64",
+    "60",
+    "30"
+   ],
+   "answer": 0,
+   "explanation": "6 host bits give 64 addresses; subtract network and broadcast."
+  },
+  {
+   "id": "cn09",
+   "topic": "IP Addressing and Routing",
+   "difficulty": 2,
+   "prompt": "Splitting 192.168.10.0/24 into /26 subnets gives how many subnets?",
+   "choices": [
+    "2",
+    "8",
+    "4",
+    "6"
+   ],
+   "answer": 2,
+   "explanation": "Two bits are borrowed, so 2^2 = 4 subnets."
+  },
+  {
+   "id": "cn10",
+   "topic": "IP Addressing and Routing",
+   "difficulty": 2,
+   "prompt": "Which address is private?",
+   "choices": [
+    "172.32.0.1",
+    "172.20.5.9",
+    "192.169.1.1",
+    "11.0.0.1"
+   ],
+   "answer": 1,
+   "explanation": "The private block 172.16.0.0/12 spans 172.16.x.x to 172.31.x.x."
+  },
+  {
+   "id": "cn11",
+   "topic": "IP Addressing and Routing",
+   "difficulty": 3,
+   "prompt": "What is the broadcast address of 192.168.10.64/26?",
+   "choices": [
+    "192.168.10.127",
+    "192.168.10.128",
+    "192.168.10.126",
+    "192.168.10.255"
+   ],
+   "answer": 0,
+   "explanation": "The block runs from .64 to .127 and the last address is the broadcast."
+  },
+  {
+   "id": "cn12",
+   "topic": "IP Addressing and Routing",
+   "difficulty": 2,
+   "prompt": "A router has 10.0.0.0/8, 10.1.0.0/16 and a default route. Which route is used for 10.1.2.3?",
+   "choices": [
+    "10.0.0.0/8",
+    "The default route",
+    "None, the packet is dropped",
+    "10.1.0.0/16"
+   ],
+   "answer": 3,
+   "explanation": "Both /8 and /16 match; the longest prefix wins."
+  },
+  {
+   "id": "cn13",
+   "topic": "IP Addressing and Routing",
+   "difficulty": 1,
+   "prompt": "What does NAT mainly allow?",
+   "choices": [
+    "Names to be resolved to addresses",
+    "Frames to be forwarded by MAC",
+    "Many private hosts to share one public address",
+    "Packets to be encrypted"
+   ],
+   "answer": 2,
+   "explanation": "NAT rewrites addresses and ports so private hosts can use a shared public address."
+  },
+  {
+   "id": "cn14",
+   "topic": "Transport Layer",
+   "difficulty": 1,
+   "prompt": "Which protocol is connectionless and does not retransmit lost data?",
+   "choices": [
+    "TCP",
+    "UDP",
+    "TLS",
+    "SMTP"
+   ],
+   "answer": 1,
+   "explanation": "UDP has no connection setup, acknowledgments or retransmission."
+  },
+  {
+   "id": "cn15",
+   "topic": "Transport Layer",
+   "difficulty": 1,
+   "prompt": "What is the order of the TCP three-way handshake?",
+   "choices": [
+    "SYN, SYN+ACK, ACK",
+    "SYN, ACK, SYN+ACK",
+    "ACK, SYN, SYN+ACK",
+    "SYN+ACK, SYN, ACK"
+   ],
+   "answer": 0,
+   "explanation": "The client sends SYN, the server answers SYN+ACK, and the client confirms with ACK."
+  },
+  {
+   "id": "cn16",
+   "topic": "Transport Layer",
+   "difficulty": 2,
+   "prompt": "Congestion control mainly aims to protect:",
+   "choices": [
+    "The receiver's buffer",
+    "The DNS server",
+    "The MAC table of a switch",
+    "The network from being overloaded"
+   ],
+   "answer": 3,
+   "explanation": "Flow control protects the receiver; congestion control protects the network."
+  },
+  {
+   "id": "cn17",
+   "topic": "Transport Layer",
+   "difficulty": 2,
+   "prompt": "What does a sliding window allow a TCP sender to do?",
+   "choices": [
+    "Skip the handshake",
+    "Have several unacknowledged segments in flight",
+    "Send data without sequence numbers",
+    "Avoid all retransmission"
+   ],
+   "answer": 1,
+   "explanation": "The window bounds how much unacknowledged data can be outstanding."
+  },
+  {
+   "id": "cn18",
+   "topic": "Application Layer and Security",
+   "difficulty": 1,
+   "prompt": "What does DNS do?",
+   "choices": [
+    "Encrypts web traffic",
+    "Assigns MAC addresses",
+    "Maps domain names to IP addresses",
+    "Routes packets between networks"
+   ],
+   "answer": 2,
+   "explanation": "DNS is the Internet's name to address lookup system."
+  },
+  {
+   "id": "cn19",
+   "topic": "Application Layer and Security",
+   "difficulty": 1,
+   "prompt": "What does HTTP status 404 mean?",
+   "choices": [
+    "The resource was not found",
+    "The server crashed",
+    "The request succeeded",
+    "The user must log in again"
+   ],
+   "answer": 0,
+   "explanation": "404 is a client-side error code for a missing resource."
+  },
+  {
+   "id": "cn20",
+   "topic": "Application Layer and Security",
+   "difficulty": 2,
+   "prompt": "HTTPS is best described as:",
+   "choices": [
+    "HTTP over UDP",
+    "HTTP carried over TLS",
+    "A faster version of TCP",
+    "Email over TLS"
+   ],
+   "answer": 1,
+   "explanation": "TLS wraps HTTP for encryption and server authentication."
+  },
+  {
+   "id": "cn21",
+   "topic": "Application Layer and Security",
+   "difficulty": 2,
+   "prompt": "In a DNS lookup, which server tells the resolver where the .com servers are?",
+   "choices": [
+    "Authoritative server for example.com",
+    "The browser cache",
+    "The SMTP server",
+    "Root server"
+   ],
+   "answer": 3,
+   "explanation": "Root servers point to top-level domain servers such as .com."
+  },
+  {
+   "id": "cn22",
+   "topic": "Application Layer and Security",
+   "difficulty": 3,
+   "prompt": "Input like ' OR '1'='1 typed into a login box is an example of:",
+   "choices": [
+    "Phishing",
+    "Denial of service",
+    "SQL injection",
+    "ARP request"
+   ],
+   "answer": 2,
+   "explanation": "Crafted input that is interpreted as SQL is injection."
+  },
+  {
+   "id": "cn23",
+   "topic": "Application Layer and Security",
+   "difficulty": 2,
+   "prompt": "Why does TLS use symmetric encryption for the bulk of the data?",
+   "choices": [
+    "It is much faster than public-key encryption",
+    "It needs no key",
+    "It cannot be broken",
+    "It works without certificates"
+   ],
+   "answer": 0,
+   "explanation": "Public-key methods agree a shared key; symmetric ciphers then encrypt efficiently."
+  },
+  {
+   "id": "cn24",
+   "topic": "Link Layer and Wireless",
+   "difficulty": 1,
+   "prompt": "How long is an Ethernet MAC address?",
+   "choices": [
+    "32 bits",
+    "64 bits",
+    "128 bits",
+    "48 bits"
+   ],
+   "answer": 3,
+   "explanation": "MAC addresses are 48 bits, shown as six hex bytes."
+  },
+  {
+   "id": "cn25",
+   "topic": "Link Layer and Wireless",
+   "difficulty": 2,
+   "prompt": "How does a switch differ from a hub?",
+   "choices": [
+    "It forwards using IP addresses",
+    "It forwards a frame only to the port of the destination MAC once learned",
+    "It repeats every frame to all ports",
+    "It encrypts frames"
+   ],
+   "answer": 1,
+   "explanation": "A hub repeats everywhere; a switch learns MAC addresses per port."
+  },
+  {
+   "id": "cn26",
+   "topic": "Link Layer and Wireless",
+   "difficulty": 1,
+   "prompt": "What does ARP do?",
+   "choices": [
+    "Maps a name to an IP address",
+    "Assigns IP addresses",
+    "Maps an IP address to a MAC address",
+    "Detects bit errors"
+   ],
+   "answer": 2,
+   "explanation": "ARP asks who owns an IP address on the local network and gets the MAC."
+  },
+  {
+   "id": "cn27",
+   "topic": "Link Layer and Wireless",
+   "difficulty": 2,
+   "prompt": "What is the even parity bit for data 1011011?",
+   "choices": [
+    "1",
+    "0",
+    "2",
+    "It cannot be computed"
+   ],
+   "answer": 0,
+   "explanation": "The data has five 1s; adding a 1 makes six, which is even."
+  },
+  {
+   "id": "cn28",
+   "topic": "Link Layer and Wireless",
+   "difficulty": 3,
+   "prompt": "Which error does a single parity bit fail to detect?",
+   "choices": [
+    "One bit flipped",
+    "Two bits flipped",
+    "Three bits flipped",
+    "One bit flipped in the parity bit itself"
+   ],
+   "answer": 1,
+   "explanation": "Two flips keep the number of 1s even (or odd), so parity looks fine. Three flips would change it."
+  }
+ ],
+ "lessons": [
+  {
+   "id": "cn-osi-tcpip",
+   "topic": "Network Models",
+   "title": "OSI and TCP/IP Layers",
+   "level": "Beginner",
+   "minutes": 7,
+   "keywords": [
+    "osi",
+    "tcpip",
+    "layers",
+    "protocol",
+    "stack",
+    "application",
+    "transport",
+    "network",
+    "link",
+    "physical",
+    "model",
+    "internet"
+   ],
+   "objectives": [
+    "Name the seven OSI layers and the four TCP/IP layers",
+    "Map OSI layers onto TCP/IP layers",
+    "Match common protocols to the layer they work at"
+   ],
+   "body": "A network model splits the hard job of communication into layers. Each layer offers a service to the layer above and uses the service of the layer below, so you can change one layer (say Wi-Fi to Ethernet) without rewriting the others.\n\nThe OSI model has seven layers: Physical (bits on the wire), Data Link (frames between neighbours), Network (packets across networks), Transport (process to process delivery), Session, Presentation and Application. The TCP/IP model that the real Internet uses is shorter: Link, Internet, Transport and Application. The OSI Session, Presentation and Application layers are roughly merged into the TCP/IP Application layer, and OSI Physical plus Data Link are roughly the TCP/IP Link layer.\n\nTypical protocols: HTTP, DNS and SMTP at the Application layer; TCP and UDP at Transport; IP and ICMP at the Internet (Network) layer; Ethernet and Wi-Fi at the Link layer. OSI is mainly a teaching and reference model, while TCP/IP describes what is actually deployed.",
+   "definitions": [
+    {
+     "term": "Layer",
+     "meaning": "A group of related functions that offers a service to the layer above."
+    },
+    {
+     "term": "Protocol",
+     "meaning": "An agreed set of rules and message formats for communication between peers at the same layer."
+    },
+    {
+     "term": "Internet layer",
+     "meaning": "The TCP/IP layer that moves packets between networks using IP addresses; it matches OSI layer 3."
+    },
+    {
+     "term": "Service",
+     "meaning": "What a layer provides to the one above it, without exposing how it does it."
+    }
+   ],
+   "example": "Opening a web page, top to bottom:\nApplication : HTTP request for /index.html\nTransport   : TCP, destination port 443\nInternet    : IP, destination IP address\nLink        : Ethernet or Wi-Fi to next hop\nPhysical    : electrical, light or radio signals",
+   "exampleNote": "Each line shows which layer handles which part of the same request. The mapping is simplified: real stacks have extra protocols such as TLS between HTTP and TCP.",
+   "diagram": " OSI                 TCP/IP\n 7 Application  \\\n 6 Presentation  >  Application\n 5 Session      /\n 4 Transport        Transport\n 3 Network          Internet\n 2 Data Link    \\   Link\n 1 Physical     /",
+   "mistakes": [
+    "Thinking OSI and TCP/IP layers match one to one. TCP/IP has 4 layers, and the OSI upper three and lower two are merged into one each.",
+    "Putting IP at the Transport layer. IP is the Network (Internet) layer; TCP and UDP are Transport."
+   ],
+   "practice": [
+    {
+     "q": "Which OSI layer is responsible for IP addressing and routing?",
+     "a": "Layer 3, the Network layer, because it moves packets between networks."
+    },
+    {
+     "q": "Name the four TCP/IP layers from top to bottom.",
+     "a": "Application, Transport, Internet, Link."
+    },
+    {
+     "q": "At which layer does Ethernet work?",
+     "a": "The Link layer (OSI Data Link plus Physical)."
+    }
+   ],
+   "exercises": [
+    "Draw the seven-layer OSI stack and write one protocol next to each layer where one exists.",
+    "List what happens at each TCP/IP layer when you press Enter on a URL."
+   ],
+   "summary": [
+    "Layering splits communication into services stacked on each other.",
+    "OSI has 7 layers, TCP/IP has 4.",
+    "Application: HTTP, DNS, SMTP; Transport: TCP, UDP; Internet: IP; Link: Ethernet, Wi-Fi.",
+    "OSI is a reference model, TCP/IP is what the Internet uses."
+   ]
+  },
+  {
+   "id": "cn-encapsulation-switching",
+   "topic": "Network Models",
+   "title": "Encapsulation and Switching",
+   "level": "Beginner",
+   "minutes": 7,
+   "keywords": [
+    "encapsulation",
+    "decapsulation",
+    "header",
+    "segment",
+    "packet",
+    "frame",
+    "pdu",
+    "circuit",
+    "switching",
+    "datagram",
+    "store",
+    "forward"
+   ],
+   "objectives": [
+    "Explain encapsulation and decapsulation",
+    "Name the data unit used at each layer",
+    "Contrast circuit switching with packet switching"
+   ],
+   "body": "When an application sends data, each layer down the stack wraps it with its own header. This is encapsulation. A Transport segment is the data plus a TCP or UDP header; an Internet packet is the segment plus an IP header; a Link frame is the packet plus a link header and usually a trailer. The receiver reverses the process (decapsulation), each layer reading and removing its own header.\n\nSwitching is how data crosses the middle of a network. In circuit switching, a dedicated path is reserved for the whole conversation, as in a traditional phone call. Capacity is guaranteed, but it sits idle when nobody is talking. In packet switching, data is cut into packets that are sent independently and share links. Routers use store-and-forward: receive the whole packet, then send it on.\n\nThe Internet uses packet switching because computer traffic is bursty and sharing links is efficient. The price is variable delay and the possibility that packets queue, get lost or arrive out of order. In datagram packet switching each packet is routed on its own; in virtual-circuit packet switching a path is set up first, but links are still shared.",
+   "definitions": [
+    {
+     "term": "Encapsulation",
+     "meaning": "Adding a layer's header (and sometimes trailer) around data from the layer above."
+    },
+    {
+     "term": "PDU",
+     "meaning": "Protocol data unit: the name of the data chunk at a layer, such as segment, packet or frame."
+    },
+    {
+     "term": "Circuit switching",
+     "meaning": "Reserving a dedicated path for the duration of a conversation."
+    },
+    {
+     "term": "Packet switching",
+     "meaning": "Splitting data into packets that share links and are forwarded independently."
+    }
+   ],
+   "example": "Sizes in a simplified example:\nApp data        : 100 bytes\nTCP segment     : 20 hdr + 100 = 120\nIP packet       : 20 hdr + 120 = 140\nEthernet frame  : 14 hdr + 140 + 4 trailer = 158\n(minimal headers, no options)",
+   "exampleNote": "Each layer adds its own overhead. Minimal TCP and IP headers are 20 bytes each and the Ethernet header is 14 bytes plus a 4-byte trailer. Real packets may carry options or padding.",
+   "diagram": "[ Data ]\n[ TCP | Data ]              segment\n[ IP | TCP | Data ]         packet\n[ Eth | IP | TCP | Data | T ] frame",
+   "mistakes": [
+    "Saying the segment is added after the packet. The order downward is data, segment, packet, frame.",
+    "Believing packet switching guarantees a fixed path and delay. Only circuit switching reserves capacity."
+   ],
+   "practice": [
+    {
+     "q": "What is the data unit at the Transport layer for TCP?",
+     "a": "A segment."
+    },
+    {
+     "q": "Why is packet switching efficient for bursty traffic?",
+     "a": "Links are shared, so unused capacity is not reserved for a silent sender."
+    },
+    {
+     "q": "What does decapsulation do?",
+     "a": "Each layer at the receiver reads and strips its own header before passing data up."
+    }
+   ],
+   "exercises": [
+    "Using the sizes in the example, compute the frame size for 500 bytes of data.",
+    "Write two situations where circuit switching suits better than packet switching and why."
+   ],
+   "summary": [
+    "Encapsulation wraps data in headers going down the stack.",
+    "Segment, packet and frame are the Transport, Internet and Link units.",
+    "Circuit switching reserves a path; packet switching shares links.",
+    "The Internet is packet switched."
+   ]
+  },
+  {
+   "id": "cn-ipv4-subnetting",
+   "topic": "IP Addressing and Routing",
+   "title": "IPv4 Addresses and Subnetting",
+   "level": "Intermediate",
+   "minutes": 10,
+   "keywords": [
+    "ipv4",
+    "subnet",
+    "cidr",
+    "mask",
+    "netmask",
+    "prefix",
+    "classful",
+    "broadcast",
+    "hosts",
+    "network",
+    "192.168",
+    "subnetting",
+    "ip address"
+   ],
+   "objectives": [
+    "Read an IPv4 address and CIDR prefix",
+    "Compute the number of subnets, hosts and ranges",
+    "Find the network and broadcast address"
+   ],
+   "body": "An IPv4 address is 32 bits, written as four decimal bytes such as 192.168.10.70. A subnet mask (or CIDR prefix length) says how many leading bits are the network part; the rest identify the host. A /26 means 26 network bits, which is the mask 255.255.255.192. Historically addresses were classful: class A (first octet 1-126, /8), class B (128-191, /16) and class C (192-223, /24). Classful addressing wasted addresses, so CIDR replaced it with prefixes of any length.\n\nWith h host bits, a subnet has 2^h addresses. The first is the network address and the last is the broadcast address, so usable hosts are 2^h - 2. For /26, h = 32 - 26 = 6, so 64 addresses and 62 usable hosts per subnet.\n\nSplitting a /24 into /26 subnets borrows 2 bits, giving 2^2 = 4 subnets. The block size is 64, so subnets start at 0, 64, 128 and 192 in the last octet. To find which subnet an address is in, AND the address with the mask.",
+   "definitions": [
+    {
+     "term": "CIDR",
+     "meaning": "Classless Inter-Domain Routing: writing an address with a prefix length like /26."
+    },
+    {
+     "term": "Subnet mask",
+     "meaning": "A 32-bit pattern of 1s then 0s marking the network part of an address."
+    },
+    {
+     "term": "Network address",
+     "meaning": "The first address of a subnet (all host bits 0); it names the subnet, not a host."
+    },
+    {
+     "term": "Broadcast address",
+     "meaning": "The last address of a subnet (all host bits 1); it targets every host in the subnet."
+    }
+   ],
+   "example": "import ipaddress\nnet = ipaddress.ip_network('192.168.10.0/24')\nfor s in net.subnets(new_prefix=26):\n    print(s, s[1], s[-2], s[-1])\nprint(ipaddress.ip_interface('192.168.10.70/26').network)",
+   "exampleNote": "The output lists four subnets: 192.168.10.0/26 (hosts .1-.62, broadcast .63), .64/26 (.65-.126, broadcast .127), .128/26 (.129-.190, broadcast .191) and .192/26 (.193-.254, broadcast .255). The last line prints 192.168.10.64/26 because 70 falls in 64-127.",
+   "diagram": "192.168.10.0/24 split into /26\nMask 255.255.255.192, block = 64\nSubnet 1: .0   - .63   hosts .1-.62\nSubnet 2: .64  - .127  hosts .65-.126\nSubnet 3: .128 - .191  hosts .129-.190\nSubnet 4: .192 - .255  hosts .193-.254\nFirst = network, last = broadcast",
+   "mistakes": [
+    "Forgetting the minus 2: usable hosts in /26 are 62, not 64.",
+    "Assigning the network or broadcast address to a host. The first and last address of each subnet are reserved."
+   ],
+   "practice": [
+    {
+     "q": "How many usable hosts does a /27 have?",
+     "a": "32 - 27 = 5 host bits, 2^5 = 32 addresses, minus 2 gives 30."
+    },
+    {
+     "q": "What is the broadcast address of 192.168.10.128/26?",
+     "a": "192.168.10.191, the last address of the block 128-191."
+    },
+    {
+     "q": "How many /26 subnets fit in a /24?",
+     "a": "4, because 2 bits are borrowed (2^2)."
+    }
+   ],
+   "exercises": [
+    "Split 10.0.0.0/24 into /27 subnets and list the first three ranges.",
+    "Find the network address of 172.16.5.200/20 by hand, then check it with the ipaddress module."
+   ],
+   "summary": [
+    "IPv4 addresses are 32 bits; the prefix length marks the network part.",
+    "Usable hosts = 2^h - 2.",
+    "A /24 splits into four /26 subnets of 62 hosts each.",
+    "CIDR replaced classful addressing."
+   ]
+  },
+  {
+   "id": "cn-routing-ipv6",
+   "topic": "IP Addressing and Routing",
+   "title": "Routing, NAT and IPv6",
+   "level": "Intermediate",
+   "minutes": 9,
+   "keywords": [
+    "routing",
+    "router",
+    "gateway",
+    "default",
+    "nat",
+    "private",
+    "ipv6",
+    "longest",
+    "prefix",
+    "match",
+    "rfc1918",
+    "forwarding",
+    "table"
+   ],
+   "objectives": [
+    "Use private address ranges and explain NAT",
+    "Apply longest prefix match to a routing table",
+    "Describe the basic shape of an IPv6 address"
+   ],
+   "body": "Three IPv4 blocks are reserved for private networks and are not routed on the public Internet: 10.0.0.0/8, 172.16.0.0/12 (172.16.x.x to 172.31.x.x) and 192.168.0.0/16. NAT (Network Address Translation) lets many private hosts share one public address: the NAT device rewrites the source address, and usually the port, and remembers the mapping to translate replies back.\n\nA host sends packets for its own subnet directly; for any other destination it sends them to its default gateway, a router on its subnet. A router looks up the destination in its forwarding table. Several entries may match, and the router chooses the one with the longest prefix, the most specific route. The default route 0.0.0.0/0 matches everything and is used only when nothing more specific does.\n\nIPv6 uses 128-bit addresses written as eight groups of hex digits, such as 2001:db8:0:0:0:0:0:1, where one run of zero groups may be shortened once with :: to give 2001:db8::1. It was created mainly because IPv4 addresses ran short. IPv6 hosts can often be reached without NAT, which was needed far less.",
+   "definitions": [
+    {
+     "term": "Default gateway",
+     "meaning": "The router a host uses for destinations outside its own subnet."
+    },
+    {
+     "term": "Forwarding table",
+     "meaning": "A router's list of prefixes and the next hop or interface for each."
+    },
+    {
+     "term": "Longest prefix match",
+     "meaning": "Choosing, among matching routes, the one with the longest prefix length."
+    },
+    {
+     "term": "NAT",
+     "meaning": "Rewriting addresses (and ports) so private hosts can use a shared public address."
+    }
+   ],
+   "example": "Routing table:\n10.0.0.0/8   -> R1\n10.1.0.0/16  -> R2\n0.0.0.0/0    -> R3 (default)\n\n10.1.2.3  matches /8 and /16 -> R2\n10.2.0.1  matches /8 only    -> R1\n8.8.8.8   matches default    -> R3",
+   "exampleNote": "For 10.1.2.3 both 10.0.0.0/8 and 10.1.0.0/16 match, and /16 is longer, so R2 wins. 10.2.0.1 is outside 10.1.0.0/16, so only /8 matches. 8.8.8.8 matches only the default route.",
+   "diagram": "Home network          Internet\n192.168.1.20 --+\n192.168.1.21 --+-- [NAT router]\n192.168.1.22 --+    203.0.113.5\n\nOut: src 192.168.1.20:5000\n  -> 203.0.113.5:40001 (mapped)\nReply is mapped back to .20:5000",
+   "mistakes": [
+    "Choosing the first matching route instead of the longest prefix.",
+    "Treating NAT as a security feature by itself. It hides addresses as a side effect but is not a firewall."
+   ],
+   "practice": [
+    {
+     "q": "Is 172.32.0.1 a private address?",
+     "a": "No. The private block is 172.16.0.0 to 172.31.255.255; 172.32.x.x is outside it."
+    },
+    {
+     "q": "What does the :: in an IPv6 address mean?",
+     "a": "One run of consecutive zero groups, allowed once per address."
+    },
+    {
+     "q": "When is the default route used?",
+     "a": "Only when no more specific prefix matches."
+    }
+   ],
+   "exercises": [
+    "Add a route 10.1.2.0/24 -> R4 to the table and say where 10.1.2.3 goes now.",
+    "Shorten 2001:0db8:0000:0000:0000:0000:0000:0001 using ::."
+   ],
+   "summary": [
+    "Private ranges: 10/8, 172.16/12, 192.168/16.",
+    "NAT shares one public address among private hosts.",
+    "Routers use the longest matching prefix; 0.0.0.0/0 is the default.",
+    "IPv6 is 128 bits, written in hex with optional ::."
+   ]
+  },
+  {
+   "id": "cn-transport",
+   "topic": "Transport Layer",
+   "title": "TCP, UDP and Congestion Control",
+   "level": "Intermediate",
+   "minutes": 9,
+   "keywords": [
+    "tcp",
+    "udp",
+    "port",
+    "handshake",
+    "syn",
+    "ack",
+    "reliability",
+    "flow",
+    "congestion",
+    "window",
+    "sliding",
+    "segment",
+    "socket"
+   ],
+   "objectives": [
+    "Compare TCP and UDP",
+    "Describe the three-way handshake",
+    "Distinguish flow control from congestion control"
+   ],
+   "body": "The Transport layer delivers data between processes, not just hosts. A port number (0-65535) identifies the application; for example HTTP uses 80, HTTPS 443, DNS 53 and SMTP 25. UDP is connectionless and simple: no handshake, no retransmission, no ordering, so it is fast and suits DNS queries and live audio or video. TCP is connection-oriented and reliable: it numbers bytes, acknowledges them, retransmits lost data and delivers in order.\n\nTCP opens a connection with a three-way handshake: the client sends SYN, the server answers SYN+ACK, and the client replies ACK. Then data flows. Flow control stops a fast sender from overrunning a slow receiver: the receiver advertises a window of how much it can accept. Congestion control stops senders from overloading the network itself; TCP slows down when it detects loss and speeds up gradually otherwise (in outline: slow start, then additive increase).\n\nThe sliding window idea lets the sender have several segments in flight without waiting for each acknowledgment. With a window of 4, the sender sends segments 1-4; when the ACK for 1 arrives, the window slides forward and segment 5 may be sent.",
+   "definitions": [
+    {
+     "term": "Port",
+     "meaning": "A 16-bit number that identifies an application endpoint on a host."
+    },
+    {
+     "term": "Three-way handshake",
+     "meaning": "SYN, SYN+ACK, ACK exchange that opens a TCP connection."
+    },
+    {
+     "term": "Flow control",
+     "meaning": "Receiver-driven limiting of the sender so the receiver is not overwhelmed."
+    },
+    {
+     "term": "Congestion control",
+     "meaning": "Sender-side rate adjustment to avoid overloading the network."
+    }
+   ],
+   "example": "Sliding window, size 4:\nSent 1 2 3 4        window = [1 2 3 4]\nACK 1 arrives       window = [2 3 4 5]\nSend 5              window = [2 3 4 5]\nACK 2 arrives       window = [3 4 5 6]",
+   "exampleNote": "Each ACK lets the left edge of the window move right, which makes room to send a new segment. Real TCP also changes the window size over time; this fixed-size version is simplified.",
+   "diagram": "Client              Server\n  | ---- SYN ------> |\n  | <--- SYN+ACK --- |\n  | ---- ACK ------> |\n  |  connection open |\n  | ==== data ====>  |",
+   "mistakes": [
+    "Saying UDP is just a worse TCP. It trades reliability for low delay and no connection setup, which is the right choice for some applications.",
+    "Mixing up flow and congestion control: flow protects the receiver, congestion control protects the network."
+   ],
+   "practice": [
+    {
+     "q": "Which transport protocol would a DNS query usually use first?",
+     "a": "UDP, because a single small request and reply does not need connection setup."
+    },
+    {
+     "q": "What are the three handshake messages?",
+     "a": "SYN, SYN+ACK, ACK."
+    },
+    {
+     "q": "What does a larger window allow?",
+     "a": "More unacknowledged data in flight, so higher throughput if the receiver and network can cope."
+    }
+   ],
+   "exercises": [
+    "Write the sequence of window positions for window size 3 and segments 1 to 6.",
+    "Explain why a live video call may prefer UDP."
+   ],
+   "summary": [
+    "Ports identify applications; IP identifies hosts.",
+    "TCP is reliable and ordered; UDP is lightweight.",
+    "Handshake: SYN, SYN+ACK, ACK.",
+    "Flow control protects the receiver; congestion control protects the network."
+   ]
+  },
+  {
+   "id": "cn-application-security",
+   "topic": "Application Layer and Security",
+   "title": "DNS, HTTP, TLS and Network Security",
+   "level": "Intermediate",
+   "minutes": 11,
+   "keywords": [
+    "dns",
+    "http",
+    "https",
+    "tls",
+    "smtp",
+    "email",
+    "status",
+    "firewall",
+    "encryption",
+    "phishing",
+    "ddos",
+    "sql",
+    "injection",
+    "certificate"
+   ],
+   "objectives": [
+    "Trace a DNS lookup and read an HTTP exchange",
+    "Explain what HTTPS and TLS add",
+    "Describe firewalls, encryption and common attacks at concept level"
+   ],
+   "body": "DNS turns names into IP addresses. A simplified lookup: the browser and OS check their caches; if empty, the recursive resolver asks a root server, which points to the .com servers; those point to the authoritative server for the domain, which gives the address; the answer is cached. HTTP is a request-response protocol: the client sends a method and path (GET /index.html), and the server replies with a status code (200 OK, 301 moved, 404 not found, 500 server error) and a body. HTTPS is HTTP carried over TLS. TLS lets the client check the server's certificate, uses public-key methods to agree a shared secret, then encrypts data with fast symmetric encryption. Email is sent with SMTP and read with IMAP or POP3.\n\nA firewall filters traffic by rules such as address, port and protocol. Encryption protects confidentiality: symmetric uses one shared key, asymmetric uses a public and private key pair. Common attacks, at concept level: phishing tricks users into giving secrets; denial of service floods a target so legitimate users are refused; man-in-the-middle sits between two parties, which TLS certificates help prevent; SQL injection sends crafted input that a careless application treats as database commands.",
+   "definitions": [
+    {
+     "term": "DNS",
+     "meaning": "The system that maps domain names to IP addresses."
+    },
+    {
+     "term": "Status code",
+     "meaning": "A number in an HTTP response that reports the result, like 200 or 404."
+    },
+    {
+     "term": "TLS",
+     "meaning": "A protocol that provides encryption and server authentication on top of TCP."
+    },
+    {
+     "term": "Firewall",
+     "meaning": "A device or software that allows or blocks traffic by rules."
+    }
+   ],
+   "example": "Request:\nGET /index.html HTTP/1.1\nHost: example.com\n\nResponse:\nHTTP/1.1 200 OK\nContent-Type: text/html\n\n<html>...</html>",
+   "exampleNote": "The request line names the method, path and version, and the Host header says which site is wanted. The response begins with the status line; 200 means success and the headers describe the body that follows.",
+   "diagram": "Browser -> Resolver : example.com?\nResolver -> Root     : .com servers?\nResolver -> .com TLD : example.com?\nResolver -> Auth NS  : example.com?\nAuth NS  -> Resolver : 93.184.x.x\nResolver -> Browser  : the address\n(address shown is illustrative)",
+   "mistakes": [
+    "Reading 404 as a server crash. 404 means the resource was not found; 5xx codes signal server errors.",
+    "Thinking HTTPS makes a site safe. It protects data in transit, but the site itself can still be malicious or vulnerable."
+   ],
+   "practice": [
+    {
+     "q": "Which server in a DNS lookup holds the final answer for a domain?",
+     "a": "The authoritative name server."
+    },
+    {
+     "q": "What is the difference between 301 and 404?",
+     "a": "301 says the resource moved permanently; 404 says it was not found."
+    },
+    {
+     "q": "Why use both public-key and symmetric encryption in TLS?",
+     "a": "Public-key methods safely agree a secret, and symmetric encryption is much faster for bulk data."
+    }
+   ],
+   "exercises": [
+    "Open a browser's developer tools network tab and note the method, status and headers of one request.",
+    "Write down which attack each is: flooding a server; a fake bank email; input like ' OR '1'='1."
+   ],
+   "summary": [
+    "DNS maps names to IPs through resolver, root, TLD and authoritative servers.",
+    "HTTP is request-response with status codes.",
+    "HTTPS is HTTP over TLS.",
+    "Firewalls filter; encryption protects confidentiality; know phishing, DoS, MITM and SQL injection."
+   ]
+  },
+  {
+   "id": "cn-link-layer-wireless",
+   "topic": "Link Layer and Wireless",
+   "title": "MAC, Ethernet, ARP and Wi-Fi",
+   "level": "Intermediate",
+   "minutes": 10,
+   "keywords": [
+    "mac",
+    "ethernet",
+    "frame",
+    "switch",
+    "hub",
+    "router",
+    "arp",
+    "wifi",
+    "csma",
+    "crc",
+    "parity",
+    "error",
+    "detection",
+    "wireless"
+   ],
+   "objectives": [
+    "Explain MAC addresses and the Ethernet frame",
+    "Compare hubs, switches and routers and explain ARP",
+    "Describe CSMA/CA and basic error detection"
+   ],
+   "body": "Every network interface has a 48-bit MAC address, written as six hex bytes such as 00:1A:2B:3C:4D:5E, used to deliver frames within one link or LAN. An Ethernet frame holds destination MAC, source MAC, a type field, the payload and a CRC check value at the end. A hub repeats every signal out of all other ports. A switch learns which MAC address sits on which port and forwards a frame only there. A router works at the network layer and connects different networks using IP addresses.\n\nARP finds the MAC address for a known IP address on the same network: the host broadcasts 'who has 192.168.1.5?' and the owner replies with its MAC. Wi-Fi uses CSMA/CA: a station listens, waits if the channel is busy, backs off for a random time, sends, and expects an acknowledgment, because a radio cannot easily detect collisions while it transmits.\n\nError detection adds redundant bits. A parity bit makes the count of 1s even (or odd) and catches any single-bit flip, but misses two flips. CRC treats data as a polynomial and appends a remainder, so it catches many more error patterns, including bursts. Both only detect errors; fixing means retransmission.",
+   "definitions": [
+    {
+     "term": "MAC address",
+     "meaning": "A 48-bit hardware address used for delivery within a local link."
+    },
+    {
+     "term": "ARP",
+     "meaning": "Address Resolution Protocol: maps an IP address to a MAC address on the local network."
+    },
+    {
+     "term": "CSMA/CA",
+     "meaning": "Carrier sense with collision avoidance: listen, back off, send, wait for ACK."
+    },
+    {
+     "term": "CRC",
+     "meaning": "Cyclic redundancy check: a remainder-based code that detects many errors."
+    }
+   ],
+   "example": "def even_parity_bit(bits):\n    return str(bits.count('1') % 2)\n\nprint(even_parity_bit('1011011'))\nprint(even_parity_bit('1101001'))",
+   "exampleNote": "1011011 has five 1s, so the parity bit is 1 to make six (even). 1101001 has four 1s, so the bit is 0. The program prints 1 then 0.",
+   "diagram": "Ethernet frame (fields in order)\n+------+------+------+---------+-----+\n| Dest | Src  | Type | Payload | CRC |\n| MAC  | MAC  |      |         |     |\n+------+------+------+---------+-----+\n\nDevice     Decides using\nHub        nothing (repeats)\nSwitch     MAC address table\nRouter     IP address, routing table",
+   "mistakes": [
+    "Saying a switch uses IP addresses. A normal switch forwards by MAC address; routers use IP.",
+    "Believing parity catches every error. Two flipped bits leave the parity unchanged."
+   ],
+   "practice": [
+    {
+     "q": "What does ARP return?",
+     "a": "The MAC address that belongs to a given IP address on the same network."
+    },
+    {
+     "q": "Even parity bit for 1100110?",
+     "a": "Four 1s, already even, so the parity bit is 0."
+    },
+    {
+     "q": "Why can't Wi-Fi simply detect collisions like classic Ethernet?",
+     "a": "A radio transmitter drowns out its own receiver, so it avoids collisions instead."
+    }
+   ],
+   "exercises": [
+    "Compute even parity bits for 1110000 and 0101011.",
+    "Describe step by step what a switch does when it receives a frame for an unknown MAC address."
+   ],
+   "summary": [
+    "MAC addresses are 48-bit and local to a link.",
+    "Hubs repeat, switches learn MACs, routers use IP.",
+    "ARP maps IP to MAC; CSMA/CA avoids Wi-Fi collisions.",
+    "Parity and CRC detect errors but do not correct them."
+   ]
+  }
+ ]
+}

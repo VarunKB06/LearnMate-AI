@@ -1,0 +1,535 @@
+{
+ "id": "sta",
+ "title": "Static Timing Analysis",
+ "description": "Setup and hold, slack and the critical path, clock skew and jitter, and how designers fix timing violations, with worked numeric examples.",
+ "level": "Advanced",
+ "path": "Digital Design and VLSI",
+ "pathOrder": 6,
+ "prerequisites": [
+  "digital",
+  "cmos"
+ ],
+ "icon": "⏱️",
+ "questions": [
+  {
+   "id": "st01",
+   "topic": "Setup and Hold",
+   "difficulty": 1,
+   "prompt": "Setup time is measured...",
+   "choices": [
+    "After the active clock edge",
+    "At the falling edge only",
+    "Only at reset",
+    "Before the active clock edge"
+   ],
+   "answer": 3,
+   "explanation": "Data must be stable for the setup time before the edge."
+  },
+  {
+   "id": "st02",
+   "topic": "Setup and Hold",
+   "difficulty": 1,
+   "prompt": "Hold time is measured...",
+   "choices": [
+    "Before the clock edge",
+    "After the active clock edge",
+    "Between two clocks",
+    "Only for latches"
+   ],
+   "answer": 1,
+   "explanation": "Data must remain stable for the hold time after the edge."
+  },
+  {
+   "id": "st03",
+   "topic": "Setup and Hold",
+   "difficulty": 2,
+   "prompt": "Does lowering the clock frequency fix a hold violation?",
+   "choices": [
+    "Yes",
+    "Only for 1 GHz",
+    "Only with pipelining",
+    "No"
+   ],
+   "answer": 3,
+   "explanation": "Hold is checked at the same edge and does not depend on the period."
+  },
+  {
+   "id": "st04",
+   "topic": "Setup and Hold",
+   "difficulty": 2,
+   "prompt": "What may happen if data changes within the setup/hold window?",
+   "choices": [
+    "Metastability or wrong capture",
+    "Faster operation",
+    "Lower power",
+    "Nothing"
+   ],
+   "answer": 0,
+   "explanation": "The flip-flop can capture a wrong value or become metastable."
+  },
+  {
+   "id": "st05",
+   "topic": "Slack and Critical Path",
+   "difficulty": 1,
+   "prompt": "Which equation gives the minimum period without skew?",
+   "choices": [
+    "T >= tlogic - tsu",
+    "T >= th + tcq",
+    "T >= tcq + tlogic + tsu",
+    "T >= tsu only"
+   ],
+   "answer": 2,
+   "explanation": "Launch delay, logic delay and setup must fit in one period."
+  },
+  {
+   "id": "st06",
+   "topic": "Slack and Critical Path",
+   "difficulty": 2,
+   "prompt": "tcq=0.5, tlogic=3.2, tsu=0.3 ns. What is fmax?",
+   "choices": [
+    "250 MHz",
+    "200 MHz",
+    "312.5 MHz",
+    "500 MHz"
+   ],
+   "answer": 0,
+   "explanation": "Tmin = 4.0 ns, so fmax = 1/4 ns = 250 MHz."
+  },
+  {
+   "id": "st07",
+   "topic": "Slack and Critical Path",
+   "difficulty": 2,
+   "prompt": "With the same path and T = 3.5 ns, the slack is...",
+   "choices": [
+    "+0.5 ns",
+    "-1.0 ns",
+    "-0.5 ns",
+    "0 ns"
+   ],
+   "answer": 2,
+   "explanation": "3.5 - 4.0 = -0.5 ns."
+  },
+  {
+   "id": "st08",
+   "topic": "Slack and Critical Path",
+   "difficulty": 2,
+   "prompt": "Which path determines fmax?",
+   "choices": [
+    "The shortest path",
+    "The average path",
+    "The clock path only",
+    "The critical path"
+   ],
+   "answer": 3,
+   "explanation": "The path with least slack limits the frequency."
+  },
+  {
+   "id": "st09",
+   "topic": "Slack and Critical Path",
+   "difficulty": 3,
+   "prompt": "What does negative slack mean?",
+   "choices": [
+    "The path has margin",
+    "The path misses its timing requirement",
+    "The clock is stopped",
+    "The path is hold-safe"
+   ],
+   "answer": 1,
+   "explanation": "Required time was not met."
+  },
+  {
+   "id": "st10",
+   "topic": "Clock Skew and Jitter",
+   "difficulty": 1,
+   "prompt": "Clock skew is...",
+   "choices": [
+    "Difference in clock arrival time between flip-flops",
+    "Variation of one edge cycle to cycle",
+    "The clock duty cycle",
+    "The clock period"
+   ],
+   "answer": 0,
+   "explanation": "Skew is spatial; jitter is temporal."
+  },
+  {
+   "id": "st11",
+   "topic": "Clock Skew and Jitter",
+   "difficulty": 2,
+   "prompt": "Positive skew (later capture clock) generally...",
+   "choices": [
+    "Hurts setup, helps hold",
+    "Helps both",
+    "Helps setup, hurts hold",
+    "Hurts both"
+   ],
+   "answer": 2,
+   "explanation": "The capture edge arrives later, giving data more time but making hold harder."
+  },
+  {
+   "id": "st12",
+   "topic": "Clock Skew and Jitter",
+   "difficulty": 3,
+   "prompt": "tcq=0.4, tmin=0.1, th=0.2, skew=0.4 ns. Hold slack is...",
+   "choices": [
+    "-0.1 ns",
+    "+0.1 ns",
+    "+0.3 ns",
+    "-0.3 ns"
+   ],
+   "answer": 0,
+   "explanation": "Arrival 0.5 minus required 0.6 = -0.1 ns."
+  },
+  {
+   "id": "st13",
+   "topic": "Clock Skew and Jitter",
+   "difficulty": 2,
+   "prompt": "What is jitter?",
+   "choices": [
+    "A fixed clock offset",
+    "The clock frequency",
+    "Cycle-to-cycle variation of the clock edge",
+    "A type of latch"
+   ],
+   "answer": 2,
+   "explanation": "Jitter is the timing variation of the clock edge."
+  },
+  {
+   "id": "st14",
+   "topic": "Fixing Timing Violations",
+   "difficulty": 1,
+   "prompt": "Which fix addresses a setup violation?",
+   "choices": [
+    "Adding delay to the short path",
+    "Pipelining the long path",
+    "Increasing hold time",
+    "Removing the clock"
+   ],
+   "answer": 1,
+   "explanation": "Splitting logic shortens the longest stage."
+  },
+  {
+   "id": "st15",
+   "topic": "Fixing Timing Violations",
+   "difficulty": 2,
+   "prompt": "How is a hold violation usually fixed?",
+   "choices": [
+    "Raise the clock frequency",
+    "Remove registers",
+    "Lower the supply voltage",
+    "Insert delay cells on the short path"
+   ],
+   "answer": 3,
+   "explanation": "Hold fixing slows down paths that are too fast."
+  },
+  {
+   "id": "st16",
+   "topic": "Fixing Timing Violations",
+   "difficulty": 2,
+   "prompt": "Splitting a 3.2 ns logic path into two 1.6 ns stages (tcq 0.5, tsu 0.3) gives Tmin of...",
+   "choices": [
+    "1.6 ns",
+    "2.4 ns",
+    "4.0 ns",
+    "2.0 ns"
+   ],
+   "answer": 1,
+   "explanation": "0.5 + 1.6 + 0.3 = 2.4 ns."
+  },
+  {
+   "id": "st17",
+   "topic": "Fixing Timing Violations",
+   "difficulty": 3,
+   "prompt": "What is the cost of pipelining?",
+   "choices": [
+    "Lower frequency",
+    "More hold margin automatically",
+    "No cost",
+    "Extra latency and registers"
+   ],
+   "answer": 3,
+   "explanation": "Each stage adds a cycle of latency and register area."
+  }
+ ],
+ "lessons": [
+  {
+   "id": "sta-setup-hold",
+   "topic": "Setup and Hold",
+   "title": "Setup and Hold Times",
+   "level": "Advanced",
+   "minutes": 8,
+   "keywords": [
+    "setup",
+    "hold",
+    "setup time",
+    "hold time",
+    "flip-flop",
+    "clock edge",
+    "timing",
+    "violation",
+    "metastability",
+    "data stable"
+   ],
+   "objectives": [
+    "Define setup and hold time",
+    "Explain what happens on a violation",
+    "Say which clock edge each refers to"
+   ],
+   "body": "A flip-flop samples its data input on the active clock edge. For that sample to be reliable the data must be stable for a short time before the edge, called the setup time, and for a short time after the edge, called the hold time.\n\nIf data changes inside this window, the flip-flop can capture a wrong value or enter a metastable state where its output is undefined for a while. Both numbers come from the cell library and depend on the device and conditions.\n\nSetup is checked against the next clock edge: the data launched by one flip-flop must arrive before the following edge minus the setup time. Hold is checked against the same edge: the new data must not arrive so early that it changes before the hold time has passed. Static timing analysis checks both for every path without needing simulation vectors.",
+   "definitions": [
+    {
+     "term": "Setup time",
+     "meaning": "How long data must be stable before the clock edge."
+    },
+    {
+     "term": "Hold time",
+     "meaning": "How long data must stay stable after the clock edge."
+    },
+    {
+     "term": "Metastability",
+     "meaning": "An unresolved flip-flop state after a timing violation."
+    },
+    {
+     "term": "Static timing analysis",
+     "meaning": "Checking all timing paths without simulating test vectors."
+    }
+   ],
+   "example": null,
+   "exampleNote": null,
+   "diagram": "  clk   ___|-----|___\n               ^ edge\n  data  ====XXXX====\n         <ts> | <th>\n  stable: ts before, th after",
+   "mistakes": [
+    "Thinking hold depends on the clock period: it does not, so slowing the clock does not fix hold violations.",
+    "Mixing up the edges: setup is for the next capture edge.",
+    "Ignoring metastability when crossing clock domains."
+   ],
+   "practice": [
+    {
+     "q": "Which time is measured before the edge?",
+     "a": "Setup time."
+    },
+    {
+     "q": "Does reducing the clock frequency fix a hold violation?",
+     "a": "No, hold does not depend on the clock period."
+    }
+   ],
+   "exercises": [
+    "Draw a timing sketch marking setup and hold around a rising edge.",
+    "Explain why STA does not need test vectors."
+   ],
+   "summary": [
+    "Setup is before the edge, hold is after.",
+    "Violations can cause wrong or metastable values.",
+    "STA checks every path automatically."
+   ]
+  },
+  {
+   "id": "sta-slack-critical-path",
+   "topic": "Slack and Critical Path",
+   "title": "Clock Period, Slack and the Critical Path",
+   "level": "Advanced",
+   "minutes": 9,
+   "keywords": [
+    "slack",
+    "critical path",
+    "clock period",
+    "fmax",
+    "tcq",
+    "logic delay",
+    "setup slack",
+    "negative slack",
+    "frequency",
+    "path delay"
+   ],
+   "objectives": [
+    "Compute the minimum clock period for a path",
+    "Calculate setup slack",
+    "Convert a period into a maximum frequency"
+   ],
+   "body": "Consider two flip-flops with logic between them. After the launch clock edge the data needs the clock-to-Q delay (tcq) to leave the first flip-flop, then the combinational logic delay, and it must arrive at least the setup time (tsu) before the next edge. So in the simplest case (no skew) the clock period must satisfy T >= tcq + tlogic + tsu.\n\nSlack is the margin: setup slack = T - (tcq + tlogic + tsu). Positive slack means the path meets timing. Negative slack is a violation. The path with the smallest slack is the critical path, and it limits the clock frequency of the whole design: fmax = 1 / Tmin.",
+   "definitions": [
+    {
+     "term": "tcq",
+     "meaning": "Delay from the clock edge to a valid output of the launching flip-flop."
+    },
+    {
+     "term": "Slack",
+     "meaning": "Timing margin: required time minus arrival time."
+    },
+    {
+     "term": "Critical path",
+     "meaning": "The path with the least slack."
+    },
+    {
+     "term": "fmax",
+     "meaning": "Maximum clock frequency, 1 divided by the minimum period."
+    }
+   ],
+   "example": "tcq = 0.5 ns, tlogic = 3.2 ns, tsu = 0.3 ns\nTmin = 0.5 + 3.2 + 0.3 = 4.0 ns\nfmax = 1 / 4.0 ns = 250 MHz\nT = 5.0 ns -> slack = 5.0 - 4.0 = +1.0 ns\nT = 3.5 ns -> slack = 3.5 - 4.0 = -0.5 ns (violation)",
+   "exampleNote": "The path needs 4.0 ns. A 5 ns clock leaves 1 ns of margin; a 3.5 ns clock is 0.5 ns too fast.",
+   "diagram": "  FF1 --tcq--> [ logic 3.2 ] --> FF2\n  |<-- 0.5 -->|<--- 3.2 --->|<-0.3->|\n  launch edge        next edge - tsu\n  total required = 4.0 ns",
+   "mistakes": [
+    "Forgetting clock-to-Q or setup time when adding up a path.",
+    "Reading a negative slack as good: negative means violation.",
+    "Computing fmax from the average path rather than the slowest."
+   ],
+   "practice": [
+    {
+     "q": "What is Tmin if tcq=0.4, tlogic=2.0 and tsu=0.2 ns?",
+     "a": "2.6 ns (0.4 + 2.0 + 0.2)."
+    },
+    {
+     "q": "Which path sets fmax?",
+     "a": "The critical path, the one with least slack."
+    }
+   ],
+   "exercises": [
+    "Compute the slack at a 3 ns clock for the example path.",
+    "Find fmax for a path of tcq 0.3, logic 1.5 and tsu 0.2 ns."
+   ],
+   "summary": [
+    "T >= tcq + tlogic + tsu.",
+    "Slack = T minus the path requirement.",
+    "The critical path limits fmax."
+   ]
+  },
+  {
+   "id": "sta-skew-jitter",
+   "topic": "Clock Skew and Jitter",
+   "title": "Clock Skew and Jitter",
+   "level": "Advanced",
+   "minutes": 8,
+   "keywords": [
+    "skew",
+    "jitter",
+    "clock tree",
+    "uncertainty",
+    "useful skew",
+    "hold violation",
+    "clock arrival",
+    "insertion delay",
+    "cts"
+   ],
+   "objectives": [
+    "Define skew and jitter",
+    "Adjust setup and hold checks for skew",
+    "Compute a hold slack"
+   ],
+   "body": "Clock skew is the difference in clock arrival time between two flip-flops. Jitter is the cycle-to-cycle variation of the clock edge. Tools add an uncertainty margin to cover both.\n\nSkew changes the checks. Let s be how much later the capture clock arrives than the launch clock. Setup becomes T >= tcq + tlogic + tsu - s, so positive skew helps setup. Hold becomes tcq + tlogic(min) >= th + s, so the same skew hurts hold.\n\nExample: tcq = 0.4 ns, minimum logic delay = 0.1 ns, th = 0.2 ns, s = 0.4 ns. Data arrives after 0.4 + 0.1 = 0.5 ns, but must wait until 0.2 + 0.4 = 0.6 ns, so hold slack is -0.1 ns: a violation. Designers balance the clock tree, and may use useful skew carefully.",
+   "definitions": [
+    {
+     "term": "Clock skew",
+     "meaning": "Difference in clock arrival times at two flip-flops."
+    },
+    {
+     "term": "Jitter",
+     "meaning": "Variation of the clock edge position from cycle to cycle."
+    },
+    {
+     "term": "Clock tree",
+     "meaning": "Buffered network that distributes the clock to all flip-flops."
+    },
+    {
+     "term": "Useful skew",
+     "meaning": "Deliberately delaying a clock to borrow time for a slow path."
+    }
+   ],
+   "example": "Hold check with skew s = 0.4 ns:\n  arrival   = tcq + tmin = 0.4 + 0.1 = 0.5 ns\n  required  = th + s     = 0.2 + 0.4 = 0.6 ns\n  hold slack = 0.5 - 0.6 = -0.1 ns (violation)",
+   "exampleNote": "The data changes 0.1 ns too early. Fix it by adding delay to the short path or by reducing skew.",
+   "diagram": "  launch  clk _|---|___\n  capture clk ___|---|__\n  (capture later by skew s)\n  new data must arrive AFTER\n  capture edge + hold time",
+   "mistakes": [
+    "Assuming skew always hurts: positive skew helps setup but hurts hold.",
+    "Ignoring clock uncertainty margins.",
+    "Confusing skew (spatial) with jitter (temporal)."
+   ],
+   "practice": [
+    {
+     "q": "Does positive skew help or hurt setup?",
+     "a": "It helps setup, giving the data more time."
+    },
+    {
+     "q": "What is jitter?",
+     "a": "Cycle-to-cycle variation in the clock edge timing."
+    }
+   ],
+   "exercises": [
+    "Recompute the hold slack if the skew drops to 0.2 ns.",
+    "Explain why a balanced clock tree is usually the goal."
+   ],
+   "summary": [
+    "Skew shifts setup and hold in opposite directions.",
+    "Jitter is cycle-to-cycle variation.",
+    "Hold: arrival >= th + skew."
+   ]
+  },
+  {
+   "id": "sta-fixing-violations",
+   "topic": "Fixing Timing Violations",
+   "title": "Fixing Setup and Hold Violations",
+   "level": "Advanced",
+   "minutes": 9,
+   "keywords": [
+    "fix",
+    "pipelining",
+    "retiming",
+    "buffer",
+    "upsizing",
+    "hold fixing",
+    "delay cell",
+    "optimization",
+    "violation",
+    "restructure",
+    "latency"
+   ],
+   "objectives": [
+    "Choose fixes for setup violations",
+    "Choose fixes for hold violations",
+    "Compute the effect of pipelining"
+   ],
+   "body": "Setup violations mean a path is too slow. Typical fixes are to restructure or simplify the logic, upsize or buffer cells on long wires, move registers across logic (retiming), or add a pipeline stage. As a last resort you can lower the clock frequency.\n\nExample: a path with tcq 0.5, logic 3.2 and tsu 0.3 ns needs 4.0 ns (250 MHz). Splitting the logic into two stages of 1.6 ns each gives 0.5 + 1.6 + 0.3 = 2.4 ns, about 416.7 MHz. The price is one extra cycle of latency and extra registers.\n\nHold violations mean a path is too fast. Slowing the clock does not help. The usual fix is to insert delay cells or buffers on the short path. Hold fixing is normally done late in the flow, after the clock tree is built.",
+   "definitions": [
+    {
+     "term": "Pipelining",
+     "meaning": "Splitting logic into stages separated by registers."
+    },
+    {
+     "term": "Retiming",
+     "meaning": "Moving registers across logic to balance stage delays."
+    },
+    {
+     "term": "Delay cell",
+     "meaning": "A buffer inserted to slow a path for hold fixing."
+    },
+    {
+     "term": "Latency",
+     "meaning": "Number of cycles between input and output."
+    }
+   ],
+   "example": "Before: Tmin = 0.5 + 3.2 + 0.3 = 4.0 ns -> 250 MHz\nAfter 2 stages of 1.6 ns:\n  Tmin = 0.5 + 1.6 + 0.3 = 2.4 ns -> 416.7 MHz\nThroughput up 1.67x, latency 1 extra cycle",
+   "exampleNote": "Pipelining shortens the longest stage, so the clock can be faster, at the cost of one more cycle of delay.",
+   "diagram": "  before: FF -[ 3.2 ns ]- FF\n  after:  FF -[1.6]- FF -[1.6]- FF\n  setup fix: shorten the path\n  hold fix : lengthen the path",
+   "mistakes": [
+    "Trying to fix hold by slowing the clock: it has no effect on hold.",
+    "Pipelining without adjusting dependent logic or latency.",
+    "Adding delay to a path that also has a setup problem."
+   ],
+   "practice": [
+    {
+     "q": "Name two ways to fix a setup violation.",
+     "a": "For example pipelining and restructuring or upsizing the logic."
+    },
+    {
+     "q": "How do you fix a hold violation?",
+     "a": "Add delay (buffers or delay cells) on the short path."
+    }
+   ],
+   "exercises": [
+    "Pipeline a path of 5.0 ns logic into two equal stages and compute the new Tmin with tcq 0.5 and tsu 0.3.",
+    "Explain why hold fixing waits until after clock-tree synthesis."
+   ],
+   "summary": [
+    "Setup: make paths faster or add a stage.",
+    "Hold: make short paths slower.",
+    "Pipelining trades latency for frequency."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,834 @@
+{
+ "id": "aiml",
+ "title": "AI and Machine Learning",
+ "description": "The core ideas of machine learning: supervised and unsupervised learning, linear and logistic regression, gradient descent, overfitting, neural networks and how to evaluate models.",
+ "level": "Intermediate",
+ "path": "AI and Machine Learning",
+ "pathOrder": 1,
+ "prerequisites": [
+  "python"
+ ],
+ "icon": "🤖",
+ "questions": [
+  {
+   "id": "ml01",
+   "topic": "Machine Learning Basics",
+   "difficulty": 1,
+   "prompt": "In supervised learning every training example has...",
+   "choices": [
+    "No input",
+    "A reward only",
+    "A cluster",
+    "A label"
+   ],
+   "answer": 3,
+   "explanation": "Labels are the correct outputs the model learns to predict."
+  },
+  {
+   "id": "ml02",
+   "topic": "Machine Learning Basics",
+   "difficulty": 1,
+   "prompt": "Predicting a house price is an example of...",
+   "choices": [
+    "Classification",
+    "Regression",
+    "Clustering",
+    "Reinforcement"
+   ],
+   "answer": 1,
+   "explanation": "The target is a number, so it is regression."
+  },
+  {
+   "id": "ml03",
+   "topic": "Machine Learning Basics",
+   "difficulty": 2,
+   "prompt": "Which task is unsupervised?",
+   "choices": [
+    "Predicting spam labels",
+    "Predicting prices",
+    "Digit recognition with labels",
+    "Clustering customers"
+   ],
+   "answer": 3,
+   "explanation": "Clustering uses no labels."
+  },
+  {
+   "id": "ml04",
+   "topic": "Machine Learning Basics",
+   "difficulty": 2,
+   "prompt": "Why keep a separate test set?",
+   "choices": [
+    "To measure performance honestly",
+    "To train faster",
+    "To get more labels",
+    "To reduce features"
+   ],
+   "answer": 0,
+   "explanation": "The model must be judged on data it never saw."
+  },
+  {
+   "id": "ml05",
+   "topic": "Machine Learning Basics",
+   "difficulty": 2,
+   "prompt": "What is a feature?",
+   "choices": [
+    "The correct answer",
+    "A loss",
+    "An input variable",
+    "A learning rate"
+   ],
+   "answer": 2,
+   "explanation": "Features are the inputs used to predict."
+  },
+  {
+   "id": "ml06",
+   "topic": "Linear Regression and Gradient Descent",
+   "difficulty": 1,
+   "prompt": "What does MSE stand for?",
+   "choices": [
+    "Mean squared error",
+    "Maximum sum estimate",
+    "Model standard error",
+    "Mean sigmoid error"
+   ],
+   "answer": 0,
+   "explanation": "It averages squared prediction errors."
+  },
+  {
+   "id": "ml07",
+   "topic": "Linear Regression and Gradient Descent",
+   "difficulty": 2,
+   "prompt": "In gradient descent we update parameters...",
+   "choices": [
+    "Along the gradient",
+    "Randomly",
+    "Against the gradient",
+    "Only at the end"
+   ],
+   "answer": 2,
+   "explanation": "Moving against the gradient lowers the loss."
+  },
+  {
+   "id": "ml08",
+   "topic": "Linear Regression and Gradient Descent",
+   "difficulty": 3,
+   "prompt": "Data (1,2),(2,4), w=0, lr=0.1 gives gradient -10. What is the new w?",
+   "choices": [
+    "-1.0",
+    "0.1",
+    "2.0",
+    "1.0"
+   ],
+   "answer": 3,
+   "explanation": "w_new = 0 - 0.1 x (-10) = 1.0."
+  },
+  {
+   "id": "ml09",
+   "topic": "Linear Regression and Gradient Descent",
+   "difficulty": 2,
+   "prompt": "A learning rate that is too large may cause...",
+   "choices": [
+    "Perfect fit",
+    "Divergence or oscillation",
+    "Fewer epochs always",
+    "Overfitting only"
+   ],
+   "answer": 1,
+   "explanation": "Steps overshoot the minimum."
+  },
+  {
+   "id": "ml10",
+   "topic": "Linear Regression and Gradient Descent",
+   "difficulty": 2,
+   "prompt": "What does an epoch mean?",
+   "choices": [
+    "One pass over the training data",
+    "One parameter",
+    "One neuron",
+    "One test sample"
+   ],
+   "answer": 0,
+   "explanation": "An epoch is a full pass over the training set."
+  },
+  {
+   "id": "ml11",
+   "topic": "Classification and Logistic Regression",
+   "difficulty": 1,
+   "prompt": "What is sigmoid(0)?",
+   "choices": [
+    "0",
+    "1",
+    "0.5",
+    "-1"
+   ],
+   "answer": 2,
+   "explanation": "1/(1+e^0) = 1/2."
+  },
+  {
+   "id": "ml12",
+   "topic": "Classification and Logistic Regression",
+   "difficulty": 2,
+   "prompt": "What does a threshold of 0.5 mean?",
+   "choices": [
+    "Predict positive if p >= 0.5",
+    "Predict negative always",
+    "Use half the data",
+    "Stop training at 50%"
+   ],
+   "answer": 0,
+   "explanation": "Probabilities at or above the threshold become the positive class."
+  },
+  {
+   "id": "ml13",
+   "topic": "Classification and Logistic Regression",
+   "difficulty": 2,
+   "prompt": "Logistic regression is mainly used for...",
+   "choices": [
+    "Clustering only",
+    "Image compression",
+    "Classification",
+    "Sorting"
+   ],
+   "answer": 2,
+   "explanation": "It outputs class probabilities."
+  },
+  {
+   "id": "ml14",
+   "topic": "Classification and Logistic Regression",
+   "difficulty": 3,
+   "prompt": "Which z gives the decision boundary?",
+   "choices": [
+    "z = 1",
+    "z = 0",
+    "z = -1",
+    "z = 0.5"
+   ],
+   "answer": 1,
+   "explanation": "sigmoid(z) = 0.5 exactly when z = 0."
+  },
+  {
+   "id": "ml15",
+   "topic": "Overfitting and Generalization",
+   "difficulty": 1,
+   "prompt": "Overfitting means...",
+   "choices": [
+    "High training error",
+    "No parameters",
+    "A perfect test score",
+    "Low training error but high error on new data"
+   ],
+   "answer": 3,
+   "explanation": "The model memorised noise."
+  },
+  {
+   "id": "ml16",
+   "topic": "Overfitting and Generalization",
+   "difficulty": 2,
+   "prompt": "Which is a way to reduce overfitting?",
+   "choices": [
+    "Removing the validation set",
+    "Regularization",
+    "Training on test data",
+    "Increasing the learning rate only"
+   ],
+   "answer": 1,
+   "explanation": "Penalising complexity helps generalization."
+  },
+  {
+   "id": "ml17",
+   "topic": "Overfitting and Generalization",
+   "difficulty": 2,
+   "prompt": "Train error 30% and validation error 31% suggests...",
+   "choices": [
+    "Overfitting",
+    "A perfect model",
+    "Data leakage",
+    "Underfitting"
+   ],
+   "answer": 3,
+   "explanation": "Both errors are high, so the model is too simple."
+  },
+  {
+   "id": "ml18",
+   "topic": "Overfitting and Generalization",
+   "difficulty": 3,
+   "prompt": "What should the test set be used for?",
+   "choices": [
+    "Tuning hyperparameters repeatedly",
+    "Training",
+    "A final unbiased estimate",
+    "Feature selection"
+   ],
+   "answer": 2,
+   "explanation": "Repeated tuning on it would make the estimate optimistic."
+  },
+  {
+   "id": "ml19",
+   "topic": "Neural Networks",
+   "difficulty": 1,
+   "prompt": "What does ReLU output for z = -3?",
+   "choices": [
+    "0",
+    "-3",
+    "3",
+    "1"
+   ],
+   "answer": 0,
+   "explanation": "ReLU is max(0, z)."
+  },
+  {
+   "id": "ml20",
+   "topic": "Neural Networks",
+   "difficulty": 2,
+   "prompt": "Why are activation functions needed?",
+   "choices": [
+    "To reduce the data",
+    "To label examples",
+    "To choose the optimizer",
+    "To add non-linearity"
+   ],
+   "answer": 3,
+   "explanation": "Without them stacked layers collapse into one linear function."
+  },
+  {
+   "id": "ml21",
+   "topic": "Neural Networks",
+   "difficulty": 2,
+   "prompt": "What does backpropagation compute?",
+   "choices": [
+    "The test accuracy",
+    "Gradients of the loss for each weight",
+    "The number of layers",
+    "The learning rate"
+   ],
+   "answer": 1,
+   "explanation": "It applies the chain rule from output to input."
+  },
+  {
+   "id": "ml22",
+   "topic": "Neural Networks",
+   "difficulty": 3,
+   "prompt": "x=[1,2], w=[0.5,-1], b=0.5. What is z?",
+   "choices": [
+    "0.5",
+    "1.0",
+    "-2.0",
+    "-1.0"
+   ],
+   "answer": 3,
+   "explanation": "0.5 - 2 + 0.5 = -1.0."
+  },
+  {
+   "id": "ml23",
+   "topic": "Neural Networks",
+   "difficulty": 2,
+   "prompt": "The forward pass...",
+   "choices": [
+    "Updates weights",
+    "Computes predictions from inputs",
+    "Splits the data",
+    "Computes the gradient"
+   ],
+   "answer": 1,
+   "explanation": "Data flows from inputs to outputs."
+  },
+  {
+   "id": "ml24",
+   "topic": "Model Evaluation",
+   "difficulty": 1,
+   "prompt": "Precision is...",
+   "choices": [
+    "TP / (TP + FN)",
+    "(TP + TN) / all",
+    "TP / (TP + FP)",
+    "FP / (FP + TN)"
+   ],
+   "answer": 2,
+   "explanation": "Of predicted positives, the fraction that are correct."
+  },
+  {
+   "id": "ml25",
+   "topic": "Model Evaluation",
+   "difficulty": 2,
+   "prompt": "Recall is...",
+   "choices": [
+    "TP / (TP + FN)",
+    "TP / (TP + FP)",
+    "TN / all",
+    "FP / all"
+   ],
+   "answer": 0,
+   "explanation": "Of actual positives, the fraction found."
+  },
+  {
+   "id": "ml26",
+   "topic": "Model Evaluation",
+   "difficulty": 3,
+   "prompt": "TP=40, FP=10, FN=20, TN=130. What is the accuracy?",
+   "choices": [
+    "0.80",
+    "0.667",
+    "0.85",
+    "0.727"
+   ],
+   "answer": 2,
+   "explanation": "(40+130)/200 = 0.85."
+  },
+  {
+   "id": "ml27",
+   "topic": "Model Evaluation",
+   "difficulty": 3,
+   "prompt": "With the same counts, what is the recall?",
+   "choices": [
+    "0.667",
+    "0.80",
+    "0.85",
+    "0.727"
+   ],
+   "answer": 0,
+   "explanation": "40/(40+20) = 0.667."
+  },
+  {
+   "id": "ml28",
+   "topic": "Model Evaluation",
+   "difficulty": 2,
+   "prompt": "Why can accuracy mislead?",
+   "choices": [
+    "Too many features",
+    "Imbalanced classes",
+    "Using sigmoid",
+    "Using epochs"
+   ],
+   "answer": 1,
+   "explanation": "Always predicting the common class scores high accuracy but finds nothing."
+  }
+ ],
+ "lessons": [
+  {
+   "id": "aiml-ml-basics",
+   "topic": "Machine Learning Basics",
+   "title": "What Machine Learning Is",
+   "level": "Beginner",
+   "minutes": 7,
+   "keywords": [
+    "machine learning",
+    "ml",
+    "supervised",
+    "unsupervised",
+    "training",
+    "features",
+    "labels",
+    "model",
+    "prediction",
+    "dataset",
+    "clustering",
+    "regression"
+   ],
+   "objectives": [
+    "Define machine learning in one sentence",
+    "Tell supervised from unsupervised learning",
+    "Name features, labels and a model"
+   ],
+   "body": "Machine learning builds programs that improve at a task by learning from data instead of following hand-written rules. You provide examples, an algorithm adjusts the parameters of a model, and the trained model makes predictions on new data.\n\nIn supervised learning every training example has a label, the correct answer, so the model learns a mapping from features (the inputs) to labels. If the label is a number, such as a house price, the task is regression; if it is a category, such as spam or not spam, it is classification.\n\nIn unsupervised learning there are no labels and the algorithm looks for structure, for example grouping similar customers with clustering. A third family, reinforcement learning, learns from rewards while interacting with an environment. Most beginner projects use supervised learning.",
+   "definitions": [
+    {
+     "term": "Feature",
+     "meaning": "An input variable used to make a prediction."
+    },
+    {
+     "term": "Label",
+     "meaning": "The correct output for a training example."
+    },
+    {
+     "term": "Model",
+     "meaning": "A function with adjustable parameters that maps features to predictions."
+    },
+    {
+     "term": "Training",
+     "meaning": "Adjusting model parameters to fit the data."
+    }
+   ],
+   "example": "# supervised data\nX = [[50], [80], [120]]   # area in m2 (feature)\ny = [150, 240, 360]       # price in thousands (label)\n# regression: learn price from area",
+   "exampleNote": "Each row of X has a matching label in y. A regression model learns the relation, here roughly price = 3 x area.",
+   "diagram": "  data + labels --> [ training ]\n                        |\n                      model\n                        |\n  new input ------> prediction",
+   "mistakes": [
+    "Using test data during training: keep it separate to measure honestly.",
+    "Thinking more data always fixes a bad model: quality and features matter.",
+    "Calling any program with if-statements machine learning."
+   ],
+   "practice": [
+    {
+     "q": "What is a label?",
+     "a": "The correct answer attached to a training example."
+    },
+    {
+     "q": "Is clustering supervised or unsupervised?",
+     "a": "Unsupervised, because it uses no labels."
+    }
+   ],
+   "exercises": [
+    "List three supervised and three unsupervised tasks.",
+    "Decide whether predicting tomorrow's temperature is regression or classification."
+   ],
+   "summary": [
+    "ML learns patterns from data.",
+    "Supervised uses labels; unsupervised does not.",
+    "Regression predicts numbers, classification predicts categories."
+   ]
+  },
+  {
+   "id": "aiml-linear-regression",
+   "topic": "Linear Regression and Gradient Descent",
+   "title": "Linear Regression and Gradient Descent",
+   "level": "Intermediate",
+   "minutes": 9,
+   "keywords": [
+    "linear regression",
+    "gradient descent",
+    "learning rate",
+    "mse",
+    "loss",
+    "cost function",
+    "weights",
+    "slope",
+    "intercept",
+    "optimization",
+    "epoch"
+   ],
+   "objectives": [
+    "Write the model y = w x + b",
+    "Compute mean squared error",
+    "Perform one gradient-descent update by hand"
+   ],
+   "body": "Linear regression fits a straight line y = w x + b to data. The weight w is the slope and b is the intercept. To measure how good a line is, we use a loss function; the usual choice is mean squared error (MSE), the average of (prediction minus target) squared.\n\nGradient descent finds good parameters by repeating small steps. The gradient tells us how the loss changes with each parameter, and we move the parameter in the opposite direction: w = w - lr x dLoss/dw. The learning rate lr sets the step size. Too large and the loss may bounce or diverge; too small and learning is slow.\n\nFor MSE with one feature and no bias, dLoss/dw = (2/n) x sum((w x - y) x).",
+   "definitions": [
+    {
+     "term": "MSE",
+     "meaning": "Mean of squared differences between predictions and targets."
+    },
+    {
+     "term": "Gradient",
+     "meaning": "Vector of partial derivatives showing how the loss changes with each parameter."
+    },
+    {
+     "term": "Learning rate",
+     "meaning": "Size of each gradient-descent step."
+    },
+    {
+     "term": "Epoch",
+     "meaning": "One full pass over the training data."
+    }
+   ],
+   "example": "Data: (x=1,y=2), (x=2,y=4); model y = w x; w = 0; lr = 0.1\ngradient = (2/2) * [(0*1-2)*1 + (0*2-4)*2] = -10\nw_new = 0 - 0.1 * (-10) = 1.0\n(the true best w is 2)",
+   "exampleNote": "The negative gradient says increasing w lowers the loss, so w moves from 0 up to 1.0. More steps would approach 2.",
+   "diagram": "  loss\n   |\\\n   | \\        o start\n   |  \\     o\n   |   \\  o\n   |    \\o  <- steps downhill\n   +------*--------- w",
+   "mistakes": [
+    "Using a huge learning rate: the loss may increase instead of decrease.",
+    "Forgetting to scale features: gradient descent can be slow.",
+    "Adding the gradient instead of subtracting it."
+   ],
+   "practice": [
+    {
+     "q": "Which way do we move parameters in gradient descent?",
+     "a": "Against the gradient, to reduce the loss."
+    },
+    {
+     "q": "What does a too-large learning rate cause?",
+     "a": "Overshooting, so the loss may oscillate or diverge."
+    }
+   ],
+   "exercises": [
+    "Do a second update step from w = 1.0 with the same data.",
+    "Explain why MSE squares the differences."
+   ],
+   "summary": [
+    "Linear regression fits y = w x + b.",
+    "MSE measures fit.",
+    "Gradient descent steps against the gradient scaled by the learning rate."
+   ]
+  },
+  {
+   "id": "aiml-classification",
+   "topic": "Classification and Logistic Regression",
+   "title": "Classification and Logistic Regression",
+   "level": "Intermediate",
+   "minutes": 8,
+   "keywords": [
+    "classification",
+    "logistic regression",
+    "sigmoid",
+    "probability",
+    "threshold",
+    "decision boundary",
+    "binary",
+    "cross entropy",
+    "class",
+    "logit"
+   ],
+   "objectives": [
+    "Explain how the sigmoid turns a score into a probability",
+    "Apply a decision threshold",
+    "Describe what a decision boundary is"
+   ],
+   "body": "Logistic regression is a classification method despite its name. It first computes a linear score z = w x + b, then passes it through the sigmoid function, sigmoid(z) = 1 / (1 + e^-z), which squeezes any number into the range 0 to 1. The result is read as the probability of the positive class.\n\nTo get a class label we apply a threshold, commonly 0.5. If the probability is at least the threshold we predict the positive class. A different threshold trades one kind of error for another.\n\nThe points where the model is exactly undecided (probability 0.5, which means z = 0) form the decision boundary. The loss usually used for training is cross-entropy, which punishes confident wrong predictions heavily.",
+   "definitions": [
+    {
+     "term": "Sigmoid",
+     "meaning": "Function 1/(1+e^-z) mapping any number to a value between 0 and 1."
+    },
+    {
+     "term": "Threshold",
+     "meaning": "Probability above which the positive class is predicted."
+    },
+    {
+     "term": "Decision boundary",
+     "meaning": "Where the model is undecided: probability 0.5."
+    },
+    {
+     "term": "Cross-entropy",
+     "meaning": "Loss that penalises confident wrong probabilities."
+    }
+   ],
+   "example": "z = 2.0 -> sigmoid(2) = 1/(1+e^-2) = 0.881 -> predict positive\nz = 0.0 -> sigmoid(0) = 0.5   -> on the boundary\nz = -1.0 -> sigmoid(-1) = 0.269 -> predict negative",
+   "exampleNote": "Large positive scores give probabilities near 1, large negative ones near 0, and z = 0 gives exactly 0.5.",
+   "diagram": "  p\n 1|            ______\n  |          /\n.5|---------*\n  |       /\n 0|_____/\n  +--------------- z",
+   "mistakes": [
+    "Treating the output as a guaranteed label: it is a probability until thresholded.",
+    "Always using 0.5 even when one error type costs more.",
+    "Using accuracy alone on very imbalanced data."
+   ],
+   "practice": [
+    {
+     "q": "What is sigmoid(0)?",
+     "a": "0.5."
+    },
+    {
+     "q": "What is the decision boundary of logistic regression?",
+     "a": "The set of inputs where z = 0, i.e. probability 0.5."
+    }
+   ],
+   "exercises": [
+    "Compute sigmoid(-2) using sigmoid(2) = 0.881.",
+    "Explain what raising the threshold to 0.8 does to predictions."
+   ],
+   "summary": [
+    "Sigmoid turns scores into probabilities.",
+    "A threshold turns probabilities into classes.",
+    "The boundary is where p = 0.5."
+   ]
+  },
+  {
+   "id": "aiml-overfitting",
+   "topic": "Overfitting and Generalization",
+   "title": "Overfitting, Bias and Variance",
+   "level": "Intermediate",
+   "minutes": 8,
+   "keywords": [
+    "overfitting",
+    "underfitting",
+    "bias",
+    "variance",
+    "generalization",
+    "validation",
+    "test set",
+    "train test split",
+    "regularization",
+    "cross validation"
+   ],
+   "objectives": [
+    "Recognise overfitting and underfitting",
+    "Use train, validation and test sets correctly",
+    "Name two ways to reduce overfitting"
+   ],
+   "body": "A model should perform well on data it has never seen. Overfitting happens when a model learns the training data too closely, including its noise, so training error is low but error on new data is high. Underfitting is the opposite: the model is too simple to capture the pattern, so error is high everywhere.\n\nBias is error from overly simple assumptions; variance is error from sensitivity to the particular training set. Simple models tend to have high bias and low variance, complex models the reverse, so there is a trade-off.\n\nTo measure generalization we split the data into a training set to fit the model, a validation set to choose settings, and a test set used once at the end. Overfitting can be reduced with more data, simpler models, regularization (penalising large weights), early stopping and cross-validation.",
+   "definitions": [
+    {
+     "term": "Overfitting",
+     "meaning": "Fitting noise in the training data, which hurts performance on new data."
+    },
+    {
+     "term": "Underfitting",
+     "meaning": "A model too simple to capture the pattern."
+    },
+    {
+     "term": "Validation set",
+     "meaning": "Held-out data used to tune model choices."
+    },
+    {
+     "term": "Regularization",
+     "meaning": "Adding a penalty to discourage overly complex models."
+    }
+   ],
+   "example": "train error 2%, validation error 25%  -> overfitting\ntrain error 30%, validation error 31% -> underfitting\ntrain error 5%,  validation error 6%  -> good fit",
+   "exampleNote": "A large gap between training and validation error signals overfitting. Both being high signals underfitting.",
+   "diagram": "  error\n   |\\          validation\n   | \\       _.-'\n   |  \\  _.-'\n   |   \\/\n   |    ----- training\n   +---------------- complexity",
+   "mistakes": [
+    "Tuning on the test set: it then stops being an honest estimate.",
+    "Judging a model only by training accuracy.",
+    "Adding complexity when the real issue is too little data."
+   ],
+   "practice": [
+    {
+     "q": "Which gap indicates overfitting?",
+     "a": "Low training error but much higher validation error."
+    },
+    {
+     "q": "What is the test set for?",
+     "a": "A final, one-time estimate of performance on unseen data."
+    }
+   ],
+   "exercises": [
+    "Sketch the learning curve for an overfit model.",
+    "Name two ways to reduce overfitting."
+   ],
+   "summary": [
+    "Overfit = great on training, poor on new data.",
+    "Use train, validation and test sets.",
+    "Regularization, more data and simpler models help."
+   ]
+  },
+  {
+   "id": "aiml-neural-networks",
+   "topic": "Neural Networks",
+   "title": "Neural Networks and Backpropagation",
+   "level": "Intermediate",
+   "minutes": 10,
+   "keywords": [
+    "neural network",
+    "neuron",
+    "activation",
+    "relu",
+    "sigmoid",
+    "layer",
+    "backpropagation",
+    "weights",
+    "bias",
+    "deep learning",
+    "forward pass",
+    "chain rule"
+   ],
+   "objectives": [
+    "Compute the output of one neuron",
+    "Explain what an activation function does",
+    "Describe backpropagation in plain words"
+   ],
+   "body": "A neuron computes a weighted sum of its inputs plus a bias, z = w1 x1 + w2 x2 + ... + b, and then applies an activation function. Without activations, a stack of layers would collapse into a single linear function. Common activations are ReLU, which outputs max(0, z), and the sigmoid.\n\nA neural network arranges neurons in layers: an input layer, one or more hidden layers and an output layer. The forward pass pushes data through the layers to produce a prediction, and a loss compares it with the label.\n\nBackpropagation computes how the loss changes with every weight by applying the chain rule from the output back to the input. Gradient descent then updates the weights. Networks with many hidden layers are called deep. The details of training large models are beyond this lesson.",
+   "definitions": [
+    {
+     "term": "Neuron",
+     "meaning": "Computes a weighted sum plus bias and applies an activation."
+    },
+    {
+     "term": "Activation function",
+     "meaning": "A non-linear function applied to a neuron's sum."
+    },
+    {
+     "term": "Forward pass",
+     "meaning": "Computing the network output from the inputs."
+    },
+    {
+     "term": "Backpropagation",
+     "meaning": "Computing gradients layer by layer with the chain rule."
+    }
+   ],
+   "example": "inputs x = [1, 2], weights w = [0.5, -1], bias b = 0.5\nz = 0.5*1 + (-1)*2 + 0.5 = -1.0\nReLU(z) = max(0, -1.0) = 0\nsigmoid(z) = 1/(1+e^1) = 0.269",
+   "exampleNote": "The same sum gives different outputs depending on the activation: ReLU outputs 0 while sigmoid outputs about 0.27.",
+   "diagram": "  x1 --w1--\\\n            (sum + b) -> f -> out\n  x2 --w2--/\n  hidden layers repeat this\n  forward ----->   loss\n  <----- gradients (backprop)",
+   "mistakes": [
+    "Leaving out activation functions: layers then collapse into one linear map.",
+    "Initialising all weights to the same value so neurons learn the same thing.",
+    "Thinking backprop is a separate learning method: it computes gradients for gradient descent."
+   ],
+   "practice": [
+    {
+     "q": "What does ReLU output for z = -3?",
+     "a": "0."
+    },
+    {
+     "q": "What does backpropagation compute?",
+     "a": "The gradient of the loss with respect to each weight."
+    }
+   ],
+   "exercises": [
+    "Compute the neuron output with weights [1, 1], bias -1 and inputs [0.5, 0.5] using ReLU.",
+    "Explain why an activation function is needed."
+   ],
+   "summary": [
+    "Neuron = weighted sum + bias, then activation.",
+    "Forward pass predicts; backprop supplies gradients.",
+    "Non-linear activations make deep networks powerful."
+   ]
+  },
+  {
+   "id": "aiml-evaluation",
+   "topic": "Model Evaluation",
+   "title": "Evaluating Models: Precision, Recall, F1",
+   "level": "Intermediate",
+   "minutes": 9,
+   "keywords": [
+    "accuracy",
+    "precision",
+    "recall",
+    "f1",
+    "confusion matrix",
+    "true positive",
+    "false positive",
+    "false negative",
+    "imbalanced",
+    "metric",
+    "roc"
+   ],
+   "objectives": [
+    "Read a confusion matrix",
+    "Compute accuracy, precision, recall and F1",
+    "Choose a metric for imbalanced data"
+   ],
+   "body": "A confusion matrix counts predictions in four boxes: true positives (TP), false positives (FP), false negatives (FN) and true negatives (TN).\n\nAccuracy = (TP + TN) / all. Precision = TP / (TP + FP) answers: of the items predicted positive, how many were right? Recall = TP / (TP + FN) answers: of the real positives, how many did we find? F1 is the harmonic mean of precision and recall, 2PR / (P + R), and is high only when both are high.\n\nAccuracy can mislead when classes are imbalanced. A model that always says not fraud is 99 percent accurate if only 1 percent of cases are fraud, yet it finds none. In such cases look at precision, recall or F1.",
+   "definitions": [
+    {
+     "term": "Precision",
+     "meaning": "TP / (TP + FP): how many predicted positives were correct."
+    },
+    {
+     "term": "Recall",
+     "meaning": "TP / (TP + FN): how many actual positives were found."
+    },
+    {
+     "term": "F1 score",
+     "meaning": "Harmonic mean of precision and recall."
+    },
+    {
+     "term": "Imbalanced data",
+     "meaning": "Data where one class is much rarer than another."
+    }
+   ],
+   "example": "TP = 40, FP = 10, FN = 20, TN = 130 (total 200)\naccuracy  = (40+130)/200 = 0.85\nprecision = 40/(40+10)   = 0.80\nrecall    = 40/(40+20)   = 0.667\nF1 = 2*0.80*0.667/(0.80+0.667) = 0.727",
+   "exampleNote": "The model is right 85 percent of the time, but it finds only two thirds of the real positives.",
+   "diagram": "              predicted\n             pos     neg\n actual pos   TP      FN\n actual neg   FP      TN",
+   "mistakes": [
+    "Quoting accuracy alone on imbalanced data.",
+    "Mixing up precision and recall: precision looks at predictions, recall looks at real positives.",
+    "Forgetting that raising the threshold usually raises precision and lowers recall."
+   ],
+   "practice": [
+    {
+     "q": "Compute precision for TP=30, FP=10.",
+     "a": "30/(30+10) = 0.75."
+    },
+    {
+     "q": "When is accuracy misleading?",
+     "a": "When classes are imbalanced."
+    }
+   ],
+   "exercises": [
+    "Compute recall and F1 for TP=30, FP=10, FN=30.",
+    "Explain which metric matters most for a cancer screening test."
+   ],
+   "summary": [
+    "Confusion matrix: TP, FP, FN, TN.",
+    "Precision, recall and F1 describe positives.",
+    "Accuracy fails on imbalanced data."
+   ]
+  }
+ ]
+}

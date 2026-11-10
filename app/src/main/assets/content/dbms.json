@@ -1,0 +1,667 @@
+{
+ "id": "dbms",
+ "title": "DBMS and SQL",
+ "description": "Relational databases: keys, ER modelling, SQL queries, joins, aggregation, normalisation, transactions and indexing.",
+ "level": "Intermediate",
+ "path": "Programming Foundations",
+ "pathOrder": 4,
+ "prerequisites": [],
+ "icon": "🗄️",
+ "questions": [
+  {
+   "id": "s01",
+   "topic": "DBMS Basics",
+   "difficulty": 1,
+   "prompt": "What does DBMS stand for?",
+   "choices": [
+    "Data Backup Management System",
+    "Database Management System",
+    "Digital Base Machine Software",
+    "Data Binding Model System"
+   ],
+   "answer": 1,
+   "explanation": "A DBMS is software that stores, manages and retrieves data."
+  },
+  {
+   "id": "s02",
+   "topic": "DBMS Basics",
+   "difficulty": 1,
+   "prompt": "Which language is used to query relational databases?",
+   "choices": [
+    "HTML",
+    "SQL",
+    "CSS",
+    "XML"
+   ],
+   "answer": 1,
+   "explanation": "SQL (Structured Query Language) is the standard relational query language."
+  },
+  {
+   "id": "s03",
+   "topic": "DBMS Basics",
+   "difficulty": 2,
+   "prompt": "Which SQL command category does CREATE TABLE belong to?",
+   "choices": [
+    "DML",
+    "DDL",
+    "DCL",
+    "TCL"
+   ],
+   "answer": 1,
+   "explanation": "CREATE, ALTER and DROP are Data Definition Language commands."
+  },
+  {
+   "id": "s04",
+   "topic": "Keys and ER Model",
+   "difficulty": 1,
+   "prompt": "Which constraint uniquely identifies each row and cannot be NULL?",
+   "choices": [
+    "Primary key",
+    "Foreign key",
+    "Check",
+    "Default"
+   ],
+   "answer": 0,
+   "explanation": "A primary key is unique and not null for every row."
+  },
+  {
+   "id": "s05",
+   "topic": "Keys and ER Model",
+   "difficulty": 2,
+   "prompt": "What does a foreign key do?",
+   "choices": [
+    "References a key in another table",
+    "Encrypts a column",
+    "Sorts the table",
+    "Deletes duplicate rows"
+   ],
+   "answer": 0,
+   "explanation": "A foreign key links rows to a primary or candidate key in another table, enforcing referential integrity."
+  },
+  {
+   "id": "s06",
+   "topic": "Keys and ER Model",
+   "difficulty": 2,
+   "prompt": "In an ER diagram, entities are conventionally drawn as what shape?",
+   "choices": [
+    "Rectangles",
+    "Ovals",
+    "Diamonds",
+    "Triangles"
+   ],
+   "answer": 0,
+   "explanation": "Entities are rectangles, attributes ovals and relationships diamonds."
+  },
+  {
+   "id": "s07",
+   "topic": "Keys and ER Model",
+   "difficulty": 2,
+   "prompt": "Students enrol in many courses and each course has many students. What kind of relationship is this?",
+   "choices": [
+    "One-to-one",
+    "One-to-many",
+    "Many-to-many",
+    "Recursive only"
+   ],
+   "answer": 2,
+   "explanation": "Both sides can relate to many rows on the other side, which is many-to-many and needs a junction table."
+  },
+  {
+   "id": "s08",
+   "topic": "SQL Queries",
+   "difficulty": 1,
+   "prompt": "Which clause filters rows before grouping?",
+   "choices": [
+    "HAVING",
+    "WHERE",
+    "ORDER BY",
+    "GROUP BY"
+   ],
+   "answer": 1,
+   "explanation": "WHERE filters individual rows; HAVING filters groups afterwards."
+  },
+  {
+   "id": "s09",
+   "topic": "SQL Queries",
+   "difficulty": 1,
+   "prompt": "Which statement retrieves data from a table?",
+   "choices": [
+    "GET",
+    "SELECT",
+    "FETCHROW",
+    "PULL"
+   ],
+   "answer": 1,
+   "explanation": "SELECT reads rows from one or more tables."
+  },
+  {
+   "id": "s10",
+   "topic": "SQL Queries",
+   "difficulty": 2,
+   "prompt": "Which keyword removes duplicate rows from a result?",
+   "choices": [
+    "UNIQUE",
+    "DISTINCT",
+    "DIFFERENT",
+    "REMOVE"
+   ],
+   "answer": 1,
+   "explanation": "SELECT DISTINCT returns each distinct combination once."
+  },
+  {
+   "id": "s11",
+   "topic": "SQL Queries",
+   "difficulty": 1,
+   "prompt": "Which clause sorts query results?",
+   "choices": [
+    "SORT BY",
+    "ORDER BY",
+    "ARRANGE",
+    "GROUP BY"
+   ],
+   "answer": 1,
+   "explanation": "ORDER BY sorts ascending by default; add DESC for descending."
+  },
+  {
+   "id": "s12",
+   "topic": "SQL Queries",
+   "difficulty": 2,
+   "prompt": "What does WHERE name LIKE 'A%' match?",
+   "choices": [
+    "Names ending with A",
+    "Names starting with A",
+    "Names exactly equal to A",
+    "Names containing only A"
+   ],
+   "answer": 1,
+   "explanation": "% matches any sequence of characters, so 'A%' means starts with A."
+  },
+  {
+   "id": "s13",
+   "topic": "Joins",
+   "difficulty": 2,
+   "prompt": "Which join returns only rows with matching values in both tables?",
+   "choices": [
+    "LEFT JOIN",
+    "INNER JOIN",
+    "FULL OUTER JOIN",
+    "CROSS JOIN"
+   ],
+   "answer": 1,
+   "explanation": "INNER JOIN keeps only rows where the join condition matches."
+  },
+  {
+   "id": "s14",
+   "topic": "Joins",
+   "difficulty": 2,
+   "prompt": "What does a LEFT JOIN return?",
+   "choices": [
+    "Only matching rows",
+    "All rows of the left table plus matches from the right",
+    "All rows of the right table",
+    "The Cartesian product"
+   ],
+   "answer": 1,
+   "explanation": "Unmatched left rows are kept, with NULLs for the right table's columns."
+  },
+  {
+   "id": "s15",
+   "topic": "Joins",
+   "difficulty": 2,
+   "prompt": "A CROSS JOIN of tables with 3 and 4 rows returns how many rows?",
+   "choices": [
+    "7",
+    "12",
+    "4",
+    "3"
+   ],
+   "answer": 1,
+   "explanation": "A Cartesian product pairs every row with every row: 3 x 4 = 12."
+  },
+  {
+   "id": "s16",
+   "topic": "Joins",
+   "difficulty": 3,
+   "prompt": "Which join returns all rows from both tables, filling NULLs where there is no match?",
+   "choices": [
+    "INNER JOIN",
+    "LEFT JOIN",
+    "FULL OUTER JOIN",
+    "CROSS JOIN"
+   ],
+   "answer": 2,
+   "explanation": "FULL OUTER JOIN keeps unmatched rows from both sides."
+  },
+  {
+   "id": "s17",
+   "topic": "Aggregation",
+   "difficulty": 1,
+   "prompt": "Which aggregate function counts rows?",
+   "choices": [
+    "SUM()",
+    "COUNT()",
+    "TOTAL()",
+    "ROWS()"
+   ],
+   "answer": 1,
+   "explanation": "COUNT(*) counts rows; COUNT(col) counts non-NULL values."
+  },
+  {
+   "id": "s18",
+   "topic": "Aggregation",
+   "difficulty": 2,
+   "prompt": "Which clause filters groups after GROUP BY?",
+   "choices": [
+    "WHERE",
+    "HAVING",
+    "FILTER",
+    "LIMIT"
+   ],
+   "answer": 1,
+   "explanation": "HAVING applies conditions to aggregated groups."
+  },
+  {
+   "id": "s19",
+   "topic": "Aggregation",
+   "difficulty": 2,
+   "prompt": "What does AVG(salary) ignore?",
+   "choices": [
+    "Zero values",
+    "NULL values",
+    "Negative values",
+    "Duplicate values"
+   ],
+   "answer": 1,
+   "explanation": "Aggregate functions other than COUNT(*) skip NULLs."
+  },
+  {
+   "id": "s20",
+   "topic": "Normalization",
+   "difficulty": 2,
+   "prompt": "A table is in first normal form (1NF) when:",
+   "choices": [
+    "Every column holds atomic values with no repeating groups",
+    "It has no partial dependencies",
+    "It has no transitive dependencies",
+    "Every determinant is a candidate key"
+   ],
+   "answer": 0,
+   "explanation": "1NF requires atomic values and no repeating groups."
+  },
+  {
+   "id": "s21",
+   "topic": "Normalization",
+   "difficulty": 2,
+   "prompt": "Second normal form (2NF) removes:",
+   "choices": [
+    "Partial dependencies on part of a composite key",
+    "Transitive dependencies",
+    "Multi-valued attributes only",
+    "Primary keys"
+   ],
+   "answer": 0,
+   "explanation": "2NF removes attributes that depend on only part of a composite key."
+  },
+  {
+   "id": "s22",
+   "topic": "Normalization",
+   "difficulty": 3,
+   "prompt": "Third normal form (3NF) removes:",
+   "choices": [
+    "Transitive dependencies of non-key attributes on the key",
+    "Partial dependencies",
+    "Repeating groups",
+    "Foreign keys"
+   ],
+   "answer": 0,
+   "explanation": "In 3NF non-key attributes depend only on the key, not on other non-key attributes."
+  },
+  {
+   "id": "s23",
+   "topic": "Normalization",
+   "difficulty": 2,
+   "prompt": "What is the main purpose of normalisation?",
+   "choices": [
+    "Reduce redundancy and update anomalies",
+    "Increase redundancy",
+    "Speed up every query",
+    "Remove primary keys"
+   ],
+   "answer": 0,
+   "explanation": "Normalisation organises data to avoid duplication and anomalies."
+  },
+  {
+   "id": "s24",
+   "topic": "Transactions",
+   "difficulty": 1,
+   "prompt": "What does the A in ACID stand for?",
+   "choices": [
+    "Availability",
+    "Atomicity",
+    "Accuracy",
+    "Authority"
+   ],
+   "answer": 1,
+   "explanation": "Atomicity means a transaction happens entirely or not at all."
+  },
+  {
+   "id": "s25",
+   "topic": "Transactions",
+   "difficulty": 2,
+   "prompt": "Which command makes a transaction's changes permanent?",
+   "choices": [
+    "SAVE",
+    "COMMIT",
+    "ROLLBACK",
+    "END"
+   ],
+   "answer": 1,
+   "explanation": "COMMIT makes the transaction's changes durable."
+  },
+  {
+   "id": "s26",
+   "topic": "Transactions",
+   "difficulty": 2,
+   "prompt": "What does ROLLBACK do?",
+   "choices": [
+    "Undoes the transaction's uncommitted changes",
+    "Commits the changes",
+    "Deletes the table",
+    "Locks the database"
+   ],
+   "answer": 0,
+   "explanation": "ROLLBACK discards uncommitted changes and restores the previous state."
+  },
+  {
+   "id": "s27",
+   "topic": "Transactions",
+   "difficulty": 3,
+   "prompt": "Which ACID property guarantees committed data survives a crash?",
+   "choices": [
+    "Atomicity",
+    "Consistency",
+    "Isolation",
+    "Durability"
+   ],
+   "answer": 3,
+   "explanation": "Durability means committed changes persist even after failures."
+  },
+  {
+   "id": "s28",
+   "topic": "Indexing",
+   "difficulty": 2,
+   "prompt": "What is the main benefit of an index?",
+   "choices": [
+    "Faster lookups and reads",
+    "Less storage use",
+    "Faster writes always",
+    "Automatic duplicate removal"
+   ],
+   "answer": 0,
+   "explanation": "Indexes let the database find rows without scanning the whole table."
+  },
+  {
+   "id": "s29",
+   "topic": "Indexing",
+   "difficulty": 2,
+   "prompt": "What is a downside of having too many indexes?",
+   "choices": [
+    "Slower INSERT and UPDATE and more storage",
+    "Queries stop working",
+    "Data is lost",
+    "Keys break"
+   ],
+   "answer": 0,
+   "explanation": "Every write must also update each index, and indexes take space."
+  },
+  {
+   "id": "s30",
+   "topic": "Indexing",
+   "difficulty": 3,
+   "prompt": "Which data structure do most relational database indexes use?",
+   "choices": [
+    "B-tree (or B+ tree)",
+    "Stack",
+    "Queue",
+    "Linked list"
+   ],
+   "answer": 0,
+   "explanation": "B-trees keep keys sorted and shallow, giving logarithmic lookups with few disk reads."
+  }
+ ],
+ "lessons": [
+  {
+   "id": "s-dbms",
+   "topic": "DBMS Basics",
+   "title": "What is a DBMS?",
+   "keywords": [
+    "dbms",
+    "database",
+    "database management system",
+    "rdbms",
+    "relational",
+    "table",
+    "row",
+    "column",
+    "schema",
+    "data"
+   ],
+   "body": "A database management system stores, organises and retrieves data. In a relational database, data lives in tables made of rows (records) and columns (attributes), described by a schema. SQL is the language used to define and query data.",
+   "example": null
+  },
+  {
+   "id": "s-sqlcats",
+   "topic": "DBMS Basics",
+   "title": "SQL command categories",
+   "keywords": [
+    "ddl",
+    "dml",
+    "dcl",
+    "tcl",
+    "create",
+    "alter",
+    "drop",
+    "insert",
+    "update",
+    "delete",
+    "grant",
+    "commit",
+    "command",
+    "category"
+   ],
+   "body": "DDL defines structure (CREATE, ALTER, DROP). DML manipulates data (INSERT, UPDATE, DELETE, SELECT). DCL controls access (GRANT, REVOKE). TCL manages transactions (COMMIT, ROLLBACK, SAVEPOINT).",
+   "example": "CREATE TABLE student (id INT PRIMARY KEY, name TEXT);\nINSERT INTO student VALUES (1, 'Asha');"
+  },
+  {
+   "id": "s-keys",
+   "topic": "Keys and ER Model",
+   "title": "Keys and constraints",
+   "keywords": [
+    "key",
+    "primary key",
+    "foreign key",
+    "candidate key",
+    "unique",
+    "not null",
+    "constraint",
+    "referential integrity",
+    "composite key",
+    "pk",
+    "fk"
+   ],
+   "body": "A primary key uniquely identifies each row and cannot be NULL. A candidate key is any column set that could serve as the primary key. A foreign key references a key in another table and enforces referential integrity. Other constraints include UNIQUE, NOT NULL, CHECK and DEFAULT.",
+   "example": "CREATE TABLE enrol (\n  sid INT REFERENCES student(id),\n  cid INT,\n  PRIMARY KEY (sid, cid)\n);"
+  },
+  {
+   "id": "s-er",
+   "topic": "Keys and ER Model",
+   "title": "ER modelling and relationships",
+   "keywords": [
+    "er",
+    "entity",
+    "relationship",
+    "attribute",
+    "cardinality",
+    "one to many",
+    "many to many",
+    "one to one",
+    "diagram",
+    "junction table"
+   ],
+   "body": "An ER diagram shows entities (rectangles), attributes (ovals) and relationships (diamonds). Cardinality can be one-to-one, one-to-many or many-to-many. A many-to-many relationship is implemented with a junction table holding both foreign keys.",
+   "example": null
+  },
+  {
+   "id": "s-select",
+   "topic": "SQL Queries",
+   "title": "SELECT, WHERE and ORDER BY",
+   "keywords": [
+    "select",
+    "where",
+    "order by",
+    "distinct",
+    "like",
+    "limit",
+    "query",
+    "filter",
+    "sort",
+    "in",
+    "between",
+    "wildcard"
+   ],
+   "body": "SELECT chooses columns, FROM names the table, WHERE filters rows, ORDER BY sorts (ASC by default) and DISTINCT removes duplicate rows. LIKE matches patterns where % is any sequence and _ is one character. LIMIT restricts the number of rows.",
+   "example": "SELECT DISTINCT city\nFROM student\nWHERE name LIKE 'A%'\nORDER BY city;"
+  },
+  {
+   "id": "s-modify",
+   "topic": "SQL Queries",
+   "title": "INSERT, UPDATE and DELETE",
+   "keywords": [
+    "insert",
+    "update",
+    "delete",
+    "modify",
+    "change data",
+    "set",
+    "truncate",
+    "remove rows"
+   ],
+   "body": "INSERT adds rows, UPDATE changes existing rows and DELETE removes rows. Always include a WHERE clause with UPDATE and DELETE, otherwise every row is affected.",
+   "example": "UPDATE student SET city = 'Bengaluru' WHERE id = 1;\nDELETE FROM student WHERE id = 2;"
+  },
+  {
+   "id": "s-joins",
+   "topic": "Joins",
+   "title": "SQL joins",
+   "keywords": [
+    "join",
+    "inner join",
+    "left join",
+    "right join",
+    "full outer join",
+    "cross join",
+    "cartesian",
+    "on",
+    "combine tables",
+    "merge tables"
+   ],
+   "body": "INNER JOIN keeps only matching rows. LEFT JOIN keeps all rows from the left table, with NULLs where the right has no match. RIGHT JOIN is the mirror image and FULL OUTER JOIN keeps unmatched rows from both. CROSS JOIN produces every combination, so m and n rows give m x n.",
+   "example": "SELECT s.name, c.title\nFROM student s\nINNER JOIN enrol e ON e.sid = s.id\nINNER JOIN course c ON c.id = e.cid;"
+  },
+  {
+   "id": "s-agg",
+   "topic": "Aggregation",
+   "title": "Aggregate functions, GROUP BY and HAVING",
+   "keywords": [
+    "aggregate",
+    "count",
+    "sum",
+    "avg",
+    "min",
+    "max",
+    "group by",
+    "having",
+    "group",
+    "average",
+    "total"
+   ],
+   "body": "COUNT, SUM, AVG, MIN and MAX summarise rows. GROUP BY forms groups, and HAVING filters groups after aggregation while WHERE filters rows before it. Aggregates ignore NULLs, except COUNT(*) which counts rows.",
+   "example": "SELECT dept, AVG(salary)\nFROM emp\nGROUP BY dept\nHAVING AVG(salary) > 50000;"
+  },
+  {
+   "id": "s-subquery",
+   "topic": "SQL Queries",
+   "title": "Subqueries",
+   "keywords": [
+    "subquery",
+    "nested query",
+    "in",
+    "exists",
+    "inner query",
+    "correlated"
+   ],
+   "body": "A subquery is a query nested inside another. It can supply a value, a list for IN, or an existence test with EXISTS. A correlated subquery refers to columns of the outer query and runs per outer row.",
+   "example": "SELECT name FROM student\nWHERE id IN (SELECT sid FROM enrol);"
+  },
+  {
+   "id": "s-norm",
+   "topic": "Normalization",
+   "title": "Normalisation: 1NF, 2NF, 3NF",
+   "keywords": [
+    "normalization",
+    "normalisation",
+    "1nf",
+    "2nf",
+    "3nf",
+    "bcnf",
+    "redundancy",
+    "anomaly",
+    "partial dependency",
+    "transitive dependency",
+    "functional dependency",
+    "normal form"
+   ],
+   "body": "Normalisation reduces redundancy and update anomalies. 1NF: atomic values and no repeating groups. 2NF: 1NF plus no partial dependency on part of a composite key. 3NF: 2NF plus no transitive dependency of non-key attributes on the key. BCNF requires every determinant to be a candidate key.",
+   "example": null
+  },
+  {
+   "id": "s-acid",
+   "topic": "Transactions",
+   "title": "Transactions and ACID",
+   "keywords": [
+    "transaction",
+    "acid",
+    "atomicity",
+    "consistency",
+    "isolation",
+    "durability",
+    "commit",
+    "rollback",
+    "savepoint",
+    "concurrency"
+   ],
+   "body": "A transaction is a unit of work. ACID: Atomicity (all or nothing), Consistency (valid state to valid state), Isolation (concurrent transactions do not interfere) and Durability (committed data survives crashes). COMMIT saves changes and ROLLBACK undoes uncommitted ones.",
+   "example": "BEGIN;\nUPDATE acct SET bal = bal - 100 WHERE id = 1;\nUPDATE acct SET bal = bal + 100 WHERE id = 2;\nCOMMIT;"
+  },
+  {
+   "id": "s-index",
+   "topic": "Indexing",
+   "title": "Indexes",
+   "keywords": [
+    "index",
+    "indexing",
+    "b tree",
+    "b+ tree",
+    "btree",
+    "clustered",
+    "non clustered",
+    "lookup",
+    "performance",
+    "scan",
+    "speed up"
+   ],
+   "body": "An index is an auxiliary structure, usually a B-tree or B+ tree, that lets the database find rows without scanning the whole table, speeding up reads. Each index slows INSERT, UPDATE and DELETE and uses storage, so index the columns you filter, join and sort on, not everything.",
+   "example": "CREATE INDEX idx_student_name ON student(name);"
+  }
+ ]
+}

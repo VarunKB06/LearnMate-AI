@@ -1,0 +1,1040 @@
+{
+  "id": "digital",
+  "title": "Digital Logic Design",
+  "description": "The building blocks of digital hardware: number systems, Boolean algebra and gates, combinational circuits, flip-flops, registers, counters and finite state machines.",
+  "level": "Beginner",
+  "path": "Digital Design and VLSI",
+  "pathOrder": 1,
+  "prerequisites": [],
+  "icon": "🔢",
+  "questions": [
+    {
+      "id": "dl01",
+      "topic": "Number Systems",
+      "difficulty": 1,
+      "prompt": "What is the decimal number 13 in binary?",
+      "choices": [
+        "1011",
+        "1110",
+        "1101",
+        "1001"
+      ],
+      "answer": 2,
+      "explanation": "13 = 8 + 4 + 1, which sets the 8, 4 and 1 positions: 1101."
+    },
+    {
+      "id": "dl02",
+      "topic": "Number Systems",
+      "difficulty": 1,
+      "prompt": "What is the hexadecimal number 2F in decimal?",
+      "choices": [
+        "47",
+        "39",
+        "57",
+        "45"
+      ],
+      "answer": 0,
+      "explanation": "2F = 2 x 16 + 15 = 47, because F stands for 15."
+    },
+    {
+      "id": "dl03",
+      "topic": "Number Systems",
+      "difficulty": 2,
+      "prompt": "What is binary 1011 0110 written in hexadecimal?",
+      "choices": [
+        "6B",
+        "B4",
+        "A6",
+        "B6"
+      ],
+      "answer": 3,
+      "explanation": "Each group of 4 bits is one hex digit: 1011 = B and 0110 = 6."
+    },
+    {
+      "id": "dl04",
+      "topic": "Number Systems",
+      "difficulty": 2,
+      "prompt": "What range of values can an 8-bit two's complement number hold?",
+      "choices": [
+        "-127 to 128",
+        "-128 to 127",
+        "-128 to 128",
+        "0 to 255"
+      ],
+      "answer": 1,
+      "explanation": "An n-bit two's complement number covers -2^(n-1) to 2^(n-1) - 1, which is -128 to 127 for n = 8."
+    },
+    {
+      "id": "dl05",
+      "topic": "Boolean Algebra and Gates",
+      "difficulty": 1,
+      "prompt": "What is the output of a 2-input XOR gate when both inputs are 1?",
+      "choices": [
+        "1",
+        "0",
+        "High impedance",
+        "It depends on the previous output"
+      ],
+      "answer": 1,
+      "explanation": "XOR is 1 only when the inputs differ, so 1 XOR 1 = 0."
+    },
+    {
+      "id": "dl06",
+      "topic": "Boolean Algebra and Gates",
+      "difficulty": 2,
+      "prompt": "By De Morgan's law, (A+B)' is equal to:",
+      "choices": [
+        "A'+B'",
+        "A.B",
+        "(A.B)'",
+        "A'.B'"
+      ],
+      "answer": 3,
+      "explanation": "Inverting an OR gives an AND of the inverted inputs: (A+B)' = A'.B'."
+    },
+    {
+      "id": "dl07",
+      "topic": "Boolean Algebra and Gates",
+      "difficulty": 2,
+      "prompt": "What does A + A.B simplify to?",
+      "choices": [
+        "A",
+        "B",
+        "A.B",
+        "A+B"
+      ],
+      "answer": 0,
+      "explanation": "Absorption law: if A = 1 the result is 1, and if A = 0 both terms are 0, so the result equals A."
+    },
+    {
+      "id": "dl08",
+      "topic": "Boolean Algebra and Gates",
+      "difficulty": 2,
+      "prompt": "Which of these gates is a universal gate?",
+      "choices": [
+        "XOR",
+        "AND",
+        "NAND",
+        "OR"
+      ],
+      "answer": 2,
+      "explanation": "Any logic function can be built from NAND gates alone, which is why NAND (like NOR) is called universal."
+    },
+    {
+      "id": "dl09",
+      "topic": "Combinational Logic",
+      "difficulty": 1,
+      "prompt": "The sum output of a half adder is equal to:",
+      "choices": [
+        "A AND B",
+        "A OR B",
+        "A NAND B",
+        "A XOR B"
+      ],
+      "answer": 3,
+      "explanation": "1+0 and 0+1 give sum 1, while 0+0 and 1+1 give sum 0, which is exactly XOR."
+    },
+    {
+      "id": "dl10",
+      "topic": "Combinational Logic",
+      "difficulty": 1,
+      "prompt": "How many select lines does an 8:1 multiplexer need?",
+      "choices": [
+        "3",
+        "2",
+        "4",
+        "8"
+      ],
+      "answer": 0,
+      "explanation": "With k select lines you can choose among 2^k inputs, and 2^3 = 8."
+    },
+    {
+      "id": "dl11",
+      "topic": "Combinational Logic",
+      "difficulty": 2,
+      "prompt": "A 3-to-8 decoder with active-high outputs and a valid input activates how many outputs?",
+      "choices": [
+        "Exactly three",
+        "All eight",
+        "Exactly one",
+        "Exactly four"
+      ],
+      "answer": 2,
+      "explanation": "Each 3-bit code selects one unique output line, so a single output is high."
+    },
+    {
+      "id": "dl12",
+      "topic": "Combinational Logic",
+      "difficulty": 2,
+      "prompt": "A full adder has A = 1, B = 1 and Cin = 1. What are its outputs?",
+      "choices": [
+        "Sum = 0, Cout = 1",
+        "Sum = 1, Cout = 1",
+        "Sum = 1, Cout = 0",
+        "Sum = 0, Cout = 0"
+      ],
+      "answer": 1,
+      "explanation": "1 + 1 + 1 = 3 = 11 in binary, so both the sum bit and the carry-out are 1."
+    },
+    {
+      "id": "dl13",
+      "topic": "Flip-Flops and Latches",
+      "difficulty": 1,
+      "prompt": "Which statement correctly separates a latch from a flip-flop?",
+      "choices": [
+        "A latch uses a clock edge; a flip-flop does not",
+        "A latch stores two bits; a flip-flop stores one",
+        "A latch is level-sensitive; a flip-flop changes only on a clock edge",
+        "A flip-flop has no feedback inside"
+      ],
+      "answer": 2,
+      "explanation": "While enabled a latch follows its input continuously, whereas a flip-flop samples only at the active edge."
+    },
+    {
+      "id": "dl14",
+      "topic": "Flip-Flops and Latches",
+      "difficulty": 1,
+      "prompt": "What does a JK flip-flop do at a clock edge when J = 1 and K = 1?",
+      "choices": [
+        "Toggles",
+        "Sets to 1",
+        "Resets to 0",
+        "Holds its value"
+      ],
+      "answer": 0,
+      "explanation": "J=K=1 is the toggle case: Q becomes the opposite of its current value."
+    },
+    {
+      "id": "dl15",
+      "topic": "Flip-Flops and Latches",
+      "difficulty": 2,
+      "prompt": "A T flip-flop with T = 1 is clocked at 10 MHz. What is the frequency of Q?",
+      "choices": [
+        "10 MHz",
+        "20 MHz",
+        "2.5 MHz",
+        "5 MHz"
+      ],
+      "answer": 3,
+      "explanation": "Q toggles once per edge, so a full Q cycle needs two clock cycles and the frequency halves."
+    },
+    {
+      "id": "dl16",
+      "topic": "Flip-Flops and Latches",
+      "difficulty": 2,
+      "prompt": "Why is S = R = 1 avoided on a NOR-based SR latch?",
+      "choices": [
+        "Both outputs become 1 and stay there",
+        "Both outputs go to 0 and the next state is unpredictable when the inputs are released",
+        "It makes Q toggle continuously",
+        "It permanently locks the output at 1"
+      ],
+      "answer": 1,
+      "explanation": "With S=R=1 both NOR outputs are 0, so Q and Q' are no longer complements and the final state depends on which input is released first."
+    },
+    {
+      "id": "dl17",
+      "topic": "Registers and Shift Registers",
+      "difficulty": 1,
+      "prompt": "How many flip-flops are needed to build an 8-bit register?",
+      "choices": [
+        "4",
+        "8",
+        "16",
+        "1"
+      ],
+      "answer": 1,
+      "explanation": "Each D flip-flop stores one bit, so eight bits need eight flip-flops."
+    },
+    {
+      "id": "dl18",
+      "topic": "Registers and Shift Registers",
+      "difficulty": 1,
+      "prompt": "Which shift register type turns a serial bit stream into a parallel word?",
+      "choices": [
+        "PISO",
+        "SISO",
+        "PIPO",
+        "SIPO"
+      ],
+      "answer": 3,
+      "explanation": "Serial-in, parallel-out collects bits one by one and presents them all at once."
+    },
+    {
+      "id": "dl19",
+      "topic": "Registers and Shift Registers",
+      "difficulty": 2,
+      "prompt": "What is the unsigned 4-bit value 0011 after one left shift (a 0 enters at the bottom)?",
+      "choices": [
+        "0110",
+        "0001",
+        "1100",
+        "0111"
+      ],
+      "answer": 0,
+      "explanation": "Moving every bit one place left gives 0110, which is 6, double the original 3."
+    },
+    {
+      "id": "dl20",
+      "topic": "Registers and Shift Registers",
+      "difficulty": 2,
+      "prompt": "How many clock edges are needed to load a 4-bit word serially into a 4-bit shift register?",
+      "choices": [
+        "1",
+        "2",
+        "4",
+        "8"
+      ],
+      "answer": 2,
+      "explanation": "Only one new bit enters per clock edge, so four bits take four edges."
+    },
+    {
+      "id": "dl21",
+      "topic": "Counters",
+      "difficulty": 1,
+      "prompt": "What is the modulus of a 3-bit binary counter?",
+      "choices": [
+        "3",
+        "6",
+        "16",
+        "8"
+      ],
+      "answer": 3,
+      "explanation": "Three bits give 2^3 = 8 states, 0 to 7."
+    },
+    {
+      "id": "dl22",
+      "topic": "Counters",
+      "difficulty": 1,
+      "prompt": "How many flip-flops are needed for a decade (mod-10) counter?",
+      "choices": [
+        "4",
+        "3",
+        "5",
+        "10"
+      ],
+      "answer": 0,
+      "explanation": "Three flip-flops give only 8 states, so four are needed to reach 10."
+    },
+    {
+      "id": "dl23",
+      "topic": "Counters",
+      "difficulty": 2,
+      "prompt": "What is the main drawback of an asynchronous (ripple) counter?",
+      "choices": [
+        "It cannot count above 3",
+        "It cannot be reset",
+        "Flip-flop delays accumulate, so the outputs do not change at the same time",
+        "It needs more flip-flops than a synchronous counter"
+      ],
+      "answer": 2,
+      "explanation": "Each stage waits for the previous one, so later bits change after a cumulative delay."
+    },
+    {
+      "id": "dl24",
+      "topic": "Counters",
+      "difficulty": 3,
+      "prompt": "How many distinct states does a Johnson counter built from 5 flip-flops have?",
+      "choices": [
+        "5",
+        "10",
+        "32",
+        "25"
+      ],
+      "answer": 1,
+      "explanation": "A Johnson counter has 2n states, which is 10 for n = 5."
+    },
+    {
+      "id": "dl25",
+      "topic": "Finite State Machines",
+      "difficulty": 1,
+      "prompt": "In a Moore machine, the outputs depend on:",
+      "choices": [
+        "The current state and the inputs",
+        "The inputs only",
+        "The current state only",
+        "The clock frequency"
+      ],
+      "answer": 2,
+      "explanation": "Moore outputs are a function of the state alone; Mealy outputs also use the inputs."
+    },
+    {
+      "id": "dl26",
+      "topic": "Finite State Machines",
+      "difficulty": 2,
+      "prompt": "What is the minimum number of flip-flops to encode 5 states in binary?",
+      "choices": [
+        "3",
+        "2",
+        "4",
+        "5"
+      ],
+      "answer": 0,
+      "explanation": "Two flip-flops give 4 states, so 5 states need 3 (2^3 = 8 >= 5)."
+    },
+    {
+      "id": "dl27",
+      "topic": "Finite State Machines",
+      "difficulty": 2,
+      "prompt": "Which part of an FSM holds the machine's current state?",
+      "choices": [
+        "The next-state logic",
+        "The output logic",
+        "The clock generator",
+        "The state register (flip-flops)"
+      ],
+      "answer": 3,
+      "explanation": "Only flip-flops can remember the state between clock edges; the logic blocks are combinational."
+    },
+    {
+      "id": "dl28",
+      "topic": "Finite State Machines",
+      "difficulty": 2,
+      "prompt": "Why can a Mealy output change in the middle of a clock cycle?",
+      "choices": [
+        "It does not contain any flip-flops",
+        "It depends directly on the inputs, which can change at any time",
+        "It ignores the clock edge entirely",
+        "It has no defined states"
+      ],
+      "answer": 1,
+      "explanation": "A Mealy output is combinational logic of state and input, so an input change moves it immediately."
+    }
+  ],
+  "lessons": [
+    {
+      "id": "digital-number-systems",
+      "topic": "Number Systems",
+      "title": "Binary, Octal, Hex and Two's Complement",
+      "level": "Beginner",
+      "minutes": 8,
+      "keywords": [
+        "binary",
+        "octal",
+        "hexadecimal",
+        "hex",
+        "decimal",
+        "base",
+        "conversion",
+        "twos complement",
+        "two's complement",
+        "signed",
+        "bits",
+        "radix"
+      ],
+      "objectives": [
+        "Convert between decimal, binary, octal and hexadecimal",
+        "Explain why hex is a convenient shorthand for binary",
+        "Represent negative numbers in two's complement"
+      ],
+      "body": "Computers store everything as bits, so digital designers count in base 2. Each binary position has a weight that is a power of two: in 1101 the weights from the left are 8, 4, 2 and 1, so the value is 8 + 4 + 0 + 1 = 13. Octal (base 8) and hexadecimal (base 16) are shorthand: one octal digit is exactly 3 bits and one hex digit is exactly 4 bits, so 1011 0110 becomes B6 in hex with no arithmetic.\n\nTo convert decimal to binary, divide by 2 repeatedly and read the remainders from the last one back to the first. For 45 the remainders, from first to last, are 1, 0, 1, 1, 0, 1, so reading them backwards gives 101101.\n\nNegative numbers are usually stored in two's complement. To negate a number, invert every bit and add 1. In 4 bits, 5 is 0101, so -5 is 1010 + 1 = 1011. An n-bit two's complement number covers -2^(n-1) to 2^(n-1) - 1, so 8 bits cover -128 to 127. The top bit acts as a sign bit, and ordinary binary addition still works on these numbers.",
+      "definitions": [
+        {
+          "term": "Bit",
+          "meaning": "A single binary digit, 0 or 1."
+        },
+        {
+          "term": "Hexadecimal",
+          "meaning": "Base 16, using digits 0-9 and A-F (A = 10 ... F = 15). One hex digit stands for 4 bits."
+        },
+        {
+          "term": "Two's complement",
+          "meaning": "The usual way to store signed integers: negate by inverting all bits and adding 1."
+        },
+        {
+          "term": "MSB",
+          "meaning": "Most significant bit, the leftmost bit, with the largest weight (and the sign in two's complement)."
+        }
+      ],
+      "example": "45 / 2 = 22 r 1\n22 / 2 = 11 r 0\n11 / 2 =  5 r 1\n 5 / 2 =  2 r 1\n 2 / 2 =  1 r 0\n 1 / 2 =  0 r 1\nRead remainders upward: 101101\nGroup in 4 bits: 0010 1101 = 2D hex",
+      "exampleNote": "Each division by 2 peels off the lowest bit as the remainder. Reading from the bottom gives 101101, and padding to 0010 1101 lets you read the hex digits 2 and D, so 45 = 0x2D.",
+      "diagram": "Dec  Bin   Oct Hex\n 0  0000   0   0\n 5  0101   5   5\n 9  1001  11   9\n10  1010  12   A\n15  1111  17   F\n\n4-bit two's complement\n0101 = +5\n1011 = -5 (1010 + 1)\n1000 = -8 (lowest value)",
+      "mistakes": [
+        "Reading the division remainders from top to bottom. The first remainder is the lowest bit, so read from the bottom up.",
+        "Forgetting to add 1 after inverting the bits when negating in two's complement. Inverting alone gives the one's complement.",
+        "Treating hex letters as small digits. A to F mean 10 to 15, so 0x2F = 2 x 16 + 15 = 47."
+      ],
+      "practice": [
+        {
+          "q": "Convert 1011 0110 to hex.",
+          "a": "B6, because 1011 = B and 0110 = 6."
+        },
+        {
+          "q": "What is -3 in 4-bit two's complement?",
+          "a": "1101. 3 = 0011, invert to 1100, add 1 to get 1101."
+        },
+        {
+          "q": "What is the largest unsigned value in 8 bits?",
+          "a": "255, because 2^8 - 1 = 255 (all eight bits set)."
+        }
+      ],
+      "exercises": [
+        "Convert 100 to binary and hex by hand, then check with a calculator.",
+        "Write the 4-bit two's complement code for every value from -8 to 7."
+      ],
+      "summary": [
+        "Binary positions are weighted by powers of two.",
+        "One hex digit equals 4 bits; one octal digit equals 3 bits.",
+        "Negate in two's complement by inverting the bits and adding 1.",
+        "n-bit two's complement covers -2^(n-1) to 2^(n-1) - 1."
+      ]
+    },
+    {
+      "id": "digital-boolean-gates",
+      "topic": "Boolean Algebra and Gates",
+      "title": "Boolean Algebra, Gates and De Morgan's Laws",
+      "level": "Beginner",
+      "minutes": 8,
+      "keywords": [
+        "boolean",
+        "algebra",
+        "gate",
+        "and",
+        "or",
+        "not",
+        "nand",
+        "nor",
+        "xor",
+        "xnor",
+        "demorgan",
+        "de morgan",
+        "truth table",
+        "universal gate"
+      ],
+      "objectives": [
+        "Describe AND, OR, NOT, NAND, NOR and XOR with truth tables",
+        "Simplify small expressions with Boolean laws",
+        "Apply De Morgan's laws"
+      ],
+      "body": "Boolean algebra works with two values, 0 and 1, and three basic operations. AND (written A.B) is 1 only when both inputs are 1. OR (written A+B) is 1 when at least one input is 1. NOT (written A') flips the input. From these come NAND and NOR, which are AND and OR followed by NOT, and XOR, which is 1 when the two inputs differ.\n\nUseful laws let you shrink a circuit without changing what it does: A + 0 = A, A.1 = A, A + A' = 1, A.A' = 0 and the absorption law A + A.B = A. De Morgan's laws connect AND with OR through inversion: (A.B)' = A' + B' and (A+B)' = A'.B'. In words, inverting an AND gives an OR of the inverted inputs.\n\nNAND and NOR are called universal gates because any other gate can be built from just one of them. For example, a NAND gate with both inputs tied together behaves as a NOT gate. A smaller circuit uses fewer gates, so simplifying before you build is worth the effort.",
+      "definitions": [
+        {
+          "term": "Truth table",
+          "meaning": "A table listing the output for every combination of inputs."
+        },
+        {
+          "term": "De Morgan's laws",
+          "meaning": "(A.B)' = A' + B' and (A+B)' = A'.B'."
+        },
+        {
+          "term": "Universal gate",
+          "meaning": "A gate type (NAND or NOR) from which every other logic function can be built."
+        },
+        {
+          "term": "XOR",
+          "meaning": "Exclusive OR: output is 1 when an odd number of inputs are 1."
+        }
+      ],
+      "example": "Simplify F = A.B + A.B'\n  = A.(B + B')    factor out A\n  = A.1           because B + B' = 1\n  = A",
+      "exampleNote": "Factoring A out leaves B + B', which is always 1, so F is simply A. Two AND gates and an OR gate collapse into a plain wire.",
+      "diagram": "A B | AND OR NAND NOR XOR\n0 0 |  0   0   1    1   0\n0 1 |  0   1   1    0   1\n1 0 |  0   1   1    0   1\n1 1 |  1   1   0    0   0",
+      "mistakes": [
+        "Thinking NOT distributes over AND unchanged. (A.B)' is not A'.B'; De Morgan says it is A' + B' (the operator flips).",
+        "Mixing up OR and XOR. For inputs 1 and 1, OR gives 1 but XOR gives 0.",
+        "Forgetting that A + A.B = A. The extra term is absorbed because A already covers it."
+      ],
+      "practice": [
+        {
+          "q": "What is (A+B)' in AND form?",
+          "a": "A'.B' by De Morgan's law."
+        },
+        {
+          "q": "Simplify A + A.B.",
+          "a": "A. When A = 1 the result is 1, and when A = 0 both terms are 0."
+        },
+        {
+          "q": "How do you make a NOT gate from a NAND?",
+          "a": "Tie both inputs together: (A.A)' = A'."
+        }
+      ],
+      "exercises": [
+        "Draw the truth table of (A.B)' and of A' + B' and confirm they match.",
+        "In HDL Studio, run the De Morgan demo and change one gate to see the checker fail."
+      ],
+      "summary": [
+        "AND, OR and NOT are the basic operations; NAND, NOR and XOR derive from them.",
+        "Simplify with identities such as A + A.B = A.",
+        "De Morgan: (A.B)' = A' + B' and (A+B)' = A'.B'.",
+        "NAND and NOR are universal gates."
+      ],
+      "hdl": {
+        "title": "De Morgan's laws check",
+        "files": [
+          {
+            "name": "demorgan.v",
+            "tb": false,
+            "text": "module demorgan(input a, input b, output nand_out, output or_of_nots,\n                output nor_out, output and_of_nots);\n  assign nand_out    = ~(a & b);\n  assign or_of_nots  = ~a | ~b;\n  assign nor_out     = ~(a | b);\n  assign and_of_nots = ~a & ~b;\nendmodule"
+          },
+          {
+            "name": "demorgan_tb.v",
+            "tb": true,
+            "text": "module demorgan_tb;\n  reg a, b;\n  wire n1, n2, r1, r2;\n  integer i, errors;\n  demorgan dut(.a(a), .b(b), .nand_out(n1), .or_of_nots(n2),\n               .nor_out(r1), .and_of_nots(r2));\n  initial begin\n    errors = 0;\n    for (i = 0; i < 4; i = i + 1) begin\n      {a, b} = i;\n      #1;\n      $display(\"a=%b b=%b  NAND=%b A'+B'=%b  NOR=%b A'.B'=%b\", a, b, n1, n2, r1, r2);\n      if (n1 !== n2 || r1 !== r2) errors = errors + 1;\n    end\n    if (errors == 0) $display(\"PASS: De Morgan's laws hold\");\n    else $display(\"FAIL: %0d mismatches\", errors);\n    $finish;\n  end\nendmodule"
+          }
+        ]
+      }
+    },
+    {
+      "id": "digital-combinational",
+      "topic": "Combinational Logic",
+      "title": "Adders, Multiplexers and Decoders",
+      "level": "Beginner",
+      "minutes": 9,
+      "keywords": [
+        "combinational",
+        "adder",
+        "half adder",
+        "full adder",
+        "mux",
+        "multiplexer",
+        "decoder",
+        "select",
+        "carry",
+        "sum",
+        "ripple carry",
+        "encoder"
+      ],
+      "objectives": [
+        "Explain what makes a circuit combinational",
+        "Build half and full adders from gates",
+        "Use multiplexers and decoders and count their select lines"
+      ],
+      "body": "A combinational circuit's outputs depend only on its present inputs; it has no memory. A truth table or Boolean expression describes it completely. Adders are the classic example. A half adder adds two bits: sum = A XOR B and carry = A.B. A full adder also takes a carry-in: sum = A XOR B XOR Cin and Cout = A.B + Cin.(A XOR B). Chaining n full adders, with each carry-out feeding the next carry-in, builds an n-bit ripple-carry adder.\n\nA multiplexer (mux) selects one of several data inputs and sends it to the output. A 2:1 mux has one select line: Y = S'.D0 + S.D1. In general a 2^k to 1 mux needs k select lines, so an 8:1 mux needs 3.\n\nA decoder turns a code into a single active line. A 3-to-8 decoder takes a 3-bit code and raises exactly one of 8 output lines, which is how a memory chip picks one location from an address. Because combinational circuits have no memory, you can test one by simply trying every input combination.",
+      "definitions": [
+        {
+          "term": "Combinational circuit",
+          "meaning": "A circuit whose outputs depend only on the current inputs."
+        },
+        {
+          "term": "Carry",
+          "meaning": "The bit passed to the next position when a column of addition overflows."
+        },
+        {
+          "term": "Multiplexer",
+          "meaning": "A selector that routes one of several inputs to the output."
+        },
+        {
+          "term": "Decoder",
+          "meaning": "A circuit that activates one output line according to the input code."
+        }
+      ],
+      "example": "Add 1 + 1 with Cin = 1 using a full adder:\nSum  = 1 xor 1 xor 1 = 1\nCout = 1.1 + 1.(1 xor 1) = 1 + 0 = 1\nResult: Cout Sum = 11 binary = 3",
+      "exampleNote": "Three ones added together make 3, which is 11 in binary, so both Sum and Cout are 1.",
+      "diagram": "A B Cin | Cout Sum\n0 0 0   |  0    0\n0 0 1   |  0    1\n0 1 0   |  0    1\n0 1 1   |  1    0\n1 0 0   |  0    1\n1 0 1   |  1    0\n1 1 0   |  1    0\n1 1 1   |  1    1",
+      "mistakes": [
+        "Using a half adder in the middle of a multi-bit adder. Every position except the lowest needs a full adder to accept the carry-in.",
+        "Miscounting mux select lines. The number of inputs is 2^k, so 8 inputs need 3 lines, not 8.",
+        "Assuming a combinational output can hold a value. When inputs change, the output follows; use flip-flops to store data."
+      ],
+      "practice": [
+        {
+          "q": "What are the sum and carry of a half adder with A=1, B=1?",
+          "a": "Sum = 0 and carry = 1, because 1 + 1 = 10 in binary."
+        },
+        {
+          "q": "How many select lines does a 4:1 mux need?",
+          "a": "2, since 2^2 = 4."
+        },
+        {
+          "q": "How many outputs does a 2-to-4 decoder have?",
+          "a": "4, one for each 2-bit input code."
+        }
+      ],
+      "exercises": [
+        "Build a full adder from two half adders and an OR gate on paper.",
+        "Run the full adder demo in HDL Studio and read the printed table."
+      ],
+      "summary": [
+        "Combinational outputs depend only on current inputs.",
+        "Full adder: sum = A xor B xor Cin; carry-out combines both carry sources.",
+        "A 2^k:1 mux needs k select lines.",
+        "A decoder activates exactly one output per input code."
+      ],
+      "hdl": {
+        "title": "Full adder exhaustive test",
+        "files": [
+          {
+            "name": "full_adder.v",
+            "tb": false,
+            "text": "module full_adder(input a, input b, input cin, output sum, output cout);\n  assign sum  = a ^ b ^ cin;\n  assign cout = (a & b) | (cin & (a ^ b));\nendmodule"
+          },
+          {
+            "name": "full_adder_tb.v",
+            "tb": true,
+            "text": "module full_adder_tb;\n  reg a, b, cin;\n  wire sum, cout;\n  reg [1:0] expected;\n  integer i, errors;\n  full_adder dut(.a(a), .b(b), .cin(cin), .sum(sum), .cout(cout));\n  initial begin\n    errors = 0;\n    for (i = 0; i < 8; i = i + 1) begin\n      {a, b, cin} = i;\n      #1;\n      expected = a + b + cin;\n      $display(\"%b + %b + %b -> cout=%b sum=%b\", a, b, cin, cout, sum);\n      if ({cout, sum} !== expected) errors = errors + 1;\n    end\n    if (errors == 0) $display(\"PASS: all 8 input rows correct\");\n    else $display(\"FAIL: %0d rows wrong\", errors);\n    $finish;\n  end\nendmodule"
+          }
+        ]
+      }
+    },
+    {
+      "id": "digital-flipflops-latches",
+      "topic": "Flip-Flops and Latches",
+      "title": "Latches and Flip-Flops",
+      "level": "Beginner",
+      "minutes": 9,
+      "keywords": [
+        "latch",
+        "flip-flop",
+        "flipflop",
+        "sr latch",
+        "d latch",
+        "d flip-flop",
+        "jk",
+        "t flip-flop",
+        "clock",
+        "edge",
+        "setup time",
+        "hold time",
+        "sequential"
+      ],
+      "objectives": [
+        "Explain how an SR latch stores a bit",
+        "Contrast level-sensitive latches with edge-triggered flip-flops",
+        "Use the D, T and JK flip-flop behaviour tables"
+      ],
+      "body": "Memory elements let a circuit remember a bit. The simplest is the SR latch, built from two cross-coupled NOR (or NAND) gates. In the NOR version, S=1 sets the output Q to 1, R=1 resets it to 0, and S=R=0 holds the value. S=R=1 is avoided because both outputs go to 0 and the result is unpredictable when both inputs return to 0 together.\n\nA D latch is level-sensitive: while its enable is high, Q follows D, and when enable goes low it holds. A D flip-flop is edge-triggered instead: it copies D into Q only at the clock edge, for example the rising edge, and ignores D at all other times. That makes designs predictable, because everything changes together on the clock.\n\nOther flip-flops build on the same idea. A T flip-flop toggles when T=1. A JK flip-flop sets when J=1 and K=0, resets when J=0 and K=1, holds when both are 0 and toggles when both are 1. For a flip-flop to work, D must be stable for a short setup time before the edge and a hold time after it.",
+      "definitions": [
+        {
+          "term": "Latch",
+          "meaning": "A storage element whose output follows the input while enabled (level-sensitive)."
+        },
+        {
+          "term": "Flip-flop",
+          "meaning": "A storage element that samples its input only at a clock edge."
+        },
+        {
+          "term": "Setup time",
+          "meaning": "How long the data must be stable before the active clock edge."
+        },
+        {
+          "term": "Toggle",
+          "meaning": "Change to the opposite value, 0 to 1 or 1 to 0."
+        }
+      ],
+      "example": "T flip-flop used as a divider (T = 1):\nclock edge:  1 2 3 4 5 6\nQ (from 0):  1 0 1 0 1 0\nQ toggles on every edge, so one full\nQ cycle takes two clock cycles.",
+      "exampleNote": "Q changes once per clock edge but needs two edges to complete a cycle, so its frequency is half the clock frequency.",
+      "diagram": "J K | Q next\n0 0 | Q   (hold)\n0 1 | 0   (reset)\n1 0 | 1   (set)\n1 1 | Q'  (toggle)\n\nD flip-flop, at the active edge\nD | Q after the edge\n0 | 0\n1 | 1",
+      "mistakes": [
+        "Treating a latch and a flip-flop as the same. A latch can change many times while enabled; a flip-flop changes only at the clock edge.",
+        "Applying S=R=1 to a NOR SR latch. It forces an undefined result; design so it never happens.",
+        "Changing D right at the clock edge. Violating setup or hold time can store a wrong value."
+      ],
+      "practice": [
+        {
+          "q": "What does a JK flip-flop do when J=0 and K=1?",
+          "a": "It resets: Q becomes 0 at the clock edge."
+        },
+        {
+          "q": "A D flip-flop has D=1 between edges, then D changes to 0 before the next edge. What is Q at that edge?",
+          "a": "0, because only the value of D at the edge is captured."
+        },
+        {
+          "q": "Why use edge-triggered flip-flops in processors?",
+          "a": "All state changes happen at one instant per cycle, which keeps timing predictable."
+        }
+      ],
+      "exercises": [
+        "Draw a D flip-flop timing diagram with a changing D input and show Q for six clock edges.",
+        "Run the D flip-flop demo and confirm Q ignores changes of D between clock edges."
+      ],
+      "summary": [
+        "Latches are level-sensitive; flip-flops are edge-triggered.",
+        "T toggles when T=1; JK covers hold, set, reset and toggle.",
+        "Respect setup and hold times around the clock edge.",
+        "A D flip-flop is the basic building block of registers."
+      ],
+      "hdl": {
+        "title": "D flip-flop edge behaviour",
+        "files": [
+          {
+            "name": "dff.v",
+            "tb": false,
+            "text": "module dff(input clk, input d, output reg q);\n  always @(posedge clk) q <= d;\nendmodule"
+          },
+          {
+            "name": "dff_tb.v",
+            "tb": true,
+            "text": "module dff_tb;\n  reg clk, d;\n  wire q;\n  integer errors;\n  dff dut(.clk(clk), .d(d), .q(q));\n  always #5 clk = ~clk;\n  initial begin\n    clk = 0; d = 0; errors = 0;\n    @(posedge clk); #1;\n    if (q !== 1'b0) errors = errors + 1;\n    d = 1; #2;\n    $display(\"d=%b q=%b (no clock edge yet, q must hold)\", d, q);\n    if (q !== 1'b0) errors = errors + 1;\n    @(posedge clk); #1;\n    $display(\"d=%b q=%b (after rising edge, q follows d)\", d, q);\n    if (q !== 1'b1) errors = errors + 1;\n    d = 0; @(posedge clk); #1;\n    $display(\"d=%b q=%b\", d, q);\n    if (q !== 1'b0) errors = errors + 1;\n    if (errors == 0) $display(\"PASS: q changes only at the clock edge\");\n    else $display(\"FAIL: %0d checks failed\", errors);\n    $finish;\n  end\nendmodule"
+          }
+        ]
+      }
+    },
+    {
+      "id": "digital-registers-shift",
+      "topic": "Registers and Shift Registers",
+      "title": "Registers and Shift Registers",
+      "level": "Beginner",
+      "minutes": 8,
+      "keywords": [
+        "register",
+        "shift register",
+        "siso",
+        "sipo",
+        "piso",
+        "pipo",
+        "serial",
+        "parallel",
+        "load",
+        "shift left",
+        "shift right",
+        "d flip-flop",
+        "storage"
+      ],
+      "objectives": [
+        "Explain how flip-flops form a register",
+        "Distinguish SISO, SIPO, PISO and PIPO shift registers",
+        "Relate shifting to multiplying and dividing by 2"
+      ],
+      "body": "A register is a group of flip-flops that share a clock and store a multi-bit word. An 8-bit register uses eight D flip-flops. With a load-enable input the register captures new data only when load is 1 and otherwise keeps its old value, which is how processor registers hold data between instructions.\n\nA shift register connects flip-flops in a chain so each one passes its bit to the next on every clock edge. Data can enter and leave serially or in parallel. SISO is serial-in serial-out, SIPO is serial-in parallel-out (useful to turn a bit stream into a word), PISO is parallel-in serial-out (the reverse), and PIPO is parallel in and out. Loading a 4-bit shift register serially takes 4 clock edges.\n\nShifting also does arithmetic. Shifting a binary number left by one place multiplies it by 2, as long as no 1 falls off the top, and shifting right by one divides an unsigned number by 2, discarding the remainder.",
+      "definitions": [
+        {
+          "term": "Register",
+          "meaning": "A set of flip-flops sharing a clock that stores one multi-bit value."
+        },
+        {
+          "term": "Shift register",
+          "meaning": "A chain of flip-flops that moves its bits one position per clock edge."
+        },
+        {
+          "term": "SIPO",
+          "meaning": "Serial-in, parallel-out: bits arrive one at a time and are read all together."
+        },
+        {
+          "term": "Load enable",
+          "meaning": "A control input that decides whether the register captures new data on this clock edge."
+        }
+      ],
+      "example": "q <= {q[2:0], sin};   // shift left, new bit enters at q0\nShift 0011 (3) left once: 0110 (6)\nShift 0110 (6) right once: 0011 (3)",
+      "exampleNote": "The concatenation drops the old top bit and appends the new serial bit at the bottom. Moving the bits one place left doubles the value, and moving them right halves it.",
+      "diagram": "sin -> [q0]->[q1]->[q2]->[q3]\nall four D flip-flops share the clock\n\nclock  sin | q3 q2 q1 q0\nreset   -  |  0  0  0  0\n  1     1  |  0  0  0  1\n  2     0  |  0  0  1  0\n  3     1  |  0  1  0  1\n  4     1  |  1  0  1  1",
+      "mistakes": [
+        "Expecting the whole word to appear after one clock in a serial register. A 4-bit serial load takes 4 clock edges.",
+        "Forgetting to clear or reset the register first. Flip-flops power up with unknown values, so old bits shift through.",
+        "Assuming a left shift always doubles the value. A 1 shifted out of the top is lost, so the result wraps."
+      ],
+      "practice": [
+        {
+          "q": "How many clock edges does it take to load a byte serially?",
+          "a": "8, one per bit."
+        },
+        {
+          "q": "What is 0101 shifted right by one (unsigned)?",
+          "a": "0010, which is 5 divided by 2 with the remainder dropped."
+        },
+        {
+          "q": "Which type converts a parallel word into a serial stream?",
+          "a": "PISO, parallel-in serial-out."
+        }
+      ],
+      "exercises": [
+        "Draw the contents of a 4-bit shift register for each clock edge while the bits 1,1,0,1 are fed in.",
+        "Run the shift register demo and change the input pattern to 0110."
+      ],
+      "summary": [
+        "A register is flip-flops sharing a clock and storing a word.",
+        "Shift registers move bits one place per clock edge.",
+        "SIPO and PISO convert between serial and parallel data.",
+        "Shifting left multiplies by 2; shifting right divides by 2."
+      ],
+      "hdl": {
+        "title": "4-bit shift register",
+        "files": [
+          {
+            "name": "shift4.v",
+            "tb": false,
+            "text": "module shift4(input clk, input rst, input sin, output reg [3:0] q);\n  always @(posedge clk) begin\n    if (rst) q <= 4'b0000;\n    else     q <= {q[2:0], sin};\n  end\nendmodule"
+          },
+          {
+            "name": "shift4_tb.v",
+            "tb": true,
+            "text": "module shift4_tb;\n  reg clk, rst, sin;\n  wire [3:0] q;\n  reg [3:0] bits;\n  integer i, errors;\n  shift4 dut(.clk(clk), .rst(rst), .sin(sin), .q(q));\n  always #5 clk = ~clk;\n  initial begin\n    clk = 0; rst = 1; sin = 0; errors = 0; bits = 4'b1011;\n    @(posedge clk); #1 rst = 0;\n    for (i = 0; i < 4; i = i + 1) begin\n      sin = bits[3 - i];\n      @(posedge clk); #1;\n      $display(\"shifted in %b -> q = %b\", sin, q);\n    end\n    if (q !== 4'b1011) errors = errors + 1;\n    sin = 0; @(posedge clk); #1;\n    $display(\"shifted in 0 -> q = %b\", q);\n    if (q !== 4'b0110) errors = errors + 1;\n    if (errors == 0) $display(\"PASS: bits 1011 loaded, then shifted left\");\n    else $display(\"FAIL: %0d checks failed\", errors);\n    $finish;\n  end\nendmodule"
+          }
+        ]
+      }
+    },
+    {
+      "id": "digital-counters",
+      "topic": "Counters",
+      "title": "Counters: Ripple, Synchronous and Ring",
+      "level": "Beginner",
+      "minutes": 9,
+      "keywords": [
+        "counter",
+        "ripple",
+        "asynchronous",
+        "synchronous",
+        "modulus",
+        "mod-n",
+        "decade",
+        "up counter",
+        "down counter",
+        "ring counter",
+        "johnson",
+        "binary counter",
+        "divider"
+      ],
+      "objectives": [
+        "Compute the modulus and flip-flop count of a binary counter",
+        "Compare ripple and synchronous counters",
+        "Describe ring and Johnson counters"
+      ],
+      "body": "A counter is a register that steps through a sequence of states on each clock pulse. An n-bit binary counter has 2^n states, so 3 flip-flops count 0 to 7 and then wrap to 0. The modulus is the number of states; a mod-10 (decade) counter counts 0 to 9 and needs 4 flip-flops, because 3 give only 8 states.\n\nIn an asynchronous (ripple) counter, each flip-flop is clocked by the output of the previous one. It is simple, but the delays add up, so the outputs do not change at the same instant and brief wrong values can appear. A synchronous counter sends one common clock to every flip-flop and uses logic to decide which bits toggle, so all bits change together and it can run faster.\n\nTo get a modulus that is not a power of two, detect the last state and return to 0. A ring counter circulates a single 1 through a shift register, giving n states for n flip-flops. A Johnson (twisted-ring) counter feeds back the inverted last bit and has 2n states.",
+      "definitions": [
+        {
+          "term": "Modulus",
+          "meaning": "The number of distinct states a counter cycles through."
+        },
+        {
+          "term": "Ripple counter",
+          "meaning": "An asynchronous counter where each stage clocks the next."
+        },
+        {
+          "term": "Synchronous counter",
+          "meaning": "A counter whose flip-flops all share the same clock edge."
+        },
+        {
+          "term": "Johnson counter",
+          "meaning": "A shift register that feeds the inverted output back to the input, giving 2n states."
+        }
+      ],
+      "example": "4-bit Johnson counter, q <= {q[2:0], ~q[3]}\n0000 0001 0011 0111\n1111 1110 1100 1000\nthen back to 0000: 8 states from 4 flip-flops",
+      "exampleNote": "A 1 spreads in from the right until the register is full, then a 0 spreads in the same way. Each state differs from the previous one by one bit, and the sequence repeats after 2n = 8 steps.",
+      "diagram": "3-bit binary up counter\ncount Q2 Q1 Q0\n  0    0  0  0\n  1    0  0  1\n  2    0  1  0\n  3    0  1  1\n  4    1  0  0\n  5    1  0  1\n  6    1  1  0\n  7    1  1  1\n  8 -> wraps to 000",
+      "mistakes": [
+        "Believing a mod-10 counter needs 10 flip-flops. It needs only enough bits for 10 states, which is 4.",
+        "Ignoring ripple delay. In an asynchronous counter the higher bits change later, so decoding the count right after a clock edge can glitch.",
+        "Forgetting to reset an unused-state counter. If a mod-10 counter powers up in state 12, it may take extra clocks or never reach the intended sequence."
+      ],
+      "practice": [
+        {
+          "q": "How many states does a 5-bit binary counter have?",
+          "a": "32, since 2^5 = 32."
+        },
+        {
+          "q": "How many flip-flops does a mod-6 counter need?",
+          "a": "3, because 2 give only 4 states and 3 give 8."
+        },
+        {
+          "q": "What is the next state of a 4-bit ring counter holding 0100 if it rotates left?",
+          "a": "1000, the single 1 moves one place left."
+        }
+      ],
+      "exercises": [
+        "Write the state sequence of a 3-bit Johnson counter starting from 000.",
+        "Run the decade counter demo, then change the wrap value from 9 to 5 to make a mod-6 counter."
+      ],
+      "summary": [
+        "An n-bit binary counter has 2^n states.",
+        "Ripple counters are simple but accumulate delay; synchronous counters change together.",
+        "A mod-N counter resets after state N-1.",
+        "Ring counters have n states, Johnson counters 2n."
+      ],
+      "hdl": {
+        "title": "Decade counter",
+        "files": [
+          {
+            "name": "decade_counter.v",
+            "tb": false,
+            "text": "module decade_counter(input clk, input rst, output reg [3:0] count);\n  always @(posedge clk) begin\n    if (rst)               count <= 4'd0;\n    else if (count == 4'd9) count <= 4'd0;\n    else                   count <= count + 4'd1;\n  end\nendmodule"
+          },
+          {
+            "name": "decade_counter_tb.v",
+            "tb": true,
+            "text": "module decade_counter_tb;\n  reg clk, rst;\n  wire [3:0] count;\n  integer i, errors;\n  decade_counter dut(.clk(clk), .rst(rst), .count(count));\n  always #5 clk = ~clk;\n  initial begin\n    clk = 0; rst = 1; errors = 0;\n    @(posedge clk); #1 rst = 0;\n    if (count !== 4'd0) errors = errors + 1;\n    for (i = 1; i <= 12; i = i + 1) begin\n      @(posedge clk); #1;\n      $display(\"edge %0d: count = %0d\", i, count);\n      if (count !== i % 10) errors = errors + 1;\n    end\n    if (errors == 0) $display(\"PASS: counts 0 to 9 and wraps\");\n    else $display(\"FAIL: %0d wrong values\", errors);\n    $finish;\n  end\nendmodule"
+          }
+        ]
+      }
+    },
+    {
+      "id": "digital-fsm",
+      "topic": "Finite State Machines",
+      "title": "Finite State Machines: Moore and Mealy",
+      "level": "Beginner",
+      "minutes": 10,
+      "keywords": [
+        "fsm",
+        "finite state machine",
+        "state",
+        "moore",
+        "mealy",
+        "state diagram",
+        "state table",
+        "next state",
+        "encoding",
+        "one-hot",
+        "sequential",
+        "controller"
+      ],
+      "objectives": [
+        "Name the three parts of an FSM",
+        "Contrast Moore and Mealy machines",
+        "Count the flip-flops needed to store a number of states"
+      ],
+      "body": "A finite state machine (FSM) is a circuit that is always in exactly one of a limited number of states and moves between them on clock edges depending on its inputs. It has three parts: a state register built from flip-flops, next-state logic that computes what the state should be next, and output logic. Designers sketch a state diagram, with circles for states and arrows labelled with the input that causes each move, and then turn it into a state table.\n\nThere are two classic styles. In a Moore machine the outputs depend only on the current state. In a Mealy machine the outputs depend on the current state and the current inputs, so they can react earlier and often need fewer states, but they can also change in the middle of a cycle when the inputs do.\n\nWith binary encoding you need at least log2(S), rounded up, flip-flops to store S states; 5 states need 3. One-hot encoding uses one flip-flop per state instead, which spends more flip-flops but often makes the logic simpler.",
+      "definitions": [
+        {
+          "term": "State",
+          "meaning": "A snapshot of what the machine remembers, stored in flip-flops."
+        },
+        {
+          "term": "Moore machine",
+          "meaning": "An FSM whose outputs depend only on the current state."
+        },
+        {
+          "term": "Mealy machine",
+          "meaning": "An FSM whose outputs depend on the current state and the inputs."
+        },
+        {
+          "term": "One-hot encoding",
+          "meaning": "A state encoding with one flip-flop per state, exactly one of which is 1."
+        }
+      ],
+      "example": "State     Input  Next state  Output\nLOCKED    coin   UNLOCKED    0\nLOCKED    push   LOCKED      0\nUNLOCKED  push   LOCKED      1\nUNLOCKED  coin   UNLOCKED    1",
+      "exampleNote": "This is the state table of the turnstile as a Moore machine: the Output column is 0 in LOCKED and 1 in UNLOCKED regardless of the input, because it depends only on the state.",
+      "diagram": "Turnstile (Moore machine)\n\n          coin\n LOCKED ---------> UNLOCKED\n (out=0) <--------- (out=1)\n          push\n\nLOCKED stays on push or no input\nUNLOCKED stays on coin or no input",
+      "mistakes": [
+        "Forgetting some input cases in the state table. Every state needs a defined next state for every input combination.",
+        "Mixing up Moore and Mealy. If the output changes when only an input changes, with no clock edge, it is Mealy.",
+        "Using the wrong number of flip-flops. Round log2(states) up, so 5 states need 3 flip-flops, not 2."
+      ],
+      "practice": [
+        {
+          "q": "Which FSM part stores the current state?",
+          "a": "The state register, made of flip-flops."
+        },
+        {
+          "q": "A machine has 9 states. How many flip-flops with binary encoding?",
+          "a": "4, because 3 give only 8 states."
+        },
+        {
+          "q": "A Moore output is 1 only in state S3. When does it go to 1?",
+          "a": "Right after the clock edge that enters S3, since it depends only on the state."
+        }
+      ],
+      "exercises": [
+        "Draw the state diagram for a machine that outputs 1 when it has seen two 1s in a row.",
+        "Run the turnstile demo and add a check for a coin followed by a push."
+      ],
+      "summary": [
+        "An FSM is a state register plus next-state logic plus output logic.",
+        "Moore outputs depend on state only; Mealy outputs also depend on inputs.",
+        "Binary encoding needs ceil(log2 S) flip-flops; one-hot needs S.",
+        "State diagrams and tables are the design starting point."
+      ],
+      "hdl": {
+        "title": "Turnstile Moore FSM",
+        "files": [
+          {
+            "name": "turnstile.v",
+            "tb": false,
+            "text": "module turnstile(input clk, input rst, input coin, input push,\n                 output unlocked);\n  reg state;            // 0 = LOCKED, 1 = UNLOCKED\n  assign unlocked = state;\n  always @(posedge clk) begin\n    if (rst) state <= 1'b0;\n    else if (state == 1'b0 && coin) state <= 1'b1;\n    else if (state == 1'b1 && push) state <= 1'b0;\n  end\nendmodule"
+          },
+          {
+            "name": "turnstile_tb.v",
+            "tb": true,
+            "text": "module turnstile_tb;\n  reg clk, rst, coin, push;\n  wire unlocked;\n  integer errors;\n  turnstile dut(.clk(clk), .rst(rst), .coin(coin), .push(push), .unlocked(unlocked));\n  always #5 clk = ~clk;\n  initial begin\n    clk = 0; rst = 1; coin = 0; push = 0; errors = 0;\n    @(posedge clk); #1 rst = 0;\n    if (unlocked !== 1'b0) errors = errors + 1;\n    push = 1; @(posedge clk); #1 push = 0;\n    $display(\"push while locked   -> unlocked=%b\", unlocked);\n    if (unlocked !== 1'b0) errors = errors + 1;\n    coin = 1; @(posedge clk); #1 coin = 0;\n    $display(\"coin                -> unlocked=%b\", unlocked);\n    if (unlocked !== 1'b1) errors = errors + 1;\n    coin = 1; @(posedge clk); #1 coin = 0;\n    $display(\"extra coin          -> unlocked=%b\", unlocked);\n    if (unlocked !== 1'b1) errors = errors + 1;\n    push = 1; @(posedge clk); #1 push = 0;\n    $display(\"push while unlocked -> unlocked=%b\", unlocked);\n    if (unlocked !== 1'b0) errors = errors + 1;\n    if (errors == 0) $display(\"PASS: turnstile follows its state diagram\");\n    else $display(\"FAIL: %0d checks failed\", errors);\n    $finish;\n  end\nendmodule"
+          }
+        ]
+      }
+    }
+  ]
+}

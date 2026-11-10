@@ -1,0 +1,503 @@
+{
+ "id": "sv",
+ "title": "SystemVerilog Basics",
+ "description": "The SystemVerilog features you need after Verilog: the logic type, always_comb and always_ff, what the language adds for design and verification, and self-checking testbench habits.",
+ "level": "Intermediate",
+ "path": "Digital Design and VLSI",
+ "pathOrder": 3,
+ "prerequisites": [
+  "verilog"
+ ],
+ "icon": "🧩",
+ "questions": [
+  {
+   "id": "sv01",
+   "topic": "SystemVerilog Basics",
+   "difficulty": 1,
+   "prompt": "What is the main benefit of the logic type?",
+   "choices": [
+    "It is faster than wire",
+    "It can be driven by assign or always",
+    "It stores 8 bits",
+    "It removes the need for clocks"
+   ],
+   "answer": 1,
+   "explanation": "logic works with either kind of driver, removing the wire/reg decision."
+  },
+  {
+   "id": "sv02",
+   "topic": "SystemVerilog Basics",
+   "difficulty": 2,
+   "prompt": "What does the single-driver rule for logic mean?",
+   "choices": [
+    "Only one bit may be used",
+    "It has one clock",
+    "It has one port",
+    "Only one source may drive the signal"
+   ],
+   "answer": 3,
+   "explanation": "Multiple drivers on one logic signal are reported as an error."
+  },
+  {
+   "id": "sv03",
+   "topic": "SystemVerilog Basics",
+   "difficulty": 1,
+   "prompt": "Which block should hold flip-flop code?",
+   "choices": [
+    "always_comb",
+    "always_ff",
+    "always_latch",
+    "initial"
+   ],
+   "answer": 1,
+   "explanation": "always_ff states that the block describes registers."
+  },
+  {
+   "id": "sv04",
+   "topic": "SystemVerilog Basics",
+   "difficulty": 1,
+   "prompt": "Which block replaces always @(*)?",
+   "choices": [
+    "always_ff",
+    "always_latch",
+    "always_comb",
+    "final"
+   ],
+   "answer": 2,
+   "explanation": "always_comb has an automatic sensitivity list."
+  },
+  {
+   "id": "sv05",
+   "topic": "SystemVerilog Basics",
+   "difficulty": 2,
+   "prompt": "Which assignment belongs in always_ff?",
+   "choices": [
+    "<=",
+    "=",
+    "assign",
+    "force"
+   ],
+   "answer": 0,
+   "explanation": "Use non-blocking assignments for registers."
+  },
+  {
+   "id": "sv06",
+   "topic": "SystemVerilog Basics",
+   "difficulty": 2,
+   "prompt": "SystemVerilog is best described as...",
+   "choices": [
+    "A replacement that breaks Verilog code",
+    "A software language only",
+    "A superset of Verilog",
+    "A simulator"
+   ],
+   "answer": 2,
+   "explanation": "It extends Verilog with new design and verification features."
+  },
+  {
+   "id": "sv07",
+   "topic": "SystemVerilog Basics",
+   "difficulty": 2,
+   "prompt": "Which feature groups related signals into one connection?",
+   "choices": [
+    "interface",
+    "assertion",
+    "parameter",
+    "$display"
+   ],
+   "answer": 0,
+   "explanation": "Interfaces bundle signals so they can be passed as a unit."
+  },
+  {
+   "id": "sv08",
+   "topic": "SystemVerilog Basics",
+   "difficulty": 2,
+   "prompt": "What is UVM?",
+   "choices": [
+    "A gate library",
+    "A methodology built on SystemVerilog classes",
+    "A clocking scheme",
+    "A waveform format"
+   ],
+   "answer": 1,
+   "explanation": "UVM is a verification methodology implemented with classes."
+  },
+  {
+   "id": "sv09",
+   "topic": "SystemVerilog Basics",
+   "difficulty": 2,
+   "prompt": "Why use a reference model in a testbench?",
+   "choices": [
+    "To speed up simulation",
+    "To create a clock",
+    "To drive resets",
+    "To know the expected result"
+   ],
+   "answer": 3,
+   "explanation": "The reference gives the expected output for comparison."
+  },
+  {
+   "id": "sv10",
+   "topic": "SystemVerilog Basics",
+   "difficulty": 3,
+   "prompt": "How many input pairs does a 4-bit adder have?",
+   "choices": [
+    "16",
+    "64",
+    "256",
+    "8"
+   ],
+   "answer": 2,
+   "explanation": "16 values for a times 16 values for b is 256."
+  },
+  {
+   "id": "sv11",
+   "topic": "SystemVerilog Basics",
+   "difficulty": 2,
+   "prompt": "What is a regression?",
+   "choices": [
+    "Re-running all tests after a change",
+    "A type of bug",
+    "A clock mode",
+    "A coding style"
+   ],
+   "answer": 0,
+   "explanation": "Regressions catch changes that break earlier behaviour."
+  },
+  {
+   "id": "sv12",
+   "topic": "SystemVerilog Basics",
+   "difficulty": 3,
+   "prompt": "Why compare with !== instead of != in a check?",
+   "choices": [
+    "It is shorter",
+    "It works on integers only",
+    "Unknown (x) outputs then fail",
+    "It ignores widths"
+   ],
+   "answer": 2,
+   "explanation": "!== treats x as different from any known value."
+  }
+ ],
+ "lessons": [
+  {
+   "id": "sv-logic-type",
+   "topic": "SystemVerilog Basics",
+   "title": "The logic Type",
+   "level": "Intermediate",
+   "minutes": 6,
+   "keywords": [
+    "logic",
+    "systemverilog",
+    "reg",
+    "wire",
+    "data type",
+    "sv",
+    "4-state",
+    "single driver",
+    "declaration"
+   ],
+   "objectives": [
+    "Explain why logic replaces most reg and wire declarations",
+    "Know the single-driver rule for logic"
+   ],
+   "body": "SystemVerilog extends Verilog. Its most visible everyday change is the logic type. A logic signal can be driven either by a continuous assign or by an always block, so you no longer decide between wire and reg before you know how the signal will be driven.\n\nA logic variable may have only one driver. If two assign statements, or an assign and an always block, drive the same logic signal, the tool reports an error. That catches a common class of mistakes early.\n\nThe type is still four-valued: 0, 1, x and z. Port declarations such as input logic a and output logic [3:0] y are legal. In this simulator the ordinary logic cases are supported, and z is read as x.",
+   "definitions": [
+    {
+     "term": "logic",
+     "meaning": "A 4-state data type usable with assign or always blocks, with one driver."
+    },
+    {
+     "term": "Driver",
+     "meaning": "A statement that assigns a value to a signal."
+    },
+    {
+     "term": "4-state",
+     "meaning": "Each bit can be 0, 1, x or z."
+    }
+   ],
+   "example": "module inv(input logic a, output logic y);\n  assign y = ~a;\nendmodule",
+   "exampleNote": "The output is declared logic and driven by assign. The same declaration would also work if y were assigned in an always block instead.",
+   "diagram": "  Verilog:        SystemVerilog:\n  wire  y;        logic y;\n  reg   q;        logic q;\n  (pick one)      (one type)",
+   "mistakes": [
+    "Driving one logic signal from two places: use one driver or separate signals.",
+    "Assuming logic means a flip-flop: it only says how the value is driven.",
+    "Forgetting the signal width when porting from reg [7:0]: write logic [7:0]."
+   ],
+   "practice": [
+    {
+     "q": "Can one logic signal be driven by assign and always?",
+     "a": "Not both at once: it must have a single driver."
+    },
+    {
+     "q": "Is logic a flip-flop?",
+     "a": "No. It is only a data type; hardware depends on how you assign it."
+    }
+   ],
+   "exercises": [
+    "Run the demo, then change the declaration to wire and notice it still works.",
+    "Rewrite a reg-based counter from the Verilog course using logic."
+   ],
+   "summary": [
+    "logic is a general-purpose 4-state type.",
+    "Single-driver rule catches errors.",
+    "Type does not decide hardware."
+   ],
+   "hdl": {
+    "title": "Inverter using logic",
+    "files": [
+     {
+      "name": "inv_sv.v",
+      "tb": false,
+      "text": "module inv_sv(input logic a, output logic y);\n  assign y = ~a;\nendmodule\n"
+     },
+     {
+      "name": "inv_sv_tb.v",
+      "tb": true,
+      "text": "module inv_sv_tb;\n  logic a; logic y; integer errors;\n  inv_sv dut(.a(a), .y(y));\n  initial begin\n    errors = 0;\n    a = 1'b0; #1; if (y !== 1'b1) errors = errors + 1;\n    a = 1'b1; #1; if (y !== 1'b0) errors = errors + 1;\n    $display(\"a=%b y=%b\", a, y);\n    if (errors == 0) $display(\"PASS\"); else $display(\"FAIL\");\n    $finish;\n  end\nendmodule\n"
+     }
+    ]
+   }
+  },
+  {
+   "id": "sv-always-comb-ff",
+   "topic": "SystemVerilog Basics",
+   "title": "always_comb, always_ff and always_latch",
+   "level": "Intermediate",
+   "minutes": 8,
+   "keywords": [
+    "always_comb",
+    "always_ff",
+    "always_latch",
+    "sensitivity",
+    "intent",
+    "synthesis",
+    "combinational",
+    "sequential",
+    "latch",
+    "systemverilog"
+   ],
+   "objectives": [
+    "Use always_comb for combinational logic",
+    "Use always_ff for registers",
+    "Explain why intent-specific blocks help"
+   ],
+   "body": "SystemVerilog adds three always variants that state the designer's intent. always_comb replaces always @(*): it is sensitive to everything it reads and, in real tools, warns if the code creates a latch. always_ff @(posedge clk) marks a block that must describe flip-flops, so combinational code inside it is flagged. always_latch is for deliberate latches.\n\nUse non-blocking assignments (<=) inside always_ff and blocking assignments (=) inside always_comb, exactly as in Verilog. The benefit is that mistakes become compiler messages instead of simulation surprises.\n\nIn this simulator always_comb runs once at time 0 and then whenever an input it reads changes. Only always_ff blocks that start with an edge event are checked for clocked style.",
+   "definitions": [
+    {
+     "term": "always_comb",
+     "meaning": "Combinational block with automatic sensitivity list."
+    },
+    {
+     "term": "always_ff",
+     "meaning": "Block that must describe flip-flops."
+    },
+    {
+     "term": "always_latch",
+     "meaning": "Block that describes a deliberate latch."
+    },
+    {
+     "term": "Intent",
+     "meaning": "What the designer means the code to build."
+    }
+   ],
+   "example": "always_comb begin\n  y = sel ? a : b;\nend\nalways_ff @(posedge clk) begin\n  if (rst) q <= 1'b0;\n  else q <= d;\nend",
+   "exampleNote": "The first block is a multiplexer, the second a flip-flop with synchronous reset.",
+   "diagram": "  always_comb  -> logic gates\n  always_ff    -> flip-flops\n  always_latch -> latches\n  (tools check the intent)",
+   "mistakes": [
+    "Using = in always_ff: use <= for registers.",
+    "Using always_comb when you really want memory: use always_ff or always_latch.",
+    "Forgetting the edge in always_ff: it needs @(posedge clk)."
+   ],
+   "practice": [
+    {
+     "q": "Which block replaces always @(*)?",
+     "a": "always_comb."
+    },
+    {
+     "q": "Which assignment do you use inside always_ff?",
+     "a": "Non-blocking <=."
+    }
+   ],
+   "exercises": [
+    "Run the demo and note the counter stepping.",
+    "Add an enable input to the counter."
+   ],
+   "summary": [
+    "Intent-specific blocks catch mistakes.",
+    "always_comb for gates, always_ff for flip-flops.",
+    "Same assignment rules as Verilog."
+   ],
+   "hdl": {
+    "title": "Counter with always_ff and always_comb",
+    "files": [
+     {
+      "name": "cnt_sv.v",
+      "tb": false,
+      "text": "module cnt_sv(input logic clk, input logic rst, output logic [3:0] count, output logic is_max);\n  always_ff @(posedge clk) begin\n    if (rst) count <= 4'd0;\n    else count <= count + 4'd1;\n  end\n  always_comb begin\n    is_max = (count == 4'd15);\n  end\nendmodule\n"
+     },
+     {
+      "name": "cnt_sv_tb.v",
+      "tb": true,
+      "text": "module cnt_sv_tb;\n  logic clk, rst; logic [3:0] count; logic is_max; integer errors, i;\n  cnt_sv dut(.clk(clk), .rst(rst), .count(count), .is_max(is_max));\n  initial clk = 0;\n  always #5 clk = ~clk;\n  initial begin\n    errors = 0; rst = 1; #12; rst = 0;\n    for (i = 1; i <= 15; i = i + 1) begin\n      @(posedge clk); #1;\n      if (count !== i) errors = errors + 1;\n    end\n    $display(\"count=%0d is_max=%b\", count, is_max);\n    if (is_max !== 1'b1) errors = errors + 1;\n    if (errors == 0) $display(\"PASS\"); else $display(\"FAIL\");\n    $finish;\n  end\nendmodule\n"
+     }
+    ]
+   }
+  },
+  {
+   "id": "sv-why-systemverilog",
+   "topic": "SystemVerilog Basics",
+   "title": "Why SystemVerilog Exists",
+   "level": "Intermediate",
+   "minutes": 7,
+   "keywords": [
+    "systemverilog",
+    "interface",
+    "class",
+    "assertion",
+    "uvm",
+    "verification",
+    "constrained random",
+    "coverage",
+    "ieee 1800",
+    "oop"
+   ],
+   "objectives": [
+    "Describe what SystemVerilog adds beyond Verilog",
+    "Separate design features from verification features"
+   ],
+   "body": "SystemVerilog (IEEE 1800) is a superset of Verilog. It keeps the hardware description language and adds features in two groups.\n\nFor design it adds the logic type, intent-specific always blocks, interfaces that bundle many signals into one port, enumerations and packages. For verification it adds object-oriented programming with classes, constrained random stimulus, functional coverage and assertions that check properties over time.\n\nProfessional verification methodologies such as UVM are written in SystemVerilog classes. This course does not run those features: HDL Studio simulates the synthesizable-style subset only. Treat this lesson as a map of what you will meet next, not as something you can execute here.",
+   "definitions": [
+    {
+     "term": "Interface",
+     "meaning": "A SystemVerilog construct bundling related signals into one connection."
+    },
+    {
+     "term": "Assertion",
+     "meaning": "A statement that checks a property of the design while it simulates."
+    },
+    {
+     "term": "Constrained random",
+     "meaning": "Random stimulus restricted by rules so that it stays legal."
+    },
+    {
+     "term": "UVM",
+     "meaning": "A standard verification methodology built on SystemVerilog classes."
+    }
+   ],
+   "example": null,
+   "exampleNote": null,
+   "diagram": "  SystemVerilog\n  +-----------+-----------------+\n  | Design    | Verification    |\n  | logic     | classes         |\n  | always_ff | assertions      |\n  | interface | coverage/random |\n  +-----------+-----------------+",
+   "mistakes": [
+    "Believing SystemVerilog replaces Verilog: it extends it.",
+    "Expecting class-based testbenches to run in HDL Studio: they do not.",
+    "Treating constrained random as unconstrained: rules keep stimulus legal."
+   ],
+   "practice": [
+    {
+     "q": "What does an interface do?",
+     "a": "It groups related signals so they can be connected as one."
+    },
+    {
+     "q": "Is UVM a language?",
+     "a": "No. It is a methodology implemented with SystemVerilog classes."
+    }
+   ],
+   "exercises": [
+    "List which features you would use in a design and which in a testbench.",
+    "Read the Verilog testbenches in Learn and mark where an assertion would help."
+   ],
+   "summary": [
+    "SystemVerilog extends Verilog.",
+    "Design features and verification features differ.",
+    "HDL Studio runs only the supported subset."
+   ]
+  },
+  {
+   "id": "sv-verification-mindset",
+   "topic": "SystemVerilog Basics",
+   "title": "Self-Checking Verification",
+   "level": "Intermediate",
+   "minutes": 8,
+   "keywords": [
+    "verification",
+    "self-checking",
+    "testbench",
+    "golden model",
+    "reference model",
+    "coverage",
+    "exhaustive",
+    "corner case",
+    "regression",
+    "pass",
+    "fail"
+   ],
+   "objectives": [
+    "Compare a design against a reference model",
+    "Choose between exhaustive and targeted tests",
+    "Write a testbench that reports PASS or FAIL"
+   ],
+   "body": "Verification means proving that the design does what the specification says. A waveform that looks right is not proof. A self-checking testbench computes the expected result with a simple reference model and compares it with the design on every test vector.\n\nFor small designs you can test exhaustively: a 4-bit adder has only 256 input pairs. For larger ones you pick corner cases such as zero, maximum values and boundaries, add random vectors and track coverage to see which cases were exercised.\n\nA good habit is to run the whole test set after every change (a regression). The testbench prints PASS only if every check succeeded, so a single glance tells you the design is still correct.",
+   "definitions": [
+    {
+     "term": "Reference model",
+     "meaning": "A simple, obviously correct description of the expected behaviour."
+    },
+    {
+     "term": "Exhaustive test",
+     "meaning": "Trying every possible input combination."
+    },
+    {
+     "term": "Corner case",
+     "meaning": "An input at the edge of the legal range."
+    },
+    {
+     "term": "Regression",
+     "meaning": "Re-running all tests after each change."
+    }
+   ],
+   "example": "for (a = 0; a < 16; a = a + 1)\n  for (b = 0; b < 16; b = b + 1) begin\n    #1;\n    if (sum !== a + b) errors = errors + 1;\n  end",
+   "exampleNote": "Every pair of 4-bit inputs is applied and the result is compared with the + operator used as the reference model.",
+   "diagram": "  stimulus --> [ DUT ] ---> out\n      |                      |\n      +--> [ reference ] -> expected\n                             |\n         compare <-----------+\n            |\n        PASS / FAIL",
+   "mistakes": [
+    "Printing results without checking them: always compare with an expected value.",
+    "Testing only typical values: add zero, maximum and overflow cases.",
+    "Ignoring x in the output: use !== to catch it."
+   ],
+   "practice": [
+    {
+     "q": "How many input pairs does a 4-bit adder have?",
+     "a": "16 x 16 = 256."
+    },
+    {
+     "q": "What is a regression?",
+     "a": "Re-running all the tests after a change."
+    }
+   ],
+   "exercises": [
+    "Run the exhaustive adder test and read the PASS line.",
+    "Introduce a bug in the adder and watch the test report FAIL."
+   ],
+   "summary": [
+    "Check outputs automatically.",
+    "Small designs: test exhaustively; larger ones: corner cases plus random.",
+    "Re-run all tests after every change."
+   ],
+   "hdl": {
+    "title": "Exhaustive 4-bit adder check",
+    "files": [
+     {
+      "name": "add4.v",
+      "tb": false,
+      "text": "module add4(input logic [3:0] a, input logic [3:0] b, output logic [4:0] sum);\n  assign sum = a + b;\nendmodule\n"
+     },
+     {
+      "name": "add4_tb.v",
+      "tb": true,
+      "text": "module add4_tb;\n  logic [3:0] a, b; logic [4:0] sum; integer ia, ib, errors;\n  add4 dut(.a(a), .b(b), .sum(sum));\n  initial begin\n    errors = 0;\n    for (ia = 0; ia < 16; ia = ia + 1)\n      for (ib = 0; ib < 16; ib = ib + 1) begin\n        a = ia; b = ib; #1;\n        if (sum !== ia + ib) errors = errors + 1;\n      end\n    $display(\"256 vectors, errors=%0d\", errors);\n    if (errors == 0) $display(\"PASS\"); else $display(\"FAIL\");\n    $finish;\n  end\nendmodule\n"
+     }
+    ]
+   }
+  }
+ ]
+}

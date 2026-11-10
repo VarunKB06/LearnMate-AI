@@ -1,0 +1,693 @@
+{
+ "id": "cmos",
+ "title": "CMOS and VLSI Design",
+ "description": "CMOS inverters and gates, power, transmission gates, the digital VLSI design flow, and the effects of scaling and leakage.",
+ "level": "Intermediate",
+ "path": "Digital Design and VLSI",
+ "pathOrder": 4,
+ "prerequisites": [
+  "semi",
+  "digital"
+ ],
+ "icon": "🔌",
+ "questions": [
+  {
+   "id": "cm01",
+   "topic": "CMOS Inverter and Power",
+   "difficulty": 1,
+   "prompt": "In a CMOS inverter, which transistor connects the output to the supply?",
+   "choices": [
+    "NMOS",
+    "Both",
+    "Neither",
+    "PMOS"
+   ],
+   "answer": 3,
+   "explanation": "The PMOS is the pull-up device."
+  },
+  {
+   "id": "cm02",
+   "topic": "CMOS Inverter and Power",
+   "difficulty": 2,
+   "prompt": "Dynamic power is proportional to...",
+   "choices": [
+    "V x f only",
+    "C x V^2 x f",
+    "C / V",
+    "f / C"
+   ],
+   "answer": 1,
+   "explanation": "P = alpha C V^2 f."
+  },
+  {
+   "id": "cm03",
+   "topic": "CMOS Inverter and Power",
+   "difficulty": 2,
+   "prompt": "alpha=0.1, C=10 fF, V=1 V, f=1 GHz gives dynamic power of...",
+   "choices": [
+    "10 uW",
+    "0.1 uW",
+    "100 uW",
+    "1 uW"
+   ],
+   "answer": 3,
+   "explanation": "0.1 x 10e-15 x 1 x 1e9 = 1e-6 W."
+  },
+  {
+   "id": "cm04",
+   "topic": "CMOS Inverter and Power",
+   "difficulty": 3,
+   "prompt": "If V is halved at the same f and C, dynamic power becomes...",
+   "choices": [
+    "One quarter",
+    "One half",
+    "Double",
+    "Unchanged"
+   ],
+   "answer": 0,
+   "explanation": "Power scales with V squared."
+  },
+  {
+   "id": "cm05",
+   "topic": "CMOS Inverter and Power",
+   "difficulty": 2,
+   "prompt": "What is the main source of power in an idle CMOS circuit?",
+   "choices": [
+    "Switching",
+    "The clock tree",
+    "Leakage",
+    "Pull-up resistors"
+   ],
+   "answer": 2,
+   "explanation": "With no switching, leakage current dominates."
+  },
+  {
+   "id": "cm06",
+   "topic": "CMOS Logic Gates",
+   "difficulty": 1,
+   "prompt": "How are the NMOS transistors of a CMOS NAND2 connected?",
+   "choices": [
+    "In series",
+    "In parallel",
+    "Not at all",
+    "Through a resistor"
+   ],
+   "answer": 0,
+   "explanation": "Both inputs must be 1 to pull the output low."
+  },
+  {
+   "id": "cm07",
+   "topic": "CMOS Logic Gates",
+   "difficulty": 2,
+   "prompt": "How many transistors does a CMOS NOR2 have?",
+   "choices": [
+    "2",
+    "6",
+    "4",
+    "8"
+   ],
+   "answer": 2,
+   "explanation": "Two NMOS plus two PMOS."
+  },
+  {
+   "id": "cm08",
+   "topic": "CMOS Logic Gates",
+   "difficulty": 2,
+   "prompt": "In a NOR2 the PMOS transistors are...",
+   "choices": [
+    "In parallel",
+    "Absent",
+    "Diode-connected",
+    "In series"
+   ],
+   "answer": 3,
+   "explanation": "Output goes high only when both inputs are 0."
+  },
+  {
+   "id": "cm09",
+   "topic": "CMOS Logic Gates",
+   "difficulty": 2,
+   "prompt": "The duality rule says the pull-up network is...",
+   "choices": [
+    "Identical to the pull-down network",
+    "The pull-down network with series and parallel swapped",
+    "Always one transistor",
+    "Made of NMOS"
+   ],
+   "answer": 1,
+   "explanation": "Series becomes parallel and vice versa."
+  },
+  {
+   "id": "cm10",
+   "topic": "CMOS Logic Gates",
+   "difficulty": 3,
+   "prompt": "Why is NAND often preferred over NOR?",
+   "choices": [
+    "Its series stack uses NMOS",
+    "It uses fewer inputs",
+    "It has no PMOS",
+    "It needs no power"
+   ],
+   "answer": 0,
+   "explanation": "NMOS conducts better than PMOS of equal size."
+  },
+  {
+   "id": "cm11",
+   "topic": "Transmission Gates and Pass Logic",
+   "difficulty": 1,
+   "prompt": "What is a transmission gate made of?",
+   "choices": [
+    "Two NMOS in series",
+    "A resistor and capacitor",
+    "An NMOS and a PMOS in parallel",
+    "A diode pair"
+   ],
+   "answer": 2,
+   "explanation": "The complementary pair passes both levels."
+  },
+  {
+   "id": "cm12",
+   "topic": "Transmission Gates and Pass Logic",
+   "difficulty": 2,
+   "prompt": "What does a single NMOS pass poorly?",
+   "choices": [
+    "A logic 1",
+    "A logic 0",
+    "Both",
+    "Neither"
+   ],
+   "answer": 0,
+   "explanation": "A 1 drops by about a threshold voltage."
+  },
+  {
+   "id": "cm13",
+   "topic": "Transmission Gates and Pass Logic",
+   "difficulty": 2,
+   "prompt": "The two transistors of a TG are driven by...",
+   "choices": [
+    "The same control",
+    "The output",
+    "Complementary controls",
+    "Ground"
+   ],
+   "answer": 2,
+   "explanation": "One gate gets ctl and the other ctl_bar."
+  },
+  {
+   "id": "cm14",
+   "topic": "Transmission Gates and Pass Logic",
+   "difficulty": 3,
+   "prompt": "Does a transmission gate restore weak signals?",
+   "choices": [
+    "Yes, fully",
+    "No",
+    "Only for 1",
+    "Only for 0"
+   ],
+   "answer": 1,
+   "explanation": "It is only a switch, so long chains need buffers."
+  },
+  {
+   "id": "cm15",
+   "topic": "VLSI Design Flow",
+   "difficulty": 1,
+   "prompt": "What does logic synthesis produce?",
+   "choices": [
+    "GDSII",
+    "A testbench",
+    "A schematic by hand",
+    "A gate-level netlist"
+   ],
+   "answer": 3,
+   "explanation": "Synthesis maps RTL to standard cells."
+  },
+  {
+   "id": "cm16",
+   "topic": "VLSI Design Flow",
+   "difficulty": 2,
+   "prompt": "What does DRC check?",
+   "choices": [
+    "Logical equivalence",
+    "Layout geometry rules",
+    "Clock frequency",
+    "Testbench coverage"
+   ],
+   "answer": 1,
+   "explanation": "Design rule check verifies spacing, width and overlap rules."
+  },
+  {
+   "id": "cm17",
+   "topic": "VLSI Design Flow",
+   "difficulty": 2,
+   "prompt": "What does LVS compare?",
+   "choices": [
+    "RTL and spec",
+    "Two clocks",
+    "Two testbenches",
+    "Layout and netlist"
+   ],
+   "answer": 3,
+   "explanation": "LVS ensures the layout implements the intended netlist."
+  },
+  {
+   "id": "cm18",
+   "topic": "VLSI Design Flow",
+   "difficulty": 2,
+   "prompt": "Which step positions standard cells?",
+   "choices": [
+    "Synthesis",
+    "Simulation",
+    "Placement",
+    "Tapeout"
+   ],
+   "answer": 2,
+   "explanation": "Placement assigns cells to locations."
+  },
+  {
+   "id": "cm19",
+   "topic": "VLSI Design Flow",
+   "difficulty": 3,
+   "prompt": "What is tapeout?",
+   "choices": [
+    "Sending the final layout to manufacturing",
+    "Starting synthesis",
+    "Writing RTL",
+    "Running DRC only"
+   ],
+   "answer": 0,
+   "explanation": "Tapeout releases the final layout, e.g. GDSII, to the foundry."
+  },
+  {
+   "id": "cm20",
+   "topic": "Scaling and Leakage",
+   "difficulty": 1,
+   "prompt": "Moore's law describes...",
+   "choices": [
+    "A conservation law of energy",
+    "A rule for resistor values",
+    "The speed of light in silicon",
+    "Transistor counts roughly doubling about every two years"
+   ],
+   "answer": 3,
+   "explanation": "It is an observation about transistor density."
+  },
+  {
+   "id": "cm21",
+   "topic": "Scaling and Leakage",
+   "difficulty": 2,
+   "prompt": "Lowering threshold voltage tends to...",
+   "choices": [
+    "Decrease leakage",
+    "Increase leakage",
+    "Remove leakage",
+    "Stop switching"
+   ],
+   "answer": 1,
+   "explanation": "Subthreshold leakage rises exponentially as Vt falls."
+  },
+  {
+   "id": "cm22",
+   "topic": "Scaling and Leakage",
+   "difficulty": 2,
+   "prompt": "Design rules are...",
+   "choices": [
+    "Rules about naming signals",
+    "Clock gating rules",
+    "Coding style rules",
+    "Minimum width and spacing rules for layout"
+   ],
+   "answer": 3,
+   "explanation": "They constrain the geometry of every layer."
+  },
+  {
+   "id": "cm23",
+   "topic": "Scaling and Leakage",
+   "difficulty": 3,
+   "prompt": "A process node name such as '5 nm' today is best seen as...",
+   "choices": [
+    "The exact gate length",
+    "A marketing label",
+    "The wire width",
+    "The die size"
+   ],
+   "answer": 1,
+   "explanation": "Node names no longer map to one physical length."
+  }
+ ],
+ "lessons": [
+  {
+   "id": "cmos-inverter",
+   "topic": "CMOS Inverter and Power",
+   "title": "The CMOS Inverter and Power",
+   "level": "Intermediate",
+   "minutes": 8,
+   "keywords": [
+    "cmos",
+    "inverter",
+    "pmos",
+    "nmos",
+    "pull-up",
+    "pull-down",
+    "static power",
+    "dynamic power",
+    "switching",
+    "leakage",
+    "cv2f",
+    "vdd"
+   ],
+   "objectives": [
+    "Explain how a CMOS inverter works",
+    "Calculate dynamic power",
+    "Separate static from dynamic power"
+   ],
+   "body": "A CMOS inverter uses one PMOS transistor connected to the supply and one NMOS transistor connected to ground, with their gates tied together as the input and their drains tied together as the output. When the input is low, the PMOS conducts and pulls the output up to the supply. When the input is high, the NMOS conducts and pulls the output down to ground.\n\nIn a stable state only one transistor is on, so in an ideal model there is no direct path from supply to ground and almost no current flows. Real devices still show small leakage current, which is the static power.\n\nMost power is dynamic: each time the output switches it charges or discharges the load capacitance. The usual estimate is P = alpha x C x V^2 x f, where alpha is the fraction of cycles in which the node switches. Reducing voltage helps most because it is squared.",
+   "definitions": [
+    {
+     "term": "Pull-up network",
+     "meaning": "Transistors that connect the output to the supply (PMOS in CMOS)."
+    },
+    {
+     "term": "Pull-down network",
+     "meaning": "Transistors that connect the output to ground (NMOS in CMOS)."
+    },
+    {
+     "term": "Dynamic power",
+     "meaning": "Power used while charging and discharging capacitances during switching."
+    },
+    {
+     "term": "Leakage",
+     "meaning": "Small current that flows even when transistors are off."
+    }
+   ],
+   "example": "alpha = 0.1, C = 10 fF, V = 1.0 V, f = 1 GHz\nP = alpha * C * V^2 * f\n  = 0.1 * 10e-15 * 1.0^2 * 1e9\n  = 1e-6 W = 1 microwatt",
+   "exampleNote": "Multiplying the terms gives 1e-6 watts. If V drops to 0.8 V, power becomes 0.64 times as large because of the V squared term.",
+   "diagram": "        VDD\n         |\n     |--o|  PMOS\nin --+     +---- out\n     |--|   NMOS\n         |\n        GND",
+   "mistakes": [
+    "Saying CMOS uses no power when idle: leakage is small but not zero.",
+    "Forgetting that V is squared in dynamic power.",
+    "Mixing up which transistor goes to VDD: PMOS to supply, NMOS to ground."
+   ],
+   "practice": [
+    {
+     "q": "Which transistor pulls the output up?",
+     "a": "The PMOS."
+    },
+    {
+     "q": "What happens to dynamic power if V is halved?",
+     "a": "It becomes one quarter, since power scales with V squared."
+    }
+   ],
+   "exercises": [
+    "Recompute the example for f = 500 MHz.",
+    "Explain in two sentences why only one transistor conducts in steady state."
+   ],
+   "summary": [
+    "PMOS pulls up, NMOS pulls down.",
+    "Dynamic power = alpha C V^2 f.",
+    "Static power comes from leakage."
+   ]
+  },
+  {
+   "id": "cmos-gates",
+   "topic": "CMOS Logic Gates",
+   "title": "NAND and NOR in CMOS",
+   "level": "Intermediate",
+   "minutes": 8,
+   "keywords": [
+    "nand",
+    "nor",
+    "series",
+    "parallel",
+    "pull-up network",
+    "pull-down network",
+    "complementary",
+    "cmos gate",
+    "transistor count",
+    "fan-in"
+   ],
+   "objectives": [
+    "Draw the pull-up and pull-down of NAND and NOR",
+    "Explain the duality rule",
+    "Count transistors"
+   ],
+   "body": "CMOS gates have a pull-down network of NMOS transistors and a pull-up network of PMOS transistors. The two networks are complementary: when one conducts, the other does not.\n\nIn a 2-input NAND the NMOS transistors are in series, because the output must go low only when A and B are both 1. The PMOS transistors are in parallel, because the output is pulled high if either input is 0. In a NOR the arrangement is swapped: NMOS in parallel and PMOS in series.\n\nThe pull-up network is the dual of the pull-down network: series becomes parallel and parallel becomes series. A 2-input NAND or NOR uses four transistors. Series stacks are slower and larger, so wide gates are avoided, and NAND is often preferred because its series stack uses NMOS, which conducts better than PMOS of the same size.",
+   "definitions": [
+    {
+     "term": "Series",
+     "meaning": "Transistors connected one after another; all must conduct for the path to conduct."
+    },
+    {
+     "term": "Parallel",
+     "meaning": "Transistors side by side; any one conducting completes the path."
+    },
+    {
+     "term": "Duality",
+     "meaning": "The pull-up network mirrors the pull-down network with series and parallel swapped."
+    },
+    {
+     "term": "Fan-in",
+     "meaning": "Number of inputs of a gate."
+    }
+   ],
+   "example": "NAND2: NMOS A,B in series to GND\n       PMOS A,B in parallel to VDD\nNOR2:  NMOS A,B in parallel to GND\n       PMOS A,B in series to VDD",
+   "exampleNote": "For NAND2, out = 0 only when both series NMOS devices are on (A=B=1). Any 0 input turns on a parallel PMOS and pulls the output high.",
+   "diagram": "  NAND2        A B | out\n  (series NMOS) 0 0 | 1\n               0 1 | 1\n               1 0 | 1\n               1 1 | 0",
+   "mistakes": [
+    "Putting NMOS in parallel for a NAND: the pull-down must be a series stack.",
+    "Forgetting duality: if you change the pull-down you must change the pull-up.",
+    "Assuming more inputs are free: long series stacks slow the gate."
+   ],
+   "practice": [
+    {
+     "q": "How many transistors are in a CMOS NOR2?",
+     "a": "Four, two NMOS and two PMOS."
+    },
+    {
+     "q": "In a NOR, how are the PMOS devices connected?",
+     "a": "In series."
+    }
+   ],
+   "exercises": [
+    "Draw the transistor schematic of NOR3.",
+    "Explain why NAND is preferred over NOR in many libraries."
+   ],
+   "summary": [
+    "Series in one network means parallel in the other.",
+    "NAND: NMOS series, PMOS parallel.",
+    "NOR: NMOS parallel, PMOS series."
+   ]
+  },
+  {
+   "id": "cmos-transmission-gates",
+   "topic": "Transmission Gates and Pass Logic",
+   "title": "Transmission Gates",
+   "level": "Advanced",
+   "minutes": 7,
+   "keywords": [
+    "transmission gate",
+    "pass transistor",
+    "tgate",
+    "threshold drop",
+    "mux",
+    "switch",
+    "complementary switch",
+    "pass gate"
+   ],
+   "objectives": [
+    "Describe a transmission gate",
+    "Explain why NMOS alone passes a weak 1",
+    "Recognise a TG-based multiplexer"
+   ],
+   "body": "A transmission gate is an NMOS and a PMOS transistor connected in parallel, with complementary control signals. When it is on, it connects its input to its output.\n\nAn NMOS transistor passes a logic 0 well but a logic 1 only up to roughly the supply voltage minus its threshold voltage. A PMOS passes a 1 well but a 0 poorly. Placing both in parallel lets the pair pass both levels fully, which is why the transmission gate is preferred for switches.\n\nTransmission gates build compact multiplexers and some flip-flop designs. They do not restore the signal level, so a long chain of them needs buffers. Using a single NMOS pass transistor is possible in some places, but the degraded 1 can cause problems in the next stage.",
+   "definitions": [
+    {
+     "term": "Transmission gate",
+     "meaning": "An NMOS and PMOS in parallel with complementary gates, used as a switch."
+    },
+    {
+     "term": "Pass transistor",
+     "meaning": "A single transistor used as a switch in the signal path."
+    },
+    {
+     "term": "Threshold drop",
+     "meaning": "The loss of about one threshold voltage when an NMOS passes a 1."
+    },
+    {
+     "term": "Restoring logic",
+     "meaning": "A gate that regenerates full logic levels."
+    }
+   ],
+   "example": null,
+   "exampleNote": null,
+   "diagram": "       +---|NMOS|---+\n in ----+              +---- out\n       +---|PMOS|---+\n   ctl on NMOS gate, ctl_bar on PMOS",
+   "mistakes": [
+    "Using a single NMOS to pass a 1 and expecting a full level.",
+    "Chaining many transmission gates without buffering.",
+    "Driving both transistor gates with the same signal: they need complementary controls."
+   ],
+   "practice": [
+    {
+     "q": "Why use both an NMOS and a PMOS?",
+     "a": "Together they pass both 0 and 1 with full swing."
+    },
+    {
+     "q": "What does an NMOS pass poorly?",
+     "a": "A logic 1, which drops by about the threshold voltage."
+    }
+   ],
+   "exercises": [
+    "Sketch a 2-to-1 mux with two transmission gates and an inverter.",
+    "Explain why the output of a long TG chain may need a buffer."
+   ],
+   "summary": [
+    "A TG is NMOS and PMOS in parallel.",
+    "It passes both levels well.",
+    "It does not restore signals."
+   ]
+  },
+  {
+   "id": "cmos-design-flow",
+   "topic": "VLSI Design Flow",
+   "title": "The VLSI Design Flow (Simplified)",
+   "level": "Intermediate",
+   "minutes": 8,
+   "keywords": [
+    "vlsi",
+    "design flow",
+    "rtl",
+    "synthesis",
+    "floorplan",
+    "place and route",
+    "drc",
+    "lvs",
+    "gdsii",
+    "tapeout",
+    "sta",
+    "physical design",
+    "signoff"
+   ],
+   "objectives": [
+    "Order the main steps from specification to layout",
+    "Say what DRC and LVS check",
+    "Place STA in the flow"
+   ],
+   "body": "In a simplified digital flow the design starts with a specification, which is turned into RTL in Verilog or SystemVerilog and verified in simulation. Logic synthesis converts the RTL into a gate-level netlist using a library of standard cells.\n\nPhysical design follows. Floorplanning decides the shape and the position of large blocks, placement positions each standard cell and routing draws the wires, including the clock tree. Static timing analysis checks that all paths meet the clock period and hold requirements, and the earlier steps are repeated if they do not.\n\nBefore manufacturing, signoff checks run. DRC (design rule check) verifies that the layout obeys the foundry's geometry rules. LVS (layout versus schematic) verifies that the layout matches the netlist. The final layout is exported in a format such as GDSII and sent to the foundry, which is called tapeout.",
+   "definitions": [
+    {
+     "term": "RTL",
+     "meaning": "Register-transfer level description of the design in an HDL."
+    },
+    {
+     "term": "Standard cell",
+     "meaning": "A pre-designed logic gate or flip-flop in a library."
+    },
+    {
+     "term": "DRC",
+     "meaning": "Design rule check of the layout against manufacturing rules."
+    },
+    {
+     "term": "LVS",
+     "meaning": "Layout versus schematic check that the layout matches the netlist."
+    }
+   ],
+   "example": null,
+   "exampleNote": null,
+   "diagram": "  Spec -> RTL -> Simulate\n    -> Synthesis (netlist)\n    -> Floorplan -> Place -> Route\n    -> STA / Signoff (DRC, LVS)\n    -> GDSII -> Tapeout\n  (simplified, loops back on fail)",
+   "mistakes": [
+    "Thinking the flow is strictly linear: timing or rule failures send you back.",
+    "Mixing up DRC and LVS: DRC checks geometry rules, LVS checks logical equivalence to the netlist.",
+    "Skipping verification before synthesis."
+   ],
+   "practice": [
+    {
+     "q": "What does synthesis turn RTL into?",
+     "a": "A gate-level netlist of standard cells."
+    },
+    {
+     "q": "What does LVS compare?",
+     "a": "The layout against the netlist."
+    }
+   ],
+   "exercises": [
+    "Write the flow steps from memory.",
+    "Explain which step would catch a layout spacing violation."
+   ],
+   "summary": [
+    "RTL -> synthesis -> physical design -> signoff -> tapeout.",
+    "DRC checks rules; LVS checks connectivity.",
+    "STA decides if timing is met."
+   ]
+  },
+  {
+   "id": "cmos-scaling",
+   "topic": "Scaling and Leakage",
+   "title": "Scaling, Moore's Law and Leakage",
+   "level": "Advanced",
+   "minutes": 8,
+   "keywords": [
+    "scaling",
+    "moore's law",
+    "dennard",
+    "leakage",
+    "subthreshold",
+    "process node",
+    "design rules",
+    "lambda",
+    "short channel",
+    "power density",
+    "finfet"
+   ],
+   "objectives": [
+    "State Moore's observation correctly",
+    "Explain why leakage became important",
+    "Describe what design rules are"
+   ],
+   "body": "Moore's law is an observation, not a physical law: the number of transistors on a chip has roughly doubled about every two years for decades. Smaller transistors are faster, cheaper per function and use less switching energy.\n\nFor a long time classic scaling let voltage shrink along with size, so power density stayed roughly constant. That stopped working because voltage could not keep falling: lowering the threshold voltage raises subthreshold leakage exponentially, so leakage power grew to a large share of total power. New transistor structures such as FinFETs help control leakage.\n\nDesign rules are the foundry's minimum width, spacing and overlap rules for each layer. They are often expressed in units tied to the process so a layout can be checked by DRC. Process node names today are marketing labels and no longer measure one physical length exactly.",
+   "definitions": [
+    {
+     "term": "Moore's law",
+     "meaning": "Observation that transistor counts roughly double about every two years."
+    },
+    {
+     "term": "Subthreshold leakage",
+     "meaning": "Current that flows when the gate voltage is below threshold."
+    },
+    {
+     "term": "Design rules",
+     "meaning": "Minimum geometric rules a layout must satisfy."
+    },
+    {
+     "term": "FinFET",
+     "meaning": "A transistor with a raised fin-shaped channel for better gate control."
+    }
+   ],
+   "example": null,
+   "exampleNote": null,
+   "diagram": "  smaller transistors\n     |\n  faster + denser\n     |   but\n  lower Vt -> more leakage\n     |\n  power density limits",
+   "mistakes": [
+    "Treating Moore's law as a law of physics.",
+    "Assuming leakage only matters for off chips: it flows whenever the chip is powered.",
+    "Reading a node name as a literal gate length."
+   ],
+   "practice": [
+    {
+     "q": "Is Moore's law a physical law?",
+     "a": "No, it is an observation about transistor counts."
+    },
+    {
+     "q": "Why did leakage grow?",
+     "a": "Lower threshold voltages raise subthreshold current."
+    }
+   ],
+   "exercises": [
+    "Explain in two sentences why lowering Vt increases leakage.",
+    "List what DRC checks."
+   ],
+   "summary": [
+    "Transistor counts roughly double about every two years.",
+    "Leakage rises as threshold voltage falls.",
+    "Design rules constrain layout geometry."
+   ]
+  }
+ ]
+}
