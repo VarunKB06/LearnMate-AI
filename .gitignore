@@ -35,3 +35,8 @@ google-services.json
 *.hprof
 
 # Keep Room schema JSON files under version control (do not ignore app/schemas)
+
+# Large or generated deliverables: never commit these
+*.pte
+tokenizer.model
+*.apk
