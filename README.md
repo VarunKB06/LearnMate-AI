@@ -1,10 +1,20 @@
-# LearnMate AI (V4)
+# LearnMate AI 
 
 On-device personalised learning assistant for Android (ARM Bharat Challenge, PS4, Education). It understands a learner's goal, finds skill gaps, recommends pathways, generates and adapts week-by-week study plans, and uses a **Llama model running on the phone through ExecuTorch** for reasoning and explanations. Also includes 15 subjects, a working Verilog simulator (HDL Studio) and adaptive quizzes.
 ARM Bharat Challenge. Package `com.varunkb.learnmateai` · Kotlin · Jetpack Compose · Room · minSdk 28 · compile/targetSdk 37 · Java 17.
 
 **The app declares no INTERNET permission and has no API keys.** Status of every feature: see [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md).
 **V4 adds** the Llama + ExecuTorch layer, goal understanding and adaptive study plans. The app, including the V4 Llama features, has been tested on a physical Vivo Y20G. To reproduce: see [docs/LLAMA_EXECUTORCH_SETUP.md](docs/LLAMA_EXECUTORCH_SETUP.md) and [docs/KNOWN_LIMITATIONS.md](docs/KNOWN_LIMITATIONS.md).
+
+## Submission links
+| Deliverable | Where |
+|---|---|
+| Source code | This repository |
+| Application (APK) | GitHub Releases: <ADD RELEASE LINK> (the Llama model is installed separately, see [setup guide](docs/LLAMA_EXECUTORCH_SETUP.md)) |
+| Demonstration video | <ADD VIDEO LINK> |
+| Technical report | [docs/TECHNICAL_REPORT.pdf](docs/TECHNICAL_REPORT.pdf) (source: [docs/TECHNICAL_REPORT.md](docs/TECHNICAL_REPORT.md)) |
+
+**Author:** Varun K B, Atria Institute of Technology. Tested on a Vivo Y20G (Arm, 6 GB RAM) with Llama 3.2 1B Instruct through ExecuTorch.
 
 ## PS4 requirements at a glance
 | Requirement | Where |
