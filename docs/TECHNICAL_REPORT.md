@@ -20,19 +20,19 @@ Learners need a path that fits their goal, current skill and time, and that chan
 | Adapt over time | Plan rebuilt after each quiz or lesson; notes say what changed; coaching note regenerated on request |
 
 ## 4. On-device Llama with ExecuTorch
-- Model: Llama 3.2 1B Instruct, exported with XNNPACK, 8da4w quantisation, sequence length 1024. File size: ____ MB.
-- Runtime: `org.pytorch:executorch-android` ____ (version used).
+- Model: Llama 3.2 1B Instruct, SpinQuant INT4 (EO8) build exported for ExecuTorch with the XNNPACK backend (`Llama-3.2-1B-Instruct-SpinQuant_INT4_EO8.pte`, from the `executorch-community` Hugging Face releases). File size: 1083 MB. App sequence budget: 1024 tokens.
+- Runtime: `org.pytorch:executorch-android` (version pinned in `gradle/libs.versions.toml`), XNNPACK CPU backend.
 - Prompting: Llama 3 chat template; retrieval-grounded tutoring; JSON-only goal extraction; temperature 0.3.
 - Safety nets: output validation, fallback to rule-based tutor, Stop button, model can be switched off.
 
-## 5. Measurements (fill in from the Model screen self-test on the phone)
+## 5. Measurements (Model screen self-test, run on the phone; the saved report is in Diagnostics)
 | Metric | Value |
 |---|---|
-| Device | Vivo Y20G, ____ GB RAM, Android ____ |
-| Model load time | ____ ms |
-| First-token latency (self-test prompt) | ____ ms |
-| Decode speed | ____ tokens/s |
-| Typical tutor answer time | ____ s |
+| Device | Vivo Y20G (Arm, arm64-v8a), 6 GB RAM |
+| Model load time | 12,014 ms |
+| First-token latency (self-test prompt, 39 prompt tokens) | 4,336 ms (first run, includes warm-up) |
+| Decode speed | 5.63 tokens/s (64 tokens in 15.5 s) |
+| Typical tutor answer time | ____ s (stopwatch, 5 questions) |
 | Goal-to-plan time with Llama | ____ s |
 | Peak memory / temperature notes | ____ |
 | APK size (without model) | ____ MB |
