@@ -5,7 +5,7 @@ ARM Bharat Challenge, PS4 (Education). Author: Varun K B.
 Learners need a path that fits their goal, current skill and time, and that changes as they learn. LearnMate runs entirely on an Arm Android phone: a Llama model (ExecuTorch) reasons about goals and explains lessons, while transparent learner-modelling and planning rules make the decisions that must be reliable.
 
 ## 2. Architecture
-(Add the diagram from docs/ARCHITECTURE.md.)
+Everything runs on the phone. Main path for a tutor question: question -> BM25 lesson retrieval (rules) -> grounded prompt -> Llama 3.2 1B through ExecuTorch -> answer. If no model is installed, or the model fails or is stopped, the rule-based answer is shown instead. Goal path: free-text goal -> Llama JSON -> validation -> planner -> week-by-week plan, rebuilt after each quiz or lesson.
 - UI: Jetpack Compose. State: `MainViewModel`. Storage: Room (lessons progress, quizzes, mastery, chat) and a preferences file (goal, plan).
 - Learner model: BKT per topic. Retrieval: BM25 over 118 lessons. Planner: `StudyPlanner`.
 - LLM layer: `LlmManager` (lifecycle, one generation at a time, cancel) -> `ExecuTorchBackend` (`LlmModule`, XNNPACK) -> `LlmAdvisor` (prompts and validation) -> UI.
