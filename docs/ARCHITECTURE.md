@@ -7,6 +7,8 @@
         └──────── StateFlow ◄─ domain (pure Kotlin) ◄── assets/content/*.json (read-only seed)
 ```
 
+On-device AI path: question -> BM25 lesson retrieval (rules) -> grounded prompt -> Llama 3.2 1B via ExecuTorch -> answer (or rule-based fallback).
+
 ## Layers
 
 **domain/** has no Android imports, so it runs in plain JVM unit tests.
@@ -18,6 +20,10 @@ Entities: `profile`, `subjects`, `questions`, `attempts`, `attempt_answers`, `ma
 Foreign keys cascade (subject → questions/attempts, attempt → answers) and every foreign-key column is indexed.
 DAOs expose `Flow` for UI state and `suspend` functions for writes. Multi-table writes are `@Transaction` methods
 (`commitQuiz` saves attempt + answers + mastery atomically; `replaceSubject` swaps a question bank without touching progress).
+
+**llm/** the on-device Llama layer. `LlmManager` owns the model lifecycle (load, one generation at a time, cancel, unload); `ExecuTorchBackend` is the only file that calls ExecuTorch (`LlmModule`, XNNPACK CPU); `LlamaPrompts` builds Llama 3 chat prompts; `LlmAdvisor` grounds tutor answers in the retrieved lesson, validates goal JSON and writes coaching notes; `ModelStore` finds and imports the `.pte` and tokenizer files. Every call falls back to the rule-based tutor on failure.
+
+**domain/ (planning)** `GoalProfile` + `GoalParser` (goal understanding, with keyword fallback) and `StudyPlanner` (deterministic week-by-week plan, rebuilt after each quiz or lesson). Goal and plan are stored in a preferences file (`PlanStore`), so the Room schema is unchanged.
 
 **perf/** `BenchmarkRunner`: measures the app's own workloads on the device. Writes use a temporary DB file.
 
