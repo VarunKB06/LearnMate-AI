@@ -10,7 +10,7 @@ ARM Bharat Challenge. Package `com.varunkb.learnmateai` · Kotlin · Jetpack Com
 | Deliverable | Where |
 |---|---|
 | Source code | This repository |
-| Application (APK) | GitHub Releases: [<ADD RELEASE LINK>](https://github.com/VarunKB06/LearnMate-AI/releases/tag/v1.0.0) (the Llama model is installed separately, see [setup guide](docs/LLAMA_EXECUTORCH_SETUP.md)) |
+| Application (APK) | GitHub Releases: [<https://github.com/VarunKB06/LearnMate-AI/releases/tag/v1.0.0>](https://github.com/VarunKB06/LearnMate-AI/releases/tag/v1.0.0) (the Llama model is installed separately, see [setup guide](docs/LLAMA_EXECUTORCH_SETUP.md)) |
 | Demonstration video | <https://www.youtube.com/shorts/Qht6ll5SXkA> |
 | Technical report | [docs/TECHNICAL_REPORT.pdf](docs/TECHNICAL_REPORT.pdf) (source: [docs/TECHNICAL_REPORT.md](docs/TECHNICAL_REPORT.md)) |
 
