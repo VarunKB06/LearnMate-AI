@@ -1,5 +1,7 @@
 # Installing Llama on the phone (ExecuTorch)
 
+**Verified path (used for the submission):** the pre-exported `Llama-3.2-1B-Instruct-SpinQuant_INT4_EO8.pte` from the `executorch-community` organisation on Hugging Face plus Meta's `tokenizer.model` (gated repo `meta-llama/Llama-3.2-1B-Instruct`, `original/` folder), imported with the in-app buttons, loaded and ran on a Vivo Y20G. Exporting it yourself (below) is the alternative if a ready-made file does not match your runtime version.
+
 The `.pte` model is about 1 GB, so it is not in the APK. You export it once on a computer and install it on the phone.
 
 ## 1. Export the model (computer, Linux/macOS/WSL)
