@@ -20,9 +20,7 @@ Engine speed on the **build machine** (2 vCPU server, JVM, NOT the phone), for o
 
 ## 2. What was NOT run here (needs Android Studio and your phone)
 
-The Android layer (Room, ViewModel, Compose UI, BenchmarkRunner) and the instrumented tests could not be built in the sandbox
-(no Android SDK, no Maven access). They were written with care and independently read-reviewed for compile errors, but
-**have not been compiled or executed**. First sync/build on your laptop is the real test; see KNOWN_LIMITATIONS.md.
+The Android layer and instrumented tests were not built in the original sandbox. Since then the app (V3 plus the V4 Llama, goal and plan features) has been built in Android Studio and run on a physical Vivo Y20G by the author; the Llama self-test results are in docs/TECHNICAL_REPORT.md. The instrumented tests (`connectedDebugAndroidTest`) have not been reported as run.
 
 ## 3. Commands
 
