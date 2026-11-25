@@ -14,6 +14,56 @@ object MiniJson {
         return v
     }
 
+    /** Serialises Map / List / String / Number / Boolean / null back to compact JSON text. */
+    fun write(value: Any?): String = StringBuilder().also { writeValue(it, value) }.toString()
+
+    private fun writeValue(sb: StringBuilder, v: Any?) {
+        when (v) {
+            null -> sb.append("null")
+            is String -> writeString(sb, v)
+            is Boolean -> sb.append(if (v) "true" else "false")
+            is Number -> sb.append(v.toString())
+            is Map<*, *> -> {
+                sb.append('{')
+                var first = true
+                for ((k, x) in v) {
+                    if (!first) sb.append(',')
+                    first = false
+                    writeString(sb, k.toString())
+                    sb.append(':')
+                    writeValue(sb, x)
+                }
+                sb.append('}')
+            }
+            is Iterable<*> -> {
+                sb.append('[')
+                var first = true
+                for (x in v) {
+                    if (!first) sb.append(',')
+                    first = false
+                    writeValue(sb, x)
+                }
+                sb.append(']')
+            }
+            else -> writeString(sb, v.toString())
+        }
+    }
+
+    private fun writeString(sb: StringBuilder, s: String) {
+        sb.append('"')
+        for (c in s) {
+            when (c) {
+                '"' -> sb.append("\\\"")
+                '\\' -> sb.append("\\\\")
+                '\n' -> sb.append("\\n")
+                '\r' -> sb.append("\\r")
+                '\t' -> sb.append("\\t")
+                else -> if (c < ' ') sb.append("\\u%04x".format(c.code)) else sb.append(c)
+            }
+        }
+        sb.append('"')
+    }
+
     private class Parser(private val s: String) {
         var pos = 0
         fun atEnd() = pos >= s.length

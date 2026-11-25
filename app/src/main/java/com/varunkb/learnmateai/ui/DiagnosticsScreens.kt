@@ -92,17 +92,30 @@ fun AboutScreen(onBack: () -> Unit) {
             "Offline tutor",
             "BM25 lesson retrieval",
             "Questions are matched against a bundled lesson pack with BM25 ranking. The tutor shows the lesson that best matches, with its source and match score, " +
-                "and says it does not know when nothing matches well."
+                "and says it does not know when nothing matches well. This layer always works, with or without a Llama model."
         )
         InfoCard(
-            "What it is not",
-            "Not a generative LLM",
-            "LearnMate does not generate free-form text and has no neural network inside. It cannot answer questions outside its lesson pack."
+            "Language model",
+            "Llama on ExecuTorch",
+            "When a Llama 3.2 model file is installed (Model setup on the home screen), it runs on this phone through ExecuTorch. " +
+                "It explains the retrieved lesson, understands your goal written in plain words, advises what to study next and writes coaching notes for your plan. " +
+                "It is only given your lesson text and your own progress, and it can be switched off."
+        )
+        InfoCard(
+            "Study plans",
+            "Rules you can inspect",
+            "The week-by-week schedule is built by a deterministic planner from your goal, your hours, your mastery and your lesson progress, " +
+                "and is rebuilt after every quiz or finished lesson. Llama explains it; it does not decide the schedule."
+        )
+        InfoCard(
+            "Limits",
+            "A small model can be wrong",
+            "A 1B or 3B model can make mistakes. That is why answers are tied to a lesson and the lesson link is always shown. Without an installed model LearnMate does not generate free text."
         )
         InfoCard(
             "Privacy",
             "Fully offline",
-            "The app has no internet permission. Your profile, quiz history, mastery and chat are stored in a local database on this phone."
+            "The app has no internet permission. Your profile, goal, plan, quiz history, mastery, chat and the Llama model all stay on this phone."
         )
     }
 }

@@ -10,6 +10,8 @@ import com.varunkb.learnmateai.domain.LegacyMigration
 import com.varunkb.learnmateai.domain.Lesson
 import com.varunkb.learnmateai.domain.RetrievalTutorEngine
 import com.varunkb.learnmateai.domain.TutorEngine
+import com.varunkb.learnmateai.llm.LlmAdvisor
+import com.varunkb.learnmateai.llm.LlmManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -31,6 +33,10 @@ data class StartupMetrics(
 class AppContainer(private val context: Context) {
     val database: LearnMateDatabase by lazy { LearnMateDatabase.build(context) }
     val repository: LearnRepository by lazy { LearnRepository(database) }
+    val planStore: PlanStore by lazy { PlanStore(context) }
+
+    /** The on-device Llama model (ExecuTorch). It loads lazily and only when a model file is installed. */
+    val llm: LlmManager by lazy { LlmManager(context) }
 
     lateinit var packs: List<ContentPack>
         private set
@@ -41,6 +47,8 @@ class AppContainer(private val context: Context) {
     lateinit var index: Bm25Index
         private set
     lateinit var tutor: TutorEngine
+        private set
+    lateinit var advisor: LlmAdvisor
         private set
 
     @Volatile
@@ -86,6 +94,7 @@ class AppContainer(private val context: Context) {
 
                 index = Bm25Index(lessons)
                 tutor = RetrievalTutorEngine(index, lessons)
+                advisor = LlmAdvisor(llm, catalog)
                 val indexMs = lap()
 
                 metrics = StartupMetrics(parseMs, seedMs, legacyMs, indexMs, needsSeed, imported)

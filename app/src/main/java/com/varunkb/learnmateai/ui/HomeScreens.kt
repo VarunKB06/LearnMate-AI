@@ -17,6 +17,8 @@ import androidx.compose.ui.unit.sp
 import com.varunkb.learnmateai.HomeState
 import com.varunkb.learnmateai.SubjectInfo
 import com.varunkb.learnmateai.data.ProfileEntity
+import com.varunkb.learnmateai.domain.GoalProfile
+import com.varunkb.learnmateai.domain.StudyPlan
 
 @Composable
 fun WelcomeScreen(onBegin: () -> Unit) {
@@ -97,7 +99,11 @@ fun DashboardScreen(
     onSubjects: () -> Unit,
     onLearn: () -> Unit,
     onDiagnostics: () -> Unit,
-    onAbout: () -> Unit
+    onAbout: () -> Unit,
+    goal: GoalProfile? = null,
+    plan: StudyPlan? = null,
+    onPlan: () -> Unit = {},
+    onModel: () -> Unit = {}
 ) {
     val subject = home.active
     val latest = home.attempts.firstOrNull()
@@ -116,7 +122,18 @@ fun DashboardScreen(
             "${home.attempts.size} quiz attempt(s) saved on this phone. Latest: ${latest?.let { "${it.correct}/${it.total}" } ?: "No quiz yet"}."
         )
         InfoCard("Recommended next step", home.recommendation.title, home.recommendation.detail)
-        PrimaryButton("Browse lessons", onClick = onLearn)
+        val week = plan?.weeks?.firstOrNull()
+        InfoCard(
+            "Your study plan",
+            if (goal == null) "Set a learning goal" else "This week: ${week?.theme?.ifBlank { "plan" } ?: "nothing scheduled"}",
+            when {
+                goal == null -> "Describe what you want to achieve and LearnMate builds a week-by-week plan that adapts to your quiz results."
+                week == null -> "Everything for this goal is done. Update your goal to continue."
+                else -> "${week.items.size} step(s), about ${week.minutes} min. " + week.items.take(3).joinToString("; ") { it.title }
+            }
+        )
+        PrimaryButton(if (goal == null) "Set my goal and build a plan" else "Open my study plan", onClick = onPlan)
+        SecondaryButton("Browse lessons", onClick = onLearn)
         SecondaryButton("Start a practice quiz", enabled = subject != null, onClick = onQuiz)
         SecondaryButton("Ask LearnMate (Offline)", onClick = onAssistant)
         SecondaryButton("View progress and topic performance", onClick = onProgress)
@@ -128,6 +145,9 @@ fun DashboardScreen(
             home.mastery.forEach { MasteryRow(it) }
         }
         Spacer(Modifier.height(8.dp))
+        TextButton(onClick = onModel, modifier = Modifier.align(Alignment.CenterHorizontally)) {
+            Text("On-device Llama model setup", color = Forest, fontWeight = FontWeight.Bold)
+        }
         TextButton(onClick = onDiagnostics, modifier = Modifier.align(Alignment.CenterHorizontally)) {
             Text("Device diagnostics and benchmark", color = Forest)
         }

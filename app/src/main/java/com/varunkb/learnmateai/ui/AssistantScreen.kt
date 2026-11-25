@@ -8,6 +8,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.OutlinedTextField
@@ -19,6 +21,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -30,6 +33,7 @@ import com.varunkb.learnmateai.domain.Subject
 
 private val SUGGESTIONS = listOf(
     "Show my progress",
+    "What should I study this week?",
     "Which topic should I revise?",
     "Explain pointers",
     "Explain loops",
@@ -50,7 +54,10 @@ fun AssistantScreen(
     onAsk: (String) -> Unit,
     onClear: () -> Unit,
     onBack: () -> Unit,
-    onOpenLesson: (String) -> Unit = {}
+    onOpenLesson: (String) -> Unit = {},
+    llmInstalled: Boolean = false,
+    generating: Boolean = false,
+    onCancel: () -> Unit = {}
 ) {
     var input by remember { mutableStateOf("") }
     fun send() {
@@ -60,13 +67,24 @@ fun AssistantScreen(
         }
     }
     AppPage {
-                Heading("Ask LearnMate", "Offline tutor for ${subject?.title ?: "your subject"}. It runs on this phone and needs no internet. Paste Verilog or a compiler error and I will explain it.")
+        Heading("Ask LearnMate", "On-device tutor for ${subject?.title ?: "your subject"}. It runs on this phone and needs no internet. Paste Verilog or a compiler error and I will explain it.")
         InfoCard(
             "How it works",
-            "Lessons, not guesses",
-            "LearnMate finds the best matching lesson in its built-in lesson pack and shows it, with the source and a match score. " +
-                "It is not a generative AI model, so it only answers topics in its lessons and says so when it does not know. Ask for \"simply\", \"an example\", \"practice questions\", or \"difference between A and B\"."
+            if (llmInstalled) "Lessons plus on-device Llama" else "Lessons, not guesses",
+            if (llmInstalled)
+                "LearnMate first finds the best matching lesson. Llama, running on this phone through ExecuTorch, then explains it using only that lesson and your own progress. " +
+                    "Answers take a while on a phone. Code, error, quiz and progress questions use fast built-in rules."
+            else
+                "LearnMate finds the best matching lesson in its built-in pack and shows it, with the source and a match score. " +
+                    "No Llama model is installed yet, so it only answers topics in its lessons. Install one from Model setup on the home screen."
         )
+        if (generating) {
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
+                CircularProgressIndicator(color = Forest)
+                Text("Llama is thinking on this phone…", color = Ink)
+            }
+            SecondaryButton("Stop and use the offline answer", onClick = onCancel)
+        }
         OutlinedTextField(
             value = input,
             onValueChange = { input = it },
@@ -84,7 +102,7 @@ fun AssistantScreen(
                 cursorColor = Forest
             )
         )
-        PrimaryButton("Ask LearnMate", enabled = enabled && input.isNotBlank()) { send() }
+        PrimaryButton("Ask LearnMate", enabled = enabled && !generating && input.isNotBlank()) { send() }
 
         SectionLabel("Quick questions")
         SUGGESTIONS.forEach { s ->

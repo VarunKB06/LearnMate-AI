@@ -10,13 +10,17 @@ android {
 
     defaultConfig {
         applicationId = "com.varunkb.learnmateai"
-        minSdk = 23
+        // ExecuTorch's Android library needs a recent minSdk; 28 covers every phone that can run a 1B model anyway.
+        minSdk = 28
         targetSdk = 37
 
         versionCode = 2
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // The ExecuTorch native libraries are packaged for 64-bit Arm phones only, which keeps the APK small.
+        ndk { abiFilters += listOf("arm64-v8a") }
     }
 
     buildTypes {
@@ -65,6 +69,9 @@ dependencies {
     // Room (offline database). Kotlin extensions are part of room-runtime since Room 2.7.
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
+
+    // On-device Llama runtime (ExecuTorch). Pulls in fbjni and soloader transitively.
+    implementation(libs.executorch.android)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)

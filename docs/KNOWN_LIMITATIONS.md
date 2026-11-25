@@ -1,3 +1,14 @@
+# V4 limitations (read first)
+
+- **Not compiled where it was written.** The V4 code (llm package, planner, Plan and Model screens, ViewModel changes) was written without an Android SDK or Maven access. Expect to fix a few compile errors on the first Gradle sync. The ExecuTorch calls are isolated in `llm/ExecuTorchBackend.kt`.
+- **ExecuTorch version.** `gradle/libs.versions.toml` pins `org.pytorch:executorch-android:1.0.0`. Newer 1.x releases exist; the callback is built with a dynamic proxy so either should work. If the build or the model load fails, try another 1.x version and make sure the `.pte` was exported with a matching ExecuTorch release (export and runtime versions must match).
+- **minSdk raised from 23 to 28** and only `arm64-v8a` is packaged. An x86 emulator cannot run the model (the rest of the app still runs).
+- **Speed.** A 1B model on a Helio G80 will be slow (seconds per token is possible). Measure with the self-test on the Model screen and report the real numbers. Answers are not streamed to the chat; a "thinking" indicator and a Stop button are shown.
+- **Model files are not in the zip.** Llama weights need Meta's licence acceptance; export and install them as described in `docs/LLAMA_EXECUTORCH_SETUP.md`.
+- **A 1B model can be wrong.** Answers are grounded in the lesson text, but there is no automatic fact check. The offline lesson is always one tap away.
+- **Prompt BOS token.** `LlamaPrompts.INCLUDE_BOS` follows the ExecuTorch demo; flip it if output looks wrong.
+- The plan schedule is rule-based on purpose; Llama only reads the goal and explains. Lesson durations come from the content packs.
+
 # Verified vs unverified, known limitations (V3)
 
 See IMPLEMENTATION_STATUS.md and docs/TESTING_REPORT.md for the current status. Test counts and lesson counts below were for V1; V3 has 114 JVM tests and 118 lessons.

@@ -1,6 +1,7 @@
 package com.varunkb.learnmateai
 
 import android.app.Application
+import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.varunkb.learnmateai.data.AttemptEntity
@@ -9,6 +10,14 @@ import com.varunkb.learnmateai.data.ChatMessageEntity
 import com.varunkb.learnmateai.data.ProfileEntity
 import com.varunkb.learnmateai.domain.Catalog
 import com.varunkb.learnmateai.domain.Curriculum
+import com.varunkb.learnmateai.domain.GoalParser
+import com.varunkb.learnmateai.domain.GoalProfile
+import com.varunkb.learnmateai.domain.ReplyKind
+import com.varunkb.learnmateai.domain.StudyPlan
+import com.varunkb.learnmateai.domain.StudyPlanner
+import com.varunkb.learnmateai.domain.TutorReply
+import com.varunkb.learnmateai.llm.LlmState
+import com.varunkb.learnmateai.llm.ModelStore
 import com.varunkb.learnmateai.domain.LearnerContext
 import com.varunkb.learnmateai.domain.Lesson
 import com.varunkb.learnmateai.domain.LessonProgress
@@ -34,7 +43,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-enum class Screen { Welcome, Profile, Dashboard, Subjects, Quiz, Result, Assistant, Progress, Diagnostics, About, Learn, SubjectDetail, Lesson, Studio }
+enum class Screen { Welcome, Profile, Dashboard, Subjects, Quiz, Result, Assistant, Progress, Diagnostics, About, Learn, SubjectDetail, Lesson, Studio, Plan, Model }
 
 data class SubjectInfo(val subject: Subject, val questionCount: Int, val attempts: Int, val masteryPercent: Int?)
 
@@ -108,6 +117,29 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     val benchmarkHistory: StateFlow<List<BenchmarkRunEntity>> =
         repo.benchmarks.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
+    // ---- goal, study plan and on-device Llama ----
+    val llmState: StateFlow<LlmState> get() = container.llm.state
+
+    private val _goal = MutableStateFlow<GoalProfile?>(null)
+    val goal: StateFlow<GoalProfile?> = _goal.asStateFlow()
+
+    private val _plan = MutableStateFlow<StudyPlan?>(null)
+    val plan: StateFlow<StudyPlan?> = _plan.asStateFlow()
+
+    /** Message while a goal, plan or model task is running; null when idle. */
+    private val _busy = MutableStateFlow<String?>(null)
+    val busy: StateFlow<String?> = _busy.asStateFlow()
+
+    /** True while Llama is writing a tutor answer. */
+    private val _generating = MutableStateFlow(false)
+    val generating: StateFlow<Boolean> = _generating.asStateFlow()
+
+    private val _useLlm = MutableStateFlow(container.planStore.useLlm)
+    val useLlm: StateFlow<Boolean> = _useLlm.asStateFlow()
+
+    private val _modelReport = MutableStateFlow("")
+    val modelReport: StateFlow<String> = _modelReport.asStateFlow()
+
     val home: StateFlow<HomeState> = combine(
         repo.profile, repo.subjects, repo.questionCounts, repo.attempts, repo.mastery
     ) { profile, subjects, counts, attempts, mastery ->
@@ -139,6 +171,9 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             try {
                 container.initialize()
+                _goal.value = container.planStore.loadGoal()
+                _plan.value = container.planStore.loadPlan()
+                container.llm.refresh()
                 _screen.value = if (repo.getProfile() != null) Screen.Dashboard else Screen.Welcome
                 _ready.value = true
             } catch (e: Exception) {
@@ -155,7 +190,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             Screen.Profile -> _screen.value = if (home.value.profile == null) Screen.Welcome else Screen.Dashboard
             Screen.Quiz -> exitQuiz()
             Screen.Welcome, Screen.Dashboard -> Unit
-            Screen.Lesson -> _screen.value = Screen.SubjectDetail
+            Screen.Lesson -> _screen.value = if (lessonFromPlan) Screen.Plan else Screen.SubjectDetail
             Screen.Studio -> if (hdl.state.value.projectId != null) hdl.closeProject() else _screen.value = Screen.Dashboard
             Screen.SubjectDetail -> _screen.value = Screen.Learn
             else -> _screen.value = Screen.Dashboard
@@ -168,7 +203,16 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         _screen.value = Screen.SubjectDetail
     }
 
+    /** True when the open lesson was reached from the study plan, so Back returns there. */
+    private var lessonFromPlan = false
+
+    fun openLessonFromPlan(lessonId: String) {
+        openLesson(lessonId)
+        lessonFromPlan = true
+    }
+
     fun openLesson(lessonId: String) {
+        lessonFromPlan = false
         val lesson = catalog.lesson(lessonId) ?: return
         _subjectId.value = lesson.subjectId
         _lessonId.value = lessonId
@@ -177,7 +221,10 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun setLessonCompleted(lesson: Lesson, completed: Boolean) {
-        viewModelScope.launch { repo.setLessonCompleted(lesson.id, lesson.subjectId, completed) }
+        viewModelScope.launch {
+            repo.setLessonCompleted(lesson.id, lesson.subjectId, completed)
+            rebuildPlanQuietly()
+        }
     }
 
     fun toggleBookmark(lesson: Lesson) {
@@ -291,6 +338,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             val prior = repo.masteryMap(q.subject.id)
             val outcome = QuizScoring.score(q.subject.id, q.items, q.chosen, prior)
             repo.commitQuiz(q.subject.id, q.startedAt, q.items, q.chosen, q.times, outcome)
+            rebuildPlanQuietly()
             val review = q.items.mapIndexedNotNull { i, item ->
                 if (q.chosen[i] == item.correctIndex) null
                 else ReviewItem(
@@ -310,16 +358,32 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     fun ask(text: String, subjectId: String? = null) {
         val h = home.value
         val subject = (subjectId?.let { id -> h.subjects.firstOrNull { it.subject.id == id }?.subject } ?: h.active) ?: return
-        if (text.isBlank() || !_ready.value) return
+        if (text.isBlank() || !_ready.value || _generating.value) return
         viewModelScope.launch {
             val mastery = repo.masteryMap(subject.id).values.toList()
             val attempts = h.attempts.count { it.subjectId == subject.id }
             val lastLesson = repo.chat.first().lastOrNull { it.role == "tutor" }?.sourceLessonId
-            val reply = withContext(Dispatchers.Default) {
-                container.tutor.answer(
-                    text,
-                    LearnerContext(h.profile?.name.orEmpty(), subject.id, subject.title, attempts, com.varunkb.learnmateai.domain.Recommender.accuracy(mastery), mastery, lastLesson)
-                )
+            val ctx = LearnerContext(
+                h.profile?.name.orEmpty(), subject.id, subject.title, attempts,
+                com.varunkb.learnmateai.domain.Recommender.accuracy(mastery), mastery, lastLesson
+            )
+            // 1. Deterministic layer: BM25 retrieval plus rule-based skills. Always runs.
+            val rule = withContext(Dispatchers.Default) { container.tutor.answer(text, ctx) }
+            var reply = rule
+            // 2. Llama layer: improves lesson answers and advice when a model is installed and enabled.
+            val llm = container.llm
+            if (llm.isInstalled && rule.kind == ReplyKind.About) {
+                reply = TutorReply(container.advisor.aboutText(), ReplyKind.About)
+            } else if (_useLlm.value && llm.isInstalled && container.advisor.handles(rule, text)) {
+                _generating.value = true
+                try {
+                    val llmReply = container.advisor.answer(text, ctx, rule, _goal.value, _plan.value, repo.mastery.first())
+                    reply = llmReply ?: rule.copy(
+                        text = rule.text + "\n\n(Llama on-device did not answer: " + llm.state.value.message + " Showing the offline answer instead.)"
+                    )
+                } finally {
+                    _generating.value = false
+                }
             }
             val now = System.currentTimeMillis()
             repo.addChat(
@@ -330,6 +394,158 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun clearChat() { viewModelScope.launch { repo.clearChat() } }
+
+    // ---- goal and study plan ----
+    private suspend fun rebuildPlan() {
+        val g = _goal.value ?: return
+        val previous = _plan.value
+        val next = withContext(Dispatchers.Default) {
+            StudyPlanner.plan(catalog, g, repo.mastery.first(), repo.lessonProgress.first(), System.currentTimeMillis(), previous)
+        }
+        container.planStore.savePlan(next)
+        _plan.value = next
+    }
+
+    /** Rebuilds the plan after new progress. A failure here must never break a quiz result or a lesson tick. */
+    private suspend fun rebuildPlanQuietly() {
+        try {
+            rebuildPlan()
+        } catch (e: Exception) {
+            // keep the old plan
+        }
+    }
+
+    /**
+     * Stores the learner's goal and builds the first plan. If a Llama model is installed it reads the
+     * free-text goal; otherwise (or if its answer is invalid) the keyword rules are used.
+     */
+    fun saveGoal(text: String, interests: String, hours: String, weeks: String) {
+        if (text.isBlank() || _busy.value != null || !_ready.value) return
+        viewModelScope.launch {
+            try {
+                val h = hours.trim().toIntOrNull()?.coerceIn(1, 40)
+                val w = weeks.trim().toIntOrNull()?.coerceIn(1, 26)
+                val rules = GoalParser.parse(text, interests, h, w, catalog)
+                var goal = rules
+                if (_useLlm.value && container.llm.isInstalled) {
+                    _busy.value = "Llama is reading your goal…"
+                    val viaLlm = container.advisor.parseGoal(text.trim(), interests, rules)
+                    if (viaLlm != null) goal = viaLlm.copy(hoursPerWeek = h ?: viaLlm.hoursPerWeek, weeks = w ?: viaLlm.weeks)
+                }
+                _busy.value = "Building your study plan…"
+                container.planStore.saveGoal(goal)
+                _goal.value = goal
+                _plan.value = null
+                rebuildPlan()
+            } finally {
+                _busy.value = null
+            }
+        }
+    }
+
+    fun replanNow() {
+        if (_busy.value != null || _goal.value == null) return
+        viewModelScope.launch {
+            _busy.value = "Rebuilding your plan from your latest progress…"
+            try { rebuildPlan() } finally { _busy.value = null }
+        }
+    }
+
+    /** Asks Llama for a short coaching note about the current plan. */
+    fun askCoach() {
+        val g = _goal.value ?: return
+        val p = _plan.value ?: return
+        if (_busy.value != null || !container.llm.isInstalled) return
+        viewModelScope.launch {
+            _busy.value = "Llama is writing your coaching note…"
+            try {
+                val note = container.advisor.coach(g, p, repo.mastery.first())
+                if (note != null) {
+                    val updated = (_plan.value ?: p).copy(coachNote = note, coachStale = false)
+                    container.planStore.savePlan(updated)
+                    _plan.value = updated
+                }
+            } finally {
+                _busy.value = null
+            }
+        }
+    }
+
+    // ---- on-device Llama model ----
+    fun setUseLlm(on: Boolean) {
+        _useLlm.value = on
+        container.planStore.useLlm = on
+    }
+
+    fun cancelGeneration() = container.llm.cancel()
+
+    fun rescanModel() {
+        container.llm.refresh()
+        _modelReport.value = "Searched:\n" + ModelStore.describeSearch(getApplication<Application>())
+    }
+
+    fun importModelFile(uri: Uri, kind: ModelStore.Kind) {
+        if (_busy.value != null) return
+        viewModelScope.launch {
+            val label = if (kind == ModelStore.Kind.Model) "model" else "tokenizer"
+            _busy.value = "Copying $label…"
+            try {
+                withContext(Dispatchers.IO) {
+                    ModelStore.copyFromUri(getApplication<Application>(), uri, kind) { mb -> _busy.value = "Copying $label… $mb MB" }
+                }
+                container.llm.unload()
+                _modelReport.value = "Imported the $label file. Import the other file if needed, then tap Load model now."
+            } catch (e: Exception) {
+                _modelReport.value = "Import failed: ${e.message}"
+            } finally {
+                _busy.value = null
+            }
+        }
+    }
+
+    fun loadModel() {
+        if (_busy.value != null) return
+        viewModelScope.launch {
+            _busy.value = "Loading the model (this can take up to a minute on first use)…"
+            try {
+                val ok = container.llm.load()
+                _modelReport.value = if (ok) "Model loaded: ${container.llm.state.value.message}" else container.llm.state.value.message
+            } finally {
+                _busy.value = null
+            }
+        }
+    }
+
+    /** Runs a short fixed prompt, shows the speed, and saves the report next to the other benchmarks. */
+    fun testModel() {
+        if (_busy.value != null) return
+        viewModelScope.launch {
+            _busy.value = "Generating a test answer…"
+            try {
+                val report = container.llm.selfTest()
+                _modelReport.value = report
+                repo.saveBenchmark(BenchmarkRunEntity(createdAt = System.currentTimeMillis(), name = "Llama on-device self-test", report = report))
+            } finally {
+                _busy.value = null
+            }
+        }
+    }
+
+    fun unloadModel() {
+        viewModelScope.launch {
+            container.llm.unload()
+            _modelReport.value = "Model released from memory. The files are still on the phone."
+        }
+    }
+
+    fun deleteImportedModel() {
+        viewModelScope.launch {
+            container.llm.unload()
+            val n = withContext(Dispatchers.IO) { ModelStore.deleteImported(getApplication<Application>()) }
+            container.llm.refresh()
+            _modelReport.value = "Deleted $n imported file(s)."
+        }
+    }
 
     // ---- diagnostics ----
     fun runQuickBenchmark() = runBenchmark("Quick benchmark") { r, status -> r.runQuick(status) }

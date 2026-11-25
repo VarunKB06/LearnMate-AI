@@ -72,3 +72,14 @@ Do the release build for final numbers (debug builds are slower).
 - Airplane mode: everything still works.
 - Upgrade test: install the previous APK, create a profile and a quiz, then install this build over it; profile and history appear and Progress shows "(imported)" attempts.
 - Assistant: "Explain pointers", "What is a primary key", "Show my progress", "Which topic should I revise", "capital of France" (must say it doesn't know), "Are you an LLM?" (must say no).
+
+## V4 device test checklist (do in this order)
+1. Gradle sync and `gradlew.bat testDebugUnitTest` pass; fix any compile errors in the new files first.
+2. Install on the phone over the old version; confirm old data (profile, mastery, chats) is still there.
+3. Without a model: Plan screen builds a plan from a typed goal (source "keyword rules"); tutor works as before; About says no model installed.
+4. Install the model (docs/LLAMA_EXECUTORCH_SETUP.md); Model screen: Rescan, Load, self-test. Record numbers.
+5. Plan screen with model: goal source becomes "Llama on-device"; try 5 different goals, note wrong subject picks.
+6. Quiz, then check the plan changed (notes + revision items).
+7. Tutor: 5 lesson questions + "what should I study this week?"; press Stop once; confirm the offline answer appears.
+8. Switch Llama off on the Model screen; confirm answers revert to rule-based.
+9. Leave the app in the background and return; confirm no crash; unload model and reload.

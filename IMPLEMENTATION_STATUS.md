@@ -1,5 +1,7 @@
 # Implementation status (honest)
 
+V4 note: rows marked V4 were written after the last device test and could not be compiled or run where they were written. They are the first things to build and test.
+
 Labels: **Verified (JVM)** = compiled with Kotlin 2.0.21 and covered by passing JUnit tests in the build sandbox. **Written, not compiled** = Android code (Compose/Room/ViewModel) that could not be built here (no Android SDK or Maven access). **Not implemented**.
 
 | Feature | Status | Notes |
@@ -18,7 +20,10 @@ Labels: **Verified (JVM)** = compiled with Kotlin 2.0.21 and covered by passing 
 | Tutor skills: follow-ups, level, compare, practice, Verilog line-by-line, error/simulation explanation, next-study | Verified (JVM) rule-based | Not an LLM; heuristic text rules |
 | Tutor UI with lesson links | Written, not compiled | |
 | Quiz-mistake explanation by tutor | Partial | Tutor can explain a topic and give practice; no per-question "why was I wrong" hook |
-| Layer 2 on-device LLM | **Not implemented** | See docs/AI_DESIGN_AND_FEASIBILITY.md: needs a ~0.5–2 GB model download, cannot be verified without device; no model in APK |
+| Llama on-device via ExecuTorch | **Implemented in V4, not yet run** | `llm/` package; model file is installed separately (not in APK). Needs your build and device test |
+| Goal understanding (free text to structured goal) | **Implemented in V4** | Llama JSON output validated against the subject list; keyword fallback. Parser logic has JVM tests |
+| Study plan generation and adaptation | **Implemented in V4** | `StudyPlanner` deterministic; JVM tests written; rebuilt after each quiz/lesson |
+| Llama coaching note, grounded tutor answers, advice | **Implemented in V4, not yet run** | Needs device test and speed measurement |
 | Layer 3 online research (Wikipedia etc.) | **Not implemented** | Kept offline by design; no INTERNET permission |
 | BKT mastery, adaptive quiz | Verified (JVM) | |
 | Dashboard, Progress, Profile | Written, not compiled | Carried over from V1 which ran on the phone |

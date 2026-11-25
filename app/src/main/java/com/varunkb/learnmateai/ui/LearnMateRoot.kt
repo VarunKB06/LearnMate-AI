@@ -37,6 +37,13 @@ fun LearnMateRoot(vm: MainViewModel) {
     val chat by vm.chat.collectAsState()
     val bench by vm.bench.collectAsState()
     val benchHistory by vm.benchmarkHistory.collectAsState()
+    val goal by vm.goal.collectAsState()
+    val plan by vm.plan.collectAsState()
+    val busy by vm.busy.collectAsState()
+    val llm by vm.llmState.collectAsState()
+    val generating by vm.generating.collectAsState()
+    val useLlm by vm.useLlm.collectAsState()
+    val modelReport by vm.modelReport.collectAsState()
 
     val progress by vm.lessonProgress.collectAsState()
     val openSubject by vm.openSubjectId.collectAsState()
@@ -86,7 +93,11 @@ fun LearnMateRoot(vm: MainViewModel) {
                     onSubjects = { vm.go(Screen.Subjects) },
                     onLearn = { vm.go(Screen.Learn) },
                     onDiagnostics = { vm.go(Screen.Diagnostics) },
-                    onAbout = { vm.go(Screen.About) }
+                    onAbout = { vm.go(Screen.About) },
+                    goal = goal,
+                    plan = plan,
+                    onPlan = { vm.go(Screen.Plan) },
+                    onModel = { vm.go(Screen.Model) }
                 )
                 Screen.Subjects -> SubjectsScreen(home, onBack = { vm.back() }, onSelect = { vm.selectSubject(it) })
                 Screen.Quiz -> {
@@ -110,7 +121,31 @@ fun LearnMateRoot(vm: MainViewModel) {
                     onAsk = { vm.ask(it) },
                     onClear = { vm.clearChat() },
                     onBack = { vm.back() },
-                    onOpenLesson = { vm.openLesson(it) }
+                    onOpenLesson = { vm.openLesson(it) },
+                    llmInstalled = llm.installed && useLlm,
+                    generating = generating,
+                    onCancel = { vm.cancelGeneration() }
+                )
+                Screen.Plan -> PlanScreen(
+                    goal = goal, plan = plan, catalog = vm.catalog, progress = progress, busy = busy, llm = llm,
+                    onSaveGoal = { t, i, h, w -> vm.saveGoal(t, i, h, w) },
+                    onReplan = { vm.replanNow() },
+                    onCoach = { vm.askCoach() },
+                    onOpenLesson = { vm.openLessonFromPlan(it) },
+                    onQuiz = { vm.quizSubject(it) },
+                    onModel = { vm.go(Screen.Model) },
+                    onBack = { vm.back() }
+                )
+                Screen.Model -> ModelScreen(
+                    state = llm, busy = busy, report = modelReport, useLlm = useLlm,
+                    onUseLlm = { vm.setUseLlm(it) },
+                    onImport = { uri, kind -> vm.importModelFile(uri, kind) },
+                    onRescan = { vm.rescanModel() },
+                    onLoad = { vm.loadModel() },
+                    onTest = { vm.testModel() },
+                    onUnload = { vm.unloadModel() },
+                    onDelete = { vm.deleteImportedModel() },
+                    onBack = { vm.back() }
                 )
                 Screen.Progress -> ProgressScreen(home, onBack = { vm.back() }, onClear = { vm.clearProgress() })
                 Screen.Diagnostics -> DiagnosticsScreen(
