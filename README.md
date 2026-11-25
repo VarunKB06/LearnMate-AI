@@ -4,7 +4,7 @@ On-device personalised learning assistant for Android (ARM Bharat Challenge, PS4
 ARM Bharat Challenge. Package `com.varunkb.learnmateai` · Kotlin · Jetpack Compose · Room · minSdk 28 · compile/targetSdk 37 · Java 17.
 
 **The app declares no INTERNET permission and has no API keys.** Status of every feature: see [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md).
-**V4 adds** the Llama + ExecuTorch layer, goal understanding and adaptive study plans. The V1-V3 app was tested on the phone; the V4 additions are new and must be built and tested by you: see [docs/LLAMA_EXECUTORCH_SETUP.md](docs/LLAMA_EXECUTORCH_SETUP.md) and [docs/KNOWN_LIMITATIONS.md](docs/KNOWN_LIMITATIONS.md).
+**V4 adds** the Llama + ExecuTorch layer, goal understanding and adaptive study plans. The app, including the V4 Llama features, has been tested on a physical Vivo Y20G. To reproduce: see [docs/LLAMA_EXECUTORCH_SETUP.md](docs/LLAMA_EXECUTORCH_SETUP.md) and [docs/KNOWN_LIMITATIONS.md](docs/KNOWN_LIMITATIONS.md).
 
 ## PS4 requirements at a glance
 | Requirement | Where |
