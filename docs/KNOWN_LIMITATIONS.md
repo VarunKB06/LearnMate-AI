@@ -14,10 +14,10 @@
 See IMPLEMENTATION_STATUS.md and docs/TESTING_REPORT.md for the current status. Test counts and lesson counts below were for V1; V3 has 114 JVM tests and 118 lessons.
 
 ## V3 additions to the limitations
-- Android layer (catalogue, HDL Studio UI, tutor UI, Room v2) never compiled or run here; no Vivo test.
+- The Android layer builds and runs on the author's Vivo Y20G (V3 and V4). Long-session, battery and other-device testing has not been done.
 - Simulator is a Verilog subset: no function/task/generate/signed/inout; z is read as x; `always @(*)` runs once at t=0; multiple drivers resolve last-wins; max 64-bit values; limits 1,000,000 time units, 5,000,000 steps, 2000 output lines, 8 s.
 - Python, DSA and DBMS lessons use the shorter V1 format.
-- Tutor is rule-based; no LLM and no online research (not implemented).
+- Online research is not implemented by design (no INTERNET permission). The rule-based tutor is the fallback when no Llama model is installed.
 
 
 ## Verified (compiled and run in the build sandbox)
@@ -40,7 +40,7 @@ If Gradle sync reports that a version cannot be found or KSP is incompatible wit
 (or `room`) line in `libs.versions.toml` to the version Android Studio suggests. No code change should be needed.
 
 ## Functional limitations
-- **No generative AI / LLM / LiteRT model** (see AI design). The tutor answers only from its bundled lessons.
+- **The Llama model is optional at runtime.** Without an installed model the tutor answers only from its bundled lessons; with one, Llama 3.2 1B (ExecuTorch) explains them (see AI design).
 - BKT parameters are defaults, not trained on learner data.
 - Mastery for imported legacy data is an estimate from aggregated counts.
 - Questions and lessons are written for this project and have not been reviewed by a subject expert; please spot-check them before submitting.
