@@ -11,7 +11,7 @@ ARM Bharat Challenge. Package `com.varunkb.learnmateai` · Kotlin · Jetpack Com
 |---|---|
 | Source code | This repository |
 | Application (APK) | GitHub Releases: <ADD RELEASE LINK> (the Llama model is installed separately, see [setup guide](docs/LLAMA_EXECUTORCH_SETUP.md)) |
-| Demonstration video | <ADD VIDEO LINK> |
+| Demonstration video | <(https://www.youtube.com/shorts/Qht6ll5SXkA)> |
 | Technical report | [docs/TECHNICAL_REPORT.pdf](docs/TECHNICAL_REPORT.pdf) (source: [docs/TECHNICAL_REPORT.md](docs/TECHNICAL_REPORT.md)) |
 
 **Author:** Varun K B, Atria Institute of Technology. Tested on a Vivo Y20G (Arm, 6 GB RAM) with Llama 3.2 1B Instruct through ExecuTorch.
