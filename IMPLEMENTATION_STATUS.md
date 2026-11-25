@@ -2,7 +2,7 @@
 
 V4 note: the Llama, goal and plan features were checked on a physical phone by the author. Content accuracy and answer quality have not been formally evaluated.
 
-Labels: **Verified (JVM)** = compiled with Kotlin 2.0.21 and covered by passing JUnit tests in the build sandbox. **Written, not compiled** = Android code (Compose/Room/ViewModel) that could not be built here (no Android SDK or Maven access). **Not implemented**.
+Labels: **Verified (JVM)** = compiled with Kotlin 2.0.21 and covered by passing JUnit tests in the build sandbox. **Written, not compiled** = was written without an Android SDK; since then built and run on the author's phone (see V4 note above). **Not implemented**.
 
 | Feature | Status | Notes |
 |---|---|---|
