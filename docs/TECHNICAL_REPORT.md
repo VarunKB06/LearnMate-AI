@@ -32,15 +32,17 @@ Learners need a path that fits their goal, current skill and time, and that chan
 | Model load time | 12,014 ms |
 | First-token latency (self-test prompt, 39 prompt tokens) | 4,336 ms (first run, includes warm-up) |
 | Decode speed | 5.63 tokens/s (64 tokens in 15.5 s) |
-| Typical tutor answer time | ____ s (stopwatch, 5 questions) |
-| Goal-to-plan time with Llama | ____ s |
-| Peak memory / temperature notes | ____ |
-| APK size (without model) | ____ MB |
+| Typical tutor answer time (lesson-grounded, stopwatch, 5 questions) | about 60 s |
+| Goal-to-plan time with Llama | about 30 s |
+| Memory, heat, stability | Model file 1,083 MB; RAM use not measured. In a 5-minute session (3 tutor questions, 1 plan) battery went 50% to 49%, no noticeable heat, no lag or crashes |
+| APK size (without model) | 16.0 MB release (R8-shrunk, arm64-v8a, includes the ExecuTorch runtime); 44 MB debug |
 
 ## 6. Evaluation
-- JVM unit tests: BKT, quiz engine, retrieval, planner, goal parser, prompt formatting (`gradlew testDebugUnitTest`).
+- JVM unit tests (`gradlew testDebugUnitTest`): all pass. They cover BKT, quiz engine, retrieval, study planner (prerequisite order, hour budget, skipping mastered or completed lessons, revision for weak topics, re-planning), goal parser (including validation of Llama JSON), prompt formatting and plan serialisation.
 - Retrieval top-1 accuracy: 97.4% on 38 author-written queries (see TESTING_AND_BENCHMARKS.md).
-- Add: goal-parsing accuracy on ~10 sample goals (Llama vs rules), and 5 tutor answers checked by hand against their lessons.
+- On-device tutor check (Vivo Y20G): 5 lesson questions asked, 5 of 5 answers judged correct against the lesson by the author, about 60 s each.
+- On-device goal check: 5 goals covering a career goal (VLSI design verification), an exam goal (DBMS), software placements, a beginner Python goal, and an FPGA goal with typed hours and weeks. All 5 generated plans were judged sensible by the author, about 30 s each.
+- Limits of this evaluation: one tester (the author), small samples, no formal accuracy metric for Llama answers, one device.
 
 ## 7. Privacy
 No INTERNET permission, no analytics, no API keys. The model, prompts, goals and progress stay on the phone.
