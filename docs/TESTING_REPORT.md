@@ -19,3 +19,5 @@ Migration SQL: executed with Python sqlite3 against a v1-shaped database (not th
 - The Android app, including the V4 additions (llm package, Plan and Model screens), builds in Android Studio and runs on a Vivo Y20G.
 - Llama 3.2 1B Instruct (SpinQuant INT4, 1083 MB) loads and answers through ExecuTorch: load 12,014 ms, first token 4,336 ms, 5.63 tokens/s (self-test, 64 tokens in 15.5 s).
 - Not run or not reported: instrumented UI tests, long-session and battery tests, other devices, formal accuracy evaluation of Llama answers.
+- `gradlew testDebugUnitTest`: all unit tests pass, including the new planner, goal-parser and prompt tests.
+- Release build (`assembleRelease`, R8 shrinking on) produced a 16.0 MB APK.
